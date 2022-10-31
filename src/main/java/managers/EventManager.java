@@ -7,6 +7,7 @@ public class EventManager {
     private Event[] eventQueue;
 
     public Event generateEvent(Event prev) {
+        Event nextEvent = prev.nextEvent;
         return null;
     }
 
