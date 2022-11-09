@@ -7,11 +7,9 @@ public abstract class StateManager implements State {
 
     private State currentState;
 
-    abstract public State nextState(String input) {
-    }
+    abstract public State nextState(String input);
 
-    abstract public void initialize() {
-    }
+    abstract public void initialize();
 
     public boolean preInput() {
         return currentState.preInput();
