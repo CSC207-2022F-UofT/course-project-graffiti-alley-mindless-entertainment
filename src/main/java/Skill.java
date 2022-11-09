@@ -15,35 +15,35 @@ public class Skill {
         this.type = type;
         allSkills.put(this.name, this); // Adds the new skill to the allSkills Dictionary
     }
-
+    
     public String get_name() {
         return this.name;
     }
-
+    
     public void set_name(String name) {
         this.name = name;
     }
-
+    
     public int get_damage() {
         return this.damage;
     }
-
+    
     public void set_damage(int damage) {
         this.damage = damage;
     }
-
+    
     public int get_lag() {
         return this.lag;
     }
-
+    
     public void set_lag(int lag) {
         this.lag = lag;
     }
-
+    
     public String get_type() {
         return this.type;
     }
-
+    
     public void set_type(String type) {
         this.type = type;
     }
