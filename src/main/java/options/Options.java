@@ -1,5 +1,9 @@
 package options;
 
+
+/*
+The options of the game. A data storage class.
+*/
 public class Options {
     private int textSpeed;
     private int textSize;
