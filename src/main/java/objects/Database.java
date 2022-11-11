@@ -1,8 +1,9 @@
 package objects;
 
+import interfaces.IDatabase;
 import org.json.simple.JSONObject;
 
-public class Database {
+public class Database implements IDatabase {
 
     private JSONObject database;
 
