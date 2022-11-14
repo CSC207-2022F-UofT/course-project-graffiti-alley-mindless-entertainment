@@ -5,10 +5,11 @@ public class Enemy extends NonPlayer{
 
     private int health;
     public ArrayList<Skill> skills;
+    private int speed;
 
-    public Enemy() {
-        super();
-        this.health = 100;
+    public Enemy(String name, int reputation) {
+        super(name, reputation);
+        health = 100;
         this.skills = new ArrayList<Skill>();
     }
 
@@ -34,6 +35,21 @@ public class Enemy extends NonPlayer{
 
     public void set_skills(ArrayList<Skill> skills){
         this.skills = skills;
+    }
+
+    public int getHealth(){
+        return this.health;
+    }
+    public void set_health(int n){
+        this.health = n;
+    }
+
+    public void change_speed(int n){
+        this.speed = this.speed - n;
+    }
+
+    public int getSpeed(){
+        return this.speed;
     }
 
 }

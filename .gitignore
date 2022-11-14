@@ -27,6 +27,7 @@
 .idea/**/gradle.xml
 .idea/**/libraries
 
+
 # Gradle and Maven with auto-import
 # When using Gradle or Maven with auto-import, you should exclude module files,
 # since they will be recreated, and may cause churn.  Uncomment if using
@@ -115,3 +116,7 @@ gradle-app.setting
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+*.xml
+gradlew
+gradlew.bat
