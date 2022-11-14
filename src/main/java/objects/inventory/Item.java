@@ -140,4 +140,5 @@ public class Item {
         System.out.println("Ability of Item:" + getAbility());
         System.out.println("Price of Item: " + getPrice());
     }
+
 }
