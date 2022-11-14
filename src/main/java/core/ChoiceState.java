@@ -18,6 +18,8 @@ public class ChoiceState implements State {
     boolean awaitingInput = false;
     InputValidator inputValidator;
 
+    boolean isDone = false;
+
     public ChoiceState(List<String> choices, List<String> choiceDisplayText) {
         this.choices = choices;
 
@@ -37,10 +39,10 @@ public class ChoiceState implements State {
      * @return whether the state is done and ready to move to the next state
      */
     @Override
-    public boolean preInput() {
+    public void preInput() {
         //display using Output handler text
+        //OutputHandler.generateText(textToDisplay);
         awaitingInput = true;
-        return false;
     }
 
     /**
@@ -48,9 +50,9 @@ public class ChoiceState implements State {
      * @return whether the state is done and ready to move to the next state
      */
     @Override
-    public boolean postInput(String input) {
+    public void postInput(String input) {
         //nothing needs to be done. Manager will send the game to the next state.
-        return true;
+        isDone = true;
     }
 
     /**
@@ -69,4 +71,9 @@ public class ChoiceState implements State {
     public InputValidator getInputValidator() {
         return inputValidator;
     }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
 }

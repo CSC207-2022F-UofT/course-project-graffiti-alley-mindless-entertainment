@@ -2,20 +2,25 @@ package interfaces;
 
 public interface State {
     /**
-     * @return whether the state is done and ready to move to the next state
+     * Executes when the state is not awaiting input
      */
-    public boolean preInput();
+    public void preInput();
 
     /**
      * @param input from the user
-     * @return whether the state is done and ready to move to the next state
+     * Executes when the state is awaiting input
      */
-    public boolean postInput(String input);
+    public void postInput(String input);
 
     /**
      * @return whether the state is awaiting input
      */
     public boolean awaitInput();
+
+    /**
+     * @return whether the state is done and ready to go to next state
+     */
+    public boolean isDone();
 
     /**
      * @return the input validator for accepted inputs
