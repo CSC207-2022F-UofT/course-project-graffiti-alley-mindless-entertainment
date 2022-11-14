@@ -102,5 +102,6 @@ public class Inventory {
             System.out.println("The item does not exist in your inventory");
         }
         return null;
+
     }
 }
