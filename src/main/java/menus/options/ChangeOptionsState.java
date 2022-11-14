@@ -1,4 +1,4 @@
-package options;
+package menus.options;
 
 import interfaces.InputValidator;
 import interfaces.State;
@@ -9,8 +9,9 @@ public class ChangeOptionsState implements State {
      * @return whether the state is done
      */
     @Override
-    public boolean preInput() {
-        return false;
+    public void preInput() {
+        //use OutputHandler to display text here
+        //ask which setting to change
     }
 
     /**
@@ -18,8 +19,16 @@ public class ChangeOptionsState implements State {
      * @return whether the state is done
      */
     @Override
-    public boolean postInput(String input) {
-        return false;
+    public void postInput(String input) {
+        //actually change the setting depending on the input.
+        return;
+    }
+
+    /**
+     * @return whether the state is awaiting input
+     */
+    public boolean isDone() {
+        return true;
     }
 
     /**
