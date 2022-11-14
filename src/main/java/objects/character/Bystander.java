@@ -15,7 +15,7 @@ public class Bystander extends Character {
         this.hasQuest = hasQuest;
     }
 
-    public boolean getHasQuest() {
+    public boolean hasQuest() {
         // Returns true if this Bystander is involved in a Quest, and false otherwise.
         return this.hasQuest;
     }

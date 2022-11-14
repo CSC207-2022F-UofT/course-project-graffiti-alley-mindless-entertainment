@@ -10,6 +10,7 @@ public class Player extends Character {
      * level: The level of the Player. Increases after experience points reach a certain value. Unlocks various new
      *        content for the Player, such as new skills and increased health.
      * type: The type of the player. Each int corresponds to an enum.
+     * speed: The speed of the player. A higher int corresponds to a higher priority in a battle.
      * money: The amount of money the Player owns.
      */
     private String name;
@@ -18,11 +19,12 @@ public class Player extends Character {
     private int experience;
     private int level;
     private int type;
+    private int speed;
     private int money;
 
     public Player(String name, int type) {
-        /* Initializes a new Player character with name and type, an empty description, 100 health, 0 experience
-        and level, and 20 money.
+        /* Initializes a new Player character with name and type, an empty description, 100 health and speed, 0
+        experience and level, and 20 money.
          */
         super(name);
         this.description = "";
@@ -30,6 +32,7 @@ public class Player extends Character {
         this.health = 100;
         this.experience = 0;
         this.level = 0;
+        this.speed = 100;
         this.money = 20;
     }
 
@@ -81,6 +84,16 @@ public class Player extends Character {
     public void changeType(int changeBy) {
         // Change the Player's type by changeBy.
         this.type += changeBy;
+    }
+
+    public int getSpeed() {
+        // Return the speed of this Player.
+        return this.speed;
+    }
+
+    public void changeSpeed(int newSpeed) {
+        // Change the speed of the Player to newSpeed.
+        this.speed = newSpeed;
     }
 
     public int getMoney() {
