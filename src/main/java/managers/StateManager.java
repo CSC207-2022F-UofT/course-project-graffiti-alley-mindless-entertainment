@@ -3,35 +3,49 @@ package managers;
 import interfaces.InputValidator;
 import interfaces.State;
 
-public abstract class StateManager implements State {
+public abstract class StateManager{
 
-    private State currentState;
+    private State currState;
     private boolean isDone;
 
     abstract public State nextState(String input);
 
     abstract public void initialize();
 
-    public boolean preInput() {
-        if (currentState.preInput()) {
-            this.nextState("");
-        }
-        return currentState.preInput();
+    public boolean isDone() {
+        return this.isDone();
     }
 
-    public boolean postInput(String input) {
-        if (currentState.postInput(input)) {
-            this.nextState(input);
+    public void preInput() {
+        boolean currPreInput = currState.preInput();
+        if (currPreInput) {
+            this.currState = this.nextState("");
+            if (this.currState == null) {
+                this.isDone = true;
+                return;
+            }
         }
-        return currentState.postInput(input);
+        this.isDone = false;
+    }
+
+    public void postInput(String input) {
+        boolean currPostInput = currState.postInput(input);
+        if (currPostInput) {
+            this.currState = this.nextState(input);
+            if (this.currState == null) {
+                this.isDone = true;
+                return;
+            }
+        }
+        this.isDone = false;
     }
 
     public boolean awaitInput() {
-        return currentState.awaitInput();
+        return currState.awaitInput();
     }
 
     public InputValidator getInputValidator() {
-        return currentState.getInputValidator();
+        return currState.getInputValidator();
     }
 
 }
