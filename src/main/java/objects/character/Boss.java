@@ -1,6 +1,6 @@
-package Enemy_Entities;
+package objects.character;
 
-import Enemy_Entities.Enemy;
+import Enemy_Entities.Gimmick;
 
 public class Boss extends Enemy {
     private Gimmick gimmick_set;

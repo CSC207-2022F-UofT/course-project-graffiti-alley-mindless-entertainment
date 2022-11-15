@@ -1,4 +1,4 @@
-package Enemy_Entities;
+package objects.character;
 import objects.character.Character;
 
 import java.util.ArrayList;
