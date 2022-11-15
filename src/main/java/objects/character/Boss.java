@@ -3,25 +3,50 @@ package objects.character;
 import Enemy_Entities.Gimmick;
 
 public class Boss extends Enemy {
-    private Gimmick gimmick_set;
-    private boolean Gimmick_used;
+    /**
+     * This is a constructor of the enemy.
+     *
+     * @param name:
+     */
+    private Gimmick gimmickSet;
+    private boolean GimmickUsed;
 
-    public Boss(String name, int reputation) {
+    public Boss(String name, int reputation)
+    /**
+     * This is a constructor of the enemy.
+     *
+     * @param name:
+     */{
         super(name, reputation);
 
-        this.gimmick_set = null;
-        this.Gimmick_used = false;
+        this.gimmickSet = null;
+        this.GimmickUsed = false;
     }
-    public boolean get_gimmick_used(){
-        return this.Gimmick_used;
+    public boolean checkGimmick()
+    /**
+     * This is a constructor of the enemy.
+     *
+     * @param name:
+     */{
+        return this.GimmickUsed;
     }
 
-    public void used_Gimmick(){
-        this.Gimmick_used = true;
+    public void usedGimmick()
+    /**
+     * This is a constructor of the enemy.
+     *
+     * @param name:
+     */{
+        this.GimmickUsed = true;
     }
 
-    public void setGimmick_set(Gimmick gimmick){
-        this.gimmick_set = gimmick;
+    public void setGimmick(Gimmick gimmick)
+    /**
+     * This is a constructor of the enemy.
+     *
+     * @param name:
+     */{
+        this.gimmickSet = gimmick;
     }
 
 
