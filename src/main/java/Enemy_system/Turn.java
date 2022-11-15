@@ -3,11 +3,14 @@ package Enemy_system;
 import objects.character.Enemy;
 
 public abstract class Turn {
-    public int dictateTurn(Player player, Enemy enemy){
+
+
+
+    public boolean dictateTurn(Player player, Enemy enemy){
         if(player.getSpeed > enemy.getSpeed()){
-            return 1;
+            return true; //returns true of the user gets the first turn
         } else{
-            return 2;
+            return false;
         }
     }
 
@@ -25,5 +28,5 @@ public abstract class Turn {
         }
     }
 
-    public abstract Object handleAction(String action);
+    public abstract Object handleAction(String input);
 }
