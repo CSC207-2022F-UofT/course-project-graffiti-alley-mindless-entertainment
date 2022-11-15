@@ -1,55 +1,58 @@
 package objects.character;
 
 import Enemy_Entities.Gimmick;
-
+/**
+ * This class represents the boss in a game
+ */
 public class Boss extends Enemy {
-    /**
-     * This is a constructor of the enemy.
-     *
-     * @param name:
-     */
+
     private Gimmick gimmickSet;
     private boolean GimmickUsed;
 
-    public Boss(String name, int reputation)
     /**
-     * This is a constructor of the enemy.
+     * This is a constructor of the boss
      *
-     * @param name:
-     */{
+     * @param name: name of the boss
+     * @param reputation: reputation that the user gets by killing the enemy in int
+     */
+    public Boss(String name, int reputation)
+    {
         super(name, reputation);
 
         this.gimmickSet = null;
         this.GimmickUsed = false;
     }
-    public boolean checkGimmick()
+
     /**
-     * This is a constructor of the enemy.
+     * This method checks if the gimmick is used or not
      *
-     * @param name:
-     */{
+     * @return boolean representing if the gimmick is used.
+     * return true if the gimmick is used
+     */
+    public boolean checkGimmick()
+    {
         return this.GimmickUsed;
     }
 
-    public void usedGimmick()
     /**
-     * This is a constructor of the enemy.
+     * This method changes the GimmickUsed to true to indicate the
+     * gimmick is used
      *
-     * @param name:
-     */{
+     *
+     */
+    public void usedGimmick()
+    {
         this.GimmickUsed = true;
     }
 
-    public void setGimmick(Gimmick gimmick)
     /**
-     * This is a constructor of the enemy.
+     * This method sets the gimmick for an enemy
      *
-     * @param name:
-     */{
+     * @param gimmick: gimmick entity
+     */
+    public void setGimmick(Gimmick gimmick)
+    {
         this.gimmickSet = gimmick;
     }
-
-
-
 
 }

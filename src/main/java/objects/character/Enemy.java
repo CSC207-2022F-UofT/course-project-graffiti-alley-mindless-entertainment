@@ -4,13 +4,14 @@ import objects.character.Character;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * This is a class for enemy that inherits character class. This enemy class includes
+ * health, skills, speed, and reputation in addition to name which is inherited from
+ * parent class.
+ */
 public class Enemy extends Character{
-    /**
-     * This is a class for enemy that inherits character class. This enemy class includes
-     * health, skills, speed, and reputation in addition to name which is inherited from
-     * parent class.
-     * Attributes:
-     */
+
 
     private int health; //does not have to be static since there are multiple enemies and
     // we create an enemy every time the user encounters an enemy.
@@ -18,12 +19,14 @@ public class Enemy extends Character{
     private int speed;
     private int reputation;
 
+    /**
+     * This is a constructor of the enemy.
+     *
+     * @param name: name if the enemy
+     * @param reputation: reputation that the user gets by killing enemy in int
+     */
     public Enemy(String name, int reputation) {
-        /**
-         * This is a constructor of the enemy.
-         *
-         * @param name:
-         */
+
         super(name);
         this.health = 100;
         this.skills = new ArrayList<Skill>();
@@ -31,32 +34,35 @@ public class Enemy extends Character{
         this.reputation = reputation;
     }
 
-    public void decreaseHP(int n)
     /**
      * This is a constructor of the enemy.
      *
-     * @param name:
-     */{
+     * @param n: the amount of health to decrease in int
+     */
+    public void decreaseHP(int n)
+    {
         this.health = this.health - n;
     }
 
-    public void increaseHP(int n)
     /**
      * this method increases the enemy's health by n
      *
-     * @param
-     */{
+     * @param n: the amount of health to increase in int
+     */
+    public void increaseHP(int n)
+    {
         this.health = this.health + n;
     }
 
-    public boolean checkAlive()
     /**
      * This method checks if the enemy is alive or not
      * and return false if the enemy is dead
      *
-     * @param
-     * @return
-     */{
+     * @return true if the enemy is alive and return false
+     * if the enemy is dead
+     */
+    public boolean checkAlive()
+    {
         if(this.health <= 0){
             return false;
         } else{
@@ -64,72 +70,74 @@ public class Enemy extends Character{
         }
     }
 
-    public int getHealth()
     /**
      * This is method returns the enemy's health
      *
-     * @param
-     * @return
-     */{
+     * @return the enemy's health in int
+     */
+    public int getHealth()
+    {
         return this.health;
     }
-    public void setHealth(int n)
+
     /**
      * This function sets the enemy's health
      *
-     * @param
-     * @return
-     */{
+     * @param n: new health in int
+     */
+    public void setHealth(int n)
+    {
         this.health = n;
     }
 
-    public void setSpeed(int speed)
     /**
      * This method sets the enemy's speed
      *
-     * @param
-     * @return
-     */{
+     * @param speed: new speed in int
+     */
+    public void setSpeed(int speed)
+    {
         this.speed = speed;
     }
 
-    public void changeSpeed(int n)
     /**
      * This method decreases the enemy's speed
      *
-     * @param
-     * @return
-     */{
+     * @param n: the amount of speed that the enemy looses by using a skill
+     *
+     */
+    public void changeSpeed(int n)
+    {
         this.speed = this.speed - n;
     }
 
-    public int getSpeed()
     /**
      * This returns the enemy's speed
      *
-     * @param
-     * @return
-     */{
+     * @return speed of this enemy in int
+     */
+    public int getSpeed()
+    {
         return this.speed;
     }
 
-    public void addSkill(Skill skill)
     /**
      * This method add a skill to enemy's skills
      *
-     * @param
-     * @return
-     */{
+     * @param skill: skill entity
+     */
+    public void addSkill(Skill skill)
+    {
         this.skills.add(skill);
     }
 
-    public int getReputation()
     /**
-     * This imethod returns the enemy's reputation
+     * This method returns the enemy's reputation
      *
-     * @param
-     * @return
-     */{
+     * @return the reputation that the player gets by killing this enemy
+     */
+    public int getReputation()
+    {
         return this.reputation;
     }
 
