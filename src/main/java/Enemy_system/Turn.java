@@ -1,6 +1,6 @@
 package Enemy_system;
 
-import Enemy_Entities.Enemy;
+import objects.character.Enemy;
 
 public abstract class Turn {
     public int dictateTurn(Player player, Enemy enemy){

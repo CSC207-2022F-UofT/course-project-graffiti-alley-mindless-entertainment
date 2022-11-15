@@ -1,7 +1,8 @@
 package Enemy_system;
 
-import Enemy_Entities.Boss;
-import Enemy_Entities.Enemy;
+package Enemy_System;
+import objects.character.Boss;
+import objects.character.Enemy;
 import Enemy_Entities.Gimmick;
 import Enemy_system.AttackGimmick;
 
@@ -71,7 +72,7 @@ public class EnemyFactory {
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         Gimmick gimmick = new HealthGimmick();
-        boss.setGimmick_set(gimmick);
+        boss.setGimmick(gimmick);
         return boss;
     }
 
@@ -81,7 +82,7 @@ public class EnemyFactory {
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         Gimmick gimmick = new AttackGimmick();
-        boss.setGimmick_set(gimmick);
+        boss.setGimmick(gimmick);
         return boss;
     }
 
@@ -91,7 +92,7 @@ public class EnemyFactory {
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         Gimmick gimmick = new TurnGimmick();
-        boss.setGimmick_set(gimmick);
+        boss.setGimmick(gimmick);
         return boss;
     }
 

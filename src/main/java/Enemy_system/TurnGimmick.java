@@ -1,23 +1,25 @@
 package Enemy_system;
 
-import Enemy_Entities.Boss;
+package Enemy_System;
+
+import objects.character.Boss;
 import Enemy_Entities.Gimmick;
 
-public class TurnGimmick extends Gimmick { //In this turn gimmick, whenever, the gimmick is triggered, only enemy
+public class TurnGimmick implements Gimmick { //In this turn gimmick, whenever, the gimmick is triggered, only enemy
     // will attack in the next turn.
 
     public TurnGimmick(){
         super();
     }
 
-    public boolean use_gimmick(Boss boss){ // return true if the gimmick has been used by the boss. This method
+    public boolean use_gimmick(Boss boss, Player player){ // return true if the gimmick has been used by the boss. This method
         // returns boolean because if the gimmick is used, maybe some dialouges will be called in battle state class.
         //(whenever this method return true)
         if(check_gimmick(boss)){
             Skill i = boss.skills.get(0);
-
-            boss.set_health(100);
-            boss.used_Gimmick(); //since the boss used gimmick
+            int damage = i.getDamage();
+            player.changeHealth(-damage);
+            boss.usedGimmick();
             return true;
         } else{
             return false;
