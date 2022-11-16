@@ -16,10 +16,10 @@ public class Skill {
     private String name;
     private int damage;
     private int lag;
-    private Type type;
+    private SkillType type;
 
 
-    public Skill(String name, int damage, int lag, Type type) {
+    public Skill(String name, int damage, int lag, SkillType type) {
         // Allows for creation and customization of skills
         this.name = name;
         this.damage = damage;
@@ -52,9 +52,9 @@ public class Skill {
         this.lag = lag;
     }
     
-    public Type getType() {return this.type;}
+    public SkillType getType() {return this.type;}
     
-    public void setType(Type type) {
+    public void setType(SkillType type) {
         this.type = type;
     }
 
