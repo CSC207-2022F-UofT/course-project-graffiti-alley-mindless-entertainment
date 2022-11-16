@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * This is a class for enemy that inherits character class. This enemy class includes
- * health, skills, speed, and reputation in addition to name which is inherited from
+ * health, skills, speed, reputation and Enemy AI in addition to name which is inherited from
  * parent class.
  */
 public class Enemy extends Character{
@@ -18,6 +18,7 @@ public class Enemy extends Character{
     public ArrayList<Skill> skills;
     private int speed;
     private int reputation;
+    private EnemyAI enemyAI;
 
     /**
      * This is a constructor of the enemy.
@@ -25,13 +26,14 @@ public class Enemy extends Character{
      * @param name: name if the enemy
      * @param reputation: reputation that the user gets by killing enemy in int
      */
-    public Enemy(String name, int reputation) {
+    public Enemy(String name, int reputation, EnemyAI enemyAI) {
 
         super(name);
         this.health = 100;
         this.skills = new ArrayList<Skill>();
         this.speed = 90;
         this.reputation = reputation;
+        this.enemyAI = enemyAI;
     }
 
     /**
@@ -143,4 +145,12 @@ public class Enemy extends Character{
         return this.skills.get(n);
     }
 
+    /**
+     * This method returns the enemy AI of the enemy
+     *
+     * @return the enemy AI of the enemy
+     */
+    public EnemyAI getEnemyAI() {
+        return this.enemyAI;
+    }
 }

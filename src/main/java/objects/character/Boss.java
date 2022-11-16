@@ -17,7 +17,7 @@ public class Boss extends Enemy {
      */
     public Boss(String name, int reputation)
     {
-        super(name, reputation);
+        super(name, reputation, enemyAI);
 
         this.gimmickSet = null;
         this.GimmickUsed = false;
