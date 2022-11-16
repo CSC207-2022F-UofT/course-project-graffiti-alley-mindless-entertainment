@@ -5,8 +5,8 @@ import interfaces.State;
 
 public abstract class StateManager{
 
-    private State currState;
-    private boolean isDone=false;
+    protected State currState;
+    protected boolean isDone=false;
 
     abstract public State nextState(String input);
 
@@ -29,7 +29,7 @@ public abstract class StateManager{
     }
 
     public void postInput(String input) {
-        currState.postInput();
+        currState.postInput(input);
         boolean currPostInput = currState.isDone();
         if (currPostInput) {
             this.currState = this.nextState(input);
