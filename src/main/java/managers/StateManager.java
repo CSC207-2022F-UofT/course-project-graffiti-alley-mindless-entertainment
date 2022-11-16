@@ -6,6 +6,7 @@ import interfaces.State;
 public abstract class StateManager{
 
     protected State currState;
+
     protected boolean isDone=false;
 
     abstract public State nextState(String input);
