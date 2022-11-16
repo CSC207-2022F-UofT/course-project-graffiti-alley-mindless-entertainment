@@ -16,9 +16,13 @@ import data_objects.EventData;
 
 public class DatabaseManager implements IDatabase {
 
+
     public JSONObject fullDatabase;
     public EventFactory eventFactory;
 
+    /**
+     * Helper function to search JSON arrays
+     */
     private JSONObject searchJSONArray(JSONArray jsonArray, String key, Object value) {
         for (Object obj: jsonArray) {
             JSONObject jsonObject = (JSONObject) obj;
@@ -45,6 +49,9 @@ public class DatabaseManager implements IDatabase {
         this.eventFactory = new EventFactory();
     }
 
+    /**
+     * @return EventData with all data from json converted to variables
+     */
     public EventData fetchEvent(String key, Object value) {
         JSONArray eventsData = (JSONArray) this.fullDatabase.get("events");
         JSONObject eventData = searchJSONArray(eventsData, key, value);
