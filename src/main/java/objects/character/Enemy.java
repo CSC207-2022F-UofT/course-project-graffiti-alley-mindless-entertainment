@@ -35,21 +35,13 @@ public class Enemy extends Character{
     }
 
     /**
-     * This is a constructor of the enemy.
+     * This method changes the Enemy's health
+     * if n is positive, it will increase the health and
+     * if its negative, it will decrease the health
      *
-     * @param n: the amount of health to decrease in int
+     * @param n: the amount of health to change in int
      */
-    public void decreaseHP(int n)
-    {
-        this.health = this.health - n;
-    }
-
-    /**
-     * this method increases the enemy's health by n
-     *
-     * @param n: the amount of health to increase in int
-     */
-    public void increaseHP(int n)
+    public void changeHealth(int n)
     {
         this.health = this.health + n;
     }
