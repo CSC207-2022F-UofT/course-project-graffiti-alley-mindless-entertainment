@@ -55,4 +55,11 @@ public class Boss extends Enemy {
         this.gimmickSet = gimmick;
     }
 
+    /**
+     * This method returns the enemy's gimmick
+     *
+     */
+    public Gimmick getGimmickSet() {
+        return gimmickSet;
+    }
 }
