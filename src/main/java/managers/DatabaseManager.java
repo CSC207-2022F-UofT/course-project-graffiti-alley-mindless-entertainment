@@ -1,5 +1,7 @@
 package managers;
 
+import interfaces.IDatabase;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -7,11 +9,25 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.IOException;
 
-import objects.Database;
+import data_factories.EventFactory;
 
-public class DatabaseManager {
+import data_objects.EventData;
 
-    public Database fullDatabase;
+
+public class DatabaseManager implements IDatabase {
+
+    public JSONObject fullDatabase;
+    public EventFactory eventFactory;
+
+    private JSONObject searchJSONArray(JSONArray jsonArray, String key, Object value) {
+        for (Object obj: jsonArray) {
+            JSONObject jsonObject = (JSONObject) obj;
+            if (jsonObject.get(key) == value) {
+                return jsonObject;
+            }
+        }
+        return null;
+    }
 
     public DatabaseManager() {
         // Initialize Full Database
@@ -20,41 +36,20 @@ public class DatabaseManager {
         {
             //Read JSON file
             Object obj = jsonParser.parse(reader);
-            this.fullDatabase = new Database((JSONObject) obj);
+            this.fullDatabase = (JSONObject) obj;
         } catch (ParseException | IOException e) {
             e.printStackTrace();
         }
+
+        // Initialize Factories
+        this.eventFactory = new EventFactory();
     }
 
-    public Database getDatabase(String key) {
-        if (this.fullDatabase.keyExists(key)) {
-            JSONObject subTree = this.fullDatabase.getInfo(key);
-            return new Database(subTree);
-        }
-        return null;
+    public EventData fetchEvent(String key, Object value) {
+        JSONArray eventsData = (JSONArray) this.fullDatabase.get("events");
+        JSONObject eventData = searchJSONArray(eventsData, key, value);
+        assert eventData != null;
+        return eventFactory.createEventData(eventData);
     }
 
-    public Database getDatabase(Database database, String key) {
-        if (database.keyExists(key)) {
-            JSONObject subTree = database.getInfo(key);
-            return new Database(subTree);
-        }
-        return null;
-    }
-
-    public String getData(String key) {
-        if (this.fullDatabase.keyExists(key)) {
-            JSONObject item = this.fullDatabase.getInfo(key);
-            return item.toString();
-        }
-        return null;
-    }
-
-    public String getData(Database database, String key) {
-        if (database.keyExists(key)) {
-            JSONObject item = database.getInfo(key);
-            return item.toString();
-        }
-        return null;
-    }
 }

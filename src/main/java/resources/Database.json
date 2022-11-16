@@ -92,12 +92,11 @@
       }
     }
   },
-  "characters": {
-
-  },
-  "items": {
-
-  },
+  "quests": [],
+  "characters": [],
+  "items": [],
+  "skills": [],
+  "enemies": [],
   "events": [
     {
       "name": "test",

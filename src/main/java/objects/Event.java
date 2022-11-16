@@ -10,6 +10,7 @@ public abstract class Event {
     public Event nextEvent;
 
     public Event() {
+
         this.eventState = 0;
     }
 }
