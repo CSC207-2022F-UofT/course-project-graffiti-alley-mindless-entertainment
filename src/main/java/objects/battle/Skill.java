@@ -1,3 +1,5 @@
+package objects.battle;
+
 import java.util.Dictionary;
 import java.util.Hashtable;
 
@@ -8,15 +10,16 @@ public class Skill {
      * name: A string representing the name of the skill
      * damage: An integer representing how much damage the skill does
      * lag; An integer that adds priority to skills
-     * type: String representing the element of the skill, introduces type advantages.
+     * type: enum representing the element of the skill, introduces type advantages.
      */
     public static Dictionary<String, Skill> allSkills = new Hashtable<>();
     private String name;
     private int damage;
     private int lag;
-    private String type;
+    private Type type;
 
-    public Skill(String name, int damage, int lag, String type) {
+
+    public Skill(String name, int damage, int lag, Type type) {
         // Allows for creation and customization of skills
         this.name = name;
         this.damage = damage;
@@ -25,35 +28,33 @@ public class Skill {
         allSkills.put(this.name, this); // Adds the new skill to the allSkills Dictionary
     }
     
-    public String get_name() {
+    public String getName() {
         return this.name;
     }
     
-    public void set_name(String name) {
+    public void setName(String name) {
         this.name = name;
     }
     
-    public int get_damage() {
+    public int getDamage() {
         return this.damage;
     }
     
-    public void set_damage(int damage) {
+    public void setDamage(int damage) {
         this.damage = damage;
     }
     
-    public int get_lag() {
+    public int getLag() {
         return this.lag;
     }
     
-    public void set_lag(int lag) {
+    public void setLag(int lag) {
         this.lag = lag;
     }
     
-    public String get_type() {
-        return this.type;
-    }
+    public Type getType() {return this.type;}
     
-    public void set_type(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
