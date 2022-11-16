@@ -141,4 +141,14 @@ public class Enemy extends Character{
         return this.reputation;
     }
 
+    /**
+     * This method returns the skill at index n
+     *
+     * @param n: the index of the skill
+     * @return the skill at index n
+     */
+    public Skill getSkill(int n){
+        return this.skills.get(n);
+    }
+
 }
