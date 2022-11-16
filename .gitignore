@@ -107,4 +107,8 @@ Temporary Items
 /.idea/modules/course-project-graffiti-alley-mindless-entertainment.test.iml
 /.idea/modules.xml
 /.idea/jarRepositories.xml
-.idea/compiler.xml
+/.idea/compiler.xml
+/.idea/modules/IdeaProjects.course-project-graffiti-alley-mindless-entertainment.iml
+/.idea/modules/IdeaProjects.course-project-graffiti-alley-mindless-entertainment.main.iml
+/.idea/modules/IdeaProjects.course-project-graffiti-alley-mindless-entertainment.test.iml
+/.idea/misc.xml
