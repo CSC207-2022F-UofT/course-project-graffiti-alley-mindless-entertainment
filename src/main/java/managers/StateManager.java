@@ -5,19 +5,20 @@ import interfaces.State;
 
 public abstract class StateManager{
 
-    private State currState;
-    private boolean isDone;
+    protected State currState;
+    protected boolean isDone=false;
 
     abstract public State nextState(String input);
 
     abstract public void initialize();
 
     public boolean isDone() {
-        return this.isDone();
+        return this.isDone;
     }
 
     public void preInput() {
-        boolean currPreInput = currState.preInput();
+        currState.preInput();
+        boolean currPreInput = currState.isDone();
         if (currPreInput) {
             this.currState = this.nextState("");
             if (this.currState == null) {
@@ -25,11 +26,11 @@ public abstract class StateManager{
                 return;
             }
         }
-        this.isDone = false;
     }
 
     public void postInput(String input) {
-        boolean currPostInput = currState.postInput(input);
+        currState.postInput(input);
+        boolean currPostInput = currState.isDone();
         if (currPostInput) {
             this.currState = this.nextState(input);
             if (this.currState == null) {
@@ -37,7 +38,6 @@ public abstract class StateManager{
                 return;
             }
         }
-        this.isDone = false;
     }
 
     public boolean awaitInput() {
