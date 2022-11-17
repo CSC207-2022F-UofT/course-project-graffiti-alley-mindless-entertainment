@@ -13,10 +13,10 @@ import java.util.List;
 public class Enemy extends Character{
 
 
-    private int health; //does not have to be static since there are multiple enemies and
+    private int health = 100; //does not have to be static since there are multiple enemies and
     // we create an enemy every time the user encounters an enemy.
     public ArrayList<Skill> skills;
-    private int speed;
+    private int speed = 90;
     private int reputation;
     private EnemyAI enemyAI;
 
@@ -26,12 +26,10 @@ public class Enemy extends Character{
      * @param name: name if the enemy
      * @param reputation: reputation that the user gets by killing enemy in int
      */
-    public Enemy(String name, int reputation, EnemyAI enemyAI) {
+    public Enemy(String name, int reputation, ArrayList<Skill> skills, EnemyAI enemyAI) {
 
         super(name);
-        this.health = 100;
-        this.skills = new ArrayList<Skill>();
-        this.speed = 90;
+        this.skills = skills;
         this.reputation = reputation;
         this.enemyAI = enemyAI;
     }
