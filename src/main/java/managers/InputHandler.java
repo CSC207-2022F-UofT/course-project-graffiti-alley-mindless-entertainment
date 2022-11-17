@@ -18,5 +18,4 @@ public class InputHandler{
             output.generateText("Your choice is not valid. Please attempt your choice again.");
         }
     }
-
 }
