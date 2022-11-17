@@ -1,6 +1,9 @@
 package objects.character;
 
 import Enemy_Entities.Gimmick;
+
+import java.util.ArrayList;
+
 /**
  * This class represents the boss in a game
  */
@@ -14,12 +17,14 @@ public class Boss extends Enemy {
      *
      * @param name: name of the boss
      * @param reputation: reputation that the user gets by killing the enemy in int
+     * @param skills: array list of skills that the boss has
+     * @param enemyAI: enemy AI that the boss has
+     * @param gimmick : the gimmick that the boss has
      */
-    public Boss(String name, int reputation)
+    public Boss(String name, int reputation, ArrayList<Skill> skills, EnemyAI enemyAI, Gimmick gimmick)
     {
-        super(name, reputation, enemyAI);
-
-        this.gimmickSet = null;
+        super(name, reputation, skills, enemyAI);
+        this.gimmickSet = gimmick;
         this.GimmickUsed = false;
     }
 
