@@ -1,6 +1,9 @@
 package objects.inventory;
 
+import objects.item.Item;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Inventory {
@@ -11,6 +14,7 @@ public class Inventory {
      */
 
     private List<Item> inventory;
+    private final int maxSize = 5;
 
     public Inventory() {
         /*
@@ -33,26 +37,30 @@ public class Inventory {
         this.inventory = inventory;
     }
 
-    public void viewInventory(){
+    public HashMap<String, String> viewInventory(){
         /*
-        Displays(print) all items with stats in the inventory.
+        Return all items' name and their ability pair {name, ability} in the inventory as a map.
          */
+        HashMap<String, String> inventoryMap = new HashMap<>();
         for(int i = 0; i < inventory.size(); i++){
-            inventory.get(i).getStats();
+            String[] stats = inventory.get(i).getStats();
+            inventoryMap.put(stats[0], stats[1]);
         }
+        return inventoryMap;
     }
 
-    public void addItem(Item item){
+    public boolean addItem(Item item){
         /*
         Add an item to inventory if the inventory is not full. Call viewInventory() if the inventory is full,
-        so the player can remove an item.
+        so the player can remove an item. Return false if inventory is full.
          */
-        if (inventory.size() > 5){
-            System.out.println("Your inventory is full. View inventory and remove an item");
+        if (inventory.size() > maxSize){
             viewInventory();
+            return false;
         }
         else{
             inventory.add(item);
+            return true;
         }
     }
 
@@ -66,28 +74,25 @@ public class Inventory {
                 return true;
             }
         }
-
         return false;
     }
 
-    public void removeItem(String itemName){
+    public boolean removeItem(String itemName){
         /*
-        Remove an item if the item exists in the inventory.
+        Remove an item and return true if the item exists in the inventory. Return false otherwise.
          */
         if (checkItem(itemName)) {
             for (int i = 0; i < inventory.size(); i++) {
                 if (inventory.get(i).getName().equals(itemName)) {
                     inventory.remove(i);
-                    break;
+                    return true;
                 }
             }
         }
-        else{
-            System.out.println("The item does not exist in your inventory.");
-        }
+        return false;
     }
 
-    public String useITem(String itemName) {
+    public String useItem(String itemName) {
         /*
         Return ability of item if the item is in inventory, return null otherwise.
          */
@@ -98,10 +103,6 @@ public class Inventory {
                 }
             }
         }
-        else {
-            System.out.println("The item does not exist in your inventory");
-        }
         return null;
     }
 }
-
