@@ -6,11 +6,13 @@ import objects.character.Enemy;
 import Enemy_Entities.Gimmick;
 import Enemy_system.AttackGimmick;
 
+import managers.DatabaseManager;
 import java.util.ArrayList;
+import data_objects.EnemyData;
 
 public class EnemyFactory {
 
-    public static Enemy getEnemy(int zone, boolean isboss){
+    public static Enemy getEnemy1(int zone, boolean isboss){
         if(zone==1 && !isboss){
             return getSlime();
         } if(zone==2 && !isboss){
@@ -28,6 +30,17 @@ public class EnemyFactory {
         } else {
             return createBoss4();
         }
+    }
+
+    public static Enemy getEnemy(String name){
+        EnemyData enemyData = databaseManager.fetchEnemyData(name);
+        Enemy enemy = new Enemy(name, 1, Enemy_system.AgressiveAI);
+        Skill skill = Skill.getFireball(); //since it is static method????
+        ArrayList<Skill> skills = new ArrayList<Skill>();
+        skills.add(skill);
+        enemy.set_skills(skills);
+        return enemy;
+
     }
 
     public static Enemy getGoblin(){
@@ -103,4 +116,6 @@ public class EnemyFactory {
         skills.add(skill);
         Gimmick gimmick = new Gimmick.get
     }
+
+
 }
