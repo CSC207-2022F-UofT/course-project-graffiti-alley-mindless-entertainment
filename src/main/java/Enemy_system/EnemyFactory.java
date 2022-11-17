@@ -52,17 +52,26 @@ public class EnemyFactory {
             bossType = Enemy_system.AggresiveAI;
         }
 
-        if(bossData.gimmick == "Health"){
-            Gimmick gimmick = new Enemy_system.HealthGimmick();
-        } if(bossData.gimmick == "Attack"){
-            Gimmick gimmick = new Enemy_system.AttackGimmick();
-        } if(bossData.gimmick == "Damage"){
-            Gimmick gimmick = new Enemy_system.DamageGimmick();
-        } if(bossData.gimmick == "Turn"){
-            Gimmick gimmick = new Enemy_system.TurnGimmick();
-
-
-        Boss boss = new Boss(name, 1, skills, enemyType, gimmick);
+        String gimmick_str = bossData.gimmick;
+        switch (gimmick_str) {
+            case "Health":{
+                Gimmick gimmick = new Enemy_system.HealthGimmick();
+                break;
+            }
+            case "Attack":{
+                Gimmick gimmick = new Enemy_system.AttackGimmick();
+                break;
+            }
+            case "Damage":{
+                Gimmick gimmick = new Enemy_system.DamageGimmick();
+                break;
+            }
+            case "Turn":{
+                Gimmick gimmick = new Enemy_system.TurnGimmick();
+                break;
+            }
+        }
+        Boss boss = new Boss(name, 10, skills, enemyType, gimmick);
         return boss;
     }
 
