@@ -3,7 +3,7 @@ package data_factories;
 import data_objects.EventData;
 import org.json.simple.JSONObject;
 
-public class EventFactory {
+public class EventDataFactory {
 
     public EventData createEventData(JSONObject jsonObject) {
         return new EventData(

@@ -12,6 +12,7 @@ public class EventManager {
     }
 
     public Event generateEvent(String[] info) {
+
         return null;
     }
 
