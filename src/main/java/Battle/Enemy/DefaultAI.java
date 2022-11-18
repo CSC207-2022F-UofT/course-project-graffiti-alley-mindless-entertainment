@@ -7,7 +7,7 @@ public class DefaultAI implements EnemyAI{
 
     public int attackChance;
 
-    public DefaultAI(int n){
+    public DefaultAI(int n, BattleInfo info){
         this.attackChance = n;
     }
 
