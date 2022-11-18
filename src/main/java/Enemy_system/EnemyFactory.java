@@ -8,6 +8,8 @@ import Enemy_system.AttackGimmick;
 
 import managers.DatabaseManager;
 import java.util.ArrayList;
+import java.util.Objects;
+
 import data_objects.EnemyData;
 import data_objects.SkillData;
 
@@ -24,18 +26,24 @@ public class EnemyFactory {
             Skill skill = new Skill(i, damage, lag, type);
             skills.add(skill);
         }
-        EnemyAI enemyType;
-        if (enemyData.type == "Passive") {
-            enemyType = Enemy_system.PassiveAI;
+        int reputation = enemyData.reputation;
+        int speed = enemyData.speed;
+        EnemyInfo enemyInfo = new EnemyInfo(name, skills, speed, reputation);
+
+        EnemyAI AItype;
+        String ai = enemyData.ai;
+        AIData aiData = databaseManager.fetchAIData(ai);
+        if (Objects.equals(ai, "Smart")) {
+            AItype = SmartAI(enemyInfo, aiData.chance);
         } else{
-            enemyType = Enemy_system.AggresiveAI;
+            AItype = DefaultAI(enemyInfo, aiData.chance);
         }
-        Enemy enemy = new Enemy(name, 1, skills, enemyType);
+        Enemy enemy = new Enemy(name, enemyInfo, AItype);
         return enemy;
     }
 
     public static Boss getBoss(String name){
-        BossData bossData = databaseManager.fetchBossData(name);
+        BossData bossData = databaseManager.fetchEnemyData(name);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         for (String i:bossData.skills) {
             SkillData skillData = databaseManager.fetchSkillData(i);
@@ -45,33 +53,39 @@ public class EnemyFactory {
             Skill skill = new Skill(i, damage, lag, type);
             skills.add(skill);
         }
-        EnemyAI bossType;
-        if (bossData.type == "Passive") {
-            bossType = Enemy_system.PassiveAI;
+        int reputation = bossData.reputation;
+        int speed = bossData.speed;
+        EnemyInfo enemyInfo = new EnemyInfo(name, skills, speed, reputation);
+
+        EnemyAI AItype;
+        String ai = bossData.ai;
+        AIData aiData = databaseManager.fetchAIData(ai);
+        if (Objects.equals(ai, "Smart")) {
+            AItype = SmartAI(enemyInfo, aiData.chance);
         } else{
-            bossType = Enemy_system.AggresiveAI;
+            AItype = DefaultAI(enemyInfo, aiData.chance);
         }
 
         String gimmick_str = bossData.gimmick;
         switch (gimmick_str) {
             case "Health":{
-                Gimmick gimmick = new Enemy_system.HealthGimmick();
+                Gimmick gimmick = new Enemy_system.HealthGimmick(enemyInfo);
                 break;
             }
             case "Attack":{
-                Gimmick gimmick = new Enemy_system.AttackGimmick();
+                Gimmick gimmick = new Enemy_system.AttackGimmick(enemyInfo);
                 break;
             }
             case "Damage":{
-                Gimmick gimmick = new Enemy_system.DamageGimmick();
+                Gimmick gimmick = new Enemy_system.DamageGimmick(enemyInfo, );
                 break;
             }
             case "Turn":{
-                Gimmick gimmick = new Enemy_system.TurnGimmick();
+                Gimmick gimmick = new Enemy_system.TurnGimmick(enemyInfo, );
                 break;
             }
         }
-        Boss boss = new Boss(name, 10, skills, enemyType, gimmick);
+        Boss boss = new Boss(name, enemyInfo, AItype, gimmick);
         return boss;
     }
 
