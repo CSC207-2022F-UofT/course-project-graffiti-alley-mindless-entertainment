@@ -19,7 +19,7 @@ public class DefaultAI implements EnemyAI{
             Random rand = new Random();
             int upperbound = 101;
             int int_random = rand.nextInt(upperbound);
-            if(int_random > this.attackChance){
+            if(int_random < this.attackChance){
                 return "use skill";
             } else{
                 return "use potion";
