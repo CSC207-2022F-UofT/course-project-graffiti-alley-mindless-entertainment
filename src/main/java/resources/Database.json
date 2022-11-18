@@ -2,7 +2,7 @@
 {
   "name": "PACT",
   "texts": {
-    "A Newcomer!": {
+    "Introduction": {
       "[GAME]": {
         "speaker": "[GAME]",
         "text": [
@@ -100,9 +100,17 @@
   "events": [
     {
       "name": "test",
-      "type": "test",
+      "type": "Encounter",
       "area": "A Newcomer!",
+      "next_event": "test 2",
       "priority": 1
+    },
+    {
+      "name": "test 2",
+      "type": "Item Pick-Up",
+      "area": "A Newcomer!",
+      "next_event": "test 2",
+      "priority": 2
     }
   ]
 }

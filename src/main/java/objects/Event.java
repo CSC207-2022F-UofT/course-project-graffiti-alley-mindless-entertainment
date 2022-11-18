@@ -4,7 +4,10 @@ import java.util.Optional;
 
 public abstract class Event {
 
-    private String eventType;
+    public String eventName;
+    public String eventType;
+    public Area eventArea;
+    public int eventPriority;
     private int eventState;
 
     public Event nextEvent;

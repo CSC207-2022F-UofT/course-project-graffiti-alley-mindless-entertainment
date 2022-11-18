@@ -1,7 +1,6 @@
 package managers;
 
 import interfaces.IDatabase;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -9,21 +8,16 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.IOException;
 
-import data_factories.EventDataFactory;
 
 
-public class DatabaseManager implements IDatabase {
+public abstract class DatabaseManager implements IDatabase {
 
-    public final String fileName = "src/main/resources/Database.json";
+    public final String FILE_NAME = "src/main/resources/Database.json";
     public JSONObject fullDatabase;
-    public EventDataFactory eventFactory;
 
     public DatabaseManager() {
         // Initialize Full Database
-        initializeDatabase(fileName);
-
-        // Initialize Factories
-        this.eventFactory = new EventDataFactory();
+        initializeDatabase(FILE_NAME);
     }
 
     public void initializeDatabase(String fileName) {
@@ -37,4 +31,5 @@ public class DatabaseManager implements IDatabase {
             e.printStackTrace();
         }
     }
+
 }

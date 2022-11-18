@@ -1,10 +1,13 @@
 package managers;
 
+import data_factories.EventDataFactory;
 import data_objects.EventData;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class EventDataManager extends DatabaseManager {
+
+    public EventDataFactory dataFactory;
 
     /**
      * Helper function to search JSON arrays
@@ -26,7 +29,10 @@ public class EventDataManager extends DatabaseManager {
         JSONArray eventsData = (JSONArray) super.fullDatabase.get("events");
         JSONObject eventData = searchJSONArray(eventsData, key, value);
         assert eventData != null;
-        return eventFactory.createEventData(eventData);
+        return this.dataFactory.createEventData(eventData);
     }
 
+    public EventDataManager() {
+        this.dataFactory = new EventDataFactory();
+    }
 }

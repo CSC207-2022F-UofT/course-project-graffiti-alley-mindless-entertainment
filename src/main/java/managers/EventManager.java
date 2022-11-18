@@ -5,18 +5,10 @@ import objects.Event;
 public class EventManager {
 
     private Event[] eventQueue;
+    private DatabaseManager database;
 
-    public Event generateEvent(Event prev) {
-        Event nextEvent = prev.nextEvent;
-        return null;
-    }
-
-    public Event generateEvent(String[] info) {
-
-        return null;
-    }
-
-    public EventManager() {
+    public EventManager(DatabaseManager database) {
+        this.database = database;
 
     }
 }
