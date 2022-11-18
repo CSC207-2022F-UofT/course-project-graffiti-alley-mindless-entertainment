@@ -28,7 +28,6 @@ public class TypeGimmick implements Enemy_system.Gimmick {
         } else{
             this.enemyInfo.setType(Type.WATER);
         }
-
     }
 
     public boolean checkGimmick(){

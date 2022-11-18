@@ -15,7 +15,6 @@ public class HealthGimmick implements Gimmick {
         // returns boolean because if the gimmick is used, maybe some dialouges will be called in battle state class.
         //(whenever this method return true)
         this.enemyInfo.setHealth(100);
-
     }
 
     public boolean checkGimmick(){

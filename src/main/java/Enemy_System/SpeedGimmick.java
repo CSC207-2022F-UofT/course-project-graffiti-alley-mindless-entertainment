@@ -21,5 +21,4 @@ public class SpeedGimmick implements Gimmick{
             return false;
         }
     }
-
 }

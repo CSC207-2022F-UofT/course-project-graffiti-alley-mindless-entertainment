@@ -11,7 +11,6 @@ public class AttackGimmick implements Gimmick {
         this.enemyInfo = enemyInfo;
     }
 
-
     public boolean checkGimmick() {
         if(this.enemyInfo.getHealth() < 15){
             return true;

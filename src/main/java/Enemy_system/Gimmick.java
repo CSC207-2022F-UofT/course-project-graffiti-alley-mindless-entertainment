@@ -9,4 +9,5 @@ public interface Gimmick {
     public boolean checkGimmick();
 
 
+
 }
