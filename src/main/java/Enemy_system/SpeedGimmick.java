@@ -1,4 +1,4 @@
-package Enemy_System;
+package Enemy_system;
 package objects.charactoers.player;
 public class SpeedGimmick implements Gimmick{
     private EnemyInfo enemyInfo;

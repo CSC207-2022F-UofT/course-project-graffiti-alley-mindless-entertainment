@@ -1,4 +1,4 @@
-package Enemy_System;
+package Enemy_system;
 
 import objects.character.Boss;
 import Enemy_Entities.Gimmick;

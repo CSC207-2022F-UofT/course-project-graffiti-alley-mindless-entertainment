@@ -1,4 +1,4 @@
-package Enemy_System;
+package Enemy_system;
 
 import Enemy_Entities.Boss;
 
