@@ -1,5 +1,3 @@
-package Enemy_system;
-
 package Enemy_System;
 import objects.character.Boss;
 import Enemy_Entities.Gimmick;
