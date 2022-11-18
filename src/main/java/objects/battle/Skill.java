@@ -6,13 +6,11 @@ import java.util.Hashtable;
 public class Skill {
     /** A class for all skills to be used by any kinds of Characters in battles.
      * Attributes:
-     * allSkills: A dictionary mapping the string name of a skill to the skill object itself
      * name: A string representing the name of the skill
      * damage: An integer representing how much damage the skill does
-     * lag; An integer that adds priority to skills
+     * lag: An integer that adds priority to skills
      * type: enum representing the element of the skill, introduces type advantages.
      */
-    public static Dictionary<String, Skill> allSkills = new Hashtable<>();
     private String name;
     private int damage;
     private int lag;
@@ -25,7 +23,6 @@ public class Skill {
         this.damage = damage;
         this.lag = lag;
         this.type = type;
-        allSkills.put(this.name, this); // Adds the new skill to the allSkills Dictionary
     }
     
     public String getName() {
@@ -56,10 +53,5 @@ public class Skill {
     
     public void setType(SkillType type) {
         this.type = type;
-    }
-
-    public static Skill find(String skill_name) {
-        // Searches the allSkills dictionary to return the corresponding skill to a given name
-        return allSkills.get(skill_name);
     }
 }
