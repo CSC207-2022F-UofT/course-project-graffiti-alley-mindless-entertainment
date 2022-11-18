@@ -1,5 +1,6 @@
 import interfaces.InputValidator;
 import interfaces.State;
+import objects.inventory.Inventory;
 
 public class InventoryState implements State {
     InputValidator inputValidator;
