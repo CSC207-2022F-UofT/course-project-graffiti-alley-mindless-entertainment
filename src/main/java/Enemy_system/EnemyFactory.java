@@ -28,7 +28,28 @@ public class EnemyFactory {
         }
         int reputation = enemyData.reputation;
         int speed = enemyData.speed;
-        EnemyInfo enemyInfo = new EnemyInfo(name, skills, speed, reputation);
+
+        String typeStr = enemyData.type;
+        switch (typeStr){
+            case "water":{
+                Type type = new Type.WATER;
+                break;
+            }
+            case "fire":{
+                Type type = new Type.FIRE;
+                break;
+            }
+            case "grass":{
+                Type type = new Type.GRASS;
+                break;
+            }
+            case "normal":{
+                Type type = new Type.NORMAL;
+                break;
+            }
+        }
+
+        EnemyInfo enemyInfo = new EnemyInfo(name, skills, speed, reputation, type);
 
         EnemyAI AItype;
         String ai = enemyData.ai;
@@ -55,7 +76,27 @@ public class EnemyFactory {
         }
         int reputation = bossData.reputation;
         int speed = bossData.speed;
-        EnemyInfo enemyInfo = new EnemyInfo(name, skills, speed, reputation);
+        String typeStr = bossData.type;
+        switch (typeStr){
+            case "water":{
+                Type type = new Type.WATER;
+                break;
+            }
+            case "fire":{
+                Type type = new Type.FIRE;
+                break;
+            }
+            case "grass":{
+                Type type = new Type.GRASS;
+                break;
+            }
+            case "normal":{
+                Type type = new Type.NORMAL;
+                break;
+            }
+        }
+
+        EnemyInfo enemyInfo = new EnemyInfo(name, skills, speed, reputation, type);
 
         EnemyAI AItype;
         String ai = bossData.ai;
@@ -65,6 +106,7 @@ public class EnemyFactory {
         } else{
             AItype = DefaultAI(enemyInfo, aiData.chance);
         }
+
 
         String gimmick_str = bossData.gimmick;
         switch (gimmick_str) {
@@ -77,11 +119,11 @@ public class EnemyFactory {
                 break;
             }
             case "Damage":{
-                Gimmick gimmick = new Enemy_system.DamageGimmick(enemyInfo, );
+                Gimmick gimmick = new Enemy_system.DamageGimmick(enemyInfo);
                 break;
             }
             case "Turn":{
-                Gimmick gimmick = new Enemy_system.TurnGimmick(enemyInfo, );
+                Gimmick gimmick = new Enemy_system.TurnGimmick(enemyInfo);
                 break;
             }
         }
