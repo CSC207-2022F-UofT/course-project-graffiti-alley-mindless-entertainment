@@ -1,9 +1,6 @@
 package objects.character;
 
 import Enemy_Entities.EnemyInfo;
-import Enemy_Entities.Gimmick;
-
-import java.util.ArrayList;
 
 /**
  * This class represents the boss in a game
