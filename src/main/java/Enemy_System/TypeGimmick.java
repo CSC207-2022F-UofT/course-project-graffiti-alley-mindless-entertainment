@@ -24,7 +24,7 @@ public class TypeGimmick implements Enemy_system.Gimmick {
         } else if(type == Type.FIRE){
             this.enemyInfo.setType(Type.GRASS);
         } else if(type == Type.GRASS){
-            this.enemyInfo.setType(Type.NORMAL);
+            this.enemyInfo.setType(Type.AIR);
         } else{
             this.enemyInfo.setType(Type.WATER);
         }
