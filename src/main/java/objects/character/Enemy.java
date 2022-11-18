@@ -1,4 +1,5 @@
 package objects.character;
+import Enemy_Entities.EnemyInfo;
 import objects.character.Character;
 
 import java.util.ArrayList;
@@ -10,145 +11,27 @@ import java.util.List;
  * health, skills, speed, reputation and Enemy AI in addition to name which is inherited from
  * parent class.
  */
-public class Enemy extends Character{
+public class Enemy extends Character {
 
 
-    private int health = 100; //does not have to be static since there are multiple enemies and
-    // we create an enemy every time the user encounters an enemy.
-    public ArrayList<Skill> skills;
-    private int speed = 90;
-    private int reputation;
+    public EnemyInfo enemyInfo;
     private EnemyAI enemyAI;
 
     /**
      * This is a constructor of the enemy.
      *
      * @param name: name if the enemy
-     * @param reputation: reputation that the user gets by killing enemy in int
+     * @param enemyInfo: information about the enemy including health, skills, speed, and reputation
+     * @param enemyAI: enemyAI that the enemy has
      */
-    public Enemy(String name, int reputation, ArrayList<Skill> skills, EnemyAI enemyAI) {
-
+    public Enemy(String name, EnemyInfo enemyInfo, EnemyAI enemyAI) {
         super(name);
-        this.skills = skills;
-        this.reputation = reputation;
         this.enemyAI = enemyAI;
+        this.enemyInfo = enemyInfo;
     }
 
-    /**
-     * This method changes the Enemy's health
-     * if n is positive, it will increase the health and
-     * if its negative, it will decrease the health
-     *
-     * @param n: the amount of health to change in int
-     */
-    public void changeHealth(int n)
-    {
-        this.health = this.health + n;
-    }
-
-    /**
-     * This method checks if the enemy is alive or not
-     * and return false if the enemy is dead
-     *
-     * @return true if the enemy is alive and return false
-     * if the enemy is dead
-     */
-    public boolean checkAlive()
-    {
-        if(this.health <= 0){
-            return false;
-        } else{
-            return true;
-        }
-    }
-
-    /**
-     * This is method returns the enemy's health
-     *
-     * @return the enemy's health in int
-     */
-    public int getHealth()
-    {
-        return this.health;
-    }
-
-    /**
-     * This function sets the enemy's health
-     *
-     * @param n: new health in int
-     */
-    public void setHealth(int n)
-    {
-        this.health = n;
-    }
-
-    /**
-     * This method sets the enemy's speed
-     *
-     * @param speed: new speed in int
-     */
-    public void setSpeed(int speed)
-    {
-        this.speed = speed;
-    }
-
-    /**
-     * This method decreases the enemy's speed
-     *
-     * @param n: the amount of speed that the enemy looses by using a skill
-     *
-     */
-    public void changeSpeed(int n)
-    {
-        this.speed = this.speed - n;
-    }
-
-    /**
-     * This returns the enemy's speed
-     *
-     * @return speed of this enemy in int
-     */
-    public int getSpeed()
-    {
-        return this.speed;
-    }
-
-    /**
-     * This method add a skill to enemy's skills
-     *
-     * @param skill: skill entity
-     */
-    public void addSkill(Skill skill)
-    {
-        this.skills.add(skill);
-    }
-
-    /**
-     * This method returns the enemy's reputation
-     *
-     * @return the reputation that the player gets by killing this enemy
-     */
-    public int getReputation()
-    {
-        return this.reputation;
-    }
-
-    /**
-     * This method returns the skill at index n
-     *
-     * @param n: the index of the skill
-     * @return the skill at index n
-     */
-    public Skill getSkill(int n){
-        return this.skills.get(n);
-    }
-
-    /**
-     * This method returns the enemy AI of the enemy
-     *
-     * @return the enemy AI of the enemy
-     */
-    public EnemyAI getEnemyAI() {
-        return this.enemyAI;
+    public String enemyAction(String input, EnemyInfo enemyInfo){
+        return this.enemyAI.respond(input, enemyInfo);
     }
 }
+
