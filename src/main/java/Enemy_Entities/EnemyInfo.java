@@ -8,6 +8,7 @@ public class EnemyInfo {
     public ArrayList<Skill> skills;
     private int speed;
     private int reputation;
+    private Type type;
 
     public EnemyInfo(ArrayList<Skill> skills, int speed, int reputation){
         this.skills = skills;
@@ -115,7 +116,21 @@ public class EnemyInfo {
         return this.skills;
     }
 
+    /**
+     * This method returns the type that the enemy has
+     *
+     * @return the enemy's type
+     */
+    public Type getType() {
+        return this.type;
+    }
 
-
-
+    /**
+     * This method sets the new type that the enemy  has
+     *
+     * @param type: new type of the enemy
+     */
+    public Type setType(Type type){
+        this.type = type;
+    }
 }
