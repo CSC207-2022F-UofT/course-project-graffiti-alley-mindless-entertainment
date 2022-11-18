@@ -42,7 +42,7 @@ public class EnemyFactory {
                 Type type = new Type.GRASS;
                 break;
             }
-            case "normal":{
+            case "air":{
                 Type type = new Type.AIR;
                 break;
             }
@@ -89,7 +89,7 @@ public class EnemyFactory {
                 Type type = new Type.GRASS;
                 break;
             }
-            case "normal":{
+            case "air":{
                 Type type = new Type.AIR;
                 break;
             }
