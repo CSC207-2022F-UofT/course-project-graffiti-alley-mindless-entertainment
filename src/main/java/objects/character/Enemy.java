@@ -30,8 +30,8 @@ public class Enemy extends Character {
         this.enemyInfo = enemyInfo;
     }
 
-    public String enemyAction(String input, EnemyInfo enemyInfo){
-        return this.enemyAI.respond(input, enemyInfo);
+    public String enemyAction(String input){
+        return this.enemyAI.respond(input);
     }
 }
 

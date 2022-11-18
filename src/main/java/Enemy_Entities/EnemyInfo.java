@@ -106,6 +106,15 @@ public class EnemyInfo {
         return this.skills.get(n);
     }
 
+    /**
+     * This method returns the skills that the enemy has
+     *
+     * @return the skills as a arraylist of skill
+     */
+    public ArrayList<Skill> getSkills(){
+        return this.skills;
+    }
+
 
 
 
