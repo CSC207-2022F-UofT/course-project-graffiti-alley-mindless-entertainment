@@ -16,6 +16,11 @@ public class EnemyInfo {
         this.speed = speed;
     }
 
+    /**
+     * This method returns the enemy's health
+     *
+     * @return  enemy's health in int
+     */
     public int getHealth() {
         return this.health;
     }
@@ -130,7 +135,7 @@ public class EnemyInfo {
      *
      * @param type: new type of the enemy
      */
-    public Type setType(Type type){
+    public void setType(Type type){
         this.type = type;
     }
 }
