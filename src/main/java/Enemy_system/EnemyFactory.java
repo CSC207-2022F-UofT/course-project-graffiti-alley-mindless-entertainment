@@ -4,7 +4,6 @@ package Enemy_System;
 import objects.character.Boss;
 import objects.character.Enemy;
 import Enemy_Entities.Gimmick;
-import Enemy_system.AttackGimmick;
 
 import managers.DatabaseManager;
 import java.util.ArrayList;
@@ -119,11 +118,11 @@ public class EnemyFactory {
                 break;
             }
             case "Damage":{
-                Gimmick gimmick = new Enemy_system.DamageGimmick(enemyInfo);
+                Gimmick gimmick = new Enemy_system.SpeedGimmick(enemyInfo);
                 break;
             }
             case "Turn":{
-                Gimmick gimmick = new Enemy_system.TurnGimmick(enemyInfo);
+                Gimmick gimmick = new Enemy_system.TypeGimmick(enemyInfo);
                 break;
             }
         }
@@ -131,13 +130,6 @@ public class EnemyFactory {
         return boss;
     }
 
-    public static Boss createBoss4() {
-        Boss boss = new Boss("Boss4", 10);
-        Skill skill = Skill.getBeam(); //decide which skill the slime has with charlie
-        ArrayList<Skill> skills = new ArrayList<Skill>();
-        skills.add(skill);
-        Gimmick gimmick = new Gimmick.get
-    }
 
 
 }
