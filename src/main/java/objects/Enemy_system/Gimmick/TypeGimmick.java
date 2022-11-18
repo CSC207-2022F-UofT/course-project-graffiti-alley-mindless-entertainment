@@ -1,9 +1,10 @@
-package Enemy_system;
+package objects.Enemy_system.Gimmick;
 
+import objects.Enemy_system.Gimmick.Gimmick;
 import objects.character.Boss;
 import Enemy_Entities.Gimmick;
 
-public class TypeGimmick implements Enemy_system.Gimmick {
+public class TypeGimmick implements Gimmick {
     private EnemyInfo enemyInfo;
     //In this turn gimmick, whenever, the gimmick is triggered, only enemy
     // will attack in the next turn.

@@ -1,6 +1,7 @@
-package Enemy_system;
-package objects.charactoers.player;
-public class SpeedGimmick implements Gimmick{
+package objects.Enemy_system.Gimmick;
+
+import objects.Enemy_system.Gimmick.Gimmick;package objects.charactoers.player;
+public class SpeedGimmick implements Gimmick {
     private EnemyInfo enemyInfo;
 
     public SpeedGimmick(EnemyInfo enemyInfo){
