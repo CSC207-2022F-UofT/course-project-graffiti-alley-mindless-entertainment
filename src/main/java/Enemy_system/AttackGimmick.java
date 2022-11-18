@@ -5,27 +5,25 @@ import objects.character.Boss;
 import Enemy_Entities.Gimmick;
 
 public class AttackGimmick implements Gimmick {
+    private EnemyInfo enemyInfo;
 
-    public AttackGimmick(){super();}
+    public AttackGimmick(EnemyInfo enemyInfo){
+        this.enemyInfo = enemyInfo;
+    }
 
 
-    public boolean check_gimmick(Boss boss, Player player) {
-        if(boss.getHealth() < 15){
+    public boolean checkGimmick() {
+        if(this.enemyInfo.getHealth() < 15){
             return true;
         } else{
             return false;
         }
     }
 
-    public boolean use_gimmick(Boss boss) {
-        if(check_gimmick(boss)){
-            for(Skill skill: boss.skills){
-                int i = skill.getDamage();
-                skill.setDamage((int)Math.ceil(i * 1.2));
-            }
-            return true;
-        } else{
-            return false;
+    public void useGimmick() {
+        for(Skill skill: this.enemyInfo.getSkills){
+            int i = skill.getDamage();
+            skill.setDamage((int)Math.ceil(i * 1.2));
         }
     }
 }
