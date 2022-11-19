@@ -1,4 +1,4 @@
-package database.data_objects;
+package database.objects;
 
 import java.util.ArrayList;
 import java.util.Map;

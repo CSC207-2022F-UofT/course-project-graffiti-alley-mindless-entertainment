@@ -1,4 +1,6 @@
-package objects;
+package game_world.objects.areas;
+
+import game_world.objects.events.Event;
 
 import java.util.ArrayList;
 

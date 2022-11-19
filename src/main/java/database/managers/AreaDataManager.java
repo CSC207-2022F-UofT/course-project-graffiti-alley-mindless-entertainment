@@ -1,10 +1,10 @@
-package database.data_managers;
+package database.managers;
 
-import database.data_factories.AreaDataFactory;
+import database.factories.AreaDataFactory;
 import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
-import database.data_objects.AreaData;
+import database.objects.AreaData;
 
 public class AreaDataManager extends DatabaseManager {
 
@@ -21,6 +21,8 @@ public class AreaDataManager extends DatabaseManager {
         ArrayList<AreaData> areas = new ArrayList<>();
         for (Object areaName : zoneData.keySet()) {
             JSONObject areaData = (JSONObject) zoneData.get(areaName);
+            if (!areaData.containsKey("speaker"))
+                continue;
             areas.add(this.dataFactory.createAreaData(areaData, (String) areaName));
         }
         return areas;

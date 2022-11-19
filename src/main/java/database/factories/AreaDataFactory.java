@@ -1,6 +1,6 @@
-package database.data_factories;
+package database.factories;
 
-import database.data_objects.AreaData;
+import database.objects.AreaData;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -20,7 +20,7 @@ public class AreaDataFactory {
 
         ArrayList<String> events = new ArrayList<>();
         for (Object obj: (JSONArray) jsonObject.get("events"))
-            texts.add((String) obj);
+            events.add((String) obj);
 
         String type = (String) jsonObject.get("type");
         if (type.equals("One-Way")) {
@@ -34,10 +34,11 @@ public class AreaDataFactory {
             );
         }
         else if (type.equals("Multi-Directional")) {
-            Set<String> options_keys = jsonObject.keySet();
+            JSONObject jsonOptions = (JSONObject) jsonObject.get("options");
+            Set<String> options_keys = jsonOptions.keySet();
             Map<String, String> options = new HashMap<String, String>();
             for (String key : options_keys) {
-                options.put(key, (String) jsonObject.get(key));
+                options.put(key, jsonOptions.get(key).toString());
             }
             return new AreaData(
                     name,

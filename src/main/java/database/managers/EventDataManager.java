@@ -1,7 +1,7 @@
-package database.data_managers;
+package database.managers;
 
-import database.data_factories.EventDataFactory;
-import database.data_objects.EventData;
+import database.factories.EventDataFactory;
+import database.objects.EventData;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -17,7 +17,7 @@ public class EventDataManager extends DatabaseManager {
     private JSONObject searchJSONArray(JSONArray jsonArray, String key, Object value) {
         for (Object obj: jsonArray) {
             JSONObject jsonObject = (JSONObject) obj;
-            if (jsonObject.get(key) == value) {
+            if (jsonObject.get(key).equals(value)) {
                 return jsonObject;
             }
         }

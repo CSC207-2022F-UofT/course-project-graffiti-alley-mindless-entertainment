@@ -1,4 +1,4 @@
-package objects;
+package game_world.objects.events;
 
 public abstract class Event {
 
@@ -9,7 +9,7 @@ public abstract class Event {
     public String name;
     public String type;
 
-    public int priority;
+    public long priority;
     public int eventState;
 
     /**

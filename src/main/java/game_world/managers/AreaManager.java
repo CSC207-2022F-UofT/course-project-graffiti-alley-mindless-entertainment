@@ -1,13 +1,12 @@
-package managers;
+package game_world.managers;
 
-import database.data_managers.AreaDataManager;
-import database.data_objects.AreaData;
-import objects.Area;
-import objects.MultiDirectionalArea;
-import objects.OneWayArea;
+import database.managers.AreaDataManager;
+import database.objects.AreaData;
+import game_world.objects.areas.Area;
+import game_world.objects.areas.MultiDirectionalArea;
+import game_world.objects.areas.OneWayArea;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class AreaManager {
 
@@ -31,6 +30,7 @@ public class AreaManager {
             Area newArea = createArea(areaData);
             this.areas.add(newArea);
         }
+        this.currentArea = areas.get(0);
     }
 
     /**
@@ -73,6 +73,7 @@ public class AreaManager {
                 }
             }
             this.areas.add(newArea);
+            return newArea;
         }
         return null;
     }
@@ -103,10 +104,12 @@ public class AreaManager {
      * Also executes event queue from next area
      * @return next area
      */
-    public Area getToNextArea(String choice, String zone) {
+    public Area getToNextArea(String choice) {
+        String nextArea = choice.split(" - ")[1];
+        String zone = choice.split(" - ")[0];
         if (this.currentZone.equals(zone)) {
             for (Area area : areas) {
-                if (area.name.equals(choice)) {
+                if (area.name.equals(nextArea)) {
                     this.currentArea = area;
                     break;
                 }
@@ -119,7 +122,7 @@ public class AreaManager {
             ArrayList<AreaData> areaList = this.database.fetchAreaList(this.currentZone);
             for (AreaData areaData : areaList) {
                 Area newArea = createArea(areaData);
-                if (newArea.name.equals(choice)) {
+                if (newArea.name.equals(nextArea)) {
                     this.currentArea = newArea;
                 }
                 areas.add(newArea);

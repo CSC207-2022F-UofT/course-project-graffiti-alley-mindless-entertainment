@@ -1,4 +1,4 @@
-package database.data_objects;
+package database.objects;
 
 public class EventData {
 
@@ -8,9 +8,9 @@ public class EventData {
 
     public String name;
     public String type;
-    public int priority;
+    public long priority;
 
-    public EventData(String name, String type, int priority) {
+    public EventData(String name, String type, long priority) {
         this.name = name;
         this.type = type;
         this.priority = priority;

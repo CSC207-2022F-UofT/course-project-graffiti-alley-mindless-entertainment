@@ -5,7 +5,7 @@
     "Introduction": {
       "[GAME]": {
         "speaker": "[GAME]",
-        "text": [
+        "texts": [
           "Welcome to PACT! PACT is a game where you make your own choices and save the world of Tartarus!",
           "Tartarus is a place, much like Earth, though ruled by a wicked ruler. A ruthless King that despises those who cross him the wrong way. He is commonly known as 'The Demon King'.",
           "Your job is to cure the world of Tartarus by slaying the Demon King. After all, you are the famed hero!",
@@ -20,13 +20,13 @@
         ],
         "type": "One-Way",
         "next": "The Aqua Nation - Beach 1",
-        "events": ["test1", "test2"]
+        "events": ["test", "test 2"]
       }
     },
     "The Aqua Nation": {
       "Beach 1": {
         "speaker": "Seaside",
-        "text": [
+        "texts": [
           "The sound of ocean waves fill your ears.",
           "They rock, back and forth, pulling against the tide.",
           "The sand crunches against your feet as you step into the world for the first time... though, it doesn't feel like your first time.",
@@ -37,7 +37,8 @@
         "options": {
           "Follow the grassy trail": "The Aqua Nation - Grassy Field",
           "Walk along the beach": "The Aqua Nation - Beach 2"
-        }
+        },
+        "events": ["test 3"]
       },
       "Beach 2": {
 
@@ -108,6 +109,11 @@
     },
     {
       "name": "test 2",
+      "type": "Item Pick-Up",
+      "priority": 1
+    },
+    {
+      "name": "test 3",
       "type": "Item Pick-Up",
       "priority": 1
     }

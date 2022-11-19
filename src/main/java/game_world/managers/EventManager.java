@@ -1,9 +1,13 @@
-package managers;
+package game_world.managers;
 
-import database.data_managers.EventDataManager;
+import database.managers.EventDataManager;
 
-import objects.*;
-import database.data_objects.EventData;
+import database.objects.EventData;
+import game_world.objects.areas.Area;
+import game_world.objects.events.ArbitraryEvent;
+import game_world.objects.events.EncounterEvent;
+import game_world.objects.events.ItemPickUpEvent;
+import game_world.objects.events.Event;
 
 import java.util.ArrayList;
 

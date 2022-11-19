@@ -1,6 +1,6 @@
-package database.data_factories;
+package database.factories;
 
-import database.data_objects.EventData;
+import database.objects.EventData;
 import org.json.simple.JSONObject;
 
 public class EventDataFactory {
@@ -13,7 +13,7 @@ public class EventDataFactory {
         return new EventData(
                 (String) jsonObject.get("name"),
                 (String) jsonObject.get("type"),
-                (int) jsonObject.get("priority")
+                (long) jsonObject.get("priority")
         );
     }
 
