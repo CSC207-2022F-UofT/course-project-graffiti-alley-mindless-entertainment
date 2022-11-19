@@ -1,9 +1,14 @@
 package objects.item;
 
-import objects.item.Item;
-
+/**
+ *
+ */
 public class Armor extends Item {
 
+    /**
+     * Initializes new Armor Item based on the level of player.
+     * @param level level of the user.
+     */
     public Armor(int level) {
         super(level);
         this.setName("LEVEL " + this.getLevel() + " ARMOR");
