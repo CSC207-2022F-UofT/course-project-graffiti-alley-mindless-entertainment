@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 class PauseMenuManagerTest {
 
     @Test
-    void nextStateOptions() {
+    void changeOptionsAndQuit() {
         Options options = Options.getOptions();
         PauseMenuChoiceStateFactory pauseMenuChoiceStateFactory = new PauseMenuChoiceStateFactory();
         ChangeOptionsStateFactory changeOptionsStateFactory = new ChangeOptionsStateFactory();
