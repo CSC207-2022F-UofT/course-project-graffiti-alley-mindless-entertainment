@@ -1,7 +1,7 @@
 package objects.character;
 
-import Enemy_Entities.EnemyInfo;
-
+import Enemy_system.EnemyInfo;
+import Enemy_system.Gimmick;
 /**
  * This class represents the boss in a game
  */

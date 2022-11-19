@@ -1,9 +1,9 @@
 package objects.character;
-import Enemy_Entities.EnemyInfo;
+import Enemy_system.EnemyInfo;
+import Enemy_system.EnemyAI;
 import objects.character.Character;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -149,8 +149,12 @@ public class Enemy extends Character {
         this.enemyInfo.setType(type);
     }
 
-
-
+    /**
+     * This method returns the enemy actions depending on the user's action
+     *
+     * @param input: input by the user
+     * @return enemy's action in string (use skill or use potion)
+     */
     public String enemyAction(String input){
         return this.enemyAI.respond(input);
     }

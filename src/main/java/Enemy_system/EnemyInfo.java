@@ -1,4 +1,4 @@
-package Enemy_Entities;
+package Enemy_system;
 
 import java.util.ArrayList;
 
