@@ -9,6 +9,7 @@ public class EnemyInfoTest {
     @Test
     public void getHealthTest(){
 
+
     }
 
 }
