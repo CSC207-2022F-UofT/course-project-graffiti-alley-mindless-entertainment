@@ -16,7 +16,7 @@ public abstract class DatabaseManager implements IDatabase {
      * Manages all matters regarding JSON database, JSON library is used nowhere else
      */
 
-    public final String FILE_NAME = "src\\main\\java\\resources\\Database.json";
+    public final String FILE_NAME = "src/main/java/resources/Database.json";
     public JSONObject fullDatabase;
 
     public DatabaseManager() {
