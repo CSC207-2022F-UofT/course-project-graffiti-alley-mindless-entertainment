@@ -1,9 +1,9 @@
-package objects.Enemy_system.EnemyAI;
+package Battle.Enemy_system.EnemyAI;
 
 import java.util.Objects;
 import java.util.Random;
 
-public class DefaultAI implements EnemyAI{
+public class DefaultAI implements EnemyAI {
 
     private EnemyInfo enemyInfo;
     private int attackChance;
