@@ -1,6 +1,5 @@
 package Enemy_system;
 
-package Enemy_System;
 import objects.character.Boss;
 import objects.character.Enemy;
 import Enemy_Entities.Gimmick;
@@ -14,13 +13,19 @@ import data_objects.SkillData;
 
 public class EnemyFactory {
 
+    /**
+     * This method returns the enemy instance using the information given by database
+     * @param name of the enemy to create
+     * @return instance of enemy
+     */
     public static Enemy getEnemy(String name){
         EnemyData enemyData = databaseManager.fetchEnemyData(name);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         for (String i:enemyData.skills) {
             SkillData skillData = databaseManager.fetchSkillData(i);
             int damage = skillData.damage;
-            String type = skillData.type;
+            String skillType = skillData.type;
+            SkillType type = translateSkill(skillType);
             int lag = skillData.lag;
             Skill skill = new Skill(i, damage, lag, type);
             skills.add(skill);
@@ -29,24 +34,7 @@ public class EnemyFactory {
         int speed = enemyData.speed;
 
         String typeStr = enemyData.type;
-        switch (typeStr){
-            case "water":{
-                Type type = new Type.WATER;
-                break;
-            }
-            case "fire":{
-                Type type = new Type.FIRE;
-                break;
-            }
-            case "grass":{
-                Type type = new Type.GRASS;
-                break;
-            }
-            case "air":{
-                Type type = new Type.AIR;
-                break;
-            }
-        }
+        SkillType type = translateSkill(typeStr);
 
         EnemyInfo enemyInfo = new EnemyInfo(name, skills, speed, reputation, type);
 
@@ -62,13 +50,19 @@ public class EnemyFactory {
         return enemy;
     }
 
+    /**
+     * This method returns the boss instance using the information given by database
+     * @param name of the boss to create
+     * @return instance of boss
+     */
     public static Boss getBoss(String name){
         BossData bossData = databaseManager.fetchEnemyData(name);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         for (String i:bossData.skills) {
             SkillData skillData = databaseManager.fetchSkillData(i);
             int damage = skillData.damage;
-            String type = skillData.type;
+            String skillType = skillData.type;
+            SkillType type = translateSkill(skillType);
             int lag = skillData.lag;
             Skill skill = new Skill(i, damage, lag, type);
             skills.add(skill);
@@ -76,24 +70,7 @@ public class EnemyFactory {
         int reputation = bossData.reputation;
         int speed = bossData.speed;
         String typeStr = bossData.type;
-        switch (typeStr){
-            case "water":{
-                Type type = new Type.WATER;
-                break;
-            }
-            case "fire":{
-                Type type = new Type.FIRE;
-                break;
-            }
-            case "grass":{
-                Type type = new Type.GRASS;
-                break;
-            }
-            case "air":{
-                Type type = new Type.AIR;
-                break;
-            }
-        }
+        SkillType type = translateSkill(typeStr);
 
         EnemyInfo enemyInfo = new EnemyInfo(name, skills, speed, reputation, type);
 
@@ -106,30 +83,59 @@ public class EnemyFactory {
             AItype = DefaultAI(enemyInfo, aiData.chance);
         }
 
-
         String gimmick_str = bossData.gimmick;
-        switch (gimmick_str) {
-            case "Health":{
-                Gimmick gimmick = new Enemy_system.HealthGimmick(enemyInfo);
-                break;
-            }
-            case "Attack":{
-                Gimmick gimmick = new Enemy_system.AttackGimmick(enemyInfo);
-                break;
-            }
-            case "Damage":{
-                Gimmick gimmick = new Enemy_system.SpeedGimmick(enemyInfo);
-                break;
-            }
-            case "Turn":{
-                Gimmick gimmick = new Enemy_system.TypeGimmick(enemyInfo);
-                break;
-            }
-        }
+        Gimmick gimmick = translateGimmick(gimmick_str);
+
         Boss boss = new Boss(name, enemyInfo, AItype, gimmick);
         return boss;
     }
 
+    public static SkillType translateSkill(String name){
+        switch (name){
+            case "water":{
+                return new SkillType.WATER;
+                break;
+            }
+            case "fire":{
+                return new SkillType.FIRE;
+
+                break;
+            }
+            case "grass":{
+                return new SkillType.GRASS;
+
+                break;
+            }
+            case "air":{
+                return new SkillType.AIR;
+
+                break;
+            }
+        }
+        return new SkillType.WATER;
+    }
+
+    public static Gimmick translateGimmick(String name){
+        switch (name) {
+            case "health":{
+                return new HealthGimmick(enemyInfo);
+                break;
+            }
+            case "attack":{
+                return new AttackGimmick(enemyInfo);
+                break;
+            }
+            case "speed":{
+                return new SpeedGimmick(enemyInfo);
+                break;
+            }
+            case "type":{
+                return new TypeGimmick(enemyInfo);
+                break;
+            }
+        }
+        return new HealthGimmick(enemyInfo);
+    }
 
 
 }
