@@ -1,13 +1,25 @@
 package options;
 
 
+
 /*
 The options of the game. A data storage class.
 */
 public class Options {
-    private int textSpeed;
-    private int textSize;
-    private boolean enableAutoSave;
+    private int textSpeed = 1;
+    private int textSize = 5;
+    private boolean enableAutoSave = true;
+
+    private static Options instance;
+
+    public static Options getOptions() {
+        if (instance == null) {
+            instance = new Options();
+        }
+        return instance;
+    }
+
+    private Options() {}
 
     public int getTextSpeed() {
         return textSpeed;
