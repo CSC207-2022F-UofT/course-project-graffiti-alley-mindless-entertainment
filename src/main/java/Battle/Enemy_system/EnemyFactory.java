@@ -1,4 +1,4 @@
-package Enemy_system;
+package Battle.Enemy_system;
 
 import objects.character.Boss;
 import objects.character.Enemy;
