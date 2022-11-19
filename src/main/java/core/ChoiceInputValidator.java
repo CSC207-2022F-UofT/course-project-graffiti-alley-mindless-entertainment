@@ -17,11 +17,20 @@ public class ChoiceInputValidator implements InputValidator {
     }
 
     /**
-     * @param input the user input to validate
-     * @return whether the given input is valid
+     * @param input the user input to parse and validate
+     * @return null if the given input is not valid, otherwise the parsed input
      */
     @Override
-    public boolean validateInput(String input) {
-        return allowedInputs.contains(input);
+    public String parseAndValidate(String input) {
+        String parsed = input.toUpperCase();
+        if (parsed == "EXIT" || parsed == "PAUSE") {
+            return parsed;
+        }
+        List<String> opt = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O",
+                "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
+        if (opt.contains(parsed)) {
+            return allowedInputs.get(opt.indexOf(parsed));
+        }
+        return null;
     }
 }

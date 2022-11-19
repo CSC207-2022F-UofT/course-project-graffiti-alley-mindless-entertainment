@@ -1,20 +1,29 @@
 package managers;
 
+import interfaces.Input;
 import interfaces.InputValidator;
 
 import java.util.Scanner;
 
-public class InputHandler{
+public class InputHandler implements Input {
 
-    String getChoice(InputValidator validator) {
+    /**
+     * @param validator from wherever is calling input
+     * @return a valid user input
+     */
+    @Override
+    public String getChoice(InputValidator validator) {
         Scanner input = new Scanner(System.in);
         while (true) {
             String choice = input.next();
-            if (validator.validateInput(choice)) {
-                return choice;
+            String parsed = validator.parseAndValidate(choice);
+            if (parsed != null) {
+                return parsed;
             }
-            OutputHandler output = new OutputHandler();
-            output.generateText("Your choice is not valid. Please attempt your choice again.");
+            OutputHandler screen = OutputHandler.getScreen();
+            screen.generateText("Your choice is not valid. Please attempt your choice again.");
         }
     }
+
 }
+
