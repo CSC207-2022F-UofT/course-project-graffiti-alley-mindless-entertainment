@@ -1,5 +1,7 @@
 package objects.character;
 
+import objects.battle.SkillType;
+
 public class Player extends Character {
     /** A class for the Player character. Includes getters and setters for all applicable attributes.
      * Attributes:
@@ -8,36 +10,48 @@ public class Player extends Character {
      * currHealth: The current amount of health of the Player. Decreases and increases during a battle. Never exceeds
      *             maxHealth.
      * maxHealth: The maximum amount of health of the Player.
+     * armor: The armor points of the Player.
      * experience: The amount of experience points of the Player. Increases after completing tasks or killing enemies.
      * level: The level of the Player. Increases after experience points reach a certain value. Unlocks various new
      *        content for the Player, such as new skills and increased health.
-     * type: The type of the player. Each int corresponds to an enum.
-     * speed: The speed of the player. A higher int corresponds to a higher priority in a battle.
+     * skillType: The skill type of the Player. Utilizes the SkillType enum.
+     * speed: The speed of the Player. A higher int corresponds to a higher priority in a battle.
      * money: The amount of money the Player owns.
      */
     private String name;
     private String description;
     private int currHealth;
     private int maxHealth;
+    private int armor;
     private int experience;
     private int level;
-    private int type;
+    private SkillType skillType;
     private int speed;
     private int money;
 
-    public Player(String name, int type) {
-        /* Initializes a new Player character with name and type, an empty description, 100 currHealth and maxHealth
-        and speed, 0 experience and level, and 20 money.
-         */
+    public Player(String name, SkillType skillType) {
+        // Initializes a new Player character with name and skillType, an empty description, 100 currHealth and
+        // maxHealth and speed, 0 experience and armor and level, and 20 money.
         super(name);
         this.description = "";
-        this.type = type;
+        this.skillType = skillType;
         this.currHealth = 100;
         this.maxHealth = 100;
+        this.armor = 0;
         this.experience = 0;
         this.level = 0;
         this.speed = 100;
         this.money = 20;
+    }
+
+    public String getName() {
+        // Return the name of the Player.
+        return this.name;
+    }
+
+    public void changeName(String newName) {
+        // Change the name of the Player to newName.
+        this.name = newName;
     }
 
     public String getDescription() {
@@ -81,6 +95,23 @@ public class Player extends Character {
         this.maxHealth += changeBy;
     }
 
+    public int getArmor() {
+        // Returns the Player's armor points.
+        return this.armor;
+    }
+
+    public void changeArmor(int changeBy) {
+        // Change the Player's armor by changeBy. Armor points cannot be negative, so decreasing armor to make it
+        // negative sets armor to 0.
+        int newArmor = this.armor + changeBy;
+        if (newArmor < 0) {
+            this.armor = 0;
+        }
+        else {
+            this.armor += changeBy;
+        }
+    }
+
     public int getExperience() {
         // Return the amount of experience points this Player has.
         return this.experience;
@@ -101,14 +132,14 @@ public class Player extends Character {
         this.level += increaseBy;
     }
 
-    public int getType() {
-        // Return the int value of the type of the Player.
-        return this.type;
+    public SkillType getSkillType() {
+        // Return the SkillType of the Player.
+        return this.skillType;
     }
 
-    public void changeType(int changeBy) {
-        // Change the Player's type by changeBy.
-        this.type += changeBy;
+    public void changeSkillType(SkillType newSkillType) {
+        // Change the Player's SkillType to newSkillType.
+        this.skillType = newSkillType;
     }
 
     public int getSpeed() {
