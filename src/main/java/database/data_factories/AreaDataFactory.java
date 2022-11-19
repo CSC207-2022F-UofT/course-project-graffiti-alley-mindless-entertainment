@@ -8,9 +8,18 @@ import java.util.*;
 
 public class AreaDataFactory {
 
+    /**
+     * @param jsonObject JSONObject with all information regarding area
+     * @param name name of Area
+     * @return AreaData with all instance attributes converted from jsonObject
+     */
     public AreaData createAreaData(JSONObject jsonObject, String name) {
         ArrayList<String> texts = new ArrayList<>();
         for (Object obj: (JSONArray) jsonObject.get("texts"))
+            texts.add((String) obj);
+
+        ArrayList<String> events = new ArrayList<>();
+        for (Object obj: (JSONArray) jsonObject.get("events"))
             texts.add((String) obj);
 
         String type = (String) jsonObject.get("type");
@@ -20,7 +29,8 @@ public class AreaDataFactory {
                     type,
                     (String) jsonObject.get("speaker"),
                     texts,
-                    (String) jsonObject.get("next")
+                    (String) jsonObject.get("next"),
+                    events
             );
         }
         else if (type.equals("Multi-Directional")) {
@@ -34,7 +44,8 @@ public class AreaDataFactory {
                     type,
                     (String) jsonObject.get("speaker"),
                     texts,
-                    options
+                    options,
+                    events
             );
         }
         return null;

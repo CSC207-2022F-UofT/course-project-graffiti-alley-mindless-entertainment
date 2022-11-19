@@ -19,7 +19,8 @@
           "So go, legendary hero. You are the only one who can bring me the crystals and put an end to this chaos."
         ],
         "type": "One-Way",
-        "next": "The Aqua Nation - Beach 1"
+        "next": "The Aqua Nation - Beach 1",
+        "events": ["test1", "test2"]
       }
     },
     "The Aqua Nation": {
@@ -103,16 +104,12 @@
     {
       "name": "test",
       "type": "Encounter",
-      "area": "A Newcomer!",
-      "next_event": "test 2",
       "priority": 1
     },
     {
       "name": "test 2",
       "type": "Item Pick-Up",
-      "area": "A Newcomer!",
-      "next_event": "test 2",
-      "priority": 2
+      "priority": 1
     }
   ]
 }

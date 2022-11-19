@@ -11,14 +11,20 @@ import java.util.HashMap;
 
 public class AreaManager {
 
+    /**
+     * Manages all matters regarding Areas
+     */
+
     private ArrayList<Area> areas;
     private AreaDataManager database;
+    private EventManager eventManager;
     private String currentZone;
     private Area currentArea;
 
-    public AreaManager() {
+    public AreaManager(EventManager eventManager) {
         this.database = new AreaDataManager();
         this.currentZone = "Introduction";
+        this.eventManager = eventManager;
         this.areas = new ArrayList<>();
         ArrayList<AreaData> areaList = this.database.fetchAreaList(this.currentZone);
         for (AreaData areaData : areaList) {
@@ -27,13 +33,19 @@ public class AreaManager {
         }
     }
 
+    /**
+     * Generates new Area object and adds to the areas list
+     * @return the new area generated
+     * @param data data from existing AreaData
+     */
     private Area createArea(AreaData data) {
         if (data.type.equals("One-Way")) {
             Area newArea = new OneWayArea(
                     data.name,
                     data.speaker,
                     data.texts,
-                    data.next
+                    data.next,
+                    eventManager.getEventsFromArea(data.events)
             );
             for (Area area : areas) {
                 if (area.name.equals(data.next)) {
@@ -42,12 +54,14 @@ public class AreaManager {
             }
             this.areas.add(newArea);
             return newArea;
-        } else if (data.type.equals("Multi-Directional")) {
+        }
+        else if (data.type.equals("Multi-Directional")) {
             Area newArea = new MultiDirectionalArea(
                     data.name,
                     data.speaker,
                     data.texts,
-                    data.options
+                    data.options,
+                    eventManager.getEventsFromArea(data.events)
             );
             ArrayList<String> nextList = new ArrayList<>();
             for (String next : data.options.values()) {
@@ -63,16 +77,32 @@ public class AreaManager {
         return null;
     }
 
-    public Area setNewArea(String name) {
-        AreaData data = this.database.fetchArea(currentZone, name);
-        this.currentArea = this.createArea(data);
-        return this.currentArea;
-    }
-
+    /**
+     * @return currentArea of Player
+     */
     public Area getCurrentArea() {
         return this.currentArea;
     }
 
+    /**
+     * @return area from current zone
+     */
+    public Area getArea(String name) {
+        for (Area area : areas) {
+            if (area.name.equals(name)) {
+                return area;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Checks if zone must be changed, if not, changes currentArea to next area defined
+     * Otherwise, clears current areas list and refreshes area manager with new zone data and
+     * returns new area from next zone
+     * Also executes event queue from next area
+     * @return next area
+     */
     public Area getToNextArea(String choice, String zone) {
         if (this.currentZone.equals(zone)) {
             for (Area area : areas) {
@@ -83,6 +113,7 @@ public class AreaManager {
             }
         }
         else {
+            // Reset Zone
             this.areas.clear();
             this.currentZone = zone;
             ArrayList<AreaData> areaList = this.database.fetchAreaList(this.currentZone);
@@ -94,6 +125,8 @@ public class AreaManager {
                 areas.add(newArea);
             }
         }
+        eventManager.areaEntered(this.currentArea);
         return this.currentArea;
     }
+
 }

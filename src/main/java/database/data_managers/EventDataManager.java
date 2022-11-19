@@ -11,6 +11,8 @@ public class EventDataManager extends DatabaseManager {
 
     /**
      * Helper function to search JSON arrays
+     * @param jsonArray initial jsonArray to iterate through
+     * @return null if key-value pair does not exist in jsonArray, otherwise returns jsonObject of key-value pair
      */
     private JSONObject searchJSONArray(JSONArray jsonArray, String key, Object value) {
         for (Object obj: jsonArray) {

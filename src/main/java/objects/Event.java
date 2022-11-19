@@ -1,19 +1,20 @@
 package objects;
 
-import java.util.Optional;
-
 public abstract class Event {
 
-    public String eventName;
-    public String eventType;
-    public Area eventArea;
-    public int eventPriority;
-    private int eventState;
+    /**
+     * Main Area class with arbitrary instance attributes
+     */
 
-    public Event nextEvent;
+    public String name;
+    public String type;
 
-    public Event() {
+    public int priority;
+    public int eventState;
 
-        this.eventState = 0;
-    }
+    /**
+     * Main abstract method, executes all code within an event
+     */
+    public void execute() {};
+
 }
