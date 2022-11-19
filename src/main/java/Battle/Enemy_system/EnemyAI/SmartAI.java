@@ -24,16 +24,21 @@ public class SmartAI implements EnemyAI {
      */
     @Override
     public String respond(String input) {
-        if(this.enemyInfo.getHealth() < 10) {
-            return "use potion";
+        if(this.enemyInfo.getHealth() < 30) {
+            Random rand = new Random();
+            int upper = 101;
+            int int_random = rand.nextInt(upper);
+            if (int_random < 50) {
+                return "use potion";
+            return "use skill";
         } else if (this.enemyInfo.getHealth() > 60) {
             return "use skill";
 
         } else {
-            Random rand = new Random();
+            Random r = new Random();
             int upperbound = 101;
-            int int_random = rand.nextInt(upperbound);
-            if (int_random < this.attackChance) {
+            int int_r = r.nextInt(upperbound);
+            if (int_r < this.attackChance) {
                 return "use skill";
             } else {
                 return "use potion";
