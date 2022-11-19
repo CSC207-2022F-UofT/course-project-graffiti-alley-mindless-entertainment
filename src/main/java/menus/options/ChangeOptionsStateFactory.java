@@ -1,6 +1,5 @@
 package menus.options;
 
-import core.GameState;
 import options.Options;
 
 public class ChangeOptionsStateFactory {
