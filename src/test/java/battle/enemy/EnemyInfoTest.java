@@ -1,5 +1,8 @@
 package battle.enemy;
 
+import objects.battle.Skill;
+import objects.battle.SkillType;
+import objects.battle.enemy.EnemyInfo;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -42,9 +45,9 @@ public class EnemyInfoTest {
         Assert.assertEquals(enemyInfo.getSpeed(), 90);
     }
 
-    @DisplayName("Test for getHealth method")
+    @DisplayName("Test for changeSpeed method")
     @Test
-    public void getHealthTest(){
+    public void changeSpeedTest(){
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
@@ -103,7 +106,7 @@ public class EnemyInfoTest {
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
-        Assert.assertEquals(enemyInfo.getskill(0), skill);
+        Assert.assertEquals(enemyInfo.getSkill(0), skill);
     }
 
     @DisplayName("Test for getSkills method")

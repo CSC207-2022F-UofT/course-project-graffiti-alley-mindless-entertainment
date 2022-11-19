@@ -1,4 +1,7 @@
-package Enemy_system;
+package objects.battle.enemy;
+
+import objects.battle.Skill;
+import objects.battle.SkillType;
 
 import java.util.ArrayList;
 
@@ -8,12 +11,13 @@ public class EnemyInfo {
     public ArrayList<Skill> skills;
     private int speed;
     private int reputation;
-    private Type type;
+    private SkillType type;
 
-    public EnemyInfo(ArrayList<Skill> skills, int speed, int reputation){
+    public EnemyInfo(ArrayList<Skill> skills, int speed, int reputation, SkillType type){
         this.skills = skills;
         this.reputation = reputation;
         this.speed = speed;
+        this.type = type;
     }
 
     /**
@@ -126,7 +130,7 @@ public class EnemyInfo {
      *
      * @return the enemy's type
      */
-    public Type getType() {
+    public SkillType getType() {
         return this.type;
     }
 
@@ -135,7 +139,7 @@ public class EnemyInfo {
      *
      * @param type: new type of the enemy
      */
-    public void setType(Type type){
+    public void setType(SkillType type){
         this.type = type;
     }
 }

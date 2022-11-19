@@ -1,3 +1,7 @@
+package objects.battle.enemy.gimmick;
+
+import objects.battle.enemy.EnemyInfo;
+
 public class SpeedGimmick implements Gimmick {
     private EnemyInfo enemyInfo;
 
@@ -16,7 +20,7 @@ public class SpeedGimmick implements Gimmick {
     public void useGimmick(){ // return true if the gimmick has been used by the boss. This method
         // returns boolean because if the gimmick is used, maybe some dialouges will be called in battle state class.
         //(whenever this method return true)
-        int newSpeed = Math.ceil(this.enemyInfo.getSpeed*0.5);
+        int newSpeed = (int) (Math.ceil(this.enemyInfo.getSpeed()*0.5));
         this.enemyInfo.changeSpeed(newSpeed);
     }
 

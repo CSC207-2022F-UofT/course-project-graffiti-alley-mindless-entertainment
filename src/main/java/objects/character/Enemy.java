@@ -1,6 +1,8 @@
 package objects.character;
-import Enemy_system.EnemyInfo;
-import Enemy_system.EnemyAI;
+import objects.battle.Skill;
+import objects.battle.SkillType;
+import objects.battle.enemy.EnemyInfo;
+import objects.battle.enemy.ai.EnemyAI;
 import objects.character.Character;
 
 import java.util.ArrayList;
@@ -136,7 +138,7 @@ public class Enemy extends Character {
      *
      * @return the enemy's type
      */
-    public Type getType() {
+    public SkillType getType() {
         return this.enemyInfo.getType();
     }
 
@@ -145,7 +147,7 @@ public class Enemy extends Character {
      *
      * @param type: new type of the enemy
      */
-    public void setType(Type type){
+    public void setType(SkillType type){
         this.enemyInfo.setType(type);
     }
 

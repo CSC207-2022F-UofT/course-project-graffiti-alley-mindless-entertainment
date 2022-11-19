@@ -1,4 +1,4 @@
-package battle.enemy.ai;
+package objects.battle.enemy.ai;
 
 public interface EnemyAI {
 

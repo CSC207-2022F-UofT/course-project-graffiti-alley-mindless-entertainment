@@ -1,15 +1,17 @@
 package battle.enemy.gimmick;
 
-import battle.enemy.ai;
+import objects.battle.Skill;
+import objects.battle.SkillType;
+import objects.battle.enemy.EnemyInfo;
+import objects.battle.enemy.gimmick.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
-import objects.character.Enemy;
-import battle.Skill;
+
 
         import java.util.ArrayList;
 
-public class EnemyAITest {
+public class GimmickTest {
 
     @DisplayName("Test if the health gimmick works properly")
     @Test
@@ -20,7 +22,7 @@ public class EnemyAITest {
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
         Gimmick gimmick = new HealthGimmick(enemyInfo);
         gimmick.useGimmick();
-        Assert.assertEquals(enemyInfo.getHealth, 100);
+        Assert.assertEquals(enemyInfo.getHealth(), 100);
     }
 
     @DisplayName("Test if the attack gimmick works properly")
@@ -30,9 +32,9 @@ public class EnemyAITest {
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
-        Gimmick gimmick = new HealthGimmick(enemyInfo);
+        Gimmick gimmick = new AttackGimmick(enemyInfo);
         gimmick.useGimmick();
-        Assert.assertEquals(enemyInfo.getSkill(0).getDamage, 24);
+        Assert.assertEquals(enemyInfo.getSkill(0).getDamage(), 24);
     }
 
     @DisplayName("Test if the type gimmick works properly")

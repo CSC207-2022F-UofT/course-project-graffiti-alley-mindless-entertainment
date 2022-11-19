@@ -1,6 +1,4 @@
-package battle.enemy.gimmick;
-
-import Enemy_Entities.Boss;
+package objects.battle.enemy.gimmick;
 
 public interface Gimmick {
 

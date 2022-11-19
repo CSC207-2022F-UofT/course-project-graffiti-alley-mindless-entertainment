@@ -1,7 +1,8 @@
-package battle.enemy.gimmick;
+package objects.battle.enemy.gimmick;
 
-import objects.character.Boss;
-import Enemy_Entities.Gimmick;
+
+import objects.battle.Skill;
+import objects.battle.enemy.EnemyInfo;
 
 public class AttackGimmick implements Gimmick {
     private EnemyInfo enemyInfo;
@@ -31,7 +32,7 @@ public class AttackGimmick implements Gimmick {
      * This method uses attack gimmick which increase the damage of the enemy's skills by 1.2
      */
     public void useGimmick() {
-        for(Skill skill: this.enemyInfo.getSkills){
+        for(Skill skill: this.enemyInfo.getSkills()){
             int i = skill.getDamage();
             skill.setDamage((int)Math.ceil(i * 1.2));
         }

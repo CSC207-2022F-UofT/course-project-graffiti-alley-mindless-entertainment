@@ -1,7 +1,9 @@
 package objects.character;
 
-import Enemy_system.EnemyInfo;
-import Enemy_system.Gimmick;
+import objects.battle.enemy.*;
+import objects.battle.enemy.gimmick.Gimmick;
+import objects.battle.enemy.ai.*;
+
 /**
  * This class represents the boss in a game
  */
@@ -65,7 +67,7 @@ public class Boss extends Enemy {
      */
     public void setGimmick(Gimmick gimmick)
     {
-        this.gimmickSet = gimmick;
+        this.gimmick = gimmick;
     }
 
     /**
@@ -73,6 +75,6 @@ public class Boss extends Enemy {
      *
      */
     public Gimmick getGimmickSet() {
-        return gimmickSet;
+        return gimmick;
     }
 }

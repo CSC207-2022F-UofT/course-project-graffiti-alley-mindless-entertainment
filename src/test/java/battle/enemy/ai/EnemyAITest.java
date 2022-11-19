@@ -1,12 +1,15 @@
 package battle.enemy.ai;
 
-import DefaultAI;
-import SmartAI;
+
+import objects.battle.Skill;
+import objects.battle.SkillType;
+import objects.battle.enemy.EnemyInfo;
+import objects.battle.enemy.ai.DefaultAI;
+import objects.battle.enemy.ai.SmartAI;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
-import objects.character.Enemy;
-import Battle.Skill
+
 
 import java.util.ArrayList;
 

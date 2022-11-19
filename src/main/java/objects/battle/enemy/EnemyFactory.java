@@ -1,6 +1,14 @@
+package objects.battle.enemy;
+
+import objects.battle.Skill;
+import objects.battle.SkillType;
+import objects.battle.enemy.ai.DefaultAI;
+import objects.battle.enemy.ai.EnemyAI;
+import objects.battle.enemy.ai.SmartAI;
+import objects.battle.enemy.gimmick.*;
 import objects.character.Boss;
 import objects.character.Enemy;
-import Enemy_Entities.Gimmick;
+import objects.battle.enemy.EnemyInfo;
 
 import managers.DatabaseManager;
 import java.util.ArrayList;
@@ -34,15 +42,15 @@ public class EnemyFactory {
         String typeStr = enemyData.type;
         SkillType type = translateSkill(typeStr);
 
-        EnemyInfo enemyInfo = new EnemyInfo(name, skills, speed, reputation, type);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, speed, reputation, type);
 
         EnemyAI AItype;
         String ai = enemyData.ai;
         AIData aiData = databaseManager.fetchAIData(ai);
         if (Objects.equals(ai, "Smart")) {
-            AItype = SmartAI(enemyInfo, aiData.chance);
+            AItype = new SmartAI(enemyInfo, aiData.chance);
         } else{
-            AItype = DefaultAI(enemyInfo, aiData.chance);
+            AItype = new DefaultAI(enemyInfo, aiData.chance);
         }
         Enemy enemy = new Enemy(name, enemyInfo, AItype);
         return enemy;
@@ -70,7 +78,7 @@ public class EnemyFactory {
         String typeStr = bossData.type;
         SkillType type = translateSkill(typeStr);
 
-        EnemyInfo enemyInfo = new EnemyInfo(name, skills, speed, reputation, type);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, speed, reputation, type);
 
         EnemyAI AItype;
         String ai = bossData.ai;
@@ -82,7 +90,7 @@ public class EnemyFactory {
         }
 
         String gimmick_str = bossData.gimmick;
-        Gimmick gimmick = translateGimmick(gimmick_str);
+        Gimmick gimmick = translateGimmick(gimmick_str, enemyInfo);
 
         Boss boss = new Boss(name, enemyInfo, AItype, gimmick);
         return boss;
@@ -91,29 +99,29 @@ public class EnemyFactory {
     public static SkillType translateSkill(String name){
         switch (name){
             case "water":{
-                return new SkillType.WATER;
+                return SkillType.WATER;
                 break;
             }
             case "fire":{
-                return new SkillType.FIRE;
+                return SkillType.FIRE;
 
                 break;
             }
             case "grass":{
-                return new SkillType.GRASS;
+                return SkillType.EARTH;
 
                 break;
             }
             case "air":{
-                return new SkillType.AIR;
+                return SkillType.AIR;
 
                 break;
             }
         }
-        return new SkillType.WATER;
+        return SkillType.WATER;
     }
 
-    public static Gimmick translateGimmick(String name){
+    public static Gimmick translateGimmick(String name, EnemyInfo enemyInfo){
         switch (name) {
             case "health":{
                 return new HealthGimmick(enemyInfo);

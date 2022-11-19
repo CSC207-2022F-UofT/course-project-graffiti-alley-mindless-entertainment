@@ -1,5 +1,9 @@
+package objects.battle.enemy.gimmick;
+
+import objects.battle.SkillType;
+import objects.battle.enemy.EnemyInfo;
 import objects.character.Boss;
-import Enemy_Entities.Gimmick;
+
 
 public class TypeGimmick implements Gimmick {
     private EnemyInfo enemyInfo;
@@ -22,15 +26,15 @@ public class TypeGimmick implements Gimmick {
         // returns boolean because if the gimmick is used, maybe some dialouges will be called in battle state class.
         //(whenever this method return true)
 
-        Type type = this.enemyInfo.getType();
-        if(type == Type.WATER){
-            this.enemyInfo.setType(Type.FIRE);
-        } else if(type == Type.FIRE){
-            this.enemyInfo.setType(Type.GRASS);
-        } else if(type == Type.GRASS){
-            this.enemyInfo.setType(Type.AIR);
+        SkillType type = this.enemyInfo.getType();
+        if(type == SkillType.WATER){
+            this.enemyInfo.setType(SkillType.FIRE);
+        } else if(type == SkillType.FIRE){
+            this.enemyInfo.setType(SkillType.EARTH);
+        } else if(type == SkillType.EARTH){
+            this.enemyInfo.setType(SkillType.AIR);
         } else{
-            this.enemyInfo.setType(Type.WATER);
+            this.enemyInfo.setType(SkillType.WATER);
         }
     }
 

@@ -1,7 +1,7 @@
-package battle.enemy.gimmick;
+package objects.battle.enemy.gimmick;
 
-import objects.character.Boss;
-import Enemy_Entities.Gimmick;
+
+import objects.battle.enemy.EnemyInfo;
 
 public class HealthGimmick implements Gimmick {
     private EnemyInfo enemyInfo;
