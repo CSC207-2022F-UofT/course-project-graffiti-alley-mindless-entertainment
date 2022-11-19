@@ -1,7 +1,7 @@
 package managers;
 
-import interfaces.InputValidator;
-import interfaces.State;
+import database.interfaces.InputValidator;
+import database.interfaces.State;
 
 public abstract class StateManager{
 

@@ -1,4 +1,4 @@
-package interfaces;
+package database.interfaces;
 
 public interface InputValidator {
     /**

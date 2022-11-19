@@ -1,6 +1,6 @@
 package database.managers;
 
-import interfaces.IDatabase;
+import database.interfaces.IDatabase;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
