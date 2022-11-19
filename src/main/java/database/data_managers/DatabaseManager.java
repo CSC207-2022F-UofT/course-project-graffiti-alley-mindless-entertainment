@@ -1,4 +1,4 @@
-package managers;
+package database.data_managers;
 
 import interfaces.IDatabase;
 import org.json.simple.JSONObject;

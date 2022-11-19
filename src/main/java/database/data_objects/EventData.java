@@ -1,4 +1,4 @@
-package data_objects;
+package database.data_objects;
 
 public class EventData {
 

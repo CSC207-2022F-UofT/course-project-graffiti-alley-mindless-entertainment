@@ -1,12 +1,10 @@
-package data_factories;
+package database.data_factories;
 
-import data_objects.AreaData;
+import database.data_objects.AreaData;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
+import java.util.*;
 
 public class AreaDataFactory {
 
@@ -15,22 +13,25 @@ public class AreaDataFactory {
         for (Object obj: (JSONArray) jsonObject.get("texts"))
             texts.add((String) obj);
 
-        if (jsonObject.containsKey("next")) {
+        String type = (String) jsonObject.get("type");
+        if (type.equals("One-Way")) {
             return new AreaData(
                     name,
+                    type,
                     (String) jsonObject.get("speaker"),
                     texts,
                     (String) jsonObject.get("next")
             );
         }
-        else if (jsonObject.containsKey("options")) {
+        else if (type.equals("Multi-Directional")) {
             Set<String> options_keys = jsonObject.keySet();
-            HashMap<String, String> options = new HashMap<>();
+            Map<String, String> options = new HashMap<String, String>();
             for (String key : options_keys) {
                 options.put(key, (String) jsonObject.get(key));
             }
             return new AreaData(
                     name,
+                    type,
                     (String) jsonObject.get("speaker"),
                     texts,
                     options

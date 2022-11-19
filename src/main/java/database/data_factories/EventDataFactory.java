@@ -1,6 +1,6 @@
-package data_factories;
+package database.data_factories;
 
-import data_objects.EventData;
+import database.data_objects.EventData;
 import org.json.simple.JSONObject;
 
 public class EventDataFactory {

@@ -1,10 +1,10 @@
-package managers;
+package database.data_managers;
 
-import data_factories.AreaDataFactory;
+import database.data_factories.AreaDataFactory;
 import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
-import data_objects.AreaData;
+import database.data_objects.AreaData;
 
 public class AreaDataManager extends DatabaseManager {
 
@@ -17,10 +17,10 @@ public class AreaDataManager extends DatabaseManager {
         JSONObject textData = (JSONObject) super.fullDatabase.get("texts");
         assert(textData.containsKey(zone));
 
-        JSONObject chapterData = (JSONObject) textData.get(zone);
+        JSONObject zoneData = (JSONObject) textData.get(zone);
         ArrayList<AreaData> areas = new ArrayList<>();
-        for (Object areaName : chapterData.keySet()) {
-            JSONObject areaData = (JSONObject) chapterData.get(areaName);
+        for (Object areaName : zoneData.keySet()) {
+            JSONObject areaData = (JSONObject) zoneData.get(areaName);
             areas.add(this.dataFactory.createAreaData(areaData, (String) areaName));
         }
         return areas;

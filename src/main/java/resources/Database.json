@@ -18,6 +18,7 @@
           "You will, unknowingly to them, save them from this hard life.",
           "So go, legendary hero. You are the only one who can bring me the crystals and put an end to this chaos."
         ],
+        "type": "One-Way",
         "next": "The Aqua Nation - Beach 1"
       }
     },
@@ -31,6 +32,7 @@
           "You spot a clearing to your left, leading to a trail towards grassy lands.",
           "On your right, the waves crash and the sand trails off into a long beach."
         ],
+        "type": "Multi-Directional",
         "options": {
           "Follow the grassy trail": "The Aqua Nation - Grassy Field",
           "Walk along the beach": "The Aqua Nation - Beach 2"

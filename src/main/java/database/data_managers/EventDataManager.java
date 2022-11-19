@@ -1,7 +1,7 @@
-package managers;
+package database.data_managers;
 
-import data_factories.EventDataFactory;
-import data_objects.EventData;
+import database.data_factories.EventDataFactory;
+import database.data_objects.EventData;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 

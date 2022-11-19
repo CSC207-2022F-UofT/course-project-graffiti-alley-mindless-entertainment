@@ -1,5 +1,6 @@
 package managers;
 
+import database.data_managers.DatabaseManager;
 import objects.Event;
 
 public class EventManager {
