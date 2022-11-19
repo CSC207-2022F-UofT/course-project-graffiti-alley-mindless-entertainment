@@ -1,6 +1,3 @@
-
-
-package battle.enemy.gimmick;
 public class SpeedGimmick implements Gimmick {
     private EnemyInfo enemyInfo;
 
