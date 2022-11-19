@@ -2,8 +2,9 @@ package database.interfaces;
 
 public interface InputValidator {
     /**
-     * @param input the user input to validate
-     * @return whether the given input is valid
+     * @param input the user input to parse and validate
+     * @return null if the given input is not valid, otherwise the parsed input
      */
-    public boolean validateInput(String input);
+    public String parseAndValidate(String input);
 }
+
