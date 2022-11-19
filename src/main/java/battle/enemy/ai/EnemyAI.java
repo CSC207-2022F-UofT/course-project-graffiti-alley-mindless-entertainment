@@ -1,4 +1,4 @@
-package Battle.Enemy_system.EnemyAI;
+package battle.enemy.ai;
 
 public interface EnemyAI {
 
