@@ -1,4 +1,5 @@
 package battle.enemy.gimmick;
+
 import objects.character.Boss;
 import Enemy_Entities.Gimmick;
 
