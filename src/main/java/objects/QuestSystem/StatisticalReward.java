@@ -8,14 +8,14 @@ public class StatisticalReward extends Reward {
      * Attributes.
      */
     // Stores the player's numerical statistic that will be affected by this reward.
-    private NumericalStatistics statistic;
+    private PlayersStatistics statistic;
     // Stores the amount by which the reward's receiver's chosen statistic is affected.
     private int value;
 
     /**
      * Constructor.
      */
-    public StatisticalReward(NumericalStatistics statistic, int value) {
+    public StatisticalReward(PlayersStatistics statistic, int value) {
         this.statistic = statistic;
         this.value = value;
     }
@@ -23,14 +23,14 @@ public class StatisticalReward extends Reward {
     /**
      * Returns the player's statistic that would be affected by the reward (when received).
      */
-    public NumericalStatistics getStatistic() {
+    public PlayersStatistics getStatistic() {
         return this.statistic;
     }
 
     /**
      * Changes the type of reward (which player's statistic would be affected).
      */
-    public void setStatistic(NumericalStatistics statistic) {
+    public void setStatistic(PlayersStatistics statistic) {
         this.statistic = statistic;
     }
 

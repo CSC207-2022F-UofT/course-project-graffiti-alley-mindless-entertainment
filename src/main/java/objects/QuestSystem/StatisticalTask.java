@@ -9,10 +9,10 @@ public class StatisticalTask extends Task {
      * Attributes in addition to its parent class' attributes (name & isCompleted).
      */
     // Stores the player's numerical statistic that will be affected by this reward.
-    private NumericalStatistics statistic;
+    private PlayersStatistics statistic;
     // Stores the amount of the statistic that the task's assignee needs to reach.
     private int value;
-    // Stores whether the
+    // Stores whether the task requires the player's statistic to be equal to the value inserted.
     // true: when player must have statistic == this.value, to complete the tasks,
     // & false: when the statistic >= this.value.
     private boolean isEquality;
@@ -20,7 +20,7 @@ public class StatisticalTask extends Task {
     /**
      * Constructor.
      */
-    public StatisticalTask(String name, NumericalStatistics statistic, int value, boolean isEquality) {
+    public StatisticalTask(String name, PlayersStatistics statistic, int value, boolean isEquality) {
         super(name);
         this.statistic = statistic;
         this.value = value;
@@ -30,71 +30,53 @@ public class StatisticalTask extends Task {
     /**
      * Returns the player's statistic that would be affected by the reward (when received).
      */
-    public NumericalStatistics getStatistic() {
+    public PlayersStatistics getStatistic() {
         return this.statistic;
     }
 
     /**
      * Changes the type of reward (which player's statistic would be affected).
      */
-    public void setStatistic(NumericalStatistics statistic) {
+    public void setStatistic(PlayersStatistics statistic) {
         this.statistic = statistic;
     }
 
     /**
-     * Checks whether the player assigned to the task has at least this amount of money in wallet.
-     * Returns true if the player who has been assigned to complete the tasks completed the task.
-     * Returns false otherwise.
+     * Checks whether the statistic required for the task by the player responds to the requirement.
+     * Returns true if it is the case, meaning that the task is completed.
+     * Returns false, otherwise.
      */
     @Override
     public boolean isCompleted(Player assignee) {
         if (this.isEquality) {
-            return isEquality(assignee);
+            return isEqual(getPlayersStatistic(assignee));
         }
         else {
-            return isNotEquality(assignee);
+            return isGreaterOrEqual(getPlayersStatistic(assignee));
         }
     }
 
-    public boolean isEquality(Player assignee) {
+    /**
+     * Returns the corresponding player's statistic for this specific task.
+     */
+    private int getPlayersStatistic(Player assignee) {
         switch (this.statistic) {
             case HEALTH:
-                return isEqual(assignee.getCurrHealth());
-                break;
-            case EXPERIENCE:
-                return isEqual(assignee.getExperience());
-                break;
-            case LEVEL:
-                return isEqual(assignee.getLevel());
-                break;
-            case MONEY:
-                return isEqual(assignee.getMoney());
-                break;
-            default:
-                return false;
-                break;
-        }
-    }
-
-    public boolean isNotEquality(Player assignee) {
-        switch (this.statistic) {
-            case HEALTH:
-                return isGreaterOrEqual(assignee.getCurrHealth());
+                return assignee.getCurrHealth();
             break;
             case EXPERIENCE:
-                return isGreaterOrEqual(assignee.getExperience());
+                return assignee.getExperience();
             break;
             case LEVEL:
-                return isGreaterOrEqual(assignee.getLevel());
+                return assignee.getLevel();
             break;
             case MONEY:
-                return isGreaterOrEqual(assignee.getMoney());
+                return assignee.getMoney();
             break;
             default:
-                return false;
+                return 0;
             break;
         }
-
     }
 
     /**

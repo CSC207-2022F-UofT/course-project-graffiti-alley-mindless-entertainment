@@ -28,7 +28,7 @@ public abstract class StateManager{
         }
     }
 
-    public void postInput(String input) {
+    public void postInput() {
         currState.postInput(input);
         boolean currPostInput = currState.isDone();
         if (currPostInput) {
