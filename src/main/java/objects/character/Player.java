@@ -1,6 +1,9 @@
 package objects.character;
 
 import objects.battle.SkillType;
+import objects.battle.Skill;
+
+import java.util.ArrayList;
 
 public class Player extends Character {
     /** A class for the Player character. Includes getters and setters for all applicable attributes.
@@ -17,6 +20,7 @@ public class Player extends Character {
      * skillType: The skill type of the Player. Utilizes the SkillType enum.
      * speed: The speed of the Player. A higher int corresponds to a higher priority in a battle.
      * money: The amount of money the Player owns.
+     * skillList: A List of Skills of the Player.
      */
     private String name;
     private String description;
@@ -28,10 +32,11 @@ public class Player extends Character {
     private SkillType skillType;
     private int speed;
     private int money;
+    private final ArrayList<Skill> skillList;
 
     public Player(String name, SkillType skillType) {
-        // Initializes a new Player character with name and skillType, an empty description, 100 currHealth and
-        // maxHealth and speed, 0 experience and armor and level, and 20 money.
+        // Initializes a new Player character with name and skillType, an empty description, 100 currHealth,
+        // maxHealth and speed, 0 experience, armor and level, 20 money, and an empty skillList.
         super(name);
         this.description = "";
         this.skillType = skillType;
@@ -42,6 +47,7 @@ public class Player extends Character {
         this.level = 0;
         this.speed = 100;
         this.money = 20;
+        this.skillList = new ArrayList<>();
     }
 
     public String getDescription() {
@@ -80,9 +86,16 @@ public class Player extends Character {
         return this.maxHealth;
     }
 
-    public void increaseMaxHealth(int changeBy) {
-        // Increase the Player's maximum health by increaseBy.
-        this.maxHealth += changeBy;
+    public void changeMaxHealth(int changeBy) {
+        // Change the Player's maximum health by changeBy. Maximum health cannot be <=0, so decreasing maxHealth
+        // to make it negative sets maxHealth to 1.
+        int newMaxHealth = this.maxHealth + changeBy;
+        if (newMaxHealth < 0) {
+            this.maxHealth = 1;
+        }
+        else {
+            this.maxHealth += changeBy;
+        }
     }
 
     public int getArmor() {
@@ -107,9 +120,16 @@ public class Player extends Character {
         return this.experience;
     }
 
-    public void addExperience(int increaseBy) {
-        // Add increaseBy experience points to the Player's experience.
-        this.experience += increaseBy;
+    public void changeExperience(int changeBy) {
+        // Change the Player's experience by changeBy. Experience cannot be negative, so decreasing experience to make
+        // it negative sets experience to 0.
+        int newExperience = this.experience + changeBy;
+        if (newExperience < 0) {
+            this.experience = 0;
+        }
+        else {
+            this.experience += changeBy;
+        }
     }
 
     public int getLevel() {
@@ -117,9 +137,16 @@ public class Player extends Character {
         return this.level;
     }
 
-    public void addLevel(int increaseBy) {
-        // Add increaseBy levels to the Player's level.
-        this.level += increaseBy;
+    public void changeLevel(int changeBy) {
+        // Change the Player's level by changeBy. Level cannot be negative, so decreasing level to make it negative
+        // sets level to 0.
+        int newLevel = this.level + changeBy;
+        if (newLevel < 0) {
+            this.level = 0;
+        }
+        else {
+            this.level += changeBy;
+        }
     }
 
     public SkillType getSkillType() {
@@ -137,9 +164,9 @@ public class Player extends Character {
         return this.speed;
     }
 
-    public void changeSpeed(int newSpeed) {
-        // Change the speed of the Player to newSpeed.
-        this.speed = newSpeed;
+    public void changeSpeed(int changeBy) {
+        // Change the speed of the Player by changeBy.
+        this.speed += changeBy;
     }
 
     public int getMoney() {
@@ -150,6 +177,28 @@ public class Player extends Character {
     public void changeMoney(int changeBy) {
         // Change the amount of money the Player has by changeBy.
         this.money += changeBy;
+    }
+
+    public ArrayList<Skill> getSkillList() {
+        // Returns the skillList of the Player.
+        return this.skillList;
+    }
+
+    public boolean addSkill(Skill newSkill) {
+        // Append a new Skill to the end of skillList iff newSkill is not already in skillList. Returns true if
+        // successful.
+        if (!this.skillList.contains(newSkill)) {
+            this.skillList.add(newSkill);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public void removeSkill(Skill toRemove) {
+        // Remove toRemove from skillList.
+        this.skillList.remove(toRemove);
     }
 
 }
