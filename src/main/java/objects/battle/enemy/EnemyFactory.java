@@ -29,15 +29,15 @@ public class EnemyFactory {
         ArrayList<Skill> skills = new ArrayList<Skill>();
         for (String i:enemyData.skills) {
             SkillData skillData = databaseManager.fetchSkillData(i);
-            int damage = skillData.damage;
+            int damage = Integer.parseInt(skillData.damage);
             String skillType = skillData.type;
             SkillType type = translateSkill(skillType);
-            int lag = skillData.lag;
+            int lag = Integer.parseInt(skillData.lag);
             Skill skill = new Skill(i, damage, lag, type);
             skills.add(skill);
         }
-        int reputation = enemyData.reputation;
-        int speed = enemyData.speed;
+        int reputation = Integer.parseInt(enemyData.reputation);
+        int speed = Integer.parseInt(enemyData.speed);
 
         String typeStr = enemyData.type;
         SkillType type = translateSkill(typeStr);
@@ -48,9 +48,9 @@ public class EnemyFactory {
         String ai = enemyData.ai;
         AIData aiData = databaseManager.fetchAIData(ai);
         if (Objects.equals(ai, "Smart")) {
-            AItype = new SmartAI(enemyInfo, aiData.chance);
+            AItype = new SmartAI(enemyInfo, Integer.parseInt(aiData.chance));
         } else{
-            AItype = new DefaultAI(enemyInfo, aiData.chance);
+            AItype = new DefaultAI(enemyInfo, Integer.parseInt(aiData.chance));
         }
         return new Enemy(name, enemyInfo, AItype);
     }
@@ -65,15 +65,15 @@ public class EnemyFactory {
         ArrayList<Skill> skills = new ArrayList<Skill>();
         for (String i:bossData.skills) {
             SkillData skillData = databaseManager.fetchSkillData(i);
-            int damage = skillData.damage;
+            int damage = Integer.parseInt(skillData.damage);
             String skillType = skillData.type;
             SkillType type = translateSkill(skillType);
-            int lag = skillData.lag;
+            int lag = Integer.parseInt(skillData.lag);
             Skill skill = new Skill(i, damage, lag, type);
             skills.add(skill);
         }
-        int reputation = bossData.reputation;
-        int speed = bossData.speed;
+        int reputation = Integer.parseInt(bossData.reputation);
+        int speed = Integer.parseInt(bossData.speed);
         String typeStr = bossData.type;
         SkillType type = translateSkill(typeStr);
 
@@ -83,9 +83,9 @@ public class EnemyFactory {
         String ai = bossData.ai;
         AIData aiData = databaseManager.fetchAIData(ai);
         if (Objects.equals(ai, "Smart")) {
-            AItype = SmartAI(enemyInfo, aiData.chance);
+            AItype = SmartAI(enemyInfo, Integer.parseInt(aiData.chance));
         } else{
-            AItype = DefaultAI(enemyInfo, aiData.chance);
+            AItype = DefaultAI(enemyInfo, Integer.parseInt(aiData.chance));
         }
 
         String gimmick_str = bossData.gimmick;

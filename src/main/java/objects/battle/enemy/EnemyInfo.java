@@ -12,6 +12,7 @@ public class EnemyInfo {
     private int speed;
     private int reputation;
     private SkillType type;
+    private final int maxHealth = 100;
 
     public EnemyInfo(ArrayList<Skill> skills, int speed, int reputation, SkillType type){
         this.skills = skills;
@@ -37,7 +38,11 @@ public class EnemyInfo {
      * @param n: the amount of health to change in int
      */
     public void changeHealth(int n){
-        this.health = this.health + n;
+        if(this.health + n > this.maxHealth){
+            this.setHealth(100);
+        } else{
+            this.health = this.health + n;
+        }
     }
 
     /**
