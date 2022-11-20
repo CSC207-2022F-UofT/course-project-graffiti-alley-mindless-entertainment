@@ -1,7 +1,7 @@
 package objects.item;
 
 /**
- *
+ * Entity for Sword Item. Inherits an abstract class Item.
  */
 public class Sword extends Item {
 

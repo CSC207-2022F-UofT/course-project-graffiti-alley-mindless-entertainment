@@ -1,7 +1,7 @@
 package objects.item;
 
 /**
- * A class for Item. Includes getter and setter for all attributes.
+ * Abstract class for Item. Includes getter and setter for all attributes.
  */
 public abstract class Item {
 
