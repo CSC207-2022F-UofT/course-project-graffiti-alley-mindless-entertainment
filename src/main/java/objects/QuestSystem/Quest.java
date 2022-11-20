@@ -101,7 +101,7 @@ public class Quest {
             // Sets the overseer as overseer of the quest.
             this.overseer = overseer;
             // Changes the status of overseer's
-            this.overseer.switchQuestStatus();
+            this.overseer.switchHasQuest();
             return true;
         }
         return false;
