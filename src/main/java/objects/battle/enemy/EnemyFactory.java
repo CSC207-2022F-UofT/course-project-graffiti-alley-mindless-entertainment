@@ -1,5 +1,12 @@
 package objects.battle.enemy;
 
+import database.managers.AIDataManager;
+import database.managers.DatabaseManager;
+import database.managers.EnemyDataManager;
+import database.managers.SkillDataManager;
+import database.objects.AIData;
+import database.objects.EnemyData;
+import database.objects.SkillData;
 import objects.battle.Skill;
 import objects.battle.SkillType;
 import objects.battle.enemy.ai.DefaultAI;
@@ -7,15 +14,13 @@ import objects.battle.enemy.ai.EnemyAI;
 import objects.battle.enemy.ai.SmartAI;
 import objects.battle.enemy.gimmick.*;
 import objects.character.Boss;
+import objects.character.Character;
 import objects.character.Enemy;
 import objects.battle.enemy.EnemyInfo;
 
-import managers.DatabaseManager;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import data_objects.EnemyData;
-import data_objects.SkillData;
 
 public class EnemyFactory {
 
@@ -24,11 +29,13 @@ public class EnemyFactory {
      * @param name of the enemy to create
      * @return instance of enemy
      */
-    public static Enemy getEnemy(String name){
-        EnemyData enemyData = databaseManager.fetchEnemyData(name);
-        ArrayList<Skill> skills = new ArrayList<Skill>();
+    public static Character getEnemy(String name){
+        EnemyDataManager data = new EnemyDataManager();
+        EnemyData enemyData = data.fetchEnemyData(name);
+        ArrayList<Skill> skills = new ArrayList<>();
+        SkillDataManager dataSkill = new SkillDataManager();
         for (String i:enemyData.skills) {
-            SkillData skillData = databaseManager.fetchSkillData(i);
+            SkillData skillData = dataSkill.fetchSkillData(i);
             int damage = Integer.parseInt(skillData.damage);
             String skillType = skillData.type;
             SkillType type = translateSkill(skillType);
@@ -46,53 +53,21 @@ public class EnemyFactory {
 
         EnemyAI AItype;
         String ai = enemyData.ai;
-        AIData aiData = databaseManager.fetchAIData(ai);
-        if (Objects.equals(ai, "Smart")) {
+        AIDataManager dataAI = new AIDataManager();
+        AIData aiData = dataAI.fetchAIData(ai);
+        if (Objects.equals(ai, "smart")) {
             AItype = new SmartAI(enemyInfo, Integer.parseInt(aiData.chance));
         } else{
             AItype = new DefaultAI(enemyInfo, Integer.parseInt(aiData.chance));
         }
+
+        if(enemyData.gimmick != null) {
+            Gimmick gimmick = translateGimmick(enemyData.gimmick, enemyInfo);
+            return new Boss(name, enemyInfo, AItype, gimmick);
+        }
         return new Enemy(name, enemyInfo, AItype);
     }
 
-    /**
-     * This method returns the boss instance using the information given by database
-     * @param name of the boss to create
-     * @return instance of boss
-     */
-    public static Boss getBoss(String name){
-        BossData bossData = databaseManager.fetchEnemyData(name);
-        ArrayList<Skill> skills = new ArrayList<Skill>();
-        for (String i:bossData.skills) {
-            SkillData skillData = databaseManager.fetchSkillData(i);
-            int damage = Integer.parseInt(skillData.damage);
-            String skillType = skillData.type;
-            SkillType type = translateSkill(skillType);
-            int lag = Integer.parseInt(skillData.lag);
-            Skill skill = new Skill(i, damage, lag, type);
-            skills.add(skill);
-        }
-        int reputation = Integer.parseInt(bossData.reputation);
-        int speed = Integer.parseInt(bossData.speed);
-        String typeStr = bossData.type;
-        SkillType type = translateSkill(typeStr);
-
-        EnemyInfo enemyInfo = new EnemyInfo(skills, speed, reputation, type);
-
-        EnemyAI AItype;
-        String ai = bossData.ai;
-        AIData aiData = databaseManager.fetchAIData(ai);
-        if (Objects.equals(ai, "smart")) {
-            AItype = SmartAI(enemyInfo, Integer.parseInt(aiData.chance));
-        } else{
-            AItype = DefaultAI(enemyInfo, Integer.parseInt(aiData.chance));
-        }
-
-        String gimmick_str = bossData.gimmick;
-        Gimmick gimmick = translateGimmick(gimmick_str, enemyInfo);
-
-        return new Boss(name, enemyInfo, AItype, gimmick);
-    }
 
     public static SkillType translateSkill(String name){
         switch (name){

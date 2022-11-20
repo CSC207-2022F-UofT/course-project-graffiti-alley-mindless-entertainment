@@ -7,7 +7,7 @@ import objects.battle.enemy.EnemyInfo;
 import objects.battle.enemy.ai.DefaultAI;
 import objects.battle.enemy.ai.SmartAI;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
 

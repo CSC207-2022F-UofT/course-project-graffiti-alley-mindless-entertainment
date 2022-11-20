@@ -160,5 +160,6 @@ public class Enemy extends Character {
     public String enemyAction(String input){
         return this.enemyAI.respond(input);
     }
+
 }
 

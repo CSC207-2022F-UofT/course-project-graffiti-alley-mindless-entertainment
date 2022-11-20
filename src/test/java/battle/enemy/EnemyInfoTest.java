@@ -4,7 +4,7 @@ import objects.battle.Skill;
 import objects.battle.SkillType;
 import objects.battle.enemy.EnemyInfo;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import objects.character.Enemy;
 import objects.character.Boss;
@@ -53,7 +53,7 @@ public class EnemyInfoTest {
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
         enemyInfo.changeSpeed(10);
-        Assert.assertEquals(enemyInfo.getSpeed(), 20);
+        Assert.assertEquals(enemyInfo.getSpeed(), 100);
     }
 
     @DisplayName("Test for checkAlive method")
@@ -75,7 +75,7 @@ public class EnemyInfoTest {
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
         enemyInfo.setHealth(50);
-        Assert.assertEquals(enemyInfo.getHealth(), 100);
+        Assert.assertEquals(enemyInfo.getHealth(), 50);
     }
 
     @DisplayName("Test for setSpeed method")

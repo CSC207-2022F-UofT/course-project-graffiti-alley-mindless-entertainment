@@ -83,4 +83,5 @@ public class Boss extends Enemy {
     public Gimmick getGimmickSet() {
         return gimmick;
     }
+
 }
