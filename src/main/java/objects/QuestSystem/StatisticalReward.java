@@ -1,5 +1,7 @@
 package objects.QuestSystem;
 
+import objects.character.Player;
+
 /**
  * This class determines specifically how a reward affecting a player's statistics behaves.
  */
@@ -60,7 +62,7 @@ public class StatisticalReward extends Reward {
                 break;
             // case where the receiver gets extra experience from the reward.
             case EXPERIENCE:
-                receiver.addExperience(this.experiencePoints);
+                receiver.addExperience(this.value);
                 break;
             // case where the receiver gets extra levels from the reward.
             case LEVEL:
