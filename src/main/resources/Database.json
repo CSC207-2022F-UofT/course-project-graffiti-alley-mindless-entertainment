@@ -99,8 +99,49 @@
   "quests": [],
   "characters": [],
   "items": [],
-  "skills": [],
-  "enemies": [],
+  "skills": [
+    {
+      "name": "fireball",
+      "type": "fire",
+      "lag": "10",
+      "damage": "20"
+    },
+    {
+      "name": "beam",
+      "type": "earth",
+      "lag": "10",
+      "damage": "25"
+    }
+  ],
+  "enemies": [
+    {
+      "name": "goblin",
+      "type": "fire",
+      "skills": ["fireball"],
+      "reputation": "5",
+      "speed": "90",
+      "ai": "default"
+    },
+    {
+      "name": "goblin warrior",
+      "type": "earth",
+      "skills": ["beam"],
+      "reputation": "20",
+      "speed": "110",
+      "ai": "smart",
+      "gimmick": "health"
+    }
+  ],
+  "ai_data": [
+    {
+      "name": "default",
+      "chance": "50"
+    },
+    {
+      "name": "smart",
+      "chance": "80"
+    }
+  ],
   "events": [
     {
       "name": "test",
