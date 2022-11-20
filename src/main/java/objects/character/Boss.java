@@ -27,6 +27,13 @@ public class Boss extends Enemy {
         this.GimmickUsed = false;
     }
 
+    /**
+     * This method uses gimmick by calling a method in gimmick class. Returns true
+     * if the gimmick is successfully used and return false if its not triggered yet.
+     *
+     * @return true if the gimmick is used and false if its not triggered or
+     * if its already used once.
+     */
     public boolean useGimmick(){
         if(!this.GimmickUsed && this.gimmick.checkGimmick()){
             this.GimmickUsed = true;
@@ -52,7 +59,6 @@ public class Boss extends Enemy {
     /**
      * This method changes the GimmickUsed to true to indicate the
      * gimmick is used
-     *
      *
      */
     public void usedGimmick()
