@@ -1,13 +1,14 @@
 package playercreation;
 
 import interfaces.InputValidator;
+import objects.battle.SkillType;
 
 import java.util.Objects;
 
 public class PlayerCreatorInputValidator implements InputValidator {
     /** A class for validating input during Player creation at the start of the game.
      * Attributes:
-     * currQuestion: The current question being asked of the user. Of type PlayerQuestion.
+     * currQuestion: The current question being asked of the user. An enum of type PlayerQuestion.
      */
     private final PlayerQuestion currQuestion;
 
@@ -21,10 +22,24 @@ public class PlayerCreatorInputValidator implements InputValidator {
         // Validates user input for different situations during Player creation. Returns true if the input is valid,
         // false otherwise.
         if (currQuestion == PlayerQuestion.SKILLTYPE) {
-            // Waiting for SkillType implementation.
-            return false;
+            // Ensures the input corresponds to one of the SkillType enums.
+            return Objects.equals(input, SkillType.AIR.name()) ||
+                    Objects.equals(input, SkillType.FIRE.name()) ||
+                    Objects.equals(input, SkillType.EARTH.name()) ||
+                    Objects.equals(input, SkillType.WATER.name());
         }
+        else if (currQuestion == PlayerQuestion.NAME) {
+            // Ensures Player names are 20 characters or fewer.
+            return (input.length() <= 20);
+        }
+
+        else if (currQuestion == PlayerQuestion.DESCRIPTION) {
+            // Ensures Player descriptions are 200 characters or fewer.
+            return (input.length() <= 200);
+        }
+
         else if (currQuestion == PlayerQuestion.CONFIRM) {
+            // Ensures the user inputted either "confirm" or "return" for confirming a response.
             return Objects.equals(input, "confirm") || Objects.equals(input, "return");
         }
         return false;

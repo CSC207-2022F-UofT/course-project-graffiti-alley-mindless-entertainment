@@ -4,9 +4,11 @@ import interfaces.State;
 import playercreation.PlayerCreatorInteractor;
 import playercreation.PlayerQuestion;
 import playercreation.PlayerQuestionState;
+import playercreation.PlayerConfirmState;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class PlayerCreatorManager extends StateManager {
     /** A controller class that helps create a new Player character at the beginning of the game.
@@ -14,7 +16,7 @@ public class PlayerCreatorManager extends StateManager {
      * currPlayerQuestion: The current question about the Player character being asked of the user. An enum of
      *                     type PlayerQuestion.
      * completedQuestions: A List of completed PlayerQuestions that have already been filled by the user. Does not
-     *                     include CONFIRM or RETURN.
+     *                     include CONFIRM.
      * confirmChoice: A string representing a user confirming the choice.
      * returnChoice: A string representing a user wanting to return to the previous question.
      * creatorInteractor: A PlayerCreatorInteractor that stores information about the Player until all questions have
@@ -22,7 +24,7 @@ public class PlayerCreatorManager extends StateManager {
      */
 
     private PlayerQuestion currPlayerQuestion;
-    private List<PlayerQuestion> completedQuestions;
+    private final List<PlayerQuestion> completedQuestions;
     private final String confirmChoice = "confirm";
     private final String returnChoice = "return";
     private final PlayerCreatorInteractor creatorInteractor;
@@ -48,20 +50,34 @@ public class PlayerCreatorManager extends StateManager {
         if (currPlayerQuestion == PlayerQuestion.NAME ||
                 currPlayerQuestion == PlayerQuestion.DESCRIPTION ||
                 currPlayerQuestion == PlayerQuestion.SKILLTYPE) {
-            // Switches the state to ask the user different questions about their Player.
-            return null;
-
-        }
-
-        else if (currPlayerQuestion == PlayerQuestion.RETURN) {
-            // Return to the previous state if the user is not satisfied with the previous decision.
-            return null;
-
+            // Switches the state to confirm if the user confirms the choice.
+            this.completedQuestions.add(currPlayerQuestion);
+            currPlayerQuestion = PlayerQuestion.CONFIRM;
+            return new PlayerConfirmState();
         }
 
         else if (currPlayerQuestion == PlayerQuestion.CONFIRM) {
-            // Ask the user to confirm their choice.
-            return null;
+            // Switches states to the next question if the user confirms their choice, or to return to the previous
+            // question if the user is not happy with their choice.
+            if (Objects.equals(input, confirmChoice)) {
+                if (completedQuestions.size() == 2) {
+                    currPlayerQuestion = PlayerQuestion.SKILLTYPE;
+                    return new PlayerQuestionState(currPlayerQuestion);
+                }
+                else if (completedQuestions.size() == 1) {
+                    currPlayerQuestion = PlayerQuestion.DESCRIPTION;
+                    return new PlayerQuestionState(currPlayerQuestion);
+                }
+                else if (completedQuestions.size() == 3) {
+
+                }
+            }
+            else if (Objects.equals(input, returnChoice)) {
+                // Return to the previous state since the user did not confirm the previous decision.
+                int lastIndex = completedQuestions.size() - 1;
+                currPlayerQuestion = completedQuestions.remove(lastIndex);
+                return new PlayerQuestionState(currPlayerQuestion);
+            }
 
         }
 

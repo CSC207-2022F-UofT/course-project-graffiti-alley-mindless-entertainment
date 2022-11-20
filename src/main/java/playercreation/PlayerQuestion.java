@@ -6,5 +6,4 @@ public enum PlayerQuestion {
     DESCRIPTION,
     SKILLTYPE,
     CONFIRM,
-    RETURN,
 }

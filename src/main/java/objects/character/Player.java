@@ -44,16 +44,6 @@ public class Player extends Character {
         this.money = 20;
     }
 
-    public String getName() {
-        // Return the name of the Player.
-        return this.name;
-    }
-
-    public void changeName(String newName) {
-        // Change the name of the Player to newName.
-        this.name = newName;
-    }
-
     public String getDescription() {
         // Return the description of the Player.
         return this.description;

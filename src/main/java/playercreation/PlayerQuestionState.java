@@ -25,25 +25,27 @@ public class PlayerQuestionState implements State {
     @Override
     public void preInput() {
         // Utilizes OutputHandler to ask the Player a question based on the currQuestion.
+        // Awaiting OutputHandler implementation.
         this.awaitInput = true;
         if (this.currQuestion == PlayerQuestion.NAME) {
-
+            return;
         }
         else if (this.currQuestion == PlayerQuestion.DESCRIPTION) {
-
+            return;
         }
         else if (this.currQuestion == PlayerQuestion.SKILLTYPE) {
-
+            return;
         }
         else {
-
+            return;
         }
     }
 
     @Override
     public void postInput(String input) {
-        this.isDone = true;
+        if (this.currQuestion == PlayerQuestion.NAME) {
 
+        }
     }
 
     @Override
