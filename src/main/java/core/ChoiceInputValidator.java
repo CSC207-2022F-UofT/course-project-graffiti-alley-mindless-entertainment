@@ -22,9 +22,6 @@ public class ChoiceInputValidator implements InputValidator {
     @Override
     public String parseAndValidate(String input) {
         String parsed = input.toUpperCase();
-        if (parsed == "EXIT" || parsed == "PAUSE") {
-            return parsed;
-        }
         List<String> opt = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O",
                 "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
         if (opt.contains(parsed)) {
