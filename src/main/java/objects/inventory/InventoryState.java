@@ -30,7 +30,6 @@ public class InventoryState implements State {
     /**
      * @param inventory inventory contains items
      */
-
     public InventoryState(Inventory inventory){
 
         this.inventory = inventory;
