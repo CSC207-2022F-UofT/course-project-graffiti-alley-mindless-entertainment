@@ -42,6 +42,7 @@ public class PlayerQuestionState implements State {
 
     @Override
     public void postInput(String input) {
+        this.isDone = true;
 
     }
 
