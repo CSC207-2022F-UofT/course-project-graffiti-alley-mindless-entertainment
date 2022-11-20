@@ -2,7 +2,7 @@ package interfaces;
 
 import java.util.List;
 
-public interface Output {
+public interface OutputHandler {
 
     /**
      * @param text to be displayed on screen

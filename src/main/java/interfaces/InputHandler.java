@@ -1,6 +1,6 @@
 package interfaces;
 
-public interface Input {
+public interface InputHandler {
 
     /**
      * @param validator from wherever is calling input

@@ -1,22 +1,22 @@
 package managers;
 
-import interfaces.Output;
+import interfaces.OutputHandler;
 
 import java.util.Arrays;
 import java.util.List;
 
 
-public class OutputHandler implements Output {
+public class OutputHandlerImpl implements OutputHandler {
 
-    private static OutputHandler screen;
+    private static OutputHandlerImpl screen;
 
     /**
      * using Singleton pattern so that globally there is only one OutputHandler instance, which is screen
      */
-    private OutputHandler() {}
-    public static OutputHandler getScreen() {
+    private OutputHandlerImpl() {}
+    public static OutputHandlerImpl getScreen() {
         if (screen == null) {
-            screen = new OutputHandler();
+            screen = new OutputHandlerImpl();
         }
         return screen;
     }
