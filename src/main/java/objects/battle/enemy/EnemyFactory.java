@@ -82,7 +82,7 @@ public class EnemyFactory {
         EnemyAI AItype;
         String ai = bossData.ai;
         AIData aiData = databaseManager.fetchAIData(ai);
-        if (Objects.equals(ai, "Smart")) {
+        if (Objects.equals(ai, "smart")) {
             AItype = SmartAI(enemyInfo, Integer.parseInt(aiData.chance));
         } else{
             AItype = DefaultAI(enemyInfo, Integer.parseInt(aiData.chance));
