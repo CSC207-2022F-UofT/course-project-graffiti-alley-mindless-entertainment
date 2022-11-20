@@ -22,11 +22,15 @@ public class ChoiceInputValidator implements InputValidator {
      */
     @Override
     public String parseAndValidate(String input) {
-        String parsed = input.toUpperCase();
-        List<String> opt = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O",
-                "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
-        if (opt.contains(parsed)) {
-            return allowedInputs.get(opt.indexOf(parsed));
+        List<String> opt = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o",
+                "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z");
+        if (opt.contains(input)) {
+            return allowedInputs.get(opt.indexOf(input)).toLowerCase();
+        }
+        for (String option: allowedInputs) {
+            if (option.toLowerCase() == input) {
+                return input;
+            }
         }
         return null;
     }
