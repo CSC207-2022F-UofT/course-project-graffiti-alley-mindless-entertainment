@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class InputHandlerImpl implements InputHandler {
 
     /**
-     * @param validator from wherever is calling input
+     * @param validator validator from whichever class that is calling InputHandler
      * @return a valid user input
      */
     @Override
@@ -27,6 +27,8 @@ public class InputHandlerImpl implements InputHandler {
                 return parsed;
             }
             OutputHandlerImpl screen = OutputHandlerImpl.getScreen();
+            String msg = validator.getErrorMessage(choice);
+            screen.generateText(msg);
             screen.generateText("Your choice is not valid. Please attempt your choice again.");
         }
     }
