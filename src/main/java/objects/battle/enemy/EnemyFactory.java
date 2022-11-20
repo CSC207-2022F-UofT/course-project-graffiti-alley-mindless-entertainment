@@ -52,8 +52,7 @@ public class EnemyFactory {
         } else{
             AItype = new DefaultAI(enemyInfo, aiData.chance);
         }
-        Enemy enemy = new Enemy(name, enemyInfo, AItype);
-        return enemy;
+        return new Enemy(name, enemyInfo, AItype);
     }
 
     /**
@@ -92,8 +91,7 @@ public class EnemyFactory {
         String gimmick_str = bossData.gimmick;
         Gimmick gimmick = translateGimmick(gimmick_str, enemyInfo);
 
-        Boss boss = new Boss(name, enemyInfo, AItype, gimmick);
-        return boss;
+        return new Boss(name, enemyInfo, AItype, gimmick);
     }
 
     public static SkillType translateSkill(String name){
