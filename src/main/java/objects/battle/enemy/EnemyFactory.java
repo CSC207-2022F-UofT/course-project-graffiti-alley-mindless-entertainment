@@ -100,22 +100,18 @@ public class EnemyFactory {
         switch (name){
             case "water":{
                 return SkillType.WATER;
-                break;
             }
             case "fire":{
                 return SkillType.FIRE;
 
-                break;
             }
             case "grass":{
                 return SkillType.EARTH;
 
-                break;
             }
             case "air":{
                 return SkillType.AIR;
 
-                break;
             }
         }
         return SkillType.WATER;
@@ -125,19 +121,15 @@ public class EnemyFactory {
         switch (name) {
             case "health":{
                 return new HealthGimmick(enemyInfo);
-                break;
             }
             case "attack":{
                 return new AttackGimmick(enemyInfo);
-                break;
             }
             case "speed":{
                 return new SpeedGimmick(enemyInfo);
-                break;
             }
             case "type":{
                 return new TypeGimmick(enemyInfo);
-                break;
             }
         }
         return new HealthGimmick(enemyInfo);
