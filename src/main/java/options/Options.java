@@ -7,7 +7,6 @@ The options of the game. A data storage class.
 */
 public class Options {
     private int textSpeed = 1;
-    private int textSize = 5;
     private boolean enableAutoSave = true;
 
     private static Options instance;
@@ -25,20 +24,12 @@ public class Options {
         return textSpeed;
     }
 
-    public int getTextSize() {
-        return textSize;
-    }
-
     public boolean isEnableAutoSave() {
         return enableAutoSave;
     }
 
     public void setTextSpeed(int textSpeed) {
         this.textSpeed = textSpeed;
-    }
-
-    public void setTextSize(int textSize) {
-        this.textSize = textSize;
     }
 
     public void setEnableAutoSave(boolean enableAutoSave) {
