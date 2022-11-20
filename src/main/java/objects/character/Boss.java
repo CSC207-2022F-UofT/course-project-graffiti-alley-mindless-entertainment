@@ -27,8 +27,8 @@ public class Boss extends Enemy {
         this.GimmickUsed = false;
     }
 
-    public boolean enemyGimmick(EnemyInfo enemyInfo){
-        if(!GimmickUsed && this.gimmick.checkGimmick()){
+    public boolean useGimmick(){
+        if(!this.GimmickUsed && this.gimmick.checkGimmick()){
             this.GimmickUsed = true;
             this.gimmick.useGimmick();
             return true;
