@@ -27,7 +27,7 @@ public class EnemyFactoryTest {
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 5, SkillType.FIRE);
         Enemy enemy = new Enemy("goblin", enemyInfo, new DefaultAI(enemyInfo, 50));
-        Assert.assertEquals(EnemyFactory.getEnemy("goblin").equals(enemy), true);
+        Assertions.assertEquals(EnemyFactory.getEnemy("goblin"), enemy);
     }
 
     @Test
@@ -43,4 +43,3 @@ public class EnemyFactoryTest {
         Assertions.assertEquals(EnemyFactory.getEnemy("goblin warrior"), boss);
     }
 }
-//
