@@ -16,17 +16,13 @@ public class PlayerCreatorManager extends StateManager {
      * currPlayerQuestion: The current question about the Player character being asked of the user. An enum of
      *                     type PlayerQuestion.
      * completedQuestions: A List of completed PlayerQuestions that have already been filled by the user. Does not
-     *                     include CONFIRM.
-     * confirmChoice: A string representing a user confirming the choice.
-     * returnChoice: A string representing a user wanting to return to the previous question.
+     *                     include CONFIRM or COMPLETE.
      * creatorInteractor: A PlayerCreatorInteractor that stores information about the Player until all questions have
      *                    been answered by the user.
      */
 
     private PlayerQuestion currPlayerQuestion;
     private final List<PlayerQuestion> completedQuestions;
-    private final String confirmChoice = "confirm";
-    private final String returnChoice = "return";
     private final PlayerCreatorInteractor creatorInteractor;
 
     public PlayerCreatorManager() {
@@ -40,13 +36,14 @@ public class PlayerCreatorManager extends StateManager {
     public void initialize() {
         // Initializes the PlayerCreatorManager.
         currPlayerQuestion = PlayerQuestion.NAME;
-        currState = new PlayerQuestionState(currPlayerQuestion);
+        currState = new PlayerQuestionState(currPlayerQuestion, this.creatorInteractor);
     }
 
     @Override
     public State nextState(String input) {
         // Switches the question state to the next state in order to ask for more input from the user.
-
+        String confirmChoice = "confirm";
+        String returnChoice = "return";
         if (currPlayerQuestion == PlayerQuestion.NAME ||
                 currPlayerQuestion == PlayerQuestion.DESCRIPTION ||
                 currPlayerQuestion == PlayerQuestion.SKILLTYPE) {
@@ -60,23 +57,26 @@ public class PlayerCreatorManager extends StateManager {
             // Switches states to the next question if the user confirms their choice, or to return to the previous
             // question if the user is not happy with their choice.
             if (Objects.equals(input, confirmChoice)) {
-                if (completedQuestions.size() == 2) {
-                    currPlayerQuestion = PlayerQuestion.SKILLTYPE;
-                    return new PlayerQuestionState(currPlayerQuestion);
-                }
-                else if (completedQuestions.size() == 1) {
+                if (completedQuestions.size() == 1) {
                     currPlayerQuestion = PlayerQuestion.DESCRIPTION;
-                    return new PlayerQuestionState(currPlayerQuestion);
+                    return new PlayerQuestionState(currPlayerQuestion, this.creatorInteractor);
+                }
+                else if (completedQuestions.size() == 2) {
+                    currPlayerQuestion = PlayerQuestion.SKILLTYPE;
+                    return new PlayerQuestionState(currPlayerQuestion, this.creatorInteractor);
                 }
                 else if (completedQuestions.size() == 3) {
-
+                    // PlayerCreatorManager has asked all questions, and Shell switches to a different Manager to start
+                    // the game.
+                    // Awaiting Shell implementation.
+                    return null;
                 }
             }
             else if (Objects.equals(input, returnChoice)) {
                 // Return to the previous state since the user did not confirm the previous decision.
                 int lastIndex = completedQuestions.size() - 1;
                 currPlayerQuestion = completedQuestions.remove(lastIndex);
-                return new PlayerQuestionState(currPlayerQuestion);
+                return new PlayerQuestionState(currPlayerQuestion, this.creatorInteractor);
             }
 
         }
