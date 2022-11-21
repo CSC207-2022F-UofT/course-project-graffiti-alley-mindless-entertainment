@@ -2,7 +2,6 @@ package menus;
 
 import interfaces.State;
 import core.StateManager;
-import menus.options.ChangeOptionsState;
 import menus.options.ChangeOptionsStateFactory;
 
 import java.util.Arrays;
@@ -52,7 +51,7 @@ public class PauseMenuManager extends StateManager {
      * @return the next state
      */
     @Override
-    public State nextState(String input) {
+    protected State nextState(String input) {
 
         if (currMenuType == MenuType.PAUSE) {
             if (Objects.equals(input, optionsCommand)) {
