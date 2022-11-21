@@ -19,6 +19,7 @@ public class BattleStateManager extends StateManager {
     public BattleStateManager(Player user, Area currArea) {
         this.user = user;
         this.currArea = currArea;
+        EnemyFactory enemyFactory = new EnemyFactory();
         this.foe = EnemyFactory.createEnemy("goblin"); // Temporary, use-case needed once decide which enemy
     }
 
@@ -29,7 +30,7 @@ public class BattleStateManager extends StateManager {
      * @return the state that comes next in the battle.
      */
     @Override
-    public State nextState(String input) {
+    protected State nextState(String input) {
         boolean userNext = user.getSpeed() >= foe.getSpeed();
         State chosenState;
 
