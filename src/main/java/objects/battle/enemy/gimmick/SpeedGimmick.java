@@ -4,24 +4,25 @@ import objects.battle.enemy.EnemyInfo;
 
 public class SpeedGimmick implements Gimmick {
     private EnemyInfo enemyInfo;
+    private int triggerHealth;
+    private int speedIncrease;
 
     /**
      * This is a constructor of speed gimmick
      * @param enemyInfo: enemyInfo which has all the information about the enemy
      *
      */
-    public SpeedGimmick(EnemyInfo enemyInfo){
+    public SpeedGimmick(EnemyInfo enemyInfo, int triggerHealth, int speedIncrease){
         this.enemyInfo = enemyInfo;
+        this.triggerHealth = triggerHealth;
+        this.speedIncrease = speedIncrease;
     }
 
     /**
      * This method uses speed gimmick which increases the enemy's speed
      */
-    public void useGimmick(){ // return true if the gimmick has been used by the boss. This method
-        // returns boolean because if the gimmick is used, maybe some dialouges will be called in battle state class.
-        //(whenever this method return true)
-        int newSpeed = (int) (Math.ceil(this.enemyInfo.getSpeed()*0.5));
-        this.enemyInfo.changeSpeed(newSpeed);
+    public void useGimmick(){
+        this.enemyInfo.changeSpeed(this.speedIncrease);
     }
 
     /**
@@ -29,7 +30,7 @@ public class SpeedGimmick implements Gimmick {
      * @return true if the gimmick is triggered
      */
     public boolean checkGimmick(){
-        if(this.enemyInfo.getHealth() < 30){
+        if(this.enemyInfo.getHealth() < this.triggerHealth){
             return true;
         } else{
             return false;

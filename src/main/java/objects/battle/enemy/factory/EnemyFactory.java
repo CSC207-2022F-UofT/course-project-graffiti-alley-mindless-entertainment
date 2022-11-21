@@ -24,7 +24,7 @@ public class EnemyFactory {
         EnemyDataManager data = new EnemyDataManager();
         EnemyData enemyData = data.fetchEnemyData(name);
         if(!(enemyData.gimmick ==null)){
-            Gimmick gimmick = translateGimmick(enemyData.gimmick, enemyInfo);
+            Gimmick gimmick = translateGimmick(enemyData.gimmick, data, enemyInfo);
             return new Boss(name, enemyInfo, enemyAI, gimmick);
         }
         return new Enemy(enemyData.name, enemyInfo, enemyAI);
@@ -36,22 +36,36 @@ public class EnemyFactory {
      * @param enemyInfo EnemeyInfo of the name given
      * @return gimmick that the enemy has (from the database)
      */
-    public static Gimmick translateGimmick(String name, EnemyInfo enemyInfo){
-        switch (name) {
+    public static Gimmick translateGimmick(String name, EnemyDataManager data, EnemyInfo enemyInfo) throws GimmickNotFoundException {
+        switch (data.fetchEnemyData(name).gimmick) {
             case "health":{
-                return new HealthGimmick(enemyInfo);
+                HealthGimmickDataManager healthGimmickDataManager = new HealthGimmickDataManager();
+                HealthGimmickData healthGimmickData = healthGimmickDataManager.fetchHealthGimmickData("health");
+                int triggerHealth = Integer.parseInt(healthGimmickData.trigger);
+                return new HealthGimmick(enemyInfo, triggerHealth);
             }
             case "attack":{
-                return new AttackGimmick(enemyInfo);
+                AttackGimmickDataManager attackGimmickDataManager = new AttackGimmickDataManager();
+                AttackGimmickData attackGimmickData = attackGimmickDataManager.fetchAttackGimmickData("attack");
+                int triggerHealth = Integer.parseInt(attackGimmickData.trigger);
+                double attackIncrease = Double.parseDouble(attackGimmickData.attack);
+                return new AttackGimmick(enemyInfo, triggerHealth, attackIncrease);
             }
             case "speed":{
-                return new SpeedGimmick(enemyInfo);
+                SpeedGimmickDataManager speedGimmickDataManager = new SpeedGimmickDataManager();
+                SpeedGimmickData speedGimmickData = speedGimmickDataManager.fetchSpeedGimmickData("speed");
+                int triggerHealth = Integer.parseInt(speedGimmickData.trigger);
+                int speedIncrease = Integer.parseInt(speedGimmickData.speed);
+                return new SpeedGimmick(enemyInfo, triggerHealth, speedIncrease);
             }
             case "type":{
-                return new TypeGimmick(enemyInfo);
+                TypeGimmickDataManager typeGimmickDataManager = new TypeGimmickDataManager();
+                TypeGimmickData typeGimmickData = typeGimmickDataManager.fetchTypeGimmickData("health");
+                int triggerHealth = Integer.parseInt(typeGimmickData.trigger);
+                return new TypeGimmick(enemyInfo, triggerHealth);
             }
         }
-        return new HealthGimmick(enemyInfo);
+        throw new GimmickNotFoundException("Gimmick is not found");
     }
 
 

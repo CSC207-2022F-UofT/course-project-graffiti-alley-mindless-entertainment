@@ -6,14 +6,18 @@ import objects.battle.enemy.EnemyInfo;
 
 public class AttackGimmick implements Gimmick {
     private EnemyInfo enemyInfo;
+    private int triggerHealth;
+    private double attackIncrease;
 
     /**
      * This is a constructor of attack gimmick
      * @param enemyInfo: enemyInfo which has all the information about the enemy
      *
      */
-    public AttackGimmick(EnemyInfo enemyInfo){
+    public AttackGimmick(EnemyInfo enemyInfo, int triggerHealth, double attackIncrease){
         this.enemyInfo = enemyInfo;
+        this.attackIncrease = attackIncrease;
+        this.triggerHealth = triggerHealth;
     }
 
     /**
@@ -21,7 +25,7 @@ public class AttackGimmick implements Gimmick {
      * @return true if the gimmick is triggered
      */
     public boolean checkGimmick() {
-        if(this.enemyInfo.getHealth() < 15){
+        if(this.enemyInfo.getHealth() < this.triggerHealth){
             return true;
         } else{
             return false;
@@ -34,7 +38,7 @@ public class AttackGimmick implements Gimmick {
     public void useGimmick() {
         for(Skill skill: this.enemyInfo.getSkills()){
             int i = skill.getDamage();
-            skill.setDamage((int)Math.ceil(i * 1.2));
+            skill.setDamage((int)Math.ceil(i * this.attackIncrease));
         }
     }
 }
