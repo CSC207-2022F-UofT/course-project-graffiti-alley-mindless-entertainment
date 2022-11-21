@@ -21,16 +21,16 @@ public class PlayerCreatorInputValidator implements InputValidator {
         // Validates and parses user input if valid, returns null if invalid.
         if (currQuestion == PlayerQuestion.SKILLTYPE) {
             // Ensures the input corresponds to one of the SkillType enums.
-            if (input.equalsIgnoreCase(SkillType.AIR.name())) {
+            if (input.equalsIgnoreCase(SkillType.AIR.toString())) {
                 return input.toLowerCase();
             }
-            else if (input.equalsIgnoreCase(SkillType.FIRE.name())) {
+            else if (input.equalsIgnoreCase(SkillType.FIRE.toString())) {
                 return input.toLowerCase();
             }
-            else if (input.equalsIgnoreCase(SkillType.EARTH.name())) {
+            else if (input.equalsIgnoreCase(SkillType.EARTH.toString())) {
                 return input.toLowerCase();
             }
-            else if (input.equalsIgnoreCase(SkillType.WATER.name())) {
+            else if (input.equalsIgnoreCase(SkillType.WATER.toString())) {
                 return input.toLowerCase();
             }
             else {

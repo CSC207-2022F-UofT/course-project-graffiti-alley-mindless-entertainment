@@ -1,8 +1,10 @@
-package playercreation;
+package playercreation.states;
 
 import io.InputValidator;
 import interfaces.State;
 import io.OutputHandlerImpl;
+import playercreation.PlayerCreatorInputValidator;
+import playercreation.PlayerQuestion;
 
 public class PlayerConfirmState implements State {
     /** A class for the user to either confirm or return to the previous question during Player creation at the
@@ -36,16 +38,9 @@ public class PlayerConfirmState implements State {
 
     @Override
     public void postInput(String input) {
-        // Takes user input, validates and parses it using inputValidator.
-        if (this.inputValidator.parseAndValidate(input) != null) {
+        // Assumes the input has been parsed and validated already.
             this.awaitInput = false;
             this.isDone = true;
-        }
-        else {
-            // Input is invalid, use OutputHandler to ask user to input valid statements.
-            OutputHandlerImpl output = OutputHandlerImpl.getScreen();
-            output.generateText("Please type a valid response.");
-        }
     }
 
     @Override

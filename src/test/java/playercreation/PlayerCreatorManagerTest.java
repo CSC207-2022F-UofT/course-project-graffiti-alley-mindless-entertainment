@@ -1,11 +1,9 @@
-package managers;
+package playercreation;
 
 import interfaces.State;
 import org.junit.jupiter.api.Test;
-import playercreation.PlayerConfirmState;
-import database.managers.PlayerCreatorManager;
-import playercreation.PlayerQuestion;
-import playercreation.PlayerQuestionState;
+import playercreation.states.PlayerConfirmState;
+import playercreation.states.PlayerQuestionState;
 
 class PlayerCreatorManagerTest {
 
@@ -23,7 +21,7 @@ class PlayerCreatorManagerTest {
         State returnedState = a.nextState("MyName");
         assert(a.getCurrPlayerQuestion() == PlayerQuestion.CONFIRM);
         assert(returnedState instanceof PlayerConfirmState);
-        assert(a.getCompletedQuestions().contains(PlayerQuestion.NAME));
+        assert(a.getCompletedQuestions() == 1);
     }
 
     @Test
@@ -33,9 +31,7 @@ class PlayerCreatorManagerTest {
         State returnedState = a.nextState("confirm");
         assert(a.getCurrPlayerQuestion() == PlayerQuestion.DESCRIPTION);
         assert(returnedState instanceof PlayerQuestionState);
-        assert(a.getCompletedQuestions().contains(PlayerQuestion.NAME));
-        assert(!a.getCompletedQuestions().contains(PlayerQuestion.DESCRIPTION));
-        assert(!a.getCompletedQuestions().contains(PlayerQuestion.CONFIRM));
+        assert(a.getCompletedQuestions() == 1);
     }
 
     @Test
@@ -45,7 +41,7 @@ class PlayerCreatorManagerTest {
         State returnedState = a.nextState("return");
         assert(a.getCurrPlayerQuestion() == PlayerQuestion.NAME);
         assert(returnedState instanceof PlayerQuestionState);
-        assert(a.getCompletedQuestions().isEmpty());
+        assert(a.getCompletedQuestions() == 0);
     }
 
     @Test
@@ -57,9 +53,7 @@ class PlayerCreatorManagerTest {
         State returnedState = a.nextState("confirm");
         assert(a.getCurrPlayerQuestion() == PlayerQuestion.SKILLTYPE);
         assert(returnedState instanceof PlayerQuestionState);
-        assert(a.getCompletedQuestions().contains(PlayerQuestion.NAME));
-        assert(a.getCompletedQuestions().contains(PlayerQuestion.DESCRIPTION));
-        assert(!a.getCompletedQuestions().contains(PlayerQuestion.CONFIRM));
+        assert(a.getCompletedQuestions() == 2);
     }
 
     @Test
@@ -73,9 +67,6 @@ class PlayerCreatorManagerTest {
         State returnedState = a.nextState("return");
         assert(a.getCurrPlayerQuestion() == PlayerQuestion.SKILLTYPE);
         assert(returnedState instanceof PlayerQuestionState);
-        assert(a.getCompletedQuestions().contains(PlayerQuestion.NAME));
-        assert(a.getCompletedQuestions().contains(PlayerQuestion.DESCRIPTION));
-        assert(!a.getCompletedQuestions().contains(PlayerQuestion.CONFIRM));
-        assert(!a.getCompletedQuestions().contains(PlayerQuestion.SKILLTYPE));
+        assert(a.getCompletedQuestions() == 2);
     }
 }

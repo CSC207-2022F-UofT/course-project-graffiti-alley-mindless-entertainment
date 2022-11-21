@@ -1,9 +1,12 @@
-package playercreation;
+package playercreation.states;
 
 import io.InputValidator;
 import interfaces.State;
 import io.OutputHandlerImpl;
 import objects.battle.SkillType;
+import playercreation.PlayerCreatorInputValidator;
+import playercreation.PlayerCreatorInteractor;
+import playercreation.PlayerQuestion;
 
 public class PlayerQuestionState implements State {
     /** A class for the current question being asked of the Player. Implements State in order to take user input.
@@ -55,29 +58,22 @@ public class PlayerQuestionState implements State {
 
     @Override
     public void postInput(String input) {
-        // Saves user-inputted Player attributes into the PlayerCreatorInteractor as long as the input is valid.
-        if (this.inputValidator.parseAndValidate(input) != null) {
-            String parsedInput = this.inputValidator.parseAndValidate(input);
-            if (this.currQuestion == PlayerQuestion.NAME) {
-                this.creatorInteractor.addName(parsedInput);
-                this.isDone = true;
-                this.awaitInput = false;
-            }
-            else if (this.currQuestion == PlayerQuestion.DESCRIPTION) {
-                this.creatorInteractor.addDescription(parsedInput);
-                this.isDone = true;
-                this.awaitInput = false;
-            }
-            else if (this.currQuestion == PlayerQuestion.SKILLTYPE) {
-                this.creatorInteractor.addSkillType(SkillType.valueOf(parsedInput));
-                this.isDone = true;
-                this.awaitInput = false;
-            }
+        // Saves user-inputted Player attributes into the PlayerCreatorInteractor. Assumes input has already been
+        // parsed and validated.
+        if (this.currQuestion == PlayerQuestion.NAME) {
+            this.creatorInteractor.addName(input);
+            this.isDone = true;
+            this.awaitInput = false;
         }
-        else {
-            // Input is invalid, use OutputHandler implementation to ask user for valid input.
-            OutputHandlerImpl output = OutputHandlerImpl.getScreen();
-            output.generateText("Please type a valid response.");
+        else if (this.currQuestion == PlayerQuestion.DESCRIPTION) {
+            this.creatorInteractor.addDescription(input);
+            this.isDone = true;
+            this.awaitInput = false;
+        }
+        else if (this.currQuestion == PlayerQuestion.SKILLTYPE) {
+            this.creatorInteractor.addSkillType(SkillType.valueOf(input));
+            this.isDone = true;
+            this.awaitInput = false;
         }
     }
 
