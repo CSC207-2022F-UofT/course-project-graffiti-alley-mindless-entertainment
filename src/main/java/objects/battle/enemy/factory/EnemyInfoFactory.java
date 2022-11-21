@@ -12,18 +12,23 @@ import java.util.ArrayList;
 
 public class EnemyInfoFactory {
 
+    private final EnemyDataManager enemyDataManager;
+    private final SkillDataManager skillDataManager;
+
+    public EnemyInfoFactory(EnemyDataManager enemyDataManager, SkillDataManager skillDataManager){
+        this.enemyDataManager = enemyDataManager;
+        this.skillDataManager = skillDataManager;
+    }
     /**
      * This method returns the EnemyInfo that the enemy with the name in the database has.
      * @param name of the enemy
      * @return EnemyInfo of the enemy with the name given
      */
-    public static EnemyInfo createEnemyInfo(String name) throws TypeNotFoundException {
-        EnemyDataManager data = new EnemyDataManager();
-        EnemyData enemyData = data.fetchEnemyData(name);
+    public EnemyInfo createEnemyInfo(String name) throws TypeNotFoundException {
+        EnemyData enemyData = this.enemyDataManager.fetchEnemyData(name);
         ArrayList<Skill> skills = new ArrayList<>();
-        SkillDataManager dataSkill = new SkillDataManager();
         for (String i:enemyData.skills) {
-            SkillData skillData = dataSkill.fetchSkillData(i);
+            SkillData skillData = this.skillDataManager.fetchSkillData(i);
             int damage = Integer.parseInt(skillData.damage);
             String skillType = skillData.type;
             SkillType type = translateSkill(skillType);
@@ -45,7 +50,7 @@ public class EnemyInfoFactory {
      * @param name of the skill
      * @return skill with the name and all the other attributes in the database
      */
-    public static SkillType translateSkill(String name) throws TypeNotFoundException {
+    public SkillType translateSkill(String name) throws TypeNotFoundException {
         switch (name){
             case "water":{
                 return SkillType.WATER;

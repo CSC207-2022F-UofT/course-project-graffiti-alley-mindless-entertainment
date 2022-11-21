@@ -13,19 +13,27 @@ import java.util.Objects;
 
 public class EnemyAIFactory{
 
+    private final AIDataManager aiDataManager;
+    private final EnemyDataManager enemyDataManager;
+    private final EnemyInfoFactory enemyInfoFactory;
+    public EnemyAIFactory(AIDataManager aiDataManager, EnemyDataManager enemyDataManager, EnemyInfoFactory
+                          enemyInfoFactory){
+        this.aiDataManager = aiDataManager;
+        this.enemyDataManager = enemyDataManager;
+        this.enemyInfoFactory = enemyInfoFactory;
+    }
+
     /**
      * This method returns the Enemy AI that the enemy with the name in the database has.
      * @param name of the enemy to create
      * @return instance enemy AI tha the enemy with the name has
      */
-    public static EnemyAI createEnemyAI(String name) throws TypeNotFoundException {
-        EnemyDataManager data = new EnemyDataManager();
-        EnemyData enemyData = data.fetchEnemyData(name);
-        EnemyInfo enemyInfo = EnemyInfoFactory.createEnemyInfo(name);
+    public EnemyAI createEnemyAI(String name) throws TypeNotFoundException {
+        EnemyData enemyData = this.enemyDataManager.fetchEnemyData(name);
+        EnemyInfo enemyInfo = this.enemyInfoFactory.createEnemyInfo(name);
         EnemyAI AItype;
         String ai = enemyData.ai;
-        AIDataManager dataAI = new AIDataManager();
-        AIData aiData = dataAI.fetchAIData(ai);
+        AIData aiData = this.aiDataManager.fetchAIData(ai);
         if (Objects.equals(ai, "smart")) {
             AItype = new SmartAI(enemyInfo, Integer.parseInt(aiData.chance));
         } else{

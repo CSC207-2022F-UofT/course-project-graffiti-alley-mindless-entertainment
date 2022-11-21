@@ -26,7 +26,8 @@ public class EnemyFactoryTest {
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 5, SkillType.FIRE);
         DefaultAI enemyAI = new DefaultAI(enemyInfo, 50);
-        Enemy enemy = EnemyFactory.createEnemy("goblin");
+        EnemyFactory enemyFactory = new EnemyFactory();
+        Enemy enemy = enemyFactory.createEnemy("goblin");
         Assertions.assertEquals(enemy.getSkill(0).getDamage(), 20);
         Assertions.assertEquals(enemy.getSkill(0).getType(), SkillType.FIRE);
         Assertions.assertEquals(enemy.getSkill(0).getLag(), 10);
@@ -49,7 +50,8 @@ public class EnemyFactoryTest {
         EnemyInfo enemyInfo = new EnemyInfo(skills, 110, 20, SkillType.EARTH);
         SmartAI enemyAI = new SmartAI(enemyInfo, 80);
         HealthGimmick gimmick = new HealthGimmick(enemyInfo, 30);
-        Boss boss = (Boss) EnemyFactory.createEnemy("goblin warrior");
+        EnemyFactory enemyFactory = new EnemyFactory();
+        Boss boss = (Boss) enemyFactory.createEnemy("goblin warrior");
         Assertions.assertEquals(boss.getSkill(0).getDamage(), 25);
         Assertions.assertEquals(boss.getSkill(0).getType(), SkillType.EARTH);
         Assertions.assertEquals(boss.getSkill(0).getLag(), 10);
