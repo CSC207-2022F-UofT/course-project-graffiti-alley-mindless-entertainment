@@ -1,51 +1,97 @@
+import core.StateManager;
+import io.InputHandler;
+import io.OutputHandler;
+
 /**
- * This class contains the Shell.
+ * This class contains the shell, which connects the different systems of the program together.
  */
 public class Shell {
     /**
      * Attributes.
      */
-    //!!! description
     private StateManager currentManager;
-    //!!! description – should it be private?
     private InputHandler inputHandler;
-    //!!! description – should it be private?
     private OutputHandler outputHandler;
 
-
     /**
-     * Main method containing the whole game.
-     * !!! Additional description will be needed
+     * Main method running the whole game.
      */
     public void main(String[] args) {
-        // The game runs until the User decides to exit the game.
-        // !!! shouldn't another condition be that the player looses? or there is no way he can lose?
-        // !!! and he gets to start over and over
-        while (! this.didUserExit()) {
-            //!!! everything below need to be worked on!
+        // !!! should there be another statement here that calls method to initialize the game?
+        this.currentManager = getStartingManager();
 
-            currentManager.preInput();
-            currentManager.postInput();
+        // !!! not calling the right input for condition
+        // !!! should it simply be already creating the string like below her
+        // and then update if in the first if statement of the loop.
+        while (this.doesUserStopGame("")) {
+            if (this.currentManager.awaitInput()) {
+                String input = this.inputHandler.getChoice(this.currentManager.getInputValidator());
 
-            this.switchingManager();
+                // !!! Not sure how to call the pause menu manager and how this works.
+
+                this.currentManager.postInput(input);
+            } else {
+                this.currentManager.preInput();
+            }
+            if (this.currentManager.isDone()) {
+                switchManager();
+            }
         }
+
+    }
+
+    //!!! Shouldn't there be the creation of game method?
+    // private void createStarterGame()
+
+    /**
+     * Returns the manager for the start of the game.
+     */
+    // !!! not sure that I got who the first manager is and how this part works.
+    public StateManager getStartingManager() {
+        return null;
     }
 
     /**
-     * Handles the system to switch between the different managers in the game & the different modules of the game
+     * Handles the system to switch between the different managers in the game.
      * (!!!)
      */
     //!! Need to create the system when more managers within the game are created.
-    public void switchingManager() {
+    private void switchManager() {
+        // !!! should assign the nextManager to this.currentManager.
 
     }
 
     /**
-     * Checks whether the user exited the game.
+     * Checks whether the user wants to exit the game.
+     * Returns true, if userInput is equal to "exit". Otherwise, returns false.
      */
-    //!!! Are parameters needed?
-    public boolean didUserExit() {
-        //!!! Add if statement and get the user's input here.
-        return false;
+    // !!! not exactly sure how to connect this to menus & MenuType.
+    private boolean doesUserExit(String userInput) {
+        return userInput.toLowerCase() == "exit";
+    }
+
+    /**
+     * Checks whether the user wants to pause the game.
+     * Returns true, if userInput equals "pause". Otherwise, returns false.
+     */
+    //!!! not exactly sure how to connect this to menus & MenuType.
+    private boolean doesUserPause(String userInput) {
+        return userInput.toLowerCase() == "pause";
+    }
+
+    /**
+     * Checks whether the user wants to save the game.
+     * Returns true, if userInput equals "save". Otherwise, returns false.
+     */
+    //!!! not exactly sure how to connect this to menus & MenuType.
+    private boolean doesUserSave(String userInput) {
+        return userInput.toLowerCase() == "save";
+    }
+
+    /**
+     * Returns true if player wants to pause, save or exit the game.
+     */
+    private boolean doesUserStopGame(String userInput) {
+        return doesUserExit(userInput) || doesUserPause(userInput) || doesUserSave(userInput);
     }
 }
