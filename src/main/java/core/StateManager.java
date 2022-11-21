@@ -1,6 +1,6 @@
-package managers;
+package core;
 
-import interfaces.InputValidator;
+import io.InputValidator;
 import interfaces.State;
 
 public abstract class StateManager{
