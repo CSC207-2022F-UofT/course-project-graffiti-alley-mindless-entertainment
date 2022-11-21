@@ -3,6 +3,9 @@ package objects.battle;
 import objects.character.Player;
 
 public class SkillHandler {
+    public SkillHandler() {
+
+    }
     /**
      * Returns whether a type advantage is present when base is being used on comparedTo.
      * Type advantages go as follows: AIR > WATER > FIRE > EARTH > AIR
@@ -11,7 +14,7 @@ public class SkillHandler {
      * @param comparedTo The type that base is being compared to
      * @return Whether base has a type advantage against type comparedTo
      */
-    public static boolean hasTypeAdv(SkillType base, SkillType comparedTo) {
+    public boolean hasTypeAdv(SkillType base, SkillType comparedTo) {
         switch (base) {
             case AIR:
                 return comparedTo == SkillType.WATER;
@@ -33,7 +36,7 @@ public class SkillHandler {
      * @param foe Enemy skill is being used on
      * @return Damage the skill does to the enemy
      */
-    public static int calculateDamage(Skill skill, Enemy foe) {
+    public int calculateDamage(Skill skill, Enemy foe) {
         int damage = skill.getDamage();
         SkillType subjectType = foe.getType();
 
@@ -54,7 +57,7 @@ public class SkillHandler {
      * @param user the user that the skill is being used on
      * @return damage done to the user by the skill
      */
-    public static int calculateDamage(Skill skill, Player user) {
+    public int calculateDamage(Skill skill, Player user) {
         double damage = skill.getDamage();
         SkillType subjectType = foe.getType();
 
@@ -75,7 +78,7 @@ public class SkillHandler {
      * @param foe The enemy being attacked by the user by skill
      * @param user The user attacking the enemy
      */
-    public static int useSkill(Skill skill, Enemy foe, Player user) {
+    public int useSkill(Skill skill, Enemy foe, Player user) {
         int totalDamage = calculateDamage(skill, foe);
 
         foe.changeHealth(-totalDamage);
@@ -91,7 +94,7 @@ public class SkillHandler {
      * @param user The user being attacked by the enemy by skill
      * @param foe The enemy attacking the user
      */
-    public static int useSkill(Skill skill, Player user, Enemy foe) {
+    public int useSkill(Skill skill, Player user, Enemy foe) {
         int damage = calculateDamage(skill, user);
         int totalDamage = Math.max(0, damage - user.getArmor());
 
