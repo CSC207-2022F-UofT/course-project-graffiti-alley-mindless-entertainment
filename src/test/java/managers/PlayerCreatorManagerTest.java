@@ -3,6 +3,7 @@ package managers;
 import database.interfaces.State;
 import org.junit.jupiter.api.Test;
 import playercreation.PlayerConfirmState;
+import database.managers.PlayerCreatorManager;
 import playercreation.PlayerQuestion;
 import playercreation.PlayerQuestionState;
 

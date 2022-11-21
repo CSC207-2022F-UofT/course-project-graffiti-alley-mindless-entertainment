@@ -1,4 +1,6 @@
-package database.interfaces;
+package interfaces;
+
+import io.InputValidator;
 
 public interface State {
     /**

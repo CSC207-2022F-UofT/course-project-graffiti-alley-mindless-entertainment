@@ -1,4 +1,4 @@
-package managers;
+package database.managers;
 
 import database.interfaces.State;
 import playercreation.PlayerCreatorInteractor;
