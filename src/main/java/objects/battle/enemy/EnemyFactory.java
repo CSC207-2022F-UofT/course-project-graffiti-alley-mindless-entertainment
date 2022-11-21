@@ -1,7 +1,6 @@
 package objects.battle.enemy;
 
 import database.managers.AIDataManager;
-import database.managers.DatabaseManager;
 import database.managers.EnemyDataManager;
 import database.managers.SkillDataManager;
 import database.objects.AIData;
@@ -14,9 +13,8 @@ import objects.battle.enemy.ai.EnemyAI;
 import objects.battle.enemy.ai.SmartAI;
 import objects.battle.enemy.gimmick.*;
 import objects.character.Boss;
-import objects.character.Character;
 import objects.character.Enemy;
-import objects.battle.enemy.EnemyInfo;
+
 
 import java.util.ArrayList;
 import java.util.Objects;
