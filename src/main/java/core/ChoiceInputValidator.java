@@ -28,7 +28,7 @@ public class ChoiceInputValidator implements InputValidator {
             return allowedInputs.get(opt.indexOf(input)).toLowerCase();
         }
         for (String option: allowedInputs) {
-            if (option.toLowerCase() == input) {
+            if (option.toLowerCase().equals(input)) {
                 return input;
             }
         }
