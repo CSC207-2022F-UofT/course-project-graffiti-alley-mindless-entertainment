@@ -27,7 +27,7 @@ public class EnemyFactory {
      * @param name of the enemy to create
      * @return instance of enemy
      */
-    public static Enemy getEnemy(String name){
+    public static Enemy createEnemy(String name) throws Exception {
         EnemyDataManager data = new EnemyDataManager();
         EnemyData enemyData = data.fetchEnemyData(name);
         ArrayList<Skill> skills = new ArrayList<>();
@@ -61,7 +61,7 @@ public class EnemyFactory {
         return new Enemy(name, enemyInfo, AItype);
     }
 
-    public static Boss getBoss(String name){
+    public static Enemy createBoss(String name) throws Exception {
         EnemyDataManager data = new EnemyDataManager();
         EnemyData enemyData = data.fetchEnemyData(name);
         ArrayList<Skill> skills = new ArrayList<>();
@@ -98,8 +98,7 @@ public class EnemyFactory {
 
     }
 
-
-    public static SkillType translateSkill(String name){
+    public static SkillType translateSkill(String name) throws Exception {
         switch (name){
             case "water":{
                 return SkillType.WATER;
@@ -117,8 +116,9 @@ public class EnemyFactory {
 
             }
         }
-        return SkillType.WATER;
+        throw new Exception("Type not found");
     }
+
 
     public static Gimmick translateGimmick(String name, EnemyInfo enemyInfo){
         switch (name) {

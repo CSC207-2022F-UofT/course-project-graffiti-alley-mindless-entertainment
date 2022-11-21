@@ -6,13 +6,13 @@ import objects.battle.SkillType;
 import java.util.ArrayList;
 
 public class EnemyInfo {
-    private int health = 100; //does not have to be static since there are multiple enemies and
+    private final int maxHealth = 100;
+    private int health = maxHealth; //does not have to be static since there are multiple enemies and
     // we create an enemy every time the user encounters an enemy.
     public ArrayList<Skill> skills;
     private int speed;
     private int reputation;
     private SkillType type;
-    private final int maxHealth = 100;
 
     public EnemyInfo(ArrayList<Skill> skills, int speed, int reputation, SkillType type){
         this.skills = skills;
@@ -146,5 +146,9 @@ public class EnemyInfo {
      */
     public void setType(SkillType type){
         this.type = type;
+    }
+
+    public int getMaxHealth(){
+        return this.maxHealth;
     }
 }

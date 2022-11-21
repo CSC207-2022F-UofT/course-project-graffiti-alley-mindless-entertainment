@@ -5,7 +5,7 @@ public interface Gimmick {
     /**
      * This method ues gimmick depending on the gimmick that an enemy has
      */
-    public void useGimmick(); //return true if the gimmick has used
+    public void useGimmick();
 
     /**
      * This method checks if the gimmick is triggered or not
