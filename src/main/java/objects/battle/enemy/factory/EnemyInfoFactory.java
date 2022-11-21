@@ -1,4 +1,4 @@
-package objects.battle.enemy;
+package objects.battle.enemy.factory;
 
 import database.managers.EnemyDataManager;
 import database.managers.SkillDataManager;
@@ -6,11 +6,18 @@ import database.objects.EnemyData;
 import database.objects.SkillData;
 import objects.battle.Skill;
 import objects.battle.SkillType;
+import objects.battle.enemy.EnemyInfo;
 
 import java.util.ArrayList;
 
 public class EnemyInfoFactory {
-    public static EnemyInfo createEnemyInfo(String name) throws Exception {
+
+    /**
+     * This method returns the EnemyInfo that the enemy with the name in the database has.
+     * @param name of the enemy
+     * @return EnemyInfo of the enemy with the name given
+     */
+    public static EnemyInfo createEnemyInfo(String name) throws TypeNotFoundException {
         EnemyDataManager data = new EnemyDataManager();
         EnemyData enemyData = data.fetchEnemyData(name);
         ArrayList<Skill> skills = new ArrayList<>();
@@ -33,7 +40,12 @@ public class EnemyInfoFactory {
         return new EnemyInfo(skills, speed, reputation, type);
     }
 
-    public static SkillType translateSkill(String name) throws Exception {
+    /**
+     * This method returns the type gimmick depending on the string in the database
+     * @param name of the skill
+     * @return skill with the name and all the other attributes in the database
+     */
+    public static SkillType translateSkill(String name) throws TypeNotFoundException {
         switch (name){
             case "water":{
                 return SkillType.WATER;
@@ -51,6 +63,6 @@ public class EnemyInfoFactory {
 
             }
         }
-        throw new Exception("Type not found");
+        throw new TypeNotFoundException("Type not found");
     }
 }

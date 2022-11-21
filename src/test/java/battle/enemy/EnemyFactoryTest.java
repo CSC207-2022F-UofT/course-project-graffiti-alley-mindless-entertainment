@@ -2,7 +2,7 @@ package battle.enemy;
 
 import objects.battle.Skill;
 import objects.battle.SkillType;
-import objects.battle.enemy.EnemyFactory;
+import objects.battle.enemy.factory.EnemyFactory;
 import objects.battle.enemy.EnemyInfo;
 import objects.battle.enemy.ai.DefaultAI;
 import objects.battle.enemy.ai.SmartAI;
@@ -26,18 +26,18 @@ public class EnemyFactoryTest {
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 5, SkillType.FIRE);
         DefaultAI enemyAI = new DefaultAI(enemyInfo, 50);
-        Enemy enemy = new Enemy("goblin", enemyInfo, enemyAI);
-        Assertions.assertEquals(EnemyFactory.createEnemy("goblin").getSkill(0).getDamage(), 20);
-        Assertions.assertEquals(EnemyFactory.createEnemy("goblin").getSkill(0).getType(), SkillType.FIRE);
-        Assertions.assertEquals(EnemyFactory.createEnemy("goblin").getSkill(0).getLag(), 10);
-        Assertions.assertEquals(EnemyFactory.createEnemy("goblin").getSkill(0).getName(),
+        Enemy enemy = EnemyFactory.createEnemy("goblin");
+        Assertions.assertEquals(enemy.getSkill(0).getDamage(), 20);
+        Assertions.assertEquals(enemy.getSkill(0).getType(), SkillType.FIRE);
+        Assertions.assertEquals(enemy.getSkill(0).getLag(), 10);
+        Assertions.assertEquals(enemy.getSkill(0).getName(),
                 "fireball");
-        Assertions.assertEquals(EnemyFactory.createEnemy("goblin").getReputation(), 5);
-        Assertions.assertEquals(EnemyFactory.createEnemy("goblin").getSpeed(), 90);
-        Assertions.assertEquals(EnemyFactory.createEnemy("goblin").getType(), SkillType.FIRE);
-        Assertions.assertEquals(EnemyFactory.createEnemy("goblin").getHealth(), 100);
-        Assertions.assertEquals(EnemyFactory.createEnemy("goblin").getName(), "goblin");
-        Assertions.assertEquals(EnemyFactory.createEnemy("goblin").getEnemyAI() instanceof DefaultAI, true);
+        Assertions.assertEquals(enemy.getReputation(), 5);
+        Assertions.assertEquals(enemy.getSpeed(), 90);
+        Assertions.assertEquals(enemy.getType(), SkillType.FIRE);
+        Assertions.assertEquals(enemy.getHealth(), 100);
+        Assertions.assertEquals(enemy.getName(), "goblin");
+        Assertions.assertTrue(enemy.getEnemyAI() instanceof DefaultAI);
     }
 
     @Test
@@ -49,20 +49,20 @@ public class EnemyFactoryTest {
         EnemyInfo enemyInfo = new EnemyInfo(skills, 110, 20, SkillType.EARTH);
         SmartAI enemyAI = new SmartAI(enemyInfo, 80);
         HealthGimmick gimmick = new HealthGimmick(enemyInfo);
-        Boss boss = new Boss("goblin warrior", enemyInfo, enemyAI, gimmick);
-        Assertions.assertEquals(EnemyFactory.createBoss("goblin warrior").getSkill(0).getDamage(), 25);
-        Assertions.assertEquals(EnemyFactory.createBoss("goblin warrior").getSkill(0).getType(), SkillType.EARTH);
-        Assertions.assertEquals(EnemyFactory.createBoss("goblin warrior").getSkill(0).getLag(), 10);
-        Assertions.assertEquals(EnemyFactory.createBoss("goblin warrior").getSkill(0).getName(),
+        Boss boss = (Boss) EnemyFactory.createEnemy("goblin warrior");
+        Assertions.assertEquals(boss.getSkill(0).getDamage(), 25);
+        Assertions.assertEquals(boss.getSkill(0).getType(), SkillType.EARTH);
+        Assertions.assertEquals(boss.getSkill(0).getLag(), 10);
+        Assertions.assertEquals(boss.getSkill(0).getName(),
                 "beam");
-        Assertions.assertEquals(EnemyFactory.createBoss("goblin warrior").getReputation(), 20);
-        Assertions.assertEquals(EnemyFactory.createBoss("goblin warrior").getSpeed(), 110);
-        Assertions.assertEquals(EnemyFactory.createBoss("goblin warrior").getType(), SkillType.EARTH);
-        Assertions.assertEquals(EnemyFactory.createBoss("goblin warrior").getHealth(), 100);
-        Assertions.assertEquals(EnemyFactory.createBoss("goblin warrior").getName(), "goblin warrior");
-        Assertions.assertEquals(boss.getGimmick() instanceof
-                HealthGimmick, true);
-        Assertions.assertEquals(EnemyFactory.createBoss("goblin warrior").getEnemyAI() instanceof
-                SmartAI, true);
+        Assertions.assertEquals(boss.getReputation(), 20);
+        Assertions.assertEquals(boss.getSpeed(), 110);
+        Assertions.assertEquals(boss.getType(), SkillType.EARTH);
+        Assertions.assertEquals(boss.getHealth(), 100);
+        Assertions.assertEquals(boss.getName(), "goblin warrior");
+        Assertions.assertTrue(boss.getGimmick() instanceof
+                HealthGimmick);
+        Assertions.assertTrue(boss.getEnemyAI() instanceof
+                SmartAI);
     }
 }
