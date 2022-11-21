@@ -2,6 +2,7 @@ package battlestates;
 
 import interfaces.State;
 import io.InputValidator;
+import io.OutputHandler;
 import io.OutputHandlerImpl;
 import objects.battle.Skill;
 import objects.battle.SkillHandler;
@@ -53,18 +54,23 @@ public class UserTurnState implements State {
     public void postInput(String input) {
         // VALIDATE THE INPUT FIRST
         Skill chosenSkill = Skill.findSkill(input, user.getSkillList());
-        SkillHandler skillHandler = new SkillHandler();
-        int damage = skillHandler.useSkill(chosenSkill, foe, user);
+        if (chosenSkill.equals("dummy")) {
+            OutputHandlerImpl.getScreen().generateText("That skill doesn't exist, please enter a valid skill.");
+        }
+        else {
+            SkillHandler skillHandler = new SkillHandler();
+            int damage = skillHandler.useSkill(chosenSkill, foe, user);
 
-        // Outputs and uses the chosen skill.
-        OutputHandlerImpl.getScreen().generateText("You used " + chosenSkill.getName() +
-                " to do " + damage + " damage!");
+            // Outputs and uses the chosen skill.
+            OutputHandlerImpl.getScreen().generateText("You used " + chosenSkill.getName() +
+                    " to do " + damage + " damage!");
 
-        // Each turn takes 20 speed, preventing too many turns.
-        user.changeSpeed(user.getSpeed()-20);
+            // Each turn takes 20 speed, preventing too many turns.
+            user.changeSpeed(user.getSpeed() - 20);
 
-        // Later change so that the state will stay to ask more questions like menu or inventory.
-        this.done = true;
+            // Later change so that the state will stay to ask more questions like menu or inventory.
+            this.done = true;
+        }
     }
 
     @Override

@@ -23,6 +23,7 @@ public class EnemyTurnState implements State {
     public void preInput() {
         String action = foe.enemyAction(this.userAction);
         SkillHandler skillHandler = new SkillHandler();
+
         // If the enemy uses a skill
         if (action.equals("use skill")) {
             int max = size(foe.getSkills()) - 1;
