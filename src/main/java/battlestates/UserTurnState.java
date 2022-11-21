@@ -53,7 +53,8 @@ public class UserTurnState implements State {
     public void postInput(String input) {
         // VALIDATE THE INPUT FIRST
         Skill chosenSkill = Skill.findSkill(input, user.getSkillList());
-        int damage = SkillHandler.useSkill(chosenSkill, foe, user);
+        SkillHandler skillHandler = new SkillHandler();
+        int damage = skillHandler.useSkill(chosenSkill, foe, user);
 
         // Outputs and uses the chosen skill.
         OutputHandlerImpl.getScreen().generateText("You used " + chosenSkill.getName() +

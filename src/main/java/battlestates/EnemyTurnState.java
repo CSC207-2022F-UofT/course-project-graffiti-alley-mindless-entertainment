@@ -22,6 +22,7 @@ public class EnemyTurnState implements State {
     @Override
     public void preInput() {
         String action = foe.enemyAction(this.userAction);
+        SkillHandler skillHandler = new SkillHandler();
         // If the enemy uses a skill
         if (action.equals("use skill")) {
             int max = size(foe.getSkills()) - 1;
@@ -31,7 +32,7 @@ public class EnemyTurnState implements State {
             // Outputs and uses the chosen skill
             Skill chosenSkill = foe.getSkill(skillIndex);
             OutputHandlerImpl.getScreen().generateText(foe.getName() + " used " + chosenSkill.getName() +
-                    " to do " + SkillHandler.useSkill(chosenSkill, user, foe) + " damage!");
+                    " to do " + skillHandler.useSkill(chosenSkill, user, foe) + " damage!");
         }
         // TEMPORARY SOLUTION: Just heal flat amount of 20
         if (action.equals("use potion")) {
