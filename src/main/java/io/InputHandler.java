@@ -1,4 +1,4 @@
-package interfaces;
+package io;
 
 public interface InputHandler {
 

@@ -1,7 +1,6 @@
-package managers;
+package io;
 
-import interfaces.InputHandler;
-import interfaces.InputValidator;
+import io.InputValidator;
 
 import java.util.Scanner;
 

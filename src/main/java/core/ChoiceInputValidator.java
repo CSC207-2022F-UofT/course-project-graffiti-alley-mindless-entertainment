@@ -1,7 +1,8 @@
 package core;
 
-import database.interfaces.InputValidator;
+import io.InputValidator;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ChoiceInputValidator implements InputValidator {

@@ -1,6 +1,6 @@
 package core;
 
-import database.interfaces.InputValidator;
+import io.InputValidator;
 import database.interfaces.State;
 
 import java.util.List;

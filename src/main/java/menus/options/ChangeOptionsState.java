@@ -1,6 +1,6 @@
 package menus.options;
 
-import database.interfaces.InputValidator;
+import io.InputValidator;
 import database.interfaces.State;
 
 public class ChangeOptionsState implements State {
