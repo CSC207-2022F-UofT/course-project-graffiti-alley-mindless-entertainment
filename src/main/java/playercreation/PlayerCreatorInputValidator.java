@@ -1,6 +1,6 @@
 package playercreation;
 
-import interfaces.InputValidator;
+import database.interfaces.InputValidator;
 import objects.battle.SkillType;
 
 import java.util.Objects;
@@ -29,13 +29,13 @@ public class PlayerCreatorInputValidator implements InputValidator {
                     Objects.equals(input, SkillType.WATER.name().toLowerCase());
         }
         else if (currQuestion == PlayerQuestion.NAME) {
-            // Ensures Player names are 20 characters or fewer.
-            return (input.length() <= 20);
+            // Ensures Player names are 20 characters or fewer, and not empty or blank.
+            return (input.length() <= 20) && (!input.isEmpty()) && (!input.isBlank());
         }
 
         else if (currQuestion == PlayerQuestion.DESCRIPTION) {
-            // Ensures Player descriptions are 200 characters or fewer.
-            return (input.length() <= 200);
+            // Ensures Player descriptions are 200 characters or fewer, and not empty or blank.
+            return (input.length() <= 200) && (!input.isEmpty()) && (!input.isBlank());
         }
 
         else if (currQuestion == PlayerQuestion.CONFIRM) {

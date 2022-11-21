@@ -1,7 +1,7 @@
 package playercreation;
 
-import interfaces.InputValidator;
-import interfaces.State;
+import database.interfaces.InputValidator;
+import database.interfaces.State;
 
 public class PlayerConfirmState implements State {
     /** A class for the user to either confirm or return to the previous question during Player creation at the

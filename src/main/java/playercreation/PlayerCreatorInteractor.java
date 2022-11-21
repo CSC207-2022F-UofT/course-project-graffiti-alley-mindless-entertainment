@@ -18,6 +18,11 @@ public class PlayerCreatorInteractor {
         this.newPlayer = new Player("", null);
     }
 
+    public Player getNewPlayer() {
+        // Return the new Player being created.
+        return this.newPlayer;
+    }
+
     public void addName(String name) {
         // Change the Player's name to name.
         this.newPlayer.changeName(name);

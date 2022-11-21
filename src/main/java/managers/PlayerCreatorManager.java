@@ -1,6 +1,6 @@
 package managers;
 
-import interfaces.State;
+import database.interfaces.State;
 import playercreation.PlayerCreatorInteractor;
 import playercreation.PlayerQuestion;
 import playercreation.PlayerQuestionState;
