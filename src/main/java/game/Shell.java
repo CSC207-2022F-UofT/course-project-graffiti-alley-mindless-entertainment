@@ -53,7 +53,6 @@ public class Shell {
             }
         }
     }
-
     /**
      * @param input from the user
      * @return whether the user entered a menu command like exit/pause
