@@ -1,7 +1,9 @@
 package objects.battle.enemy.factory;
 
 import database.managers.EnemyDataManager;
+import database.managers.GimmickDataManager;
 import database.objects.EnemyData;
+import database.objects.GimmickData;
 import objects.battle.enemy.EnemyInfo;
 import objects.battle.enemy.ai.EnemyAI;
 import objects.battle.enemy.gimmick.*;
@@ -24,7 +26,7 @@ public class EnemyFactory {
         EnemyDataManager data = new EnemyDataManager();
         EnemyData enemyData = data.fetchEnemyData(name);
         if(!(enemyData.gimmick ==null)){
-            Gimmick gimmick = translateGimmick(enemyData.gimmick, data, enemyInfo);
+            Gimmick gimmick = translateGimmick(enemyData.gimmick, enemyInfo);
             return new Boss(name, enemyInfo, enemyAI, gimmick);
         }
         return new Enemy(enemyData.name, enemyInfo, enemyAI);
@@ -36,11 +38,10 @@ public class EnemyFactory {
      * @param enemyInfo EnemeyInfo of the name given
      * @return gimmick that the enemy has (from the database)
      */
-    public static Gimmick translateGimmick(String name, EnemyDataManager data, EnemyInfo enemyInfo)
+    public static Gimmick translateGimmick(String name, EnemyInfo enemyInfo)
             throws GimmickNotFoundException {
-        String gimmick = data.fetchEnemyData(name).gimmick;
-        GimmickDataManager gimmickDataManager = new GimickDataManager();
-        switch (gimmick) {
+        GimmickDataManager gimmickDataManager = new GimmickDataManager();
+        switch (name) {
             case "health":{
                 GimmickData healthGimmickData = gimmickDataManager.fetchGimmickData(name);
                 int triggerHealth = Integer.parseInt(healthGimmickData.trigger);

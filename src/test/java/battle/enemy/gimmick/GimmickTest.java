@@ -20,7 +20,7 @@ public class GimmickTest {
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
-        Gimmick gimmick = new HealthGimmick(enemyInfo);
+        Gimmick gimmick = new HealthGimmick(enemyInfo, 30);
         gimmick.useGimmick();
         Assert.assertEquals(enemyInfo.getHealth(), 100);
     }
@@ -32,7 +32,7 @@ public class GimmickTest {
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
-        Gimmick gimmick = new AttackGimmick(enemyInfo);
+        Gimmick gimmick = new AttackGimmick(enemyInfo, 20, 1.2);
         gimmick.useGimmick();
         Assert.assertEquals(enemyInfo.getSkill(0).getDamage(), 24);
     }
@@ -44,7 +44,7 @@ public class GimmickTest {
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
-        Gimmick gimmick = new TypeGimmick(enemyInfo);
+        Gimmick gimmick = new TypeGimmick(enemyInfo, 20);
         gimmick.useGimmick();
         Assert.assertEquals(enemyInfo.getType(), SkillType.FIRE);
     }
@@ -56,8 +56,8 @@ public class GimmickTest {
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 100, 10, SkillType.WATER);
-        Gimmick gimmick = new SpeedGimmick(enemyInfo);
+        Gimmick gimmick = new SpeedGimmick(enemyInfo, 25, 20);
         gimmick.useGimmick();
-        Assert.assertEquals(enemyInfo.getSpeed(), 150);
+        Assert.assertEquals(enemyInfo.getSpeed(), 120);
     }
 }

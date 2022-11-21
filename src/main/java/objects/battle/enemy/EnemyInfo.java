@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class EnemyInfo {
     private final int maxHealth = 100;
+    private int baseSpeed;
     private int health = maxHealth; //does not have to be static since there are multiple enemies and
     // we create an enemy every time the user encounters an enemy.
     public ArrayList<Skill> skills;
@@ -19,6 +20,7 @@ public class EnemyInfo {
         this.reputation = reputation;
         this.speed = speed;
         this.type = type;
+        this.baseSpeed = speed;
     }
 
     /**
@@ -148,7 +150,29 @@ public class EnemyInfo {
         this.type = type;
     }
 
+    /**
+     * This method returns the maximum health that an enemy can have
+     *
+     * @return max health that the enemy can have
+     */
     public int getMaxHealth(){
         return this.maxHealth;
+    }
+
+    /**
+     * This method resets the enemy's speed to base speed
+     *
+     */
+    public void resetSpeed(){
+        this.speed = baseSpeed;
+    }
+
+    /**
+     * This method returns the base speed that the enemy has
+     *
+     * @return the base speed of the enemy.
+     */
+    public int getBaseSpeed() {
+        return this.baseSpeed;
     }
 }

@@ -142,6 +142,26 @@
       "chance": "80"
     }
   ],
+  "gimmicks": [
+    {
+      "name": "health",
+      "trigger": "30"
+    },
+    {
+      "name": "attack",
+      "trigger": "20",
+      "attack": "1.2"
+    },
+    {
+      "name": "speed",
+      "trigger": "25",
+      "speed": "20"
+    },
+    {
+      "name": "type",
+      "trigger": "20"
+    }
+  ],
   "events": [
     {
       "name": "test",
