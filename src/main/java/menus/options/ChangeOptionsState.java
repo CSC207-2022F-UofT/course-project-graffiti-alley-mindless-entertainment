@@ -1,6 +1,6 @@
 package menus.options;
 
-import interfaces.InputValidator;
+import io.InputValidator;
 import interfaces.State;
 import options.Options;
 
