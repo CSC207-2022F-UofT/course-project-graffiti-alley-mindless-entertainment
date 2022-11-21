@@ -23,10 +23,10 @@ public class PlayerCreatorInputValidator implements InputValidator {
         // false otherwise.
         if (currQuestion == PlayerQuestion.SKILLTYPE) {
             // Ensures the input corresponds to one of the SkillType enums.
-            return Objects.equals(input, SkillType.AIR.name()) ||
-                    Objects.equals(input, SkillType.FIRE.name()) ||
-                    Objects.equals(input, SkillType.EARTH.name()) ||
-                    Objects.equals(input, SkillType.WATER.name());
+            return Objects.equals(input, SkillType.AIR.name().toLowerCase()) ||
+                    Objects.equals(input, SkillType.FIRE.name().toLowerCase()) ||
+                    Objects.equals(input, SkillType.EARTH.name().toLowerCase()) ||
+                    Objects.equals(input, SkillType.WATER.name().toLowerCase());
         }
         else if (currQuestion == PlayerQuestion.NAME) {
             // Ensures Player names are 20 characters or fewer.

@@ -30,6 +30,11 @@ public class PlayerQuestionState implements State {
         this.inputValidator = new PlayerCreatorInputValidator(this.currQuestion);
     }
 
+    public PlayerQuestion getCurrQuestion() {
+        // Return the current PlayerQuestion.
+        return this.currQuestion;
+    }
+
     @Override
     public void preInput() {
         // Utilizes OutputHandler to ask the user a question based on the currQuestion.

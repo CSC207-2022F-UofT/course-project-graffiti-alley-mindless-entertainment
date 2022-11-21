@@ -7,7 +7,6 @@ import playercreation.PlayerQuestionState;
 import playercreation.PlayerConfirmState;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class PlayerCreatorManager extends StateManager {
@@ -22,7 +21,7 @@ public class PlayerCreatorManager extends StateManager {
      */
 
     private PlayerQuestion currPlayerQuestion;
-    private final List<PlayerQuestion> completedQuestions;
+    private final ArrayList<PlayerQuestion> completedQuestions;
     private final PlayerCreatorInteractor creatorInteractor;
 
     public PlayerCreatorManager() {
@@ -37,6 +36,21 @@ public class PlayerCreatorManager extends StateManager {
         // Initializes the PlayerCreatorManager.
         currPlayerQuestion = PlayerQuestion.NAME;
         currState = new PlayerQuestionState(currPlayerQuestion, this.creatorInteractor);
+    }
+
+    public PlayerQuestion getCurrPlayerQuestion() {
+        // Return the current PlayerQuestion.
+        return this.currPlayerQuestion;
+    }
+
+    public State getCurrState() {
+        // Return the current State.
+        return this.currState;
+    }
+
+    public ArrayList<PlayerQuestion> getCompletedQuestions() {
+        // Return the completedQuestions.
+        return this.completedQuestions;
     }
 
     @Override

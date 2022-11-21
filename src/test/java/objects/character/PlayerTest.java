@@ -70,7 +70,7 @@ class PlayerTest {
     @Test
     void changeCurrHealthBelowZero() {
         Player player = new Player("a", null);
-        player.changeCurrHealth(200);
+        player.changeCurrHealth(-200);
         assert(player.getCurrHealth() == 0);
     }
 
@@ -97,7 +97,7 @@ class PlayerTest {
     @Test
     void changeMaxHealthDecrease() {
         Player player = new Player("a", null);
-        player.changeMaxHealth(200);
+        player.changeMaxHealth(-200);
         assert(player.getMaxHealth() == 1);
     }
 
