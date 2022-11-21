@@ -53,7 +53,7 @@ public class PlayerCreatorManager extends StateManager {
     }
 
     @Override
-    public State nextState(String input) {
+    protected State nextState(String input) {
         // Switches the question state to the next state in order to ask for more input from the user. Assumes input
         // has already been parsed and validated by InputHandler.
         if (this.currPlayerQuestion == PlayerQuestion.NAME ||
