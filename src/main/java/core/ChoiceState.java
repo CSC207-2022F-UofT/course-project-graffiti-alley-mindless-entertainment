@@ -1,9 +1,8 @@
 package core;
 
-import interfaces.InputValidator;
-import interfaces.State;
+import database.interfaces.InputValidator;
+import database.interfaces.State;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class ChoiceState implements State {
