@@ -1,0 +1,64 @@
+package battlestates;
+
+import interfaces.State;
+import io.InputValidator;
+import io.OutputHandler;
+import io.OutputHandlerImpl;
+import objects.character.Player;
+
+public class WinBattleState implements State {
+    /** State which handles the result of a battle from BattleStateManager, thus ending the battle.
+     *  Handles the case in where the user wins the battle, giving the user relevant stat changes and/or items
+     *  Attributes:
+     *  user: The Player that is participating in the battle
+     *  foe: The Enemy that the user is fighting
+     *  done: represents whether the state is done
+     */
+    private Player user;
+    private Enemy foe;
+    private boolean done = false;
+
+    public WinBattleState(Player user, Enemy foe) {
+        this.user = user;
+        this.foe = foe;
+    }
+
+    /**
+     * Gives exp, loot, and reputation changes to the player.
+     */
+    @Override
+    public void preInput() {
+        int expGain = 100; // Will be changed later depending on final exp mechanic
+        // int repChange = foe.getReputation();
+
+        // expGain = foe.getExp() * expModifier // Something along the lines of this in the future
+        user.addExperience(expGain);
+        // Something that adds loot into the user's inventory, so far no loot table.
+        // user.changeReputation(repChange); // Currently no implementation
+
+        // Displaying victory text!
+        String winText = "You defeated the " + foe.getName() + "! You earned " + expGain
+                + " experience points, unless you cheated ;)";
+        OutputHandlerImpl.getScreen().generateText(winText);
+        this.done = true;
+    }
+
+    @Override
+    public void postInput(String input) {
+
+    }
+    @Override
+    public boolean awaitInput() {
+        return false;
+    }
+
+    @Override
+    public boolean isDone() {
+        return this.done;
+    }
+
+    @Override
+    public InputValidator getInputValidator() {
+        return null;
+    }
+}
