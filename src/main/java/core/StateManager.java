@@ -8,14 +8,20 @@ public abstract class StateManager{
     protected State currState;
     protected boolean isDone=false;
 
-    abstract public State nextState(String input);
+    abstract protected State nextState(String input);
 
     abstract public void initialize();
 
+    /**
+     * @return whether the state is done or not
+     */
     public boolean isDone() {
         return this.isDone;
     }
 
+    /**
+     * @return whether the state is done and ready to move to the next state
+     */
     public void preInput() {
         currState.preInput();
         boolean currPreInput = currState.isDone();
@@ -28,6 +34,10 @@ public abstract class StateManager{
         }
     }
 
+    /**
+     * @param input from the user
+     * @return whether the state is done and ready to move to the next state
+     */
     public void postInput(String input) {
         currState.postInput(input);
         boolean currPostInput = currState.isDone();
@@ -40,10 +50,16 @@ public abstract class StateManager{
         }
     }
 
+    /**
+     * @return whether the state is awaiting input
+     */
     public boolean awaitInput() {
         return currState.awaitInput();
     }
 
+    /**
+     * @return the input validator for accepted inputs
+     */
     public InputValidator getInputValidator() {
         return currState.getInputValidator();
     }
