@@ -8,7 +8,7 @@ public abstract class StateManager{
     protected State currState;
     protected boolean isDone=false;
 
-    abstract public State nextState(String input);
+    abstract protected State nextState(String input);
 
     abstract public void initialize();
 
