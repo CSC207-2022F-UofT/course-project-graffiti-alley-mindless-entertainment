@@ -3,6 +3,7 @@ package io;
 import io.InputValidator;
 
 import java.util.Scanner;
+import java.util.List;
 
 public class InputHandlerImpl implements InputHandler {
 
@@ -28,7 +29,15 @@ public class InputHandlerImpl implements InputHandler {
             OutputHandlerImpl screen = OutputHandlerImpl.getScreen();
             String msg = validator.getErrorMessage(choice);
             screen.generateText(msg);
-            screen.generateText("Your choice is not valid. Please attempt your choice again.");
+            screen.generateText("Your choice is not valid. Please attempt again.");
+            String text = screen.getText();
+            List<String> options = screen.getOptions();
+            if (options == null) {
+                screen.generateText(text);
+            } else {
+                screen.generateTextWithOptions(text, options);
+            }
+
         }
     }
 
