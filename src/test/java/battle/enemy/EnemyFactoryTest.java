@@ -26,8 +26,15 @@ public class EnemyFactoryTest {
         ArrayList<Skill> skills = new ArrayList<>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 5, SkillType.FIRE);
-        Enemy enemy = new Enemy("goblin", enemyInfo, new DefaultAI(enemyInfo, 50));
-        Assertions.assertEquals(EnemyFactory.getEnemy("goblin"), enemy);
+        DefaultAI enemyAI = new DefaultAI(enemyInfo, 50);
+        Enemy enemy = new Enemy("goblin", enemyInfo, enemyAI);
+        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getSkills(), skills);
+        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getReputation(), 20);
+        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getSpeed(), 110);
+        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getType(), SkillType.EARTH);
+        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getHealth(), 100);
+        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getName(), "goblin warrior");
+        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getEnemyAI(), enemyAI);
     }
 
     @Test
@@ -40,6 +47,13 @@ public class EnemyFactoryTest {
         SmartAI enemyAI = new SmartAI(enemyInfo, 80);
         HealthGimmick gimmick = new HealthGimmick(enemyInfo);
         Boss boss = new Boss("goblin warrior", enemyInfo, enemyAI, gimmick);
-        Assertions.assertEquals(EnemyFactory.getEnemy("goblin warrior"), boss);
+        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getSkills(), skills);
+        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getReputation(), 20);
+        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getSpeed(), 110);
+        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getType(), SkillType.EARTH);
+        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getHealth(), 100);
+        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getName(), "goblin warrior");
+        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getGimmick(), gimmick);
+        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getEnemyAI(), enemyAI);
     }
 }

@@ -80,7 +80,7 @@ public class Boss extends Enemy {
      * This method returns the enemy's gimmick
      *
      */
-    public Gimmick getGimmickSet() {
+    public Gimmick getGimmick() {
         return gimmick;
     }
 

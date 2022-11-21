@@ -161,5 +161,8 @@ public class Enemy extends Character {
         return this.enemyAI.respond(input);
     }
 
+    public EnemyAI getEnemyAI() {
+        return this.enemyAI;
+    }
 }
 

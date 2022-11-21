@@ -29,7 +29,41 @@ public class EnemyFactory {
      * @param name of the enemy to create
      * @return instance of enemy
      */
-    public static Character getEnemy(String name){
+    public static Enemy getEnemy(String name){
+        EnemyDataManager data = new EnemyDataManager();
+        EnemyData enemyData = data.fetchEnemyData(name);
+        ArrayList<Skill> skills = new ArrayList<>();
+        SkillDataManager dataSkill = new SkillDataManager();
+        for (String i:enemyData.skills) {
+            SkillData skillData = dataSkill.fetchSkillData(i);
+            int damage = Integer.parseInt(skillData.damage);
+            String skillType = skillData.type;
+            SkillType type = translateSkill(skillType);
+            int lag = Integer.parseInt(skillData.lag);
+            Skill skill = new Skill(i, damage, lag, type);
+            skills.add(skill);
+        }
+        int reputation = Integer.parseInt(enemyData.reputation);
+        int speed = Integer.parseInt(enemyData.speed);
+
+        String typeStr = enemyData.type;
+        SkillType type = translateSkill(typeStr);
+
+        EnemyInfo enemyInfo = new EnemyInfo(skills, speed, reputation, type);
+
+        EnemyAI AItype;
+        String ai = enemyData.ai;
+        AIDataManager dataAI = new AIDataManager();
+        AIData aiData = dataAI.fetchAIData(ai);
+        if (Objects.equals(ai, "smart")) {
+            AItype = new SmartAI(enemyInfo, Integer.parseInt(aiData.chance));
+        } else{
+            AItype = new DefaultAI(enemyInfo, Integer.parseInt(aiData.chance));
+        }
+        return new Enemy(name, enemyInfo, AItype);
+    }
+
+    public static Boss getBoss(String name){
         EnemyDataManager data = new EnemyDataManager();
         EnemyData enemyData = data.fetchEnemyData(name);
         ArrayList<Skill> skills = new ArrayList<>();
@@ -61,11 +95,9 @@ public class EnemyFactory {
             AItype = new DefaultAI(enemyInfo, Integer.parseInt(aiData.chance));
         }
 
-        if(enemyData.gimmick != null) {
-            Gimmick gimmick = translateGimmick(enemyData.gimmick, enemyInfo);
-            return new Boss(name, enemyInfo, AItype, gimmick);
-        }
-        return new Enemy(name, enemyInfo, AItype);
+        Gimmick gimmick = translateGimmick(enemyData.gimmick, enemyInfo);
+        return new Boss(name, enemyInfo, AItype, gimmick);
+
     }
 
 
