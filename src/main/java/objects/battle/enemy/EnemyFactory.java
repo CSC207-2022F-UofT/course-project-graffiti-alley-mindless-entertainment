@@ -110,7 +110,7 @@ public class EnemyFactory {
                 return SkillType.FIRE;
 
             }
-            case "grass":{
+            case "earth":{
                 return SkillType.EARTH;
 
             }

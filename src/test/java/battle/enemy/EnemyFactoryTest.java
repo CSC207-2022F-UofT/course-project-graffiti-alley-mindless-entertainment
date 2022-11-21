@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
+import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 
 public class EnemyFactoryTest {
@@ -28,13 +29,17 @@ public class EnemyFactoryTest {
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 5, SkillType.FIRE);
         DefaultAI enemyAI = new DefaultAI(enemyInfo, 50);
         Enemy enemy = new Enemy("goblin", enemyInfo, enemyAI);
-        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getSkills(), skills);
-        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getReputation(), 20);
-        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getSpeed(), 110);
-        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getType(), SkillType.EARTH);
-        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getHealth(), 100);
-        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getName(), "goblin warrior");
-        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getEnemyAI(), enemyAI);
+        Assertions.assertEquals(EnemyFactory.getEnemy("goblin").getSkill(0).getDamage(), 20);
+        Assertions.assertEquals(EnemyFactory.getEnemy("goblin").getSkill(0).getType(), SkillType.FIRE);
+        Assertions.assertEquals(EnemyFactory.getEnemy("goblin").getSkill(0).getLag(), 10);
+        Assertions.assertEquals(EnemyFactory.getEnemy("goblin").getSkill(0).getName(),
+                "fireball");
+        Assertions.assertEquals(EnemyFactory.getEnemy("goblin").getReputation(), 5);
+        Assertions.assertEquals(EnemyFactory.getEnemy("goblin").getSpeed(), 90);
+        Assertions.assertEquals(EnemyFactory.getEnemy("goblin").getType(), SkillType.FIRE);
+        Assertions.assertEquals(EnemyFactory.getEnemy("goblin").getHealth(), 100);
+        Assertions.assertEquals(EnemyFactory.getEnemy("goblin").getName(), "goblin");
+        Assertions.assertEquals(EnemyFactory.getEnemy("goblin").getEnemyAI() instanceof DefaultAI, true);
     }
 
     @Test
@@ -47,13 +52,19 @@ public class EnemyFactoryTest {
         SmartAI enemyAI = new SmartAI(enemyInfo, 80);
         HealthGimmick gimmick = new HealthGimmick(enemyInfo);
         Boss boss = new Boss("goblin warrior", enemyInfo, enemyAI, gimmick);
-        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getSkills(), skills);
+        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getSkill(0).getDamage(), 25);
+        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getSkill(0).getType(), SkillType.EARTH);
+        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getSkill(0).getLag(), 10);
+        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getSkill(0).getName(),
+                "beam");
         Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getReputation(), 20);
         Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getSpeed(), 110);
         Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getType(), SkillType.EARTH);
         Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getHealth(), 100);
         Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getName(), "goblin warrior");
-        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getGimmick(), gimmick);
-        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getEnemyAI(), enemyAI);
+        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getGimmick() instanceof
+                HealthGimmick, true);
+        Assertions.assertEquals(EnemyFactory.getBoss("goblin warrior").getEnemyAI() instanceof
+                SmartAI, true);
     }
 }
