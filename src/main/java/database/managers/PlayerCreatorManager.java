@@ -1,10 +1,11 @@
 package database.managers;
 
-import database.interfaces.State;
+import interfaces.State;
 import playercreation.PlayerCreatorInteractor;
 import playercreation.PlayerQuestion;
 import playercreation.PlayerQuestionState;
 import playercreation.PlayerConfirmState;
+import core.StateManager;
 
 import java.util.ArrayList;
 import java.util.Objects;

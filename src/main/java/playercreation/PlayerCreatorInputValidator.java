@@ -1,6 +1,6 @@
 package playercreation;
 
-import database.interfaces.InputValidator;
+import io.InputValidator;
 import objects.battle.SkillType;
 
 import java.util.Objects;
@@ -18,15 +18,15 @@ public class PlayerCreatorInputValidator implements InputValidator {
     }
 
     @Override
-    public boolean validateInput(String input) {
+    public String parseAndValidate(String input) {
         // Validates user input for different situations during Player creation. Returns true if the input is valid,
         // false otherwise.
         if (currQuestion == PlayerQuestion.SKILLTYPE) {
             // Ensures the input corresponds to one of the SkillType enums.
-            return Objects.equals(input, SkillType.AIR.name().toLowerCase()) ||
-                    Objects.equals(input, SkillType.FIRE.name().toLowerCase()) ||
-                    Objects.equals(input, SkillType.EARTH.name().toLowerCase()) ||
-                    Objects.equals(input, SkillType.WATER.name().toLowerCase());
+            if (input.equalsIgnoreCase(SkillType.AIR.name())) {
+
+            }
+
         }
         else if (currQuestion == PlayerQuestion.NAME) {
             // Ensures Player names are 20 characters or fewer, and not empty or blank.

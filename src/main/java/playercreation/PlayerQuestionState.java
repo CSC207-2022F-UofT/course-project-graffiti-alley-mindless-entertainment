@@ -1,7 +1,7 @@
 package playercreation;
 
-import database.interfaces.InputValidator;
-import database.interfaces.State;
+import io.InputValidator;
+import interfaces.State;
 import objects.battle.SkillType;
 
 public class PlayerQuestionState implements State {
