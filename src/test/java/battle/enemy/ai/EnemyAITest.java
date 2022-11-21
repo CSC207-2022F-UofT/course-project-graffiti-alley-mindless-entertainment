@@ -45,9 +45,10 @@ public class EnemyAITest {
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 0, SkillType.WATER);
         DefaultAI defaultAI = new DefaultAI(enemyInfo, 50);
-        Boolean check = "use potion".equals(defaultAI.respond("use skill")) ||
-                "use skill".equals(defaultAI.respond("use skill"));
-        Assert.assertEquals(check, true);
+        String respond = defaultAI.respond("use skill");
+        Boolean check = "use potion".equals(respond);
+        Boolean check2 = "use skill".equals(respond);
+        Assert.assertEquals(true, check||check2);
     }
 
     @DisplayName("Test of SmartAI with 50% attack chance")
@@ -58,8 +59,9 @@ public class EnemyAITest {
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 0, SkillType.WATER);
         SmartAI smartAI = new SmartAI(enemyInfo, 50);
-        Boolean check = "use potion".equals(smartAI.respond("use skill")) ||
-                "use skill".equals(smartAI.respond("use skill"));
-        Assert.assertEquals(check, true);
+        String respond = smartAI.respond("use skill");
+        Boolean check = "use potion".equals(respond);
+        Boolean check2 = "use skill".equals(respond);
+        Assert.assertEquals(true, check||check2);
     }
 }
