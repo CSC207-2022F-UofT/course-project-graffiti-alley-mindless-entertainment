@@ -8,7 +8,6 @@ import playercreation.PlayerConfirmState;
 import core.StateManager;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class PlayerCreatorManager extends StateManager {
     /** A controller class that helps create a new Player character at the beginning of the game.
@@ -57,21 +56,25 @@ public class PlayerCreatorManager extends StateManager {
     @Override
     public State nextState(String input) {
         // Switches the question state to the next state in order to ask for more input from the user.
-        String confirmChoice = "confirm";
-        String returnChoice = "return";
         if (currPlayerQuestion == PlayerQuestion.NAME ||
                 currPlayerQuestion == PlayerQuestion.DESCRIPTION ||
                 currPlayerQuestion == PlayerQuestion.SKILLTYPE) {
-            // Switches the state to confirm if the user confirms the choice.
-            this.completedQuestions.add(currPlayerQuestion);
-            currPlayerQuestion = PlayerQuestion.CONFIRM;
-            return new PlayerConfirmState();
+            if (currState.getInputValidator().parseAndValidate(input) != null) {
+                // Switches the state to confirm if the user confirms the choice.
+                this.completedQuestions.add(currPlayerQuestion);
+                currPlayerQuestion = PlayerQuestion.CONFIRM;
+                return new PlayerConfirmState();
+            }
+            else {
+                // Input is invalid, return the same question state to the user.
+                return new PlayerQuestionState(this.currPlayerQuestion, this.creatorInteractor);
+            }
         }
 
         else if (currPlayerQuestion == PlayerQuestion.CONFIRM) {
             // Switches states to the next question if the user confirms their choice, or to return to the previous
             // question if the user is not happy with their choice.
-            if (Objects.equals(input, confirmChoice)) {
+            if (currState.getInputValidator().parseAndValidate(input).equals("confirm")) {
                 if (completedQuestions.size() == 1) {
                     currPlayerQuestion = PlayerQuestion.DESCRIPTION;
                     return new PlayerQuestionState(currPlayerQuestion, this.creatorInteractor);
@@ -87,11 +90,16 @@ public class PlayerCreatorManager extends StateManager {
                     return null;
                 }
             }
-            else if (Objects.equals(input, returnChoice)) {
+            else if (currState.getInputValidator().parseAndValidate(input).equals("return")) {
                 // Return to the previous state since the user did not confirm the previous decision.
                 int lastIndex = completedQuestions.size() - 1;
                 currPlayerQuestion = completedQuestions.remove(lastIndex);
                 return new PlayerQuestionState(currPlayerQuestion, this.creatorInteractor);
+            }
+
+            else {
+                // Input is invalid, return a new confirm state to the user.
+                return new PlayerConfirmState();
             }
 
         }

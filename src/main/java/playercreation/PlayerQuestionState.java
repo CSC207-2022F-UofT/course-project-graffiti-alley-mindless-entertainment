@@ -2,6 +2,7 @@ package playercreation;
 
 import io.InputValidator;
 import interfaces.State;
+import io.OutputHandlerImpl;
 import objects.battle.SkillType;
 
 public class PlayerQuestionState implements State {
@@ -38,45 +39,45 @@ public class PlayerQuestionState implements State {
     @Override
     public void preInput() {
         // Utilizes OutputHandler to ask the user a question based on the currQuestion.
-        // Awaiting OutputHandler implementation.
         this.awaitInput = true;
+        OutputHandlerImpl output = OutputHandlerImpl.getScreen();
         if (this.currQuestion == PlayerQuestion.NAME) {
-            return;
+            output.generateText("Welcome, weary traveler. May I ask what your name is?");
         }
         else if (this.currQuestion == PlayerQuestion.DESCRIPTION) {
-            return;
+            output.generateText("Nice to meet you! Would you mind telling me a bit about yourself?");
         }
         else if (this.currQuestion == PlayerQuestion.SKILLTYPE) {
-            return;
-        }
-        else {
-            return;
+            output.generateText("I sense an aura of magic within you. If I may ask, which of the four elements do you" +
+                    " command? Air, Earth, Fire, or Water?");
         }
     }
 
     @Override
     public void postInput(String input) {
         // Saves user-inputted Player attributes into the PlayerCreatorInteractor as long as the input is valid.
-        if (this.inputValidator.validateInput(input)) {
+        if (this.inputValidator.parseAndValidate(input) != null) {
+            String parsedInput = this.inputValidator.parseAndValidate(input);
             if (this.currQuestion == PlayerQuestion.NAME) {
-                this.creatorInteractor.addName(input);
+                this.creatorInteractor.addName(parsedInput);
                 this.isDone = true;
                 this.awaitInput = false;
             }
             else if (this.currQuestion == PlayerQuestion.DESCRIPTION) {
-                this.creatorInteractor.addDescription(input);
+                this.creatorInteractor.addDescription(parsedInput);
                 this.isDone = true;
                 this.awaitInput = false;
             }
             else if (this.currQuestion == PlayerQuestion.SKILLTYPE) {
-                this.creatorInteractor.addSkillType(SkillType.valueOf(input));
+                this.creatorInteractor.addSkillType(SkillType.valueOf(parsedInput));
                 this.isDone = true;
                 this.awaitInput = false;
             }
         }
         else {
-            // Input is invalid, awaiting OutputHandler implementation to ask user for valid input.
-            return;
+            // Input is invalid, use OutputHandler implementation to ask user for valid input.
+            OutputHandlerImpl output = OutputHandlerImpl.getScreen();
+            output.generateText("Please type a valid response.");
         }
     }
 

@@ -1,6 +1,6 @@
 package managers;
 
-import database.interfaces.State;
+import interfaces.State;
 import org.junit.jupiter.api.Test;
 import playercreation.PlayerConfirmState;
 import database.managers.PlayerCreatorManager;
