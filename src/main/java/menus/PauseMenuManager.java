@@ -1,7 +1,7 @@
 package menus;
 
 import interfaces.State;
-import managers.StateManager;
+import core.StateManager;
 import menus.options.ChangeOptionsState;
 import menus.options.ChangeOptionsStateFactory;
 

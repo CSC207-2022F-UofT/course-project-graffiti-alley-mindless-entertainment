@@ -93,10 +93,10 @@ public class ChangeOptionsState implements State {
      * @return whether the input was valid
      */
     private boolean attemptAutoSaveChange(String value) {
-        if (value.toLowerCase().equals("true")) {
+        if (value.equalsIgnoreCase("true")) {
             options.setEnableAutoSave(true);
         }
-        else if (value.toLowerCase().equals("false")) {
+        else if (value.equalsIgnoreCase("false")) {
             options.setEnableAutoSave(false);
         } else {
             //say input invalid
