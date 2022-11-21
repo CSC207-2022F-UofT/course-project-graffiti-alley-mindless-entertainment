@@ -2,7 +2,6 @@ package objects.battle.enemy.gimmick;
 
 import objects.battle.SkillType;
 import objects.battle.enemy.EnemyInfo;
-import objects.character.Boss;
 
 
 public class TypeGimmick implements Gimmick {

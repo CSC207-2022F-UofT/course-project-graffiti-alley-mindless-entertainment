@@ -5,17 +5,15 @@ import objects.battle.SkillType;
 import objects.battle.enemy.EnemyFactory;
 import objects.battle.enemy.EnemyInfo;
 import objects.battle.enemy.ai.DefaultAI;
-import objects.battle.enemy.ai.EnemyAI;
 import objects.battle.enemy.ai.SmartAI;
 import objects.battle.enemy.gimmick.HealthGimmick;
 import objects.character.Boss;
 import objects.character.Enemy;
-import org.junit.Assert;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
-import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 
 public class EnemyFactoryTest {

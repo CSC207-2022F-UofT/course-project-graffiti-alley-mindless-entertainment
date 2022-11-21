@@ -6,9 +6,6 @@ import objects.battle.enemy.EnemyInfo;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
-import objects.character.Enemy;
-import objects.character.Boss;
-import battle.*;
 
 import java.util.ArrayList;
 
