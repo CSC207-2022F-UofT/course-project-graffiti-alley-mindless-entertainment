@@ -71,7 +71,7 @@ public class PlayerQuestionState implements State {
             this.awaitInput = false;
         }
         else if (this.currQuestion == PlayerQuestion.SKILLTYPE) {
-            this.creatorInteractor.addSkillType(SkillType.valueOf(input));
+            this.creatorInteractor.addSkillType(SkillType.valueOf(input.toUpperCase()));
             this.isDone = true;
             this.awaitInput = false;
         }
