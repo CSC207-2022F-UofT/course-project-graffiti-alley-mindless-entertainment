@@ -46,7 +46,7 @@ public class Inventory {
         for(int i = 0; i < inventory.size(); i++){
             Item item = (Item) inventory.get(i);
             String[] stats = item.getStats();
-            itemInfo = i + ". " + itemInfo + stats[0] + ": " + stats[1] + "\n";
+            itemInfo = itemInfo + i + ". "+ stats[0] + ": " + stats[1] + "\n";
 
         }
         return itemInfo;
@@ -72,7 +72,7 @@ public class Inventory {
      * @return whether item is removed.
      */
     public boolean removeItem(int i){
-            if (inventory.size() >= i){
+            if (inventory.size() > i){
                 inventory.remove(i);
                 return true;
         }
@@ -84,7 +84,7 @@ public class Inventory {
      * @return i-th item's ability in inventory, return null otherwise.
      */
     public String useItem(int i) {
-        if (inventory.size() >= i){
+        if (inventory.size() > i){
             Item item = (Item) inventory.get(i);
             String ability = item.getAbility();
             removeItem(i);

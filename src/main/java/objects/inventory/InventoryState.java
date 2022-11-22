@@ -2,8 +2,6 @@ package objects.inventory;
 
 import io.InputValidator;
 import interfaces.State;
-import objects.item.*;
-import objects.character.Player;
 
 /**
  * Use case to change inventory based on user input
@@ -19,25 +17,20 @@ public class InventoryState implements State {
      * quitCommand: user command when user want to quit inventory
      */
     private Inventory inventory;
-    private Player player;
     private boolean isDone = false;
     private boolean awaitingInput = false;
-    private final String addItemCommand;
     private final String removeItemCommand;
-    private final String useItemCommand;
+
     private final String quitCommand;
 
     /**
      * @param inventory inventory contains items
      */
-    public InventoryState(Inventory inventory, Player player){
+    public InventoryState(Inventory inventory){
 
         this.inventory = inventory;
-        this.player = player;
         this.quitCommand = "quit";
         this.removeItemCommand = "remove";
-        this.addItemCommand = "add";
-        this.useItemCommand = "use";
     }
 
     /**
@@ -49,9 +42,8 @@ public class InventoryState implements State {
         // use outputHandler to display inventory, call inventory.viewInventory()
         // use outputHandler to display choices of commands below
         // Commands:
-        // Use item: type "use i" ("i" is the i-th item in inventory)
+        // Quit: quit inventory
         // Remove item: type "remove i" ("i" is the i-th item in inventory)
-        // Add item: type "add itemType" (itemType: Sword, Potion, Armor)
     }
 
     /**
@@ -65,50 +57,14 @@ public class InventoryState implements State {
         if (command.equals(quitCommand)) {
             isDone = true;
             return;
-        }
-        boolean success = false;
-        if (command.length() == 2) {
-            if (command.equals(removeItemCommand)) {
-                success = inventory.removeItem(Integer.parseInt(inputarr[1]));
-//            } else if (command.equals(addItemCommand)) {
-//                Item item = inputToItem(player.getLevel(), inputarr[1]);
-//                success = inventory.addItem(item);
-//                if (!success){
-//                    // say inventory is full
-//                }
-            } else if (command.equals(useItemCommand)) {
-                String ability = inventory.useItem(Integer.parseInt(inputarr[1]));
-                if (ability != null){
-                    success = true;
-                    // return the ability to battle system
-                }
-            }
-        }
-        if (success){
-            // say success
+        } else if (command.equals(removeItemCommand)) {
+            inventory.removeItem(Integer.parseInt(inputarr[1]));
             awaitingInput = false;
+            // say success
+            return;
         }
-        else {
-            // say input invalid
-        }
-    }
 
-    /**
-     * Initiate an item based on level and type
-     * @param level level of player
-     * @param type type of item
-     * @return Item created by level and type
-     */
-    public Item inputToItem(int level, String type) {
-        Item item = null;
-        if (type.equals("SWORD")) {
-            item = new Sword(level);
-        } else if (type.equals("ARMOR")) {
-            item = new Armor(level);
-        } else if (type.equals("POTION")) {
-            item = new Potion(level);
-        }
-        return item;
+        // say input invalid
     }
 
     /**
