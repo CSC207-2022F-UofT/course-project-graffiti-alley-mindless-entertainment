@@ -1,14 +1,16 @@
 package game_world.managers;
 
+import core.StateManager;
 import database.managers.AreaDataManager;
 import database.objects.AreaData;
 import game_world.objects.areas.Area;
 import game_world.objects.areas.MultiDirectionalArea;
 import game_world.objects.areas.OneWayArea;
+import interfaces.State;
 
 import java.util.ArrayList;
 
-public class AreaManager {
+public class AreaManager extends StateManager {
 
     /**
      * Manages all matters regarding Areas
@@ -22,8 +24,18 @@ public class AreaManager {
 
     public AreaManager(EventManager eventManager) {
         this.database = new AreaDataManager();
-        this.currentZone = "Introduction";
         this.eventManager = eventManager;
+        initialize();
+    }
+
+    @Override
+    protected State nextState(String input) {
+        return null;
+    }
+
+    @Override
+    public void initialize() {
+        this.currentZone = "Introduction";
         this.areas = new ArrayList<>();
         ArrayList<AreaData> areaList = this.database.fetchAreaList(this.currentZone);
         for (AreaData areaData : areaList) {
@@ -32,6 +44,8 @@ public class AreaManager {
         }
         this.currentArea = areas.get(0);
     }
+
+
 
     /**
      * Generates new Area object and adds to the areas list
@@ -88,7 +102,7 @@ public class AreaManager {
     /**
      * @return area from current zone
      */
-    public Area getArea(String name) {
+    private Area getArea(String name) {
         for (Area area : areas) {
             if (area.name.equals(name)) {
                 return area;
