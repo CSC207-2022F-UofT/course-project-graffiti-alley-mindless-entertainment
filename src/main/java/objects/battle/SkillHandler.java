@@ -1,5 +1,6 @@
 package objects.battle;
 
+import objects.character.Enemy;
 import objects.character.Player;
 
 public class SkillHandler {
@@ -25,6 +26,7 @@ public class SkillHandler {
             case WATER:
                 return comparedTo == SkillType.FIRE;
         }
+        return false;
     }
 
     // CURRENTLY REDUNDANT CODE TEMPORARY SOLUTION, WILL NEED WRAPPER CLASS FOR BATTLE CHARACTERS LATER
@@ -59,7 +61,7 @@ public class SkillHandler {
      */
     public int calculateDamage(Skill skill, Player user) {
         double damage = skill.getDamage();
-        SkillType subjectType = foe.getType();
+        SkillType subjectType = user.getSkillType();
 
         if (hasTypeAdv(skill.getType(), subjectType)) {
             damage *= 1.2;
@@ -98,7 +100,7 @@ public class SkillHandler {
         int damage = calculateDamage(skill, user);
         int totalDamage = Math.max(0, damage - user.getArmor());
 
-        user.changeCurrHealth((-1 * afterArmorDamage));
+        user.changeCurrHealth((-1 * totalDamage));
         user.changeArmor((-1 * (damage - totalDamage)));
         foe.setSpeed(foe.getSpeed() - skill.getLag());
 

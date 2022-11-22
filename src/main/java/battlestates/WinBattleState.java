@@ -4,6 +4,7 @@ import interfaces.State;
 import io.InputValidator;
 import io.OutputHandler;
 import io.OutputHandlerImpl;
+import objects.character.Enemy;
 import objects.character.Player;
 
 public class WinBattleState implements State {
@@ -32,7 +33,7 @@ public class WinBattleState implements State {
         // int repChange = foe.getReputation();
 
         // expGain = foe.getExp() * expModifier // Something along the lines of this in the future
-        user.addExperience(expGain);
+        user.changeExperience(expGain);
         // Something that adds loot into the user's inventory, so far no loot table.
         // user.changeReputation(repChange); // Currently no implementation
 

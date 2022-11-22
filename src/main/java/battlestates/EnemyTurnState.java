@@ -5,6 +5,7 @@ import io.InputValidator;
 import io.OutputHandlerImpl;
 import objects.battle.Skill;
 import objects.battle.SkillHandler;
+import objects.character.Enemy;
 import objects.character.Player;
 import java.util.ArrayList;
 
@@ -26,7 +27,7 @@ public class EnemyTurnState implements State {
 
         // If the enemy uses a skill
         if (action.equals("use skill")) {
-            int max = size(foe.getSkills()) - 1;
+            int max = foe.getSkills().size() - 1;
             int min = 0;
             int skillIndex = (int) Math.floor(Math.random()*(max-min+1)+min);
 

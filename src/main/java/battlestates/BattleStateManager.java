@@ -3,6 +3,8 @@ package battlestates;
 import core.StateManager;
 import game_world.objects.areas.Area;
 import interfaces.State;
+import objects.battle.enemy.factory.EnemyFactory;
+import objects.character.Enemy;
 import objects.character.Player;
 
 public class BattleStateManager extends StateManager {
@@ -16,11 +18,11 @@ public class BattleStateManager extends StateManager {
     private Area currArea;
     private Enemy foe;
 
-    public BattleStateManager(Player user, Area currArea) {
+    public BattleStateManager(Player user, Area currArea) throws Exception {
         this.user = user;
         this.currArea = currArea;
         EnemyFactory enemyFactory = new EnemyFactory();
-        this.foe = EnemyFactory.createEnemy("goblin"); // Temporary, use-case needed once decide which enemy
+        this.foe = (Enemy) enemyFactory.createEnemy("goblin"); // Temporary, use-case needed once decide which enemy
     }
 
     /**

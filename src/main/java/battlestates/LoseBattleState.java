@@ -3,6 +3,7 @@ package battlestates;
 import interfaces.State;
 import io.InputValidator;
 import io.OutputHandlerImpl;
+import objects.character.Enemy;
 import objects.character.Player;
 
 import java.util.ArrayList;

@@ -2,10 +2,10 @@ package battlestates;
 
 import interfaces.State;
 import io.InputValidator;
-import io.OutputHandler;
 import io.OutputHandlerImpl;
 import objects.battle.Skill;
 import objects.battle.SkillHandler;
+import objects.character.Enemy;
 import objects.character.Player;
 
 import java.util.List;
