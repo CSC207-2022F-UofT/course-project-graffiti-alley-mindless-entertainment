@@ -1,5 +1,7 @@
 package interfaces;
 
+import io.InputValidator;
+
 public interface State {
     /**
      * Executes when the state is not awaiting input

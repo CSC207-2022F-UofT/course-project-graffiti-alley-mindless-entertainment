@@ -1,0 +1,182 @@
+
+{
+  "name": "PACT",
+  "texts": {
+    "Introduction": {
+      "[GAME]": {
+        "speaker": "[GAME]",
+        "texts": [
+          "Welcome to PACT! PACT is a game where you make your own choices and save the world of Tartarus!",
+          "Tartarus is a place, much like Earth, though ruled by a wicked ruler. A ruthless King that despises those who cross him the wrong way. He is commonly known as 'The Demon King'.",
+          "Your job is to cure the world of Tartarus by slaying the Demon King. After all, you are the famed hero!",
+          "To do this, you must collect 4 sacred crystals from the 4 nations that inhabit Tartarus. These 4 crystals are: ",
+          "Turqoise, the crystal of Water; hidden within a village by a chaotic orc tribe.",
+          "Cassiterite, the crystal of Earth; protected by dark knights at the royal castle.",
+          "Angelite, the crystal of Air; encased in magic within the sacred tombs of a pyramid.",
+          "And Pyrite, the crystal of Fire; embedded inside the Demon King's heart.",
+          "You must be careful. The nations will do everything in their power to keep the crystals away from you. But remember, they are hypnotized by the Demon King, forced to serve him.",
+          "You will, unknowingly to them, save them from this hard life.",
+          "So go, legendary hero. You are the only one who can bring me the crystals and put an end to this chaos."
+        ],
+        "type": "One-Way",
+        "next": "The Aqua Nation - Beach 1",
+        "events": ["test", "test 2"]
+      }
+    },
+    "The Aqua Nation": {
+      "Beach 1": {
+        "speaker": "Seaside",
+        "texts": [
+          "The sound of ocean waves fill your ears.",
+          "They rock, back and forth, pulling against the tide.",
+          "The sand crunches against your feet as you step into the world for the first time... though, it doesn't feel like your first time.",
+          "You spot a clearing to your left, leading to a trail towards grassy lands.",
+          "On your right, the waves crash and the sand trails off into a long beach."
+        ],
+        "type": "Multi-Directional",
+        "options": {
+          "Follow the grassy trail": "The Aqua Nation - Grassy Field",
+          "Walk along the beach": "The Aqua Nation - Beach 2"
+        },
+        "events": ["test 3"]
+      },
+      "Beach 2": {
+
+      },
+      "Grassy Field": {
+
+      },
+      "Village": {
+
+      },
+      "Dark Cave 1": {
+
+      }
+    },
+    "The Terra Nation": {
+      "Dark Cave 2": {
+
+      },
+      "Outskirts": {
+
+      },
+      "Desert 1": {
+
+      },
+      "Kingdom Entrance": {
+
+      },
+      "Royal Castle": {
+
+      }
+    },
+    "The Ventus Nation": {
+      "Desert 2": {
+
+      },
+      "Oasis": {
+
+      },
+      "Pyramid": {
+
+      },
+      "Sacred Tombs": {
+
+      },
+      "Secret Passage": {
+
+      }
+    },
+    "New Home": {
+      "The Gate": {
+
+      },
+      "To Your Demise": {
+
+      }
+    }
+  },
+  "quests": [],
+  "characters": [],
+  "items": [],
+  "skills": [
+    {
+      "name": "fireball",
+      "type": "fire",
+      "lag": "10",
+      "damage": "20"
+    },
+    {
+      "name": "beam",
+      "type": "earth",
+      "lag": "10",
+      "damage": "25"
+    }
+  ],
+  "enemies": [
+    {
+      "name": "goblin",
+      "type": "fire",
+      "skills": ["fireball"],
+      "reputation": "5",
+      "speed": "90",
+      "ai": "default"
+    },
+    {
+      "name": "goblin warrior",
+      "type": "earth",
+      "skills": ["beam"],
+      "reputation": "20",
+      "speed": "110",
+      "ai": "smart",
+      "gimmick": "health"
+    }
+  ],
+  "ai_data": [
+    {
+      "name": "default",
+      "chance": "50"
+    },
+    {
+      "name": "smart",
+      "chance": "80"
+    }
+  ],
+  "gimmicks": [
+    {
+      "name": "health",
+      "trigger": "30"
+    },
+    {
+      "name": "attack",
+      "trigger": "20",
+      "attack": "1.2"
+    },
+    {
+      "name": "speed",
+      "trigger": "25",
+      "speed": "20"
+    },
+    {
+      "name": "type",
+      "trigger": "20"
+    }
+  ],
+  "events": [
+    {
+      "name": "test",
+      "type": "Encounter",
+      "priority": 1
+    },
+    {
+      "name": "test 2",
+      "type": "Item Pick-Up",
+      "priority": 1
+    },
+    {
+      "name": "test 3",
+      "type": "Item Pick-Up",
+      "priority": 1
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 package core;
 
-import interfaces.InputValidator;
+import io.InputValidator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,11 +17,21 @@ public class ChoiceInputValidator implements InputValidator {
     }
 
     /**
-     * @param input the user input to validate
-     * @return whether the given input is valid
+     * @param input the user input to parse and validate
+     * @return null if the given input is not valid, otherwise the parsed input
      */
     @Override
-    public boolean validateInput(String input) {
-        return allowedInputs.contains(input);
+    public String parseAndValidate(String input) {
+        List<String> opt = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o",
+                "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z");
+        if (opt.contains(input)) {
+            return allowedInputs.get(opt.indexOf(input)).toLowerCase();
+        }
+        for (String option: allowedInputs) {
+            if (option.toLowerCase().equals(input)) {
+                return input;
+            }
+        }
+        return null;
     }
 }
