@@ -42,6 +42,7 @@ public class OutputHandlerImpl implements OutputHandler {
     @Override
     public void generateText(String text) {
         this.text = text;
+        this.options = null;
         System.out.println(text);
     }
 
