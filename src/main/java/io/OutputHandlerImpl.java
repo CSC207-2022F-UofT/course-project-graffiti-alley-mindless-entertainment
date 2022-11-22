@@ -24,14 +24,14 @@ public class OutputHandlerImpl implements OutputHandler {
     /**
      * @return the last question
      */
-    public String getText() {
-        return text;
-    }
+    @Override
+    public String getLastText() { return text; }
 
     /**
      * @return the last question's options
      */
-    public List<String> getOptions() {
+    @Override
+    public List<String> getLastOptions() {
         return options;
     }
 
@@ -46,7 +46,8 @@ public class OutputHandlerImpl implements OutputHandler {
     }
 
     /**
-     * @param text and options to be displayed on screen
+     * @param text to be displayed on screen
+     * @param options to be displayed on screen
      * Display text and options on screen
      */
     @Override

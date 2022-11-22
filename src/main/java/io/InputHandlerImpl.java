@@ -30,8 +30,8 @@ public class InputHandlerImpl implements InputHandler {
             String msg = validator.getErrorMessage(choice);
             screen.generateText(msg);
             screen.generateText("Your choice is not valid. Please attempt again.");
-            String text = screen.getText();
-            List<String> options = screen.getOptions();
+            String text = screen.getLastText();
+            List<String> options = screen.getLastOptions();
             if (options == null) {
                 screen.generateText(text);
             } else {
