@@ -44,6 +44,7 @@ public class EnemyTurnState implements State {
                     hpIncrease + " health!");
         }
         foe.changeSpeed(-20);
+        this.done = true;
     }
 
     /**
@@ -53,7 +54,6 @@ public class EnemyTurnState implements State {
      */
     @Override
     public void postInput(String input) {
-        this.done = true;
     }
     @Override
     public boolean awaitInput() {
@@ -62,7 +62,7 @@ public class EnemyTurnState implements State {
 
     @Override
     public boolean isDone() {
-        return false;
+        return this.done;
     }
 
     @Override

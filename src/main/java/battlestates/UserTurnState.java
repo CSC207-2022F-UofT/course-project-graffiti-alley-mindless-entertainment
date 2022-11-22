@@ -28,7 +28,8 @@ public class UserTurnState implements State {
 
     public UserTurnState(Player user, Enemy foe) {
         // Will need to change later to accommodate other options, like inventory
-        this.skillList = Skill.toSkillString(user.getSkillList());
+        Skill dummy = new Skill();
+        this.skillList = dummy.toSkillString(user.getSkillList());
         this.user = user;
         this.foe = foe;
     }
@@ -53,7 +54,8 @@ public class UserTurnState implements State {
     @Override
     public void postInput(String input) {
         // VALIDATE THE INPUT FIRST
-        Skill chosenSkill = Skill.findSkill(input, user.getSkillList());
+        Skill dummy = new Skill();
+        Skill chosenSkill = dummy.findSkill(input, user.getSkillList());
         if (chosenSkill.equals("dummy")) {
             OutputHandlerImpl.getScreen().generateText("That skill doesn't exist, please enter a valid skill.");
         }

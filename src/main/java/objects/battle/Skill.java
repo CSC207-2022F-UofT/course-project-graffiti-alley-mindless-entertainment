@@ -65,7 +65,7 @@ public class Skill {
      * @param skillList List of type Skill wanted to be turned into a string
      * @return String of the names of each skill in skillList
      */
-    public static List<String> toSkillString(List<Skill> skillList) {
+    public List<String> toSkillString(List<Skill> skillList) {
         List<String> stringSkills = new ArrayList<>();
         for (Skill skill : skillList) {
             stringSkills.add(skill.getName());
@@ -79,7 +79,7 @@ public class Skill {
      * @param skillList list of skills to look through
      * @return either Dummy skill or the corresponding skill needed
      */
-    public static Skill findSkill(String skillName, List<Skill> skillList) {
+    public Skill findSkill(String skillName, List<Skill> skillList) {
         Skill correctSkill = new Skill();
         for (Skill skill : skillList) {
             if (skill.getName().equals(skillName)) {
