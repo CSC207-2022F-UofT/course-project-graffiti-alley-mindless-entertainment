@@ -8,6 +8,7 @@ import menus.PauseMenuChoiceStateFactory;
 import menus.PauseMenuManager;
 import menus.options.ChangeOptionsStateFactory;
 import options.Options;
+import playercreation.PlayerCreatorManager;
 
 /**
  * This class contains the shell, which connects the different systems of the program together.
@@ -52,7 +53,10 @@ public class Shell {
             }
         }
     }
-
+    /**
+     * @param input from the user
+     * @return whether the user entered a menu command like exit/pause
+     */
     private boolean detectedMenuInput(String input) {
         if (doesUserExit(input)) {
             exitGame();
@@ -64,6 +68,9 @@ public class Shell {
         return false;
     }
 
+    /**
+     * Exit the game cleanly.
+     */
     private void exitGame() {
         running = false;
         //do smth here like saving data to files to be implemented later
@@ -78,10 +85,9 @@ public class Shell {
     // !!! not sure that I got who the first manager is and how this part works.
     private StateManager getStartingManager() {
         //should change to a mainMenuManager when one gets created
-        Options options = Options.getOptions();
-        PauseMenuChoiceStateFactory pauseMenuChoiceStateFactory = new PauseMenuChoiceStateFactory();
-        ChangeOptionsStateFactory changeOptionsStateFactory = new ChangeOptionsStateFactory();
-        return new PauseMenuManager(pauseMenuChoiceStateFactory, changeOptionsStateFactory);
+        PlayerCreatorManager playerCreatorManager = new PlayerCreatorManager();
+        //playerCreatorManager.initialize();
+        return playerCreatorManager;
     }
 
     /**
