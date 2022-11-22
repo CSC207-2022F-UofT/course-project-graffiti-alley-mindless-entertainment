@@ -21,7 +21,7 @@ class InventoryTest {
         inventory.addItem(item);
 
         // then
-        assertEquals("LEVEL 15 ARMOR: Gain 15 Armor\n", inventory.viewInventory());
+        assertEquals("0. LEVEL 15 ARMOR: Gain 15 Armor\n", inventory.viewInventory());
 
     }
 
@@ -80,44 +80,11 @@ class InventoryTest {
 
 
         // then
-        String expected = "LEVEL 12 ARMOR: Gain 12 Armor\n" +
-                "LEVEL 10 SWORD: Grant 10 Damage\n";
+        String expected = "0. LEVEL 12 ARMOR: Gain 12 Armor\n" +
+                "1. LEVEL 10 SWORD: Grant 10 Damage\n";
         assertEquals(expected, result);
     }
 
-    /**
-     * Test checkItem() method: item found
-     */
-    @Test
-    void checkItemTest1(){
-        // given
-        Item item1 = new Armor(12);
-        Item item2 = new Sword(10);
-        Inventory inventory = new Inventory();
-        inventory.addItem(item1);
-        inventory.addItem(item2);
-
-        // when
-        boolean result = inventory.checkItem("LEVEL 12 ARMOR");
-
-        // then
-        assertTrue(result);
-    }
-
-    /**
-     * Test checkItem() method: item not found
-     */
-    @Test
-    void checkItemTest2(){
-        // given
-        Inventory inventory = new Inventory();
-
-        // when
-        boolean result = inventory.checkItem("LEVEL 12 ARMOR");
-
-        // then
-        assertFalse(result);
-    }
 
     /**
      * Test removeItem() method: whether item is removed
@@ -132,10 +99,10 @@ class InventoryTest {
         inventory.addItem(item2);
 
         // when
-        inventory.removeItem("LEVEL 12 ARMOR");
+        inventory.removeItem(0);
 
         // then
-        String expected = "LEVEL 10 SWORD: Grant 10 Damage\n";
+        String expected = "0. LEVEL 10 SWORD: Grant 10 Damage\n";
         String result = inventory.viewInventory();
         assertEquals(expected, result);
 
@@ -154,7 +121,7 @@ class InventoryTest {
         inventory.addItem(item2);
 
         // when
-        boolean result = inventory.removeItem("LEVEL 12 ARMOR");
+        boolean result = inventory.removeItem(0);
 
         // then
         assertTrue(result);
@@ -174,7 +141,7 @@ class InventoryTest {
         inventory.addItem(item2);
 
         // when
-        boolean result = inventory.removeItem("LEVEL 1 Potion");
+        boolean result = inventory.removeItem(12);
 
         // then
         assertFalse(result);
@@ -194,7 +161,7 @@ class InventoryTest {
         inventory.addItem(item2);
 
         // when
-        String result = inventory.useItem("LEVEL 12 ARMOR");
+        String result = inventory.useItem(0);
 
         // then
         String expected = "Gain 12 Armor";
@@ -211,7 +178,7 @@ class InventoryTest {
 
 
         // when
-        String result = inventory.useItem("LEVEL 12 Potion");
+        String result = inventory.useItem(10);
 
         // then
         assertNull(result);
