@@ -38,22 +38,23 @@ public class Inventory {
     }
 
     /**
-     * Return all items' name and their ability in the inventory as a string.
+     * @Return all items' name and their ability in the inventory as a string.
      */
     public String viewInventory(){
         String itemInfo = "";
+
         for(int i = 0; i < inventory.size(); i++){
             Item item = (Item) inventory.get(i);
             String[] stats = item.getStats();
-            itemInfo = itemInfo + stats[0] + ": " + stats[1] + "\n";
+            itemInfo = i + ". " + itemInfo + stats[0] + ": " + stats[1] + "\n";
 
         }
         return itemInfo;
     }
 
     /**
-     * Add an item to inventory if the inventory is not full. Call viewInventory() if the inventory is full
-     * so the player can remove an item. Return false if inventory is full.
+     * @param item to be added to inventory
+     * @return whether item is added.
      */
     public boolean addItem(Item item){
         if (inventory.size() >= maxSize){
@@ -66,48 +67,28 @@ public class Inventory {
     }
 
     /**
-     * Return whether the item is in the inventory.
+     * Remove i-th item in inventory
+     * @param i: i-th item in the inventory that is to be removed.
+     * @return whether item is removed.
      */
-
-    public boolean checkItem(String itemName){
-        for (int i = 0; i < inventory.size(); i++) {
-            Item item = (Item) inventory.get(i);
-            if (item.getName().equals(itemName)) {
+    public boolean removeItem(int i){
+            if (inventory.size() >= i){
+                inventory.remove(i);
                 return true;
-            }
         }
         return false;
     }
 
     /**
-     * Remove an item and return true if the item exists in the inventory. Return false otherwise.
+     * @param i-th item in the inventory to be used.
+     * @return i-th item's ability in inventory, return null otherwise.
      */
-    public boolean removeItem(String itemName){
-        if (checkItem(itemName)) {
-            for (int i = 0; i < inventory.size(); i++) {
-                Item item = (Item) inventory.get(i);
-                if (item.getName().equals(itemName)) {
-                    inventory.remove(i);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Return ability of item if the item is in inventory, return null otherwise.
-     */
-    public String useItem(String itemName) {
-        if (checkItem(itemName)) {
-            for (int i = 0; i < inventory.size(); i++) {
-                Item item = (Item) inventory.get(i);
-                if (item.getName().equals(itemName)) {
-                    String ability = item.getAbility();
-                    inventory.remove(itemName);
-                    return ability;
-                }
-            }
+    public String useItem(int i) {
+        if (inventory.size() >= i){
+            Item item = (Item) inventory.get(i);
+            String ability = item.getAbility();
+            removeItem(i);
+            return ability;
         }
         return null;
     }
