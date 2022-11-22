@@ -11,9 +11,7 @@ public class InventoryState implements State {
      * inventory: entity for inventory
      * isDone: whether the state is done
      * awaitingInput: whether the state is waiting for user input
-     * addItemCommand: user command when user want to add item
      * removeItemCommand: user command when user want to remove item
-     * useItemCommand: user command when user want to use item
      * quitCommand: user command when user want to quit inventory
      */
     private Inventory inventory;
