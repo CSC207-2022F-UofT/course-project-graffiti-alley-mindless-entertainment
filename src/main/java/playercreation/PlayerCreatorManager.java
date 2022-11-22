@@ -17,7 +17,6 @@ public class PlayerCreatorManager extends StateManager {
      */
 
     private PlayerQuestion currPlayerQuestion;
-    private State currState;
     private int completedQuestions;
     private final PlayerQuestionStateFactory questionStateFactory;
     private final PlayerConfirmStateFactory confirmStateFactory;
@@ -34,7 +33,7 @@ public class PlayerCreatorManager extends StateManager {
     public void initialize() {
         // Initializes the PlayerCreatorManager.
         this.currPlayerQuestion = PlayerQuestion.NAME;
-        this.currState = questionStateFactory.createPlayerQuestionState(currPlayerQuestion);
+        currState = questionStateFactory.createPlayerQuestionState(currPlayerQuestion);
     }
 
     public PlayerQuestion getCurrPlayerQuestion() {
