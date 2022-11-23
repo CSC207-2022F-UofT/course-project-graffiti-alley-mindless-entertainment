@@ -5,6 +5,7 @@ import io.InputValidator;
 import io.OutputHandlerImpl;
 import objects.battle.Skill;
 import objects.battle.SkillHandler;
+import objects.battle.enemy.SkillHelper;
 import objects.character.Enemy;
 import objects.character.Player;
 
@@ -28,7 +29,7 @@ public class UserTurnState implements State {
 
     public UserTurnState(Player user, Enemy foe) {
         // Will need to change later to accommodate other options, like inventory
-        Skill dummy = new Skill();
+        SkillHelper dummy = new SkillHelper();
         this.skillList = dummy.toSkillString(user.getSkillList());
         this.user = user;
         this.foe = foe;
@@ -54,9 +55,9 @@ public class UserTurnState implements State {
     @Override
     public void postInput(String input) {
         // VALIDATE THE INPUT FIRST
-        Skill dummy = new Skill();
+        SkillHelper dummy = new SkillHelper();
         Skill chosenSkill = dummy.findSkill(input, user.getSkillList());
-        if (chosenSkill.equals("dummy")) {
+        if (chosenSkill.getName().equals("dummy")) {
             OutputHandlerImpl.getScreen().generateText("That skill doesn't exist, please enter a valid skill.");
         }
         else {
