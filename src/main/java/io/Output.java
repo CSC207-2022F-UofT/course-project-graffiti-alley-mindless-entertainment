@@ -23,7 +23,7 @@ public class Output {
         handler = h;
     }
 
-    class OutputHandlerImpl implements OutputHandler {
+    public class OutputHandlerImpl implements OutputHandler {
 
         private OutputHandlerImpl screen;
         private String text=null;

@@ -26,15 +26,16 @@ public class InputHandlerImpl implements InputHandler {
             if (parsed != null) {
                 return parsed;
             }
+            Output.OutputHandlerImpl screen = Output.getScreen();
             String msg = validator.getErrorMessage(choice);
-            Output.getScreen().generateText(msg);
-            Output.getScreen().generateText("Your choice is not valid. Please attempt again.");
-            String text = Output.getScreen().getLastText();
-            List<String> options = Output.getScreen().getLastOptions();
+            screen.generateText(msg);
+            screen.getScreen().generateText("Your choice is not valid. Please attempt again.");
+            String text = screen.getLastText();
+            List<String> options = screen.getLastOptions();
             if (options == null) {
-                Output.getScreen().generateText(text);
+                screen.generateText(text);
             } else {
-                Output.getScreen().generateTextWithOptions(text, options);
+                screen.generateTextWithOptions(text, options);
             }
 
         }

@@ -2,7 +2,7 @@ package playercreation.states;
 
 import io.InputValidator;
 import interfaces.State;
-import io.OutputHandlerImpl;
+import io.Output;
 import playercreation.PlayerCreatorInputValidator;
 import playercreation.PlayerQuestion;
 
@@ -31,8 +31,8 @@ public class PlayerConfirmState implements State {
         // Utilizes OutputHandler to ask the user if they would like to confirm their decision or return to the
         // previous question.
         this.awaitInput = true;
-        OutputHandlerImpl output = OutputHandlerImpl.getScreen();
-        output.generateText("Are you satisfied with your choice? Type 'confirm' if you are, or 'return' if you" +
+        Output.OutputHandlerImpl screen = Output.getScreen();
+        screen.generateText("Are you satisfied with your choice? Type 'confirm' if you are, or 'return' if you" +
                 " would like to return to the previous question.");
     }
 
