@@ -15,7 +15,7 @@ public class InputHandlerImpl implements InputHandler {
     public String getChoice(InputValidator validator) {
         Scanner input = new Scanner(System.in);
         while (true) {
-            String choice = input.next().toLowerCase();
+            String choice = input.nextLine().toLowerCase();
             if (choice.equals("exit") || choice.equals("pause")) {
                 return choice;
             }
@@ -26,16 +26,15 @@ public class InputHandlerImpl implements InputHandler {
             if (parsed != null) {
                 return parsed;
             }
-            OutputHandlerImpl screen = OutputHandlerImpl.getScreen();
             String msg = validator.getErrorMessage(choice);
-            screen.generateText(msg);
-            screen.generateText("Your choice is not valid. Please attempt again.");
-            String text = screen.getLastText();
-            List<String> options = screen.getLastOptions();
+            Output.getScreen().generateText(msg);
+            Output.getScreen().generateText("Your choice is not valid. Please attempt again.");
+            String text = Output.getScreen().getLastText();
+            List<String> options = Output.getScreen().getLastOptions();
             if (options == null) {
-                screen.generateText(text);
+                Output.getScreen().generateText(text);
             } else {
-                screen.generateTextWithOptions(text, options);
+                Output.getScreen().generateTextWithOptions(text, options);
             }
 
         }
