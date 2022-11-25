@@ -2,6 +2,7 @@ package menus.options;
 
 import io.InputValidator;
 import interfaces.State;
+import io.OutputHandlerImpl;
 import options.Options;
 
 /**
@@ -28,6 +29,10 @@ public class ChangeOptionsState implements State {
 
     private final String changeCommand;
 
+    private final String ANSI_BLUE = "\u001B[34m";
+
+    private final String ANSI_RESET = "\u001B[0m";
+
     /**
      * @param options stored options of the game. Injected dependency.
      */
@@ -37,7 +42,6 @@ public class ChangeOptionsState implements State {
         this.autoSaveCommand = "autoSave";
         this.quitCommand = "quit";
         this.changeCommand = "change";
-        //this.inputValidator = new ChoiceInputValidator();
     }
 
     /**
@@ -46,8 +50,23 @@ public class ChangeOptionsState implements State {
     @Override
     public void preInput() {
         awaitingInput = true;
-        //use OutputHandler to display text here
-        //ask which setting to change
+        StringBuilder textToDisplay = new StringBuilder("Options: \n");
+        textToDisplay.append(this.autoSaveCommand).append(": ");
+        textToDisplay.append(options.isEnableAutoSave() ? ANSI_BLUE : "").append("true ").append(ANSI_RESET);
+        textToDisplay.append(!options.isEnableAutoSave() ? ANSI_BLUE : "").append("false ").append(ANSI_RESET);
+
+        textToDisplay.append("\n").append(this.textSpeedCommand).append(": ");
+
+        int[] textSpeedOptions = {1, 2, 3, 4, 5};
+        for (int textSpeedOption : textSpeedOptions) {
+            textToDisplay.append(options.getTextSpeed() == textSpeedOption ? ANSI_BLUE : "")
+                    .append(textSpeedOption).append(" " + ANSI_RESET);
+        }
+
+        textToDisplay.append("\nTo change options, enter `").append(changeCommand).append(" settingName").append(" newValue`");
+        textToDisplay.append("\nTo go back, enter `").append(quitCommand).append("`");
+        OutputHandlerImpl.getScreen().generateText(textToDisplay.toString());
+
     }
 
     /**
@@ -57,33 +76,42 @@ public class ChangeOptionsState implements State {
     @Override
     public void postInput(String input) {
         //actually change the setting depending on the input.
-        String[] inputarr = input.split(" ");
+        String[] inputarr = input.trim().split("\\s+");
         String command = inputarr[0];
-        if (command.equals(quitCommand)) {
+        if (command.equalsIgnoreCase(quitCommand)) {
             isDone = true;
-            return;
-        } else if (command.equals(changeCommand)) {
+        } else if (command.equalsIgnoreCase(changeCommand)) {
             if (inputarr.length != 3) {
-                //say input invalid
+                OutputHandlerImpl.getScreen().generateText("Please enter 3 words! e.g. `change autoSave true`");
                 return;
             }
-            String option = inputarr[1];
-            String value = inputarr[2];
-            boolean success = false;
-            if (option.equals(textSpeedCommand)) {
-                success = attemptTextSpeedChange(value);
-            } else if (option.equals(autoSaveCommand)) {
-                success = attemptAutoSaveChange(value);
-            }
-
-            if (success) {
-                //say change successful
-                awaitingInput = false;
-            }
+            attemptChangeOption(inputarr[1], inputarr[2]);
         } else {
-            //say input invalid
+            OutputHandlerImpl.getScreen().generateText("Please enter a valid command! e.g. `change autoSave true`");
         }
 
+    }
+
+
+    /**
+     * Attempt to change Option option to parameter value
+     * @param option The option to change
+     * @param value The value to change option to
+     */
+    private void attemptChangeOption(String option, String value) {
+        boolean success = false;
+        if (option.equalsIgnoreCase(textSpeedCommand)) {
+            success = attemptTextSpeedChange(value);
+        } else if (option.equalsIgnoreCase(autoSaveCommand)) {
+            success = attemptAutoSaveChange(value);
+        } else {
+            OutputHandlerImpl.getScreen().generateText("Please select a valid option!");
+        }
+
+        if (success) {
+            OutputHandlerImpl.getScreen().generateText("Successfully changed settings!");
+            awaitingInput = false;
+        }
     }
 
 
@@ -99,7 +127,7 @@ public class ChangeOptionsState implements State {
         else if (value.equalsIgnoreCase("false")) {
             options.setEnableAutoSave(false);
         } else {
-            //say input invalid
+            OutputHandlerImpl.getScreen().generateText("This is not a valid value for option "+autoSaveCommand+"!");
             return false;
         }
         return true;
@@ -113,9 +141,13 @@ public class ChangeOptionsState implements State {
     private boolean attemptTextSpeedChange(String value) {
         if (isInt(value)) {
             int textSpeed = Integer.parseInt(value);
+            if (textSpeed > 5 || textSpeed < 1) {
+                OutputHandlerImpl.getScreen().generateText("This is not a valid value for option "+textSpeedCommand+"!");
+                return false;
+            }
             options.setTextSpeed(textSpeed);
         } else {
-            //say input invalid
+            OutputHandlerImpl.getScreen().generateText("This is not a valid value for option "+textSpeedCommand+"!");
             return false;
         }
         return true;

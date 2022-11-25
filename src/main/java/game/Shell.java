@@ -98,6 +98,8 @@ public class Shell {
     private void switchManager() {
         // !!! should assign the nextManager to this.currentManager.
         //should have some arguments
+
+        currentManager = new PauseMenuManager(new PauseMenuChoiceStateFactory(), new ChangeOptionsStateFactory());
     }
 
     /**
