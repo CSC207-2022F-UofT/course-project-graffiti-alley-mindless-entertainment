@@ -1,6 +1,7 @@
 package game_world.objects.areas;
 
 import game_world.objects.events.Event;
+import io.InputValidator;
 
 import java.util.ArrayList;
 
@@ -19,5 +20,30 @@ public class OneWayArea extends Area {
         this.texts = texts;
         this.next = next;
         this.events = events;
+    }
+
+    @Override
+    public void preInput() {
+
+    }
+
+    @Override
+    public void postInput(String input) {
+
+    }
+
+    @Override
+    public boolean awaitInput() {
+        return false;
+    }
+
+    @Override
+    public boolean isDone() {
+        return false;
+    }
+
+    @Override
+    public InputValidator getInputValidator() {
+        return null;
     }
 }

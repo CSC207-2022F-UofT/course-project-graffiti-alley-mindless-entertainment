@@ -3,6 +3,7 @@ package game_world.managers;
 import core.StateManager;
 import database.managers.AreaDataManager;
 import database.objects.AreaData;
+import game_world.factories.AreaFactory;
 import game_world.objects.areas.Area;
 import game_world.objects.areas.MultiDirectionalArea;
 import game_world.objects.areas.OneWayArea;
@@ -16,79 +17,43 @@ public class AreaManager extends StateManager {
      * Manages all matters regarding Areas
      */
 
-    private ArrayList<Area> areas;
-    private AreaDataManager database;
-    private EventManager eventManager;
+    private final AreaFactory factory;
+    private final AreaDataManager database;
+    private final EventManager eventManager;
+
     private String currentZone;
     private Area currentArea;
+    private ArrayList<Area> areas;
 
     public AreaManager(EventManager eventManager) {
         this.database = new AreaDataManager();
         this.eventManager = eventManager;
+        this.factory = new AreaFactory(this.eventManager);
+        this.currentZone = "Introduction";
         initialize();
     }
 
     @Override
-    protected State nextState(String input) {
-        return null;
+    public void initialize() {
+        boolean areaInit = false;
+        this.areas = new ArrayList<>();
+        ArrayList<AreaData> areaList = this.database.fetchAreaList(this.currentZone);
+
+        for (AreaData areaData : areaList) {
+            Area newArea = this.factory.createArea(this.areas, areaData);
+            this.areas.add(newArea);
+            if (newArea.name.equals(this.currentArea.name)) {areaInit = true;}
+        }
+
+        // Initialize to first area of zone
+        if (!areaInit) {
+            this.currentArea = areas.get(0);
+        }
     }
 
     @Override
-    public void initialize() {
-        this.currentZone = "Introduction";
-        this.areas = new ArrayList<>();
-        ArrayList<AreaData> areaList = this.database.fetchAreaList(this.currentZone);
-        for (AreaData areaData : areaList) {
-            Area newArea = createArea(areaData);
-            this.areas.add(newArea);
-        }
-        this.currentArea = areas.get(0);
-    }
-
-
-
-    /**
-     * Generates new Area object and adds to the areas list
-     * @return the new area generated
-     * @param data data from existing AreaData
-     */
-    private Area createArea(AreaData data) {
-        if (data.type.equals("One-Way")) {
-            Area newArea = new OneWayArea(
-                    data.name,
-                    data.speaker,
-                    data.texts,
-                    data.next,
-                    eventManager.getEventsFromArea(data.events)
-            );
-            for (Area area : areas) {
-                if (area.name.equals(data.next)) {
-                    newArea.adjacentAreas.add(area);
-                }
-            }
-            this.areas.add(newArea);
-            return newArea;
-        }
-        else if (data.type.equals("Multi-Directional")) {
-            Area newArea = new MultiDirectionalArea(
-                    data.name,
-                    data.speaker,
-                    data.texts,
-                    data.options,
-                    eventManager.getEventsFromArea(data.events)
-            );
-            ArrayList<String> nextList = new ArrayList<>();
-            for (String next : data.options.values()) {
-                nextList.add(next.split(" - ")[1]);
-            }
-            for (Area area : areas) {
-                if (nextList.contains(data.name)) {
-                    newArea.adjacentAreas.add(area);
-                }
-            }
-            this.areas.add(newArea);
-            return newArea;
-        }
+    protected State nextState(String input) {
+        if (input.equals("move"))
         return null;
     }
 
@@ -135,7 +100,7 @@ public class AreaManager extends StateManager {
             this.currentZone = zone;
             ArrayList<AreaData> areaList = this.database.fetchAreaList(this.currentZone);
             for (AreaData areaData : areaList) {
-                Area newArea = createArea(areaData);
+                Area newArea = this.factory.createArea(areas, areaData);
                 if (newArea.name.equals(nextArea)) {
                     this.currentArea = newArea;
                 }
