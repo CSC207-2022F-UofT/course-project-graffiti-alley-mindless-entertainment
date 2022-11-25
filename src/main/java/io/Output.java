@@ -4,7 +4,7 @@ public class Output {
     public static Output instance;
 
     public static OutputHandler getScreen() {
-        return instance.outputHandler;
+        return getInstance().outputHandler;
     }
 
     public static Output getInstance() {
