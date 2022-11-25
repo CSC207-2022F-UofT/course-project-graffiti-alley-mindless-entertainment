@@ -1,13 +1,15 @@
 package game;
 
-import core.ManagerControllerImpl;
-import interfaces.ManagerController;
+import switch_managers.ManagerControllerImpl;
+import core.StateManager;
+import switch_managers.ManagerController;
 import io.InputHandler;
 import io.InputHandlerImpl;
 import menus.PauseMenuChoiceStateFactory;
 import menus.PauseMenuManager;
 import menus.options.ChangeOptionsStateFactory;
-import switch_event_handlers.PauseResumeEventHandler;
+import playercreation.PlayerCreatorManager;
+import switch_managers.handlers.PauseResumeEventHandler;
 
 public class Game {
     public static void main(String[] args) {
@@ -20,10 +22,22 @@ public class Game {
     public void startGame() {
         InputHandler inputHandler = new InputHandlerImpl();
         ManagerController managerController = createManagerController();
-        Shell s = new Shell(inputHandler, managerController);
+        StateManager startingManager = getStartingManager();
+        Shell s = new Shell(inputHandler, managerController, startingManager);
         s.startGame();
     }
 
+    private StateManager getStartingManager() {
+        //should change to a mainMenuManager when one gets created
+        PlayerCreatorManager playerCreatorManager = new PlayerCreatorManager();
+        //playerCreatorManager.initialize();
+        return playerCreatorManager;
+    }
+
+    /**
+     * Creates the manager controller and all switch event handlers.
+     * @return the manager controller to pass to the shell.
+     */
     public ManagerController createManagerController() {
         ManagerControllerImpl managerController = new ManagerControllerImpl();
 

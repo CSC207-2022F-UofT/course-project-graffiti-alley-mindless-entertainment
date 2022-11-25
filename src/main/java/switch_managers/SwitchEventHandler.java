@@ -1,7 +1,12 @@
-package core;
+package switch_managers;
 
-import javax.swing.plaf.nimbus.State;
+import core.StateManager;
 
+/**
+ * SwitchEventHandler. Takes inspiration from the chain of responsibility pattern:
+ * If the handler can handle the switch event, then it returns a StateManager, otherwise, returns null.
+ * Used in conjunction with the ManagerController to handle all manager switching.
+ */
 public interface SwitchEventHandler {
 
 

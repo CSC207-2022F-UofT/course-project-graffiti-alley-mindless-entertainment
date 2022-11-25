@@ -1,10 +1,9 @@
 package game;
 
 import core.StateManager;
-import core.SwitchEventType;
-import interfaces.ManagerController;
+import switch_managers.SwitchEventType;
+import switch_managers.ManagerController;
 import io.InputHandler;
-import playercreation.PlayerCreatorManager;
 
 /**
  * This class contains the shell, which connects the different systems of the program together.
@@ -19,15 +18,17 @@ public class Shell {
     private final InputHandler inputHandler;
     private boolean running;
 
-    public Shell(InputHandler inputHandler, ManagerController managerController) {
+    public Shell(InputHandler inputHandler, ManagerController managerController, StateManager startingManager) {
         this.inputHandler = inputHandler;
         this.managerController = managerController;
+        this.currentManager = startingManager;
     }
 
+    /**
+     * Starts the game,
+     */
     public void startGame() {
-        currentManager = getStartingManager();
         running = true;
-        //initialize all the managers
 
         mainLoop();
     }
@@ -82,12 +83,7 @@ public class Shell {
      * Returns the manager for the start of the game.
      */
     // !!! not sure that I got who the first manager is and how this part works.
-    private StateManager getStartingManager() {
-        //should change to a mainMenuManager when one gets created
-        PlayerCreatorManager playerCreatorManager = new PlayerCreatorManager();
-        //playerCreatorManager.initialize();
-        return playerCreatorManager;
-    }
+
 
     /**
      * Handles the system to switch between the different managers in the game.

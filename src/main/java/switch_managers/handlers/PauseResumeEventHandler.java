@@ -1,26 +1,29 @@
-package switch_event_handlers;
+package switch_managers.handlers;
 
 import core.StateManager;
-import core.SwitchEventHandler;
-import core.SwitchEventType;
+import switch_managers.SwitchEventHandler;
+import switch_managers.SwitchEventType;
 import menus.PauseMenuManager;
 
 public class PauseResumeEventHandler implements SwitchEventHandler {
-
-    /**
-     * @param eventType   the switch event to handle
-     * @param currManager the current manager
-     * @return the manager to switch to, or null if this handler cannot handle the event
-     */
 
     private StateManager prevManager;
 
     private final PauseMenuManager pauseMenuManager;
 
+
+    /**
+     * @param pauseMenuManager the pause menu manager.
+     */
     public PauseResumeEventHandler(PauseMenuManager pauseMenuManager) {
         this.pauseMenuManager = pauseMenuManager;
     }
 
+    /**
+     * @param eventType the switch event to handle
+     * @param currManager the current manager
+     * @return the manager to switch to, or null if this handler cannot handle the event
+     */
     @Override
     public StateManager handleSwitchEvent(SwitchEventType eventType, StateManager currManager) {
         switch (eventType) {
