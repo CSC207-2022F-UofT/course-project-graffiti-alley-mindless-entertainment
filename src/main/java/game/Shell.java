@@ -1,13 +1,9 @@
 package game;
 
 import core.StateManager;
+import core.SwitchEventType;
+import interfaces.ManagerController;
 import io.InputHandler;
-import io.OutputHandler;
-import io.OutputHandlerImpl;
-import menus.PauseMenuChoiceStateFactory;
-import menus.PauseMenuManager;
-import menus.options.ChangeOptionsStateFactory;
-import options.Options;
 import playercreation.PlayerCreatorManager;
 
 /**
@@ -18,11 +14,14 @@ public class Shell {
      * Attributes.
      */
     private StateManager currentManager;
-    private InputHandler inputHandler;
+
+    private final ManagerController managerController;
+    private final InputHandler inputHandler;
     private boolean running;
 
-    public Shell(InputHandler inputHandler) {
+    public Shell(InputHandler inputHandler, ManagerController managerController) {
         this.inputHandler = inputHandler;
+        this.managerController = managerController;
     }
 
     public void startGame() {
@@ -94,10 +93,11 @@ public class Shell {
      * Handles the system to switch between the different managers in the game.
      * (!!!)
      */
-    //!! Need to create the system when more managers within the game are created.
     private void switchManager() {
-        // !!! should assign the nextManager to this.currentManager.
-        //should have some arguments
+        // !!! get switch event somehow - maybe through a mediator?
+        SwitchEventType switchEventType = SwitchEventType.PAUSE;
+        this.currentManager = managerController.switchManagers(switchEventType, currentManager);
+        currentManager.initialize();
     }
 
     /**
