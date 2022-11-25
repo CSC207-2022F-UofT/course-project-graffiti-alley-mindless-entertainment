@@ -3,7 +3,6 @@ package game;
 import core.StateManager;
 import io.InputHandler;
 import io.OutputHandler;
-import io.OutputHandlerImpl;
 import menus.PauseMenuChoiceStateFactory;
 import menus.PauseMenuManager;
 import menus.options.ChangeOptionsStateFactory;

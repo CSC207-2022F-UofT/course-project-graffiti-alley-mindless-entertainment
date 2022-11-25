@@ -2,7 +2,7 @@ package menus.options;
 
 import io.InputValidator;
 import interfaces.State;
-import io.OutputHandlerImpl;
+import io.Output;
 import options.Options;
 
 /**
@@ -65,7 +65,7 @@ public class ChangeOptionsState implements State {
 
         textToDisplay.append("\nTo change options, enter `").append(changeCommand).append(" settingName").append(" newValue`");
         textToDisplay.append("\nTo go back, enter `").append(quitCommand).append("`");
-        OutputHandlerImpl.getScreen().generateText(textToDisplay.toString());
+        Output.getScreen().generateText(textToDisplay.toString());
 
     }
 
@@ -82,12 +82,12 @@ public class ChangeOptionsState implements State {
             isDone = true;
         } else if (command.equalsIgnoreCase(changeCommand)) {
             if (inputarr.length != 3) {
-                OutputHandlerImpl.getScreen().generateText("Please enter 3 words! e.g. `change autoSave true`");
+                Output.getScreen().generateText("Please enter 3 words! e.g. `change autoSave true`");
                 return;
             }
             attemptChangeOption(inputarr[1], inputarr[2]);
         } else {
-            OutputHandlerImpl.getScreen().generateText("Please enter a valid command! e.g. `change autoSave true`");
+            Output.getScreen().generateText("Please enter a valid command! e.g. `change autoSave true`");
         }
 
     }
@@ -105,11 +105,11 @@ public class ChangeOptionsState implements State {
         } else if (option.equalsIgnoreCase(autoSaveCommand)) {
             success = attemptAutoSaveChange(value);
         } else {
-            OutputHandlerImpl.getScreen().generateText("Please select a valid option!");
+            Output.getScreen().generateText("Please select a valid option!");
         }
 
         if (success) {
-            OutputHandlerImpl.getScreen().generateText("Successfully changed settings!");
+            Output.getScreen().generateText("Successfully changed settings!");
             awaitingInput = false;
         }
     }
@@ -127,7 +127,7 @@ public class ChangeOptionsState implements State {
         else if (value.equalsIgnoreCase("false")) {
             options.setEnableAutoSave(false);
         } else {
-            OutputHandlerImpl.getScreen().generateText("This is not a valid value for option "+autoSaveCommand+"!");
+            Output.getScreen().generateText("This is not a valid value for option "+autoSaveCommand+"!");
             return false;
         }
         return true;
@@ -142,12 +142,12 @@ public class ChangeOptionsState implements State {
         if (isInt(value)) {
             int textSpeed = Integer.parseInt(value);
             if (textSpeed > 5 || textSpeed < 1) {
-                OutputHandlerImpl.getScreen().generateText("This is not a valid value for option "+textSpeedCommand+"!");
+                Output.getScreen().generateText("This is not a valid value for option "+textSpeedCommand+"!");
                 return false;
             }
             options.setTextSpeed(textSpeed);
         } else {
-            OutputHandlerImpl.getScreen().generateText("This is not a valid value for option "+textSpeedCommand+"!");
+            Output.getScreen().generateText("This is not a valid value for option "+textSpeedCommand+"!");
             return false;
         }
         return true;

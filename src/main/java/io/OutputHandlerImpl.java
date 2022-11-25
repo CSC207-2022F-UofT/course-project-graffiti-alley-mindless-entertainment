@@ -5,19 +5,10 @@ import java.util.List;
 
 
 public class OutputHandlerImpl implements OutputHandler {
-
-    private static OutputHandlerImpl screen;
-
     /**
      * using Singleton pattern so that globally there is only one OutputHandler instance, which is screen
      */
-    private OutputHandlerImpl() {}
-    public static OutputHandlerImpl getScreen() {
-        if (screen == null) {
-            screen = new OutputHandlerImpl();
-        }
-        return screen;
-    }
+    public OutputHandlerImpl() {}
 
     /**
      * @param text to be displayed on screen
