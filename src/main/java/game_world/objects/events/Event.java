@@ -1,6 +1,9 @@
 package game_world.objects.events;
 
-public abstract class Event {
+import interfaces.State;
+
+
+public abstract class Event implements State {
 
     /**
      * Main Area class with arbitrary instance attributes

@@ -1,6 +1,8 @@
 package game;
 
 import core.StateManager;
+import game_world.managers.AreaManager;
+import game_world.managers.EventManager;
 import io.InputHandler;
 import io.OutputHandler;
 import menus.PauseMenuChoiceStateFactory;
@@ -17,6 +19,8 @@ public class Shell {
      * Attributes.
      */
     private StateManager currentManager;
+    private AreaManager areaManager;
+    private EventManager eventManager;
     private InputHandler inputHandler;
     private boolean running;
 
@@ -28,6 +32,8 @@ public class Shell {
         currentManager = getStartingManager();
         running = true;
         //initialize all the managers
+        eventManager = new EventManager();
+        areaManager = new AreaManager(this.eventManager);
 
         mainLoop();
     }
@@ -98,7 +104,9 @@ public class Shell {
         // !!! should assign the nextManager to this.currentManager.
         //should have some arguments
 
-        currentManager = new PauseMenuManager(new PauseMenuChoiceStateFactory(), new ChangeOptionsStateFactory());
+        //currentManager = new PauseMenuManager(new PauseMenuChoiceStateFactory(), new ChangeOptionsStateFactory());
+
+        currentManager = areaManager;
     }
 
     /**

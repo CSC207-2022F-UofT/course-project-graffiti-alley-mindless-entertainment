@@ -1,13 +1,16 @@
 package game_world.managers;
 
+import core.ChoiceState;
 import core.StateManager;
 import database.managers.AreaDataManager;
 import database.objects.AreaData;
 import game_world.factories.AreaFactory;
+import game_world.factories.DialogueStateFactory;
+import game_world.objects.Action;
 import game_world.objects.areas.Area;
-import game_world.objects.areas.MultiDirectionalArea;
-import game_world.objects.areas.OneWayArea;
 import interfaces.State;
+import io.Output;
+import io.OutputHandler;
 
 import java.util.ArrayList;
 
@@ -17,44 +20,87 @@ public class AreaManager extends StateManager {
      * Manages all matters regarding Areas
      */
 
-    private final AreaFactory factory;
+    private final AreaFactory areaFactory;
+    private final DialogueStateFactory enteringAreaStateFactory = new DialogueStateFactory();
     private final AreaDataManager database;
     private final EventManager eventManager;
 
     private String currentZone;
     private Area currentArea;
+    private Action currentAction;
     private ArrayList<Area> areas;
 
     public AreaManager(EventManager eventManager) {
         this.database = new AreaDataManager();
         this.eventManager = eventManager;
-        this.factory = new AreaFactory(this.eventManager);
+
+        this.areaFactory = new AreaFactory(this.eventManager);
         this.currentZone = "Introduction";
         initialize();
     }
 
     @Override
     public void initialize() {
-        boolean areaInit = false;
         this.areas = new ArrayList<>();
         ArrayList<AreaData> areaList = this.database.fetchAreaList(this.currentZone);
 
         for (AreaData areaData : areaList) {
-            Area newArea = this.factory.createArea(this.areas, areaData);
+            Area newArea = this.areaFactory.createArea(this.areas, areaData);
             this.areas.add(newArea);
-            if (newArea.name.equals(this.currentArea.name)) {areaInit = true;}
         }
 
         // Initialize to first area of zone
-        if (!areaInit) {
-            this.currentArea = areas.get(0);
-        }
+        this.currentArea = areas.get(0);
+        this.currentAction = Action.ENTERING_AREA;
+        this.currState = enteringAreaStateFactory.createDialogueState(
+                "The game will now begin. To advance dialogue, press enter. Enjoy!"
+        );
     }
 
     @Override
     protected State nextState(String input) {
-        if (input.equals("move"))
+        OutputHandler output = Output.getScreen();
+        if (this.currentAction == Action.ENTERING_AREA) {
+            if (this.currentArea.getCurrTextIndex() == 0) {
+                output.generateText("◈ " + this.currentArea.getSpeaker() + "");
+            }
+            if (this.currentArea.getCurrTextIndex() == this.currentArea.getTexts().size()) {
+                if (this.currentArea.getEvents().size() == 0) {
+                    if (this.currentArea.getType().equals("One-Way")) {
+                        String nextAreaName = this.currentArea.getNextArea("");
+                        this.getToNextArea(nextAreaName);
+                        this.currState = enteringAreaStateFactory.createDialogueState(
+                                "You approach " + nextAreaName.split(" - ")[1] + " in " + nextAreaName.split(" - ")[0] + "."
+                        );
+                        return this.currState;
+                    } else if (this.currentArea.getType().equals("Multi-Directional")) {
+                        this.currentAction = Action.LEAVING_AREA;
+                        ArrayList<String> actions = new ArrayList<>();
+                        for (int i = 0; i < this.currentArea.getAdjacentAreas().size(); i++) {
+                            actions.add(getCharForNumber(i + 1));
+                        }
+                    }
+                }
+                else {
+                    eventManager.areaEntered(this.currentArea);
+                    this.currState = null;
+                }
+            }
+            else {
+                this.currState = enteringAreaStateFactory.createDialogueState(
+                        this.currentArea.getTexts().get(this.currentArea.getCurrTextIndex())
+                );
+                this.currentArea.incrementCurrTextIndex();
+            }
+            return this.currState;
+        } else if (this.currentAction == Action.LEAVING_AREA) {
+
+        }
         return null;
+    }
+
+    private String getCharForNumber(int i) {
+        return i > 0 && i < 27 ? String.valueOf((char)(i + 64)) : null;
     }
 
     /**
@@ -62,18 +108,6 @@ public class AreaManager extends StateManager {
      */
     public Area getCurrentArea() {
         return this.currentArea;
-    }
-
-    /**
-     * @return area from current zone
-     */
-    private Area getArea(String name) {
-        for (Area area : areas) {
-            if (area.name.equals(name)) {
-                return area;
-            }
-        }
-        return null;
     }
 
     /**
@@ -88,7 +122,7 @@ public class AreaManager extends StateManager {
         String zone = choice.split(" - ")[0];
         if (this.currentZone.equals(zone)) {
             for (Area area : areas) {
-                if (area.name.equals(nextArea)) {
+                if (area.getName().equals(nextArea)) {
                     this.currentArea = area;
                     break;
                 }
@@ -100,14 +134,13 @@ public class AreaManager extends StateManager {
             this.currentZone = zone;
             ArrayList<AreaData> areaList = this.database.fetchAreaList(this.currentZone);
             for (AreaData areaData : areaList) {
-                Area newArea = this.factory.createArea(areas, areaData);
-                if (newArea.name.equals(nextArea)) {
+                Area newArea = this.areaFactory.createArea(areas, areaData);
+                if (newArea.getName().equals(nextArea)) {
                     this.currentArea = newArea;
                 }
                 areas.add(newArea);
             }
         }
-        eventManager.areaEntered(this.currentArea);
         return this.currentArea;
     }
 

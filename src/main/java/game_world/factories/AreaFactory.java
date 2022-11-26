@@ -32,8 +32,8 @@ public class AreaFactory {
                     this.eventManager.getEventsFromArea(data.events)
             );
             for (Area area : areas) {
-                if (area.name.equals(data.next)) {
-                    newArea.adjacentAreas.add(area);
+                if (area.getName().equals(data.next)) {
+                    newArea.addAdjacentArea(area);
                 }
             }
             areas.add(newArea);
@@ -48,12 +48,16 @@ public class AreaFactory {
                     this.eventManager.getEventsFromArea(data.events)
             );
             ArrayList<String> nextList = new ArrayList<>();
+            ArrayList<String> actionsList = new ArrayList<>();
             for (String next : data.options.values()) {
                 nextList.add(next.split(" - ")[1]);
             }
+            for (String action : data.options.keySet()) {
+                actionsList.add(action.split(" - ")[0]);
+            }
             for (Area area : areas) {
                 if (nextList.contains(data.name)) {
-                    newArea.adjacentAreas.add(area);
+                    newArea.addAdjacentArea(area);
                 }
             }
             areas.add(newArea);

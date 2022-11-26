@@ -1,6 +1,8 @@
 package game_world.objects.areas;
 
+import game_world.objects.Action;
 import game_world.objects.events.Event;
+import game_world.validators.AreaInputValidator;
 import io.InputValidator;
 
 import java.util.ArrayList;
@@ -22,30 +24,10 @@ public class MultiDirectionalArea extends Area {
         this.texts = texts;
         this.options = options;
         this.events = events;
+        this.currTextIndex = 0;
     }
 
-    @Override
-    public void preInput() {
-
-    }
-
-    @Override
-    public void postInput(String input) {
-
-    }
-
-    @Override
-    public boolean awaitInput() {
-        return false;
-    }
-
-    @Override
-    public boolean isDone() {
-        return false;
-    }
-
-    @Override
-    public InputValidator getInputValidator() {
-        return null;
+    public String getNextArea(String choice) {
+        return this.options.get(choice);
     }
 }

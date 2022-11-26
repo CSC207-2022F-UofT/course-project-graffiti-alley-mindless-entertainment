@@ -1,20 +1,59 @@
 package game_world.objects.areas;
 
 import game_world.objects.events.Event;
-import interfaces.State;
 
 import java.util.ArrayList;
 
-public abstract class Area implements State {
+public abstract class Area {
 
     /**
      * Main Area class with arbitrary instance attributes
      */
 
-    public String name;
-    public String type;
-    public String speaker;
-    public ArrayList<String> texts;
-    public ArrayList<Area> adjacentAreas;
-    public ArrayList<Event> events;
+    String name;
+    String type;
+    String speaker;
+    ArrayList<String> texts;
+
+    int currTextIndex;
+    ArrayList<Area> adjacentAreas;
+    ArrayList<Event> events;
+
+    public String getName() {
+        return name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getSpeaker() {
+        return speaker;
+    }
+
+    public ArrayList<Event> getEvents() {
+        return events;
+    }
+
+    public ArrayList<String> getTexts() {
+        return texts;
+    }
+
+    public int getCurrTextIndex() {
+        return currTextIndex;
+    }
+
+    public ArrayList<Area> getAdjacentAreas() {
+        return adjacentAreas;
+    }
+
+    public void incrementCurrTextIndex() {
+        this.currTextIndex += 1;
+    }
+
+    public void addAdjacentArea(Area area) {
+        this.adjacentAreas.add(area);
+    }
+
+    public String getNextArea(String choice) { return ""; }
 }

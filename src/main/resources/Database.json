@@ -20,7 +20,7 @@
         ],
         "type": "One-Way",
         "next": "The Aqua Nation - Beach 1",
-        "events": ["test", "test 2"]
+        "events": []
       }
     },
     "The Aqua Nation": {
@@ -38,19 +38,56 @@
           "Follow the grassy trail": "The Aqua Nation - Grassy Field",
           "Walk along the beach": "The Aqua Nation - Beach 2"
         },
-        "events": ["test 3"]
+        "events": []
       },
       "Beach 2": {
-
+        "speaker": "George",
+        "texts": [
+          "Hi! My name is George.",
+          "This area isn't implemented yet but at least you got me!"
+        ],
+        "type": "Multi-Directional",
+        "options": {
+          "A": "The Aqua Nation - Beach 1",
+          "B": "The Aqua Nation - Dark Cave 1"
+        },
+        "events": []
       },
       "Grassy Field": {
-
+        "speaker": "George",
+        "texts": [
+          "Hi! My name is George.",
+          "This area isn't implemented yet but at least you got me!"
+        ],
+        "type": "One-Way",
+        "next": "The Aqua Nation - Village",
+        "events": []
       },
       "Village": {
-
+        "speaker": "George",
+        "texts": [
+          "Hi! My name is George.",
+          "This area isn't implemented yet but at least you got me!"
+        ],
+        "type": "Multi-Directional",
+        "options": {
+          "A": "The Aqua Nation - Grassy Field",
+          "B": "The Terra Nation - Dark Cave 2"
+        },
+        "events": []
       },
       "Dark Cave 1": {
-
+        "speaker": "George",
+        "texts": [
+          "Hi! My name is George.",
+          "This area isn't implemented yet but at least you got me!"
+        ],
+        "type": "Multi-Directional",
+        "options": {
+          "A": "The Aqua Nation - Village",
+          "B": "The Terra Nation - Dark Cave 2"
+        },
+        "events": []
       }
     },
     "The Terra Nation": {
