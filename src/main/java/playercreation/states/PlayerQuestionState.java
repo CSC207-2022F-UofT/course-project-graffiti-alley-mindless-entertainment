@@ -2,7 +2,8 @@ package playercreation.states;
 
 import io.InputValidator;
 import interfaces.State;
-import io.OutputHandlerImpl;
+import io.Output;
+import io.OutputHandler;
 import objects.battle.SkillType;
 import playercreation.PlayerCreatorInputValidator;
 import playercreation.PlayerCreatorInteractor;
@@ -43,7 +44,7 @@ public class PlayerQuestionState implements State {
     public void preInput() {
         // Utilizes OutputHandler to ask the user a question based on the currQuestion.
         this.awaitInput = true;
-        OutputHandlerImpl output = OutputHandlerImpl.getScreen();
+        OutputHandler output = Output.getScreen();
         if (this.currQuestion == PlayerQuestion.NAME) {
             output.generateText("Welcome, weary traveler. May I ask what your name is?");
         }
