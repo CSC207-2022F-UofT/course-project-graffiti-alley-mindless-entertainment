@@ -10,6 +10,8 @@ public class DefaultAI implements EnemyAI {
     private EnemyInfo enemyInfo;
     private int attackChance;
 
+    private EnemyPotion potion;
+
     /**
      * This is a constructor of Default AI
      * @param attackChance : chance of the enemy attacking in int
@@ -18,6 +20,7 @@ public class DefaultAI implements EnemyAI {
     public DefaultAI(EnemyInfo enemyInfo, int attackChance){
         this.enemyInfo = enemyInfo;
         this.attackChance = attackChance;
+        this.potion = new EnemyPotion(10);
     }
 
     /**
@@ -27,18 +30,18 @@ public class DefaultAI implements EnemyAI {
      * @return string that represents the enemy's action
      */
     @Override
-    public String respond(String input) {
+    public EnemyAction respond(String input) {
+        Random rand = new Random();
         if (Objects.equals(input, "use skill")) {
-            Random rand = new Random();
             int upperbound = 101;
             int int_random = rand.nextInt(upperbound);
             if(int_random < this.attackChance){
-                return "use skill";
+                return enemyInfo.getSkill(rand.nextInt(enemyInfo.getSkills().size()));
             } else{
-                return "use potion";
+                return potion;
             }
         } else{
-            return "use skill";
+            return enemyInfo.getSkill(rand.nextInt(enemyInfo.getSkills().size()));
         }
     }
 }
