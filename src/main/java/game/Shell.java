@@ -91,7 +91,7 @@ public class Shell {
      */
     private void switchManager() {
         // !!! get switch event somehow - maybe through a mediator?
-        SwitchEventType switchEventType = SwitchEventType.PAUSE;
+        SwitchEventType switchEventType = SwitchEventType.START_GAME;
         this.currentManager = managerController.switchManagers(switchEventType, currentManager);
         currentManager.initialize();
     }

@@ -38,7 +38,10 @@ public class SelectionState implements State {
         this.awaitInput = false;
         this.isDone = true;
         OutputHandler output = Output.getScreen();
-        output.generateText("You decide to " + input + ".");
+        if (input.startsWith("i"))
+            output.generateText("You decide to " + input.substring(2) + ".");
+        else
+            output.generateText("You decide to " + input + ".");
     }
 
     @Override
