@@ -4,11 +4,11 @@ import core.StateManager;
 import database.managers.EventDataManager;
 
 import database.objects.EventData;
-import game_world.objects.areas.Area;
-import game_world.objects.events.ArbitraryEvent;
-import game_world.objects.events.EncounterEvent;
-import game_world.objects.events.ItemPickUpEvent;
-import game_world.objects.events.Event;
+import game_world.validators.objects.areas.Area;
+import game_world.validators.objects.events.ArbitraryEvent;
+import game_world.validators.objects.events.EncounterEvent;
+import game_world.validators.objects.events.ItemPickUpEvent;
+import game_world.validators.objects.events.Event;
 import interfaces.State;
 
 import java.util.ArrayList;

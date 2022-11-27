@@ -2,9 +2,9 @@ package game_world.factories;
 
 import database.objects.AreaData;
 import game_world.managers.EventManager;
-import game_world.objects.areas.Area;
-import game_world.objects.areas.MultiDirectionalArea;
-import game_world.objects.areas.OneWayArea;
+import game_world.validators.objects.areas.Area;
+import game_world.validators.objects.areas.MultiDirectionalArea;
+import game_world.validators.objects.areas.OneWayArea;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,6 @@
-package game_world.objects.states;
+package game_world.validators.objects.states;
 
-import game_world.objects.Action;
+import game_world.validators.objects.Action;
 import game_world.validators.AreaInputValidator;
 import interfaces.State;
 import io.InputValidator;

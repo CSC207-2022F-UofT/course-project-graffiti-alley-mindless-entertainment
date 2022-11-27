@@ -1,6 +1,6 @@
 import game_world.managers.AreaManager;
 import game_world.managers.EventManager;
-import game_world.objects.areas.OneWayArea;
+import game_world.validators.objects.areas.OneWayArea;
 import org.junit.jupiter.api.Test;
 
 public class EventManagerTest {

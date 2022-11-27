@@ -1,6 +1,6 @@
 package game_world.validators;
 
-import game_world.objects.Action;
+import game_world.validators.objects.Action;
 import io.InputValidator;
 
 import java.util.ArrayList;

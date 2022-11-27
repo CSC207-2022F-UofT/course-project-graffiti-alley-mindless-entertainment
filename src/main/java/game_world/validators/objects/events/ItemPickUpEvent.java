@@ -1,4 +1,4 @@
-package game_world.objects.events;
+package game_world.validators.objects.events;
 
 import io.InputValidator;
 

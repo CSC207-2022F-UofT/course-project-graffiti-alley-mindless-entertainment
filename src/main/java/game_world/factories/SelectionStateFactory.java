@@ -1,6 +1,6 @@
 package game_world.factories;
 
-import game_world.objects.states.SelectionState;
+import game_world.validators.objects.states.SelectionState;
 
 import java.util.ArrayList;
 

@@ -6,7 +6,7 @@ import database.objects.AreaData;
 import game_world.factories.AreaFactory;
 import game_world.factories.DialogueStateFactory;
 import game_world.factories.SelectionStateFactory;
-import game_world.objects.areas.Area;
+import game_world.validators.objects.areas.Area;
 import interfaces.State;
 import io.Output;
 import io.OutputHandler;
