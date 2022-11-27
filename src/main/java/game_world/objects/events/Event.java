@@ -1,9 +1,9 @@
-package game_world.validators.objects.events;
+package game_world.objects.events;
 
 import interfaces.State;
 
 
-public abstract class Event implements State {
+public abstract class Event {
 
     /**
      * Main Area class with arbitrary instance attributes
@@ -13,7 +13,7 @@ public abstract class Event implements State {
     public String type;
 
     public long priority;
-    public int eventState;
+    public State eventState;
 
     /**
      * Main abstract method, executes all code within an event

@@ -1,4 +1,4 @@
-package game_world.validators.objects;
+package game_world.objects;
 
 public enum Action {
 

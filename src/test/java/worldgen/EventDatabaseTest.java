@@ -1,3 +1,5 @@
+package worldgen;
+
 import database.managers.AreaDataManager;
 import database.managers.EventDataManager;
 import database.objects.AreaData;

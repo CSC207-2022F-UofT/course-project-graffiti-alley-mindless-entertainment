@@ -31,7 +31,7 @@ public class InputHandlerImpl implements InputHandler {
             String text = screen.getLastText();
             List<String> options = screen.getLastOptions();
             if (options == null) {
-                screen.generateText(text);
+                //screen.generateText(text);
             } else {
                 screen.generateTextWithOptions(text, options);
             }
