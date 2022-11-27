@@ -27,7 +27,15 @@ public class MultiDirectionalArea extends Area {
         this.currTextIndex = 0;
     }
 
-    public String getNextArea(String choice) {
-        return this.options.get(choice);
+    public ArrayList<String> getNextInputs() {
+        return new ArrayList<>(this.options.keySet());
+    }
+
+    public ArrayList<String> getNextAreas() {
+        return new ArrayList<>(this.options.values());
+    }
+
+    public String getAreaFromInput(String input) {
+        return options.get(input);
     }
 }

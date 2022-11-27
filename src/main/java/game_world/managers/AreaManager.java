@@ -1,12 +1,11 @@
 package game_world.managers;
 
-import core.ChoiceState;
 import core.StateManager;
 import database.managers.AreaDataManager;
 import database.objects.AreaData;
 import game_world.factories.AreaFactory;
 import game_world.factories.DialogueStateFactory;
-import game_world.objects.Action;
+import game_world.factories.SelectionStateFactory;
 import game_world.objects.areas.Area;
 import interfaces.State;
 import io.Output;
@@ -21,13 +20,13 @@ public class AreaManager extends StateManager {
      */
 
     private final AreaFactory areaFactory;
-    private final DialogueStateFactory enteringAreaStateFactory = new DialogueStateFactory();
+    private final DialogueStateFactory dialogueStateFactory = new DialogueStateFactory();
+    private final SelectionStateFactory selectionStateFactory = new SelectionStateFactory();
     private final AreaDataManager database;
     private final EventManager eventManager;
 
     private String currentZone;
     private Area currentArea;
-    private Action currentAction;
     private ArrayList<Area> areas;
 
     public AreaManager(EventManager eventManager) {
@@ -51,8 +50,7 @@ public class AreaManager extends StateManager {
 
         // Initialize to first area of zone
         this.currentArea = areas.get(0);
-        this.currentAction = Action.ENTERING_AREA;
-        this.currState = enteringAreaStateFactory.createDialogueState(
+        this.currState = dialogueStateFactory.createDialogueState(
                 "The game will now begin. To advance dialogue, press enter. Enjoy!"
         );
     }
@@ -60,47 +58,44 @@ public class AreaManager extends StateManager {
     @Override
     protected State nextState(String input) {
         OutputHandler output = Output.getScreen();
-        if (this.currentAction == Action.ENTERING_AREA) {
-            if (this.currentArea.getCurrTextIndex() == 0) {
-                output.generateText("◈ " + this.currentArea.getSpeaker() + "");
-            }
-            if (this.currentArea.getCurrTextIndex() == this.currentArea.getTexts().size()) {
-                if (this.currentArea.getEvents().size() == 0) {
-                    if (this.currentArea.getType().equals("One-Way")) {
-                        String nextAreaName = this.currentArea.getNextArea("");
-                        this.getToNextArea(nextAreaName);
-                        this.currState = enteringAreaStateFactory.createDialogueState(
-                                "You approach " + nextAreaName.split(" - ")[1] + " in " + nextAreaName.split(" - ")[0] + "."
+        if (this.currentArea.getCurrTextIndex() == 0) {
+            output.generateText("◈ " + this.currentArea.getSpeaker() + "");
+        }
+        if (this.currentArea.getCurrTextIndex() == this.currentArea.getTexts().size()) {
+            if (this.currentArea.getEvents().size() == 0) {
+                if (this.currentArea.getType().equals("One-Way")) {
+                    String nextAreaName = this.currentArea.getNextAreas().get(0);
+                    this.getToNextArea(nextAreaName);
+                    this.currState = dialogueStateFactory.createDialogueState(
+                            "You approach " + nextAreaName.split(" - ")[1] + " in " + nextAreaName.split(" - ")[0] + "."
+                    );
+                    return this.currState;
+                } else if (this.currentArea.getType().equals("Multi-Directional")) {
+                    if (this.currentArea.getNextInputs().contains(input.toLowerCase())) {
+                        this.getToNextArea(this.currentArea.getAreaFromInput(input.toLowerCase()));
+                        this.currState = dialogueStateFactory.createDialogueState(
+                                "You approach " + this.currentArea.getName() + " in " + this.currentZone + "."
                         );
-                        return this.currState;
-                    } else if (this.currentArea.getType().equals("Multi-Directional")) {
-                        this.currentAction = Action.LEAVING_AREA;
-                        ArrayList<String> actions = new ArrayList<>();
-                        for (int i = 0; i < this.currentArea.getAdjacentAreas().size(); i++) {
-                            actions.add(getCharForNumber(i + 1));
-                        }
                     }
-                }
-                else {
-                    eventManager.areaEntered(this.currentArea);
-                    this.currState = null;
+                    else {
+                        this.currState = selectionStateFactory.createSelectionState(this.currentArea.getNextInputs());
+                    }
+                    return this.currState;
                 }
             }
             else {
-                this.currState = enteringAreaStateFactory.createDialogueState(
-                        this.currentArea.getTexts().get(this.currentArea.getCurrTextIndex())
-                );
-                this.currentArea.incrementCurrTextIndex();
+                // play events
+                eventManager.areaEntered(this.currentArea);
+                this.currState = null;
             }
-            return this.currState;
-        } else if (this.currentAction == Action.LEAVING_AREA) {
-
         }
-        return null;
-    }
-
-    private String getCharForNumber(int i) {
-        return i > 0 && i < 27 ? String.valueOf((char)(i + 64)) : null;
+        else {
+            this.currState = dialogueStateFactory.createDialogueState(
+                    this.currentArea.getTexts().get(this.currentArea.getCurrTextIndex())
+            );
+            this.currentArea.incrementCurrTextIndex();
+        }
+        return this.currState;
     }
 
     /**

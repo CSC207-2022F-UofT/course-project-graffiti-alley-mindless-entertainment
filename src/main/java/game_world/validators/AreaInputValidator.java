@@ -3,14 +3,24 @@ package game_world.validators;
 import game_world.objects.Action;
 import io.InputValidator;
 
+import java.util.ArrayList;
+
 
 public class AreaInputValidator implements InputValidator {
 
     private final Action currentAction;
+    private final ArrayList<String> possibleInputs;
 
     public AreaInputValidator(Action currentAction) {
         // Constructs a new PlayerCreatorInputValidator with currQuestion.
         this.currentAction = currentAction;
+        this.possibleInputs = new ArrayList<>();
+    }
+
+    public AreaInputValidator(Action currentAction, ArrayList<String> possibleInputs) {
+        // Constructs a new PlayerCreatorInputValidator with currQuestion.
+        this.currentAction = currentAction;
+        this.possibleInputs = possibleInputs;
     }
 
     @Override
@@ -21,14 +31,10 @@ public class AreaInputValidator implements InputValidator {
             return "";
         }
         else if (currentAction == Action.LEAVING_AREA) {
-            // Ensures the user inputted either "confirm" or "return" for confirming a response.
-            if (input.equalsIgnoreCase("confirm")) {
-                return input.toLowerCase();
+            String lowerInput = input.toLowerCase();
+            if (this.possibleInputs.contains(lowerInput)) {
+                return lowerInput;
             }
-            else if (input.equalsIgnoreCase("return")) {
-                return input.toLowerCase();
-            }
-            return null;
         }
         return null;
     }

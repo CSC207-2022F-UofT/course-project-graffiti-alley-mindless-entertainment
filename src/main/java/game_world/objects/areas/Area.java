@@ -55,5 +55,7 @@ public abstract class Area {
         this.adjacentAreas.add(area);
     }
 
-    public String getNextArea(String choice) { return ""; }
+    public String getAreaFromInput(String input) { return null; }
+    public ArrayList<String> getNextAreas() { return null; }
+    public ArrayList<String> getNextInputs() { return null; }
 }

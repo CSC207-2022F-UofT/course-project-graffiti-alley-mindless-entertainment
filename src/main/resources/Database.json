@@ -35,8 +35,8 @@
         ],
         "type": "Multi-Directional",
         "options": {
-          "Follow the grassy trail": "The Aqua Nation - Grassy Field",
-          "Walk along the beach": "The Aqua Nation - Beach 2"
+          "follow the grassy trail": "The Aqua Nation - Grassy Field",
+          "walk along the beach": "The Aqua Nation - Beach 2"
         },
         "events": []
       },
@@ -48,8 +48,8 @@
         ],
         "type": "Multi-Directional",
         "options": {
-          "A": "The Aqua Nation - Beach 1",
-          "B": "The Aqua Nation - Dark Cave 1"
+          "beach 1": "The Aqua Nation - Beach 1",
+          "dark cave 1": "The Aqua Nation - Dark Cave 1"
         },
         "events": []
       },
@@ -71,8 +71,8 @@
         ],
         "type": "Multi-Directional",
         "options": {
-          "A": "The Aqua Nation - Grassy Field",
-          "B": "The Terra Nation - Dark Cave 2"
+          "grassy field": "The Aqua Nation - Grassy Field",
+          "dark cave 1": "The Aqua Nation - Dark Cave 1"
         },
         "events": []
       },
@@ -84,8 +84,8 @@
         ],
         "type": "Multi-Directional",
         "options": {
-          "A": "The Aqua Nation - Village",
-          "B": "The Terra Nation - Dark Cave 2"
+          "village": "The Aqua Nation - Village",
+          "dark cave 2": "The Terra Nation - Dark Cave 2"
         },
         "events": []
       }

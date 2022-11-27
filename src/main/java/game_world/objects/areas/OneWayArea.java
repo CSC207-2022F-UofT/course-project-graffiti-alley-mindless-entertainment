@@ -7,6 +7,7 @@ import io.InputValidator;
 import io.OutputHandlerImpl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class OneWayArea extends Area {
 
@@ -27,7 +28,7 @@ public class OneWayArea extends Area {
     }
 
     @Override
-    public String getNextArea(String choice) {
-        return this.next;
+    public ArrayList<String> getNextAreas() {
+        return new ArrayList<>(Collections.singleton(this.next));
     }
 }
