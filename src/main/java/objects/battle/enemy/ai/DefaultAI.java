@@ -5,7 +5,14 @@ import objects.battle.enemy.EnemyInfo;
 import java.util.Objects;
 import java.util.Random;
 
+
+
 public class DefaultAI implements EnemyAI {
+
+    /**
+     * Default AI that decides enemy's action depending on the User's input
+     *
+     */
 
     private EnemyInfo enemyInfo;
     private int attackChance;

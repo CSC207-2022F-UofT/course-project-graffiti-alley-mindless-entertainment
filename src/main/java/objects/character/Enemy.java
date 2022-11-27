@@ -152,16 +152,12 @@ public class Enemy extends Character {
         this.enemyInfo.setType(type);
     }
 
-    /**
-     * This method returns the enemy actions depending on the user's action
-     *
-     * @param input: input by the user
-     * @return enemy's action in string (use skill or use potion)
-     */
-    public EnemyAction enemyAction(String input){
-        return this.enemyAI.respond(input);
-    }
 
+    /**
+     * This method returns EnemyAI that the enemy  has
+     *
+     * @return enemyAI that the enemy has
+     */
     public EnemyAI getEnemyAI() {
         return this.enemyAI;
     }
