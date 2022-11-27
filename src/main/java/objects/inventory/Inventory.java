@@ -53,6 +53,18 @@ public class Inventory {
     }
 
     /**
+     * @Return list of item's name
+     */
+    public ArrayList<Object> viewItemList(){
+        ArrayList<Object> items = new ArrayList<>();
+        for (int i = 0; i < inventory.size(); i++) {
+            Item item = (Item) inventory.get(i);
+            items.add(i + ". " + item.getName());
+        }
+        return items;
+    }
+
+    /**
      * @param item to be added to inventory
      * @return whether item is added.
      */
@@ -72,9 +84,9 @@ public class Inventory {
      * @return whether item is removed.
      */
     public boolean removeItem(int i){
-            if (inventory.size() > i){
-                inventory.remove(i);
-                return true;
+        if (inventory.size() > i){
+            inventory.remove(i);
+            return true;
         }
         return false;
     }
