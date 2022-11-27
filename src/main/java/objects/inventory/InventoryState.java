@@ -2,7 +2,7 @@ package objects.inventory;
 
 import io.InputValidator;
 import interfaces.State;
-
+import io.Output;
 /**
  * Use case to change inventory based on user input
  */
@@ -37,11 +37,11 @@ public class InventoryState implements State {
     @Override
     public void preInput() {
         awaitingInput = true;
-        // use outputHandler to display inventory, call inventory.viewInventory()
-        // use outputHandler to display choices of commands below
-        // Commands:
-        // Quit: quit inventory
-        // Remove item: type "remove i" ("i" is the i-th item in inventory)
+        StringBuilder textToDisplay = new StringBuilder(inventory.viewInventory());
+        textToDisplay.append("Commands: \n");
+        textToDisplay.append("quit: type 'quit' inventory to quit inventory.\n");
+        textToDisplay.append("remove i: type 'remove i' (i is the i-th item in inventory) to remove item.\n");
+        Output.getScreen().generateText(textToDisplay.toString());
     }
 
     /**
@@ -58,11 +58,11 @@ public class InventoryState implements State {
         } else if (command.equals(removeItemCommand)) {
             inventory.removeItem(Integer.parseInt(inputarr[1]));
             awaitingInput = false;
-            // say success
+            Output.getScreen().generateText("The item is successfully removed!");
             return;
         }
 
-        // say input invalid
+        Output.getScreen().generateText("Please enter a valid command! e.g. 'quit', 'remove 0'");
     }
 
     /**
