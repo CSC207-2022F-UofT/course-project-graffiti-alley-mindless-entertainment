@@ -7,8 +7,6 @@ import switch_managers.SwitchEventType;
 
 public class StartGameEventHandler implements SwitchEventHandler {
 
-    private StateManager prevManager;
-
     private final AreaManager areaManager;
 
 
@@ -27,7 +25,6 @@ public class StartGameEventHandler implements SwitchEventHandler {
     @Override
     public StateManager handleSwitchEvent(SwitchEventType eventType, StateManager currManager) {
         if (eventType == SwitchEventType.START_GAME) {
-            prevManager = currManager;
             return areaManager;
         }
         return null;
