@@ -55,11 +55,11 @@ public class Inventory {
     /**
      * @Return list of item's name
      */
-    public ArrayList<Object> viewItemList(){
-        ArrayList<Object> items = new ArrayList<>();
+    public String viewItemList(){
+        String items = "";
         for (int i = 0; i < inventory.size(); i++) {
             Item item = (Item) inventory.get(i);
-            items.add(i + ". " + item.getName());
+            items = items + i + ". " + item.getName() + "\n";
         }
         return items;
     }
