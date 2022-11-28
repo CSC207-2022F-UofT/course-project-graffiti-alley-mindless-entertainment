@@ -55,6 +55,7 @@ public class LoseBattleState implements State {
                 this.user.changeCurrHealth(1);
                 this.foe.setHealth(0);
         }
+        user.changeSpeed(100 - user.getSpeed());
         this.done = true;
     }
     @Override

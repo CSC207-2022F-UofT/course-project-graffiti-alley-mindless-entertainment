@@ -5,6 +5,7 @@ import io.InputValidator;
 import io.OutputHandlerImpl;
 import objects.battle.Skill;
 import objects.battle.SkillHandler;
+import objects.battle.enemy.SkillHelper;
 import objects.character.Enemy;
 import objects.character.Player;
 
@@ -25,10 +26,12 @@ public class UserTurnState implements State {
     private boolean done = false;
     private List<String> skillList;
     private boolean awaitingInp = false;
+    private InputValidator validator;
 
     public UserTurnState(Player user, Enemy foe) {
         // Will need to change later to accommodate other options, like inventory
-        this.skillList = Skill.toSkillString(user.getSkillList());
+        SkillHelper dummy = new SkillHelper();
+        this.skillList = dummy.toSkillString(user.getSkillList());
         this.user = user;
         this.foe = foe;
     }
@@ -38,8 +41,10 @@ public class UserTurnState implements State {
      */
     @Override
     public void preInput() {
-        // Asking the user for input
-        OutputHandlerImpl.getScreen().generateTextWithOptions("Pick a skill", skillList);
+        if () {
+            // Asking the user for input
+            OutputHandlerImpl.getScreen().generateTextWithOptions("Pick a skill", skillList);
+            this.validator = new ChoicesInputValidator(this.skillList);
         awaitingInp = true;
     }
 
@@ -53,8 +58,9 @@ public class UserTurnState implements State {
     @Override
     public void postInput(String input) {
         // VALIDATE THE INPUT FIRST
-        Skill chosenSkill = Skill.findSkill(input, user.getSkillList());
-        if (chosenSkill.equals("dummy")) {
+        SkillHelper dummy = new SkillHelper();
+        Skill chosenSkill = dummy.findSkill(input, user.getSkillList());
+        if (chosenSkill == null) {
             OutputHandlerImpl.getScreen().generateText("That skill doesn't exist, please enter a valid skill.");
         }
         else {

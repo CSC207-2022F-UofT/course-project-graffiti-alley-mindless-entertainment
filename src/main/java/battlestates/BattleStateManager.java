@@ -39,12 +39,12 @@ public class BattleStateManager extends StateManager {
         // Win condition
         if (!foe.checkAlive()) {
             chosenState = new WinBattleState(user, foe);
-            user.changeSpeed(100);
+            this.isDone = true;
         }
         // Lose condition
         else if (this.user.getCurrHealth() <= 0) {
             chosenState = new LoseBattleState(user, foe);
-            user.changeSpeed(100);
+            this.isDone = true;
         }
         // Normal battle turn ordering, characters can get multiple turns in a row if high enough speed.
         else {
@@ -57,47 +57,6 @@ public class BattleStateManager extends StateManager {
         }
         return chosenState;
     }
-
-    /**
-     * Calls the preinput function from the current state.
-     * If the current state is done moves onto the next state.
-     * When the current state is done and is a Win/Lose state, battle ends.
-     * TEMPORARY, instead of battle ending for losing, resets health.
-     */
-    @Override
-    public void preInput() {
-        currState.preInput();
-        boolean currStateDone = currState.isDone();
-
-        if (currStateDone) {
-            this.currState = this.nextState("");
-            if (this.currState instanceof WinBattleState) {
-                this.isDone = true;
-            }
-        }
-    }
-
-    /**
-     * Passes on the user input from the shell to the current state.
-     * If the current state is done moves onto the next state.
-     * When the current state is done and is a Win/Lose state, battle ends.
-     * TEMPORARY, instead of battle ending for losing, resets health.
-     *
-     * @param input User input given by the shell
-     */
-    @Override
-    public void postInput(String input) {
-        currState.postInput(input);
-        boolean currStateDone = currState.isDone();
-
-        if (currStateDone) {
-            this.currState = this.nextState(input);
-            if (this.currState instanceof WinBattleState) {
-                this.isDone = true;
-            }
-        }
-    }
-
     @Override
     public void initialize() {
 
