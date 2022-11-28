@@ -1,6 +1,19 @@
 {
   "name": "PACT",
   "texts": {
+    "0": {
+      "zone": "Introduction",
+      "name": "[GAME]",
+      "speaker": "[G̶̢̥̥̋̅͠ͅĄ̶̡̰̉̋̔M̴̢̺̜̥͎̞̅̏̏̃̊͆̈́̂͘ͅḚ̵̣̻͖͓̒̑͜]",
+      "texts": [
+        "Well then...",
+        "I wish you luck in the next world."
+      ],
+      "options": {
+
+      },
+      "events": []
+    },
     "1": {
       "zone": "Introduction",
       "name": "[GAME]",
@@ -20,7 +33,8 @@
         "Promise me that you will save them."
       ],
       "options": {
-        "2": "i promise"
+        "2": "i promise",
+        "0": "i do not promise"
       },
       "events": []
     },
@@ -171,6 +185,8 @@
     {
       "name": "test",
       "type": "Encounter",
+      "encounter-type": "Hostile",
+      "enemy": "goblin",
       "priority": 1
     },
     {
