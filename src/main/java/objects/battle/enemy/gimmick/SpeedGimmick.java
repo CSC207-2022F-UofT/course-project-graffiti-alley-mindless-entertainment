@@ -7,6 +7,7 @@ public class SpeedGimmick implements Gimmick {
     private int triggerHealth;
     private int speedIncrease;
 
+    private boolean GimmickUsed = false;
     /**
      * This is a constructor of speed gimmick
      * @param enemyInfo: enemyInfo which has all the information about the enemy
@@ -21,8 +22,14 @@ public class SpeedGimmick implements Gimmick {
     /**
      * This method uses speed gimmick which increases the enemy's speed
      */
-    public void useGimmick(){
-        this.enemyInfo.changeSpeed(this.speedIncrease);
+    public boolean useGimmick() {
+        if (!this.GimmickUsed && checkGimmick()) {
+            this.enemyInfo.changeSpeed(this.speedIncrease);
+            this.GimmickUsed = true;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

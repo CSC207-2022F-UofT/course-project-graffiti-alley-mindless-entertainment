@@ -9,6 +9,7 @@ public class TypeGimmick implements Gimmick {
     private int triggerHealth;
     //In this turn gimmick, whenever, the gimmick is triggered, only enemy
     // will attack in the next turn.
+    private boolean GimmickUsed = false;
 
     /**
      * This is a constructor of type gimmick
@@ -23,17 +24,22 @@ public class TypeGimmick implements Gimmick {
     /**
      * This method use type gimmick which changes the enemy's type
      */
-    public void useGimmick(){
-
-        SkillType type = this.enemyInfo.getType();
-        if(type == SkillType.WATER){
-            this.enemyInfo.setType(SkillType.FIRE);
-        } else if(type == SkillType.FIRE){
-            this.enemyInfo.setType(SkillType.EARTH);
-        } else if(type == SkillType.EARTH){
-            this.enemyInfo.setType(SkillType.AIR);
-        } else{
-            this.enemyInfo.setType(SkillType.WATER);
+    public boolean useGimmick() {
+        if (!this.GimmickUsed && checkGimmick()) {
+            SkillType type = this.enemyInfo.getType();
+            if(type == SkillType.WATER){
+                this.enemyInfo.setType(SkillType.FIRE);
+            } else if(type == SkillType.FIRE){
+                this.enemyInfo.setType(SkillType.EARTH);
+            } else if(type == SkillType.EARTH){
+                this.enemyInfo.setType(SkillType.AIR);
+            } else{
+                this.enemyInfo.setType(SkillType.WATER);
+            }
+            this.GimmickUsed = true;
+            return true;
+        } else {
+            return false;
         }
     }
 
