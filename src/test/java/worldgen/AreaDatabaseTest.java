@@ -10,7 +10,7 @@ public class AreaDatabaseTest {
     void testJSONConversionToAreaData() {
         AreaDataManager database = new AreaDataManager();
         AreaData introData = database.fetchArea("1");
-        assert introData.next_ids.get(0).equals("2");
+        assert introData.next_ids.get(0).equals("0");
         assert introData.name.equals("[GAME]");
     }
 
