@@ -63,19 +63,14 @@ public class StatisticalTask extends Task {
         switch (this.statistic) {
             case HEALTH:
                 return assignee.getCurrHealth();
-            break;
             case EXPERIENCE:
                 return assignee.getExperience();
-            break;
             case LEVEL:
                 return assignee.getLevel();
-            break;
             case MONEY:
                 return assignee.getMoney();
-            break;
             default:
                 return 0;
-            break;
         }
     }
 

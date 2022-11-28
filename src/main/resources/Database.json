@@ -96,7 +96,61 @@
       }
     }
   },
-  "quests": [],
+  "quests": [
+    {
+      "name":"",
+      "description": "",
+      "bystander": "",
+      "reward": {
+        "type": "statistical",
+        "statistic": "health",
+        "value": "25"
+      },
+      "tasks": [{
+        "type": "statistical",
+        "statistic": "health",
+        "value": "90",
+        "isEquality": "false"
+      }]
+    },
+    {
+      "name":"",
+      "description": "",
+      "bystander": "",
+      "reward": {
+        "type": "statistical",
+        "statistic": "money",
+        "value": "1000"
+      },
+      "tasks": [{
+        "type": "statistical",
+        "statistic": "level",
+        "value": "5",
+        "isEquality": "true"
+      }, {
+        "type": "statistical",
+        "statistic": "money",
+        "value": "300",
+        "isEquality": "false"
+        }]
+    },
+    {
+      "name":"",
+      "description": "",
+      "bystander": "",
+      "reward": {
+        "type": "statistical",
+        "statistic": "experience",
+        "value": "25"
+      },
+      "tasks": [{
+        "type": "statistical",
+        "statistic": "experience",
+        "value": "10",
+        "isEquality": "false"
+      }]
+    }
+  ],
   "characters": [],
   "items": [],
   "skills": [

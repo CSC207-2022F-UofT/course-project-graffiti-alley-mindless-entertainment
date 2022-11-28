@@ -32,64 +32,13 @@ public class Quest {
      */
     // Constructor requesting all the attributes to define a quest.
     public Quest(String name, String description, Bystander overseer, Reward reward, List<Task> tasks) {
-        // assigns name to the quest's name.
         this.name = name;
-        // assigns description to the quest's description.
         this.description = description;
-        // assigns false the quest status: just created, not started = not completed.
         this.isCompleted = false;
-        // assigns the overseer to the quest.
         this.setOverseer(overseer);
-        // assigns the reward that will be received for completing the quest.
         this.reward = reward;
-        // assigns tasks to the list of tasks that need to be completed during the quest.
         this.tasks = tasks;
-        // assigns false to the quest at the start, since quest not started = reward cannot be distributed.
         this.isRewardDistributed = false;
-    }
-    // Constructor requesting only a name, a description, an overseer.
-    public Quest(String name, String description, Bystander overseer) {
-        this(name, description, overseer, null, new ArrayList<Task>());
-    }
-    // Constructor only requesting a name and an overseer.
-    public Quest(String name, Bystander overseer) {
-
-        this(name, "", overseer, null, new ArrayList<Task>());
-    }
-
-    /**
-     * Returns the name of the quest.
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Sets a new name for the quest.
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Returns the description of the quest.
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * Sets the description of the quest.
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    /**
-     * Returns the overseer affiliated to the quest.
-     */
-    public Bystander getOverseer() {
-        return overseer;
     }
 
     /**
@@ -126,13 +75,6 @@ public class Quest {
      */
     public Reward getReward() {
         return this.reward;
-    }
-
-    /**
-     * Sets a new reward for the completion of the quest.
-     */
-    public void setReward(Reward reward) {
-        this.reward = reward;
     }
 
     /***
@@ -180,5 +122,19 @@ public class Quest {
      */
     public void distributeReward() {
         this.isRewardDistributed = true;
+    }
+
+    /**
+     *
+     */
+    @Override
+    public String toString() {
+        String str = this.name + ", status: ";
+        if (this.isCompleted) {
+            str += "completed.";
+        } else {
+            str += "on going.";
+        }
+        return str;
     }
 }

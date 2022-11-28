@@ -62,11 +62,11 @@ public class StatisticalReward extends Reward {
                 break;
             // case where the receiver gets extra experience from the reward.
             case EXPERIENCE:
-                receiver.addExperience(this.value);
+                receiver.changeExperience(this.value);
                 break;
             // case where the receiver gets extra levels from the reward.
             case LEVEL:
-                receiver.addLevel(this.value);
+                receiver.changeLevel(this.value);
                 break;
             // case where the receiver gets extra money from the reward.
             case MONEY:
