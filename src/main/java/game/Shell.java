@@ -1,14 +1,9 @@
 package game;
 
 import core.StateManager;
+import switch_managers.SwitchEventType;
+import switch_managers.ManagerController;
 import io.InputHandler;
-import io.OutputHandler;
-import io.OutputHandlerImpl;
-import menus.PauseMenuChoiceStateFactory;
-import menus.PauseMenuManager;
-import menus.options.ChangeOptionsStateFactory;
-import options.Options;
-import playercreation.PlayerCreatorManager;
 
 /**
  * This class contains the shell, which connects the different systems of the program together.
@@ -18,17 +13,22 @@ public class Shell {
      * Attributes.
      */
     private StateManager currentManager;
-    private InputHandler inputHandler;
+
+    private final ManagerController managerController;
+    private final InputHandler inputHandler;
     private boolean running;
 
-    public Shell(InputHandler inputHandler) {
+    public Shell(InputHandler inputHandler, ManagerController managerController, StateManager startingManager) {
         this.inputHandler = inputHandler;
+        this.managerController = managerController;
+        this.currentManager = startingManager;
     }
 
+    /**
+     * Starts the game,
+     */
     public void startGame() {
-        currentManager = getStartingManager();
         running = true;
-        //initialize all the managers
 
         mainLoop();
     }
@@ -83,21 +83,17 @@ public class Shell {
      * Returns the manager for the start of the game.
      */
     // !!! not sure that I got who the first manager is and how this part works.
-    private StateManager getStartingManager() {
-        //should change to a mainMenuManager when one gets created
-        PlayerCreatorManager playerCreatorManager = new PlayerCreatorManager();
-        //playerCreatorManager.initialize();
-        return playerCreatorManager;
-    }
+
 
     /**
      * Handles the system to switch between the different managers in the game.
      * (!!!)
      */
-    //!! Need to create the system when more managers within the game are created.
     private void switchManager() {
-        // !!! should assign the nextManager to this.currentManager.
-        //should have some arguments
+        // !!! get switch event somehow - maybe through a mediator?
+        SwitchEventType switchEventType = SwitchEventType.PAUSE;
+        this.currentManager = managerController.switchManagers(switchEventType, currentManager);
+        currentManager.initialize();
     }
 
     /**
