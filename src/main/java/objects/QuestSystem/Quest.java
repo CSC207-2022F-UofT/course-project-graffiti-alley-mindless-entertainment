@@ -43,6 +43,8 @@ public class Quest {
 
     /**
      * Sets a new overseer, to be assigned to this quest.
+     * @param overseer: Bystander in charge of quest.
+     * @return whether action has been completed (true) or not (false).
      */
     private boolean setOverseer(Bystander overseer) {
         // Checks whether the overseer is already assigned to a Quest or not.
@@ -57,7 +59,7 @@ public class Quest {
     }
 
     /**
-     * Returns the lists of tasks that constitutes the quest.
+     * @return the lists of tasks that constitutes the quest.
      */
     public List<Task> getTasks() {
         return this.tasks;
@@ -65,20 +67,21 @@ public class Quest {
 
     /**
      * Adds a new task to the list of tasks.
+     * @param task to be added to the list of tasks in the quest.
      */
     public void addTask(Task task) {
         this.tasks.add(task);
     }
 
     /**
-     * Returns the reward for completing the quest completed.
+     * @return the reward for completing the quest completed.
      */
     public Reward getReward() {
         return this.reward;
     }
 
     /***
-     * Returns whether the reward for the quest has been distributed.
+     * @return whether the reward for the quest has been distributed.
      */
     public boolean isRewardDistributed() { return this.isRewardDistributed; }
 
@@ -86,9 +89,9 @@ public class Quest {
     /**
      * Checks whether the Quest is completed.
      *
-     * Returns true, if the status of the quest is completed.
-     * Returns true, if all the quest's tasks are completed (in addition to change the quest's status to completed).
-     * Returns false otherwise.
+     * @return true, if the status of the quest is completed.
+     * @return true, if all the quest's tasks are completed (in addition to change the quest's status to completed).
+     * @return false otherwise.
      */
     public boolean isCompleted() {
         // Checks whether the status is set to completed.
@@ -104,8 +107,8 @@ public class Quest {
 
     /**
      * Checks whether all the tasks in the quest have been completed.
-     * Returns true if all the tasks in the quest have been completed.
-     * Returns false otherwise.
+     * @return true if all the tasks in the quest have been completed.
+     * @return false otherwise.
      */
     private boolean areTasksCompleted() {
         boolean areTasksCompleted = true;
@@ -125,7 +128,7 @@ public class Quest {
     }
 
     /**
-     *
+     * @return String containing the quest's name & status.
      */
     @Override
     public String toString() {

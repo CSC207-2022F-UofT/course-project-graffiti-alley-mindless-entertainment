@@ -23,35 +23,8 @@ public class StatisticalReward extends Reward {
     }
 
     /**
-     * Returns the player's statistic that would be affected by the reward (when received).
-     */
-    public PlayersStatistics getStatistic() {
-        return this.statistic;
-    }
-
-    /**
-     * Changes the type of reward (which player's statistic would be affected).
-     */
-    public void setStatistic(PlayersStatistics statistic) {
-        this.statistic = statistic;
-    }
-
-    /**
-     * Returns the amount by which the player's statistic would be affected when reward is distributed.
-     */
-    public int getValue() {
-        return this.value;
-    }
-
-    /**
-     * Changes the amount by which the player's statistic would be affected when reward is distributed.
-     */
-    public void setValue(int value) {
-        this.value = value;
-    }
-
-    /**
      * Distributes the reward by changing the corresponding player's statistic by the amount defined.
+     * @param receiver: player that will receive the reward when distributed.
      */
     @Override
     protected void distribute(Player receiver) {

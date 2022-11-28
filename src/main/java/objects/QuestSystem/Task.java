@@ -23,21 +23,7 @@ public abstract class Task {
     }
 
     /**
-     * Returns the name of the task.
-     */
-    public String getName() {
-        return this.name;
-    }
-
-    /**
-     * Sets the name of the task.
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Returns whether the task is completed or not.
+     * @return whether the task is completed or not.
      */
     public boolean isCompleted() {
         return isCompleted;
@@ -45,7 +31,7 @@ public abstract class Task {
 
     /**
      * Completes the task.
-     * Returns true if the task has been completed properly. Returns false otherwise.
+     * @return true if the task has been completed properly. Returns false otherwise.
      */
     public abstract boolean isCompleted(Player assignee);
 }

@@ -28,23 +28,10 @@ public class StatisticalTask extends Task {
     }
 
     /**
-     * Returns the player's statistic that would be affected by the reward (when received).
-     */
-    public PlayersStatistics getStatistic() {
-        return this.statistic;
-    }
-
-    /**
-     * Changes the type of reward (which player's statistic would be affected).
-     */
-    public void setStatistic(PlayersStatistics statistic) {
-        this.statistic = statistic;
-    }
-
-    /**
      * Checks whether the statistic required for the task by the player responds to the requirement.
-     * Returns true if it is the case, meaning that the task is completed.
-     * Returns false, otherwise.
+     * @param assignee: player that has been assigned the task.
+     * @return true if it is the case, meaning that the task is completed.
+     * @return false, otherwise.
      */
     @Override
     public boolean isCompleted(Player assignee) {
@@ -57,7 +44,8 @@ public class StatisticalTask extends Task {
     }
 
     /**
-     * Returns the corresponding player's statistic for this specific task.
+     * @param assignee: player that is assigned to the task in hand.
+     * @return the corresponding player's statistic for this specific task.
      */
     private int getPlayersStatistic(Player assignee) {
         switch (this.statistic) {
@@ -76,7 +64,8 @@ public class StatisticalTask extends Task {
 
     /**
      * Checks whether the number is equal to the task's required value.
-     * Return true if it is the case. Otherwise, returns false.
+     * @param number: that will be compared to the value of the task.
+     * @return true if it is the case. Otherwise, returns false.
      */
     private boolean isEqual(int number) {
         return number == this.value;
@@ -84,7 +73,8 @@ public class StatisticalTask extends Task {
 
     /**
      * Checks whether the number is at least equal to the value required.
-     * Returns true if it is the case. Otherwise, returns false.
+     * @param number: that will be compared to value of the task.
+     * @return true if it is the case. Otherwise, returns false.
      */
     private boolean isGreaterOrEqual(int number) {
         return number >= this.value;

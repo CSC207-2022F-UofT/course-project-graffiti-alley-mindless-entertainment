@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class QuestManager extends DatabaseManager {
     /**
-     * Attribute
+     * Attributes.
      */
     // Stores the list of quests to be completed throughout the game.
     private List<Quest> quests;
@@ -51,10 +51,8 @@ public class QuestManager extends DatabaseManager {
     /**
      * Creates all the quests from the database.
      */
-    private void initializeQuests(JSONArray jsonArray) {
-        for (Object obj: jsonArray) {
-            this.quests.add(factory.createQuest((JSONObject) obj));
-        }
+    private void initializeQuests(JSONArray questData) {
+        this.quests = factory.createQuests(questData);
     }
 
     /**
@@ -66,7 +64,7 @@ public class QuestManager extends DatabaseManager {
     }
 
     /**
-     * Returns a String containing the statuses for all the quests.
+     * @return String containing the statuses for all the quests.
      */
     private String questsStatuses() {
         String str = "";
@@ -79,11 +77,12 @@ public class QuestManager extends DatabaseManager {
     }
 
     /**
-     * Returns the quest number x.
+     * @param i: index of the quest requested.
+     * @return the quest at the i index.
      */
-    public Quest getQuest(int x) {
-        if (x < this.quests.size()) {
-            return this.quests.get(x);
+    public Quest getQuest(int i) {
+        if (i < this.quests.size()) {
+            return this.quests.get(i);
         }
         else {
             return null;

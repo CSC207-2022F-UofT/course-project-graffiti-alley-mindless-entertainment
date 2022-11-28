@@ -1,7 +1,9 @@
 package objects.QuestSystem;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,9 +12,22 @@ import java.util.List;
 public class QuestDataFactory {
 
     /**
-     *
-     * @param jsonObject JSONObject with all information regarding event
-     * @return SkillData with all instance attributes converted from jsonObject
+     * @param jsonArray: contains all the quests objects and information needed for their creation.
+     * @return list of quests.
+     */
+    public List<Quest> createQuests(JSONArray jsonArray) {
+        List<Quest> quests = new ArrayList<>();
+
+        for (Object obj: jsonArray) {
+            quests.add(this.createQuest((JSONObject) obj));
+        }
+
+        return quests;
+    }
+
+    /**
+     * @param jsonObject: contains information regarding a quest
+     * @return quest created.
      */
     public Quest createQuest(JSONObject jsonObject) {
         return new Quest(
@@ -21,20 +36,27 @@ public class QuestDataFactory {
                 //!!! how do I do for the Bystander? Do I have to create new Bystander?
                 null,
                 createReward((JSONObject) jsonObject.get("reward")),
-                getTasks((JSONObject) jsonObject.get("tasks"))
+                getTasks((JSONArray) jsonObject.get("tasks"))
         );
     }
 
     /**
-     * Returns the lists of tasks for the Quest.
+     * @param jsonArray: contains the information about all the object for
+     * @return lists of tasks for the Quest.
      */
-    //!!!
-    public List<Task> getTasks(JSONObject jsonObject) {
-        return null;
+    public List<Task> getTasks(JSONArray jsonArray) {
+        List<Task> tasks = new ArrayList<>();
+
+        for (Object obj: jsonArray) {
+            tasks.add(createTask((JSONObject) obj));
+        }
+
+        return tasks;
     }
 
     /**
-     *
+     * @param jsonObject: contains information for creation of task.
+     * @return a new task
      */
     public Task createTask(JSONObject jsonObject) {
         switch (((String) jsonObject.get("type")).toLowerCase()) {
@@ -46,7 +68,8 @@ public class QuestDataFactory {
     }
 
     /**
-     * Returns a new statistical task.
+     * @param jsonObject: contains information for creation of task.
+     * @return a new statistical task.
      */
     public StatisticalTask createStatisticalTask(JSONObject jsonObject) {
         return new StatisticalTask(
@@ -58,7 +81,8 @@ public class QuestDataFactory {
     }
 
     /**
-     * Returns a new reward using information in JSON Object.
+     * @param jsonObject: contains information for the reward.
+     * @return  a new reward using information in JSON Object.
      */
     public Reward createReward(JSONObject jsonObject) {
         switch (((String) jsonObject.get("type")).toLowerCase()) {
@@ -72,7 +96,8 @@ public class QuestDataFactory {
     }
 
     /**
-     * Returns a new Statistical Reward using information in JSON Object.
+     * @param jsonObject: contains information for the reward.
+     * @return a new Statistical Reward using information in JSON Object.
      */
     public StatisticalReward createStatisticalReward(JSONObject jsonObject) {
         return new StatisticalReward(
@@ -83,7 +108,8 @@ public class QuestDataFactory {
 
     //!!! not very sure if having this method is bad practice or not.
     /**
-     * Returns the corresponding player's statistic.
+     * @param statistic: String containing player's statistic.
+     * @return the corresponding player's statistic (type: PlayersStatistics).
      */
     private PlayersStatistics getStatistics(String statistic) {
         switch (statistic.toLowerCase()) {
