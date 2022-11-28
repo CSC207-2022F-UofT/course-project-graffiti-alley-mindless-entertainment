@@ -21,6 +21,7 @@ public class Player extends Character {
      * speed: The speed of the Player. A higher int corresponds to a higher priority in a battle.
      * money: The amount of money the Player owns.
      * skillList: A List of Skills of the Player.
+     * inventory: An Inventory of the Player. Awaiting Inventory implementation.
      */
     private String name;
     private String description;
