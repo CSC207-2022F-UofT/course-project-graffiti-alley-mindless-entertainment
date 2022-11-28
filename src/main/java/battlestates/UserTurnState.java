@@ -26,6 +26,7 @@ public class UserTurnState implements State {
     private boolean done = false;
     private List<String> skillList;
     private boolean awaitingInp = false;
+    private InputValidator validator;
 
     public UserTurnState(Player user, Enemy foe) {
         // Will need to change later to accommodate other options, like inventory
@@ -40,8 +41,10 @@ public class UserTurnState implements State {
      */
     @Override
     public void preInput() {
-        // Asking the user for input
-        OutputHandlerImpl.getScreen().generateTextWithOptions("Pick a skill", skillList);
+        if () {
+            // Asking the user for input
+            OutputHandlerImpl.getScreen().generateTextWithOptions("Pick a skill", skillList);
+            this.validator = new ChoicesInputValidator(this.skillList);
         awaitingInp = true;
     }
 
@@ -57,7 +60,7 @@ public class UserTurnState implements State {
         // VALIDATE THE INPUT FIRST
         SkillHelper dummy = new SkillHelper();
         Skill chosenSkill = dummy.findSkill(input, user.getSkillList());
-        if (chosenSkill.getName().equals("dummy")) {
+        if (chosenSkill == null) {
             OutputHandlerImpl.getScreen().generateText("That skill doesn't exist, please enter a valid skill.");
         }
         else {
