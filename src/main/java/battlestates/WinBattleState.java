@@ -41,6 +41,7 @@ public class WinBattleState implements State {
         String winText = "You defeated the " + foe.getName() + "! You earned " + expGain
                 + " experience points, unless you cheated ;)";
         OutputHandlerImpl.getScreen().generateText(winText);
+        user.changeSpeed(100 - user.getSpeed()); // Resets speed to 100
         this.done = true;
     }
 
