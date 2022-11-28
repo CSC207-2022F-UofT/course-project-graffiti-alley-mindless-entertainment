@@ -10,7 +10,7 @@ import objects.battle.enemy.ai.*;
 public class Boss extends Enemy {
 
     private Gimmick gimmick;
-    private boolean GimmickUsed;
+    //private boolean GimmickUsed;
 
     /**
      * This is a constructor of the boss
@@ -24,7 +24,46 @@ public class Boss extends Enemy {
     {
         super(name, enemyInfo, enemyAI);
         this.gimmick = gimmick;
-        this.GimmickUsed = false;
+        //this.GimmickUsed = false;
+    }
+
+    /**
+     * This method checks if the gimmick is used or not
+     *
+     * @return boolean representing if the gimmick is used.
+     * return true if the gimmick is used
+     */
+    //public boolean checkGimmick()
+    //{
+        //return this.GimmickUsed;
+    //}
+
+    /**
+     * This method changes the GimmickUsed to true to indicate the
+     * gimmick is used
+     *
+     */
+    //public void usedGimmick()
+    //{
+        //this.GimmickUsed = true;
+    //}
+
+    /**
+     * This method sets the gimmick for an enemy
+     *
+     * @param gimmick: gimmick entity
+     */
+    //public void setGimmick(Gimmick gimmick)
+    //{
+        //this.gimmick = gimmick;
+    //}
+
+    /**
+     * This method returns the enemy's gimmick
+     *
+     */
+    public Gimmick getGimmick() {
+        return this.gimmick;
     }
 
     /**
@@ -34,54 +73,25 @@ public class Boss extends Enemy {
      * @return true if the gimmick is used and false if its not triggered or
      * if its already used once.
      */
-    public boolean useGimmick(){
-        if(!this.GimmickUsed && this.gimmick.checkGimmick()){
-            this.GimmickUsed = true;
-            this.gimmick.useGimmick();
-            return true;
-        } else{
-            return false;
-        }
+    //public boolean applyGimmick(){
+        //if(!this.GimmickUsed && this.gimmick.checkGimmick()){
+            //this.GimmickUsed = false;
+            //this.gimmick.useGimmick();
+            //return true;
+        //} else{
+            //return false;
+        //}
 
-    }
-
+    //}
     /**
-     * This method checks if the gimmick is used or not
+     * This method uses gimmick by calling a method in gimmick class. Returns true
+     * if the gimmick is successfully used and return false if its not triggered yet.
      *
-     * @return boolean representing if the gimmick is used.
-     * return true if the gimmick is used
+     * @return true if the gimmick is used and false if its not triggered or
+     * if its already used once.
      */
-    public boolean checkGimmick()
-    {
-        return this.GimmickUsed;
-    }
-
-    /**
-     * This method changes the GimmickUsed to true to indicate the
-     * gimmick is used
-     *
-     */
-    public void usedGimmick()
-    {
-        this.GimmickUsed = true;
-    }
-
-    /**
-     * This method sets the gimmick for an enemy
-     *
-     * @param gimmick: gimmick entity
-     */
-    public void setGimmick(Gimmick gimmick)
-    {
-        this.gimmick = gimmick;
-    }
-
-    /**
-     * This method returns the enemy's gimmick
-     *
-     */
-    public Gimmick getGimmick() {
-        return gimmick;
+    public boolean applyGimmick(){
+        return this.gimmick.useGimmick();
     }
 
 }

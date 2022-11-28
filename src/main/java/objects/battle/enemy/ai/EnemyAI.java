@@ -7,5 +7,5 @@ public interface EnemyAI {
      * @param input: user's action in string
      * @return string that represents the enemy's action
      */
-    public String respond(String input);
+    public EnemyAction respond(String input);
 }

@@ -3,6 +3,7 @@ import objects.battle.Skill;
 import objects.battle.SkillType;
 import objects.battle.enemy.EnemyInfo;
 import objects.battle.enemy.ai.EnemyAI;
+import objects.battle.enemy.ai.EnemyAction;
 import objects.character.Character;
 
 import java.util.ArrayList;
@@ -42,6 +43,26 @@ public class Enemy extends Character {
     }
 
     /**
+     * This function sets the enemy's health
+     *
+     * @param n: new health in int
+     */
+    public void setHealth(int n)
+    {
+        this.enemyInfo.setHealth(n);
+    }
+
+    /**
+     * This method sets the enemy's speed
+     *
+     * @param speed: new speed in int
+     */
+    public void setSpeed(int speed)
+    {
+        this.enemyInfo.setSpeed(speed);
+    }
+
+    /**
      * This method changes the Enemy's health
      * if n is positive, it will increase the health and
      * if its negative, it will decrease the health
@@ -62,7 +83,6 @@ public class Enemy extends Character {
         this.enemyInfo.changeSpeed(n);
     }
 
-
     /**
      * This returns the enemy's speed
      *
@@ -82,26 +102,6 @@ public class Enemy extends Character {
     public boolean checkAlive()
     {
         return this.enemyInfo.checkAlive();
-    }
-
-    /**
-     * This function sets the enemy's health
-     *
-     * @param n: new health in int
-     */
-    public void setHealth(int n)
-    {
-        this.enemyInfo.setHealth(n);
-    }
-
-    /**
-     * This method sets the enemy's speed
-     *
-     * @param speed: new speed in int
-     */
-    public void setSpeed(int speed)
-    {
-        this.enemyInfo.setSpeed(speed);
     }
 
     /**
@@ -151,18 +151,18 @@ public class Enemy extends Character {
         this.enemyInfo.setType(type);
     }
 
-    /**
-     * This method returns the enemy actions depending on the user's action
-     *
-     * @param input: input by the user
-     * @return enemy's action in string (use skill or use potion)
-     */
-    public String enemyAction(String input){
-        return this.enemyAI.respond(input);
-    }
 
+    /**
+     * This method returns EnemyAI that the enemy  has
+     *
+     * @return enemyAI that the enemy has
+     */
     public EnemyAI getEnemyAI() {
         return this.enemyAI;
+    }
+
+    public EnemyAction respond(String input){
+        return this.enemyAI.respond(input);
     }
 }
 

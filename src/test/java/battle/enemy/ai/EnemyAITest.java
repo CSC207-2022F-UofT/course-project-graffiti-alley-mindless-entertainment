@@ -5,6 +5,7 @@ import objects.battle.Skill;
 import objects.battle.SkillType;
 import objects.battle.enemy.EnemyInfo;
 import objects.battle.enemy.ai.DefaultAI;
+import objects.battle.enemy.ai.EnemyPotion;
 import objects.battle.enemy.ai.SmartAI;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,8 @@ public class EnemyAITest {
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
         DefaultAI defaultAI = new DefaultAI(enemyInfo, 100);
-        Assert.assertEquals("use skill", defaultAI.respond("use skill"));
+        Assert.assertEquals(true, defaultAI.respond("use skill") instanceof Skill ||
+                defaultAI.respond("use skill") instanceof EnemyPotion);
 
     }
     @DisplayName("Test of Default AI with 0% attack chance")

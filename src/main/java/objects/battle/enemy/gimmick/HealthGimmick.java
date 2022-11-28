@@ -6,6 +6,7 @@ import objects.battle.enemy.EnemyInfo;
 public class HealthGimmick implements Gimmick {
     private EnemyInfo enemyInfo;
     private int triggerHealth;
+    private boolean GimmickUsed = false;
 
     /**
      * This is a constructor of health gimmick
@@ -20,8 +21,14 @@ public class HealthGimmick implements Gimmick {
     /**
      * This method uses health gimmick which fully heal the enemy's health
      */
-    public void useGimmick(){
-        this.enemyInfo.setHealth(this.enemyInfo.getMaxHealth());
+    public boolean useGimmick() {
+        if (!this.GimmickUsed && checkGimmick()) {
+            this.enemyInfo.setHealth(this.enemyInfo.getMaxHealth());
+            this.GimmickUsed = true;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
