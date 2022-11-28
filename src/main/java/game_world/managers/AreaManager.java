@@ -1,9 +1,6 @@
 package game_world.managers;
 
 import core.StateManager;
-import database.managers.AreaDataManager;
-import database.objects.AreaData;
-import game_world.factories.AreaFactory;
 import game_world.factories.DialogueStateFactory;
 import game_world.factories.SelectionStateFactory;
 import game_world.objects.areas.Area;
@@ -11,32 +8,23 @@ import interfaces.State;
 import io.Output;
 import io.OutputHandler;
 
-import java.util.ArrayList;
-
 public class AreaManager extends StateManager {
 
     /**
      * Manages all matters regarding Areas
      */
 
-    private final AreaFactory areaFactory;
     private final DialogueStateFactory dialogueStateFactory = new DialogueStateFactory();
     private final SelectionStateFactory selectionStateFactory = new SelectionStateFactory();
-    private final AreaDataManager database;
+    private final AreaDatabaseInteractor databaseController;
     private final EventManager eventManager;
     private Area currentArea;
 
     public AreaManager(EventManager eventManager) {
-        this.database = new AreaDataManager();
         this.eventManager = eventManager;
-        this.areaFactory = new AreaFactory(this.eventManager);
-        loadArea("1");
+        this.databaseController = new AreaDatabaseInteractor(this.eventManager);
+        this.currentArea = databaseController.loadArea("1");
         initialize();
-    }
-
-    private void loadArea(String id) {
-        AreaData areaData = this.database.fetchArea(id);
-        this.currentArea = this.areaFactory.createArea(areaData);
     }
 
     @Override
@@ -99,7 +87,7 @@ public class AreaManager extends StateManager {
     public void getToNextArea(String id) {
         // save events and data here
         assert this.currentArea.getNextAreas().contains(id);
-        loadArea(id);
+        this.currentArea = databaseController.loadArea(id);
     }
 
 }

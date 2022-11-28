@@ -8,7 +8,7 @@ import database.objects.AreaData;
 
 public class AreaDataManager extends DatabaseManager {
 
-    public AreaDataFactory dataFactory;
+    private final AreaDataFactory dataFactory;
 
     /**
      * @return AreaData with all data from json converted to variables
