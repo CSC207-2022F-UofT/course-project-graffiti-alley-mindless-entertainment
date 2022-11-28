@@ -5,8 +5,15 @@ import switch_managers.SwitchEventHandler;
 import switch_managers.SwitchEventType;
 import menus.PauseMenuManager;
 
+/**
+ * Handler for PAUSE and RESUME events.
+ */
 public class PauseResumeEventHandler implements SwitchEventHandler {
 
+    /**
+     * prevManager: the manager to return to after pausing.
+     * pauseMenuManager: the manager for the pause menu.
+     */
     private StateManager prevManager;
 
     private final PauseMenuManager pauseMenuManager;
