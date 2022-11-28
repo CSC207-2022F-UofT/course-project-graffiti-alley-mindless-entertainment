@@ -30,7 +30,7 @@ public class SkillHelper {
      * @return either Dummy skill or the corresponding skill needed
      */
     public Skill findSkill(String skillName, List<Skill> skillList) {
-        Skill correctSkill = new Skill();
+        Skill correctSkill = null;
         for (Skill skill : skillList) {
             if (skill.getName().equals(skillName)) {
                 correctSkill = skill;
