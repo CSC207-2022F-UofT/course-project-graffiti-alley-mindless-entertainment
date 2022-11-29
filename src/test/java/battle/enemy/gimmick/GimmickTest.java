@@ -20,6 +20,7 @@ public class GimmickTest {
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
+        enemyInfo.changeHealth(-90);
         Gimmick gimmick = new Gimmick(GimmickType.HEALTH, enemyInfo, 30, 0, 1, null);
         UseGimmick usecase = new UseGimmick(gimmick);
         boolean used = usecase.useGimmick();
@@ -33,6 +34,7 @@ public class GimmickTest {
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
+        enemyInfo.changeHealth(-90);
         Gimmick gimmick = new Gimmick(GimmickType.ATTACK, enemyInfo, 20, 0, 1.2,null);
         UseGimmick usecase = new UseGimmick(gimmick);
         boolean used = usecase.useGimmick();
@@ -46,6 +48,7 @@ public class GimmickTest {
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
+        enemyInfo.changeHealth(-90);
         Gimmick gimmick = new Gimmick(GimmickType.TYPE, enemyInfo, 20, 0, 1, SkillType.FIRE);
         UseGimmick usecase = new UseGimmick(gimmick);
         boolean used = usecase.useGimmick();
@@ -59,6 +62,7 @@ public class GimmickTest {
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 100, 10, SkillType.WATER);
+        enemyInfo.changeHealth(-90);
         Gimmick gimmick = new Gimmick(GimmickType.SPEED, enemyInfo, 25, 20, 1, null);
         UseGimmick usecase = new UseGimmick(gimmick);
         boolean used = usecase.useGimmick();
