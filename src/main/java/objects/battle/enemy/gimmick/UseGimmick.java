@@ -4,11 +4,21 @@ import objects.battle.Skill;
 import objects.battle.SkillType;
 
 public class UseGimmick {
+    /** This class is the Gimmick use case that uses gimmick.
+     * Attribute: gimmick that has been used
+     */
     private Gimmick gimmick;
+
+    /** This is the constructor of the UseGimmick class that takes gimmick as a parameter
+     * @param gimmick: gimmick that has been used
+     */
     public UseGimmick(Gimmick gimmick){
         this.gimmick = gimmick;
     }
 
+    /** This is a method that actually use the gimmick that is given in the constructor.
+     * @return boolean: if return true if the gimmick is successfully used.
+     */
     public boolean useGimmick(){
         if(!this.gimmick.getUsedGimmick() && gimmick.getEnemyInfo().getHealth() <= gimmick.getTriggerHealth()){
             GimmickType gimmickType = this.gimmick.getName();
