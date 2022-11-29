@@ -6,6 +6,7 @@ import java.util.Random;
 public class SmartAI implements EnemyAI {
     private EnemyInfo enemyInfo;
     private int attackChance;
+    private EnemyPotion potion;
 
     /**
      * This is a constructor of Smart AI
@@ -15,6 +16,7 @@ public class SmartAI implements EnemyAI {
     public SmartAI(EnemyInfo enemyInfo, int attackChance){
         this.enemyInfo = enemyInfo;
         this.attackChance = attackChance;
+        this.potion = new EnemyPotion(10);
     }
 
     /**
@@ -24,26 +26,26 @@ public class SmartAI implements EnemyAI {
      * @return string that represents the enemy's action
      */
     @Override
-    public String respond(String input) {
+    public EnemyAction respond(String input) {
+        Random rand = new Random();
         if (this.enemyInfo.getHealth() < 30) {
-            Random rand = new Random();
             int upper = 101;
             int int_random = rand.nextInt(upper);
             if (int_random < 70) {
-                return "use potion";
+                return potion;
             } else if (this.enemyInfo.getHealth() > 60) {
-                return "use skill";
+                return enemyInfo.getSkill(rand.nextInt(enemyInfo.getSkills().size()));
             }
         } else {
             Random r = new Random();
             int upperbound = 101;
             int int_r = r.nextInt(upperbound);
             if (int_r < this.attackChance) {
-                return "use skill";
+                return enemyInfo.getSkill(rand.nextInt(enemyInfo.getSkills().size()));
             } else {
-                return "use potion";
+                return potion;
             }
         }
-        return "use skill";
+        return enemyInfo.getSkill(rand.nextInt(enemyInfo.getSkills().size()));
     }
 }
