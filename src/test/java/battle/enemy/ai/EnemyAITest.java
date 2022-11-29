@@ -5,8 +5,11 @@ import objects.battle.Skill;
 import objects.battle.SkillType;
 import objects.battle.enemy.EnemyInfo;
 import objects.battle.enemy.ai.DefaultAI;
+import objects.battle.enemy.ai.EnemyAction;
+import objects.battle.enemy.ai.EnemyPotion;
 import objects.battle.enemy.ai.SmartAI;
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
@@ -23,7 +26,8 @@ public class EnemyAITest {
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
         DefaultAI defaultAI = new DefaultAI(enemyInfo, 100);
-        Assert.assertEquals("use skill", defaultAI.respond("use skill"));
+        EnemyAction enemyAction = defaultAI.respond("use skill");
+        Assertions.assertTrue(enemyAction instanceof Skill);
 
     }
     @DisplayName("Test of Default AI with 0% attack chance")
@@ -34,7 +38,7 @@ public class EnemyAITest {
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
         DefaultAI defaultAI = new DefaultAI(enemyInfo, 0);
-        Assert.assertEquals("use potion", defaultAI.respond("use skill"));
+        Assertions.assertTrue(defaultAI.respond("use skill") instanceof EnemyPotion);
     }
 
     @DisplayName("Test of Default AI with 50% attack chance")
@@ -45,10 +49,10 @@ public class EnemyAITest {
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 0, SkillType.WATER);
         DefaultAI defaultAI = new DefaultAI(enemyInfo, 50);
-        String respond = defaultAI.respond("use skill");
-        Boolean check = "use potion".equals(respond);
-        Boolean check2 = "use skill".equals(respond);
-        Assert.assertEquals(true, check||check2);
+        EnemyAction respond = defaultAI.respond("use skill");
+        Boolean check = respond instanceof Skill;
+        Boolean check2 = respond instanceof EnemyPotion;
+        Assertions.assertTrue(check||check2);
     }
 
     @DisplayName("Test of SmartAI with 50% attack chance")
@@ -59,9 +63,9 @@ public class EnemyAITest {
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 0, SkillType.WATER);
         SmartAI smartAI = new SmartAI(enemyInfo, 50);
-        String respond = smartAI.respond("use skill");
-        Boolean check = "use potion".equals(respond);
-        Boolean check2 = "use skill".equals(respond);
-        Assert.assertEquals(true, check||check2);
+        EnemyAction respond = smartAI.respond("use skill");
+        Boolean check = respond instanceof Skill;
+        Boolean check2 = respond instanceof EnemyPotion;
+        Assert.assertTrue(check||check2);
     }
 }

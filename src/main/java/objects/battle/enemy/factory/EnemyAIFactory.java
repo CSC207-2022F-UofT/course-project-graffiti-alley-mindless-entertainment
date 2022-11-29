@@ -5,9 +5,7 @@ import database.managers.EnemyDataManager;
 import database.objects.AIData;
 import database.objects.EnemyData;
 import objects.battle.enemy.EnemyInfo;
-import objects.battle.enemy.ai.DefaultAI;
 import objects.battle.enemy.ai.EnemyAI;
-import objects.battle.enemy.ai.SmartAI;
 
 import java.util.Objects;
 

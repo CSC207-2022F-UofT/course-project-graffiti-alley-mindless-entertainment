@@ -3,6 +3,7 @@ import objects.battle.Skill;
 import objects.battle.SkillType;
 import objects.battle.enemy.EnemyInfo;
 import objects.battle.enemy.ai.EnemyAI;
+import objects.battle.enemy.ai.EnemyAction;
 import objects.character.Character;
 
 import java.util.ArrayList;
@@ -157,7 +158,7 @@ public class Enemy extends Character {
      * @param input: input by the user
      * @return enemy's action in string (use skill or use potion)
      */
-    public String enemyAction(String input){
+    public EnemyAction enemyAction(String input){
         return this.enemyAI.respond(input);
     }
 
