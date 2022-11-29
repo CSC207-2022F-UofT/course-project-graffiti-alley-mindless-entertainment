@@ -50,7 +50,8 @@ public class EnemyFactoryTest {
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 110, 20, SkillType.EARTH);
         SmartAI enemyAI = new SmartAI(enemyInfo, 80);
-        StatGimmickEntity gimmick = new StatGimmickEntity(GimmickType.HEALTH, enemyInfo, 30, 0, 1, null);
+        StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.HEALTH, enemyInfo,
+                30).build();
         EnemyFactory enemyFactory = new EnemyFactory();
         Boss boss = (Boss) enemyFactory.createEnemy("goblin warrior");
         Assertions.assertEquals(boss.getSkill(0).getDamage(), 25);
