@@ -1,7 +1,7 @@
 package objects.character;
 
 import objects.battle.enemy.*;
-import objects.battle.enemy.gimmick.Gimmick;
+import objects.battle.enemy.gimmick.StatGimmickEntity;
 import objects.battle.enemy.ai.*;
 
 /**
@@ -9,7 +9,7 @@ import objects.battle.enemy.ai.*;
  */
 public class Boss extends Enemy {
 
-    private Gimmick gimmick;
+    private StatGimmickEntity gimmick;
     private boolean GimmickUsed;
 
     /**
@@ -20,7 +20,7 @@ public class Boss extends Enemy {
      * @param enemyAI: enemy AI that the boss has
      * @param gimmick : the gimmick that the boss has
      */
-    public Boss(String name, EnemyInfo enemyInfo, EnemyAI enemyAI, Gimmick gimmick)
+    public Boss(String name, EnemyInfo enemyInfo, EnemyAI enemyAI, StatGimmickEntity gimmick)
     {
         super(name, enemyInfo, enemyAI);
         this.gimmick = gimmick;
@@ -53,7 +53,7 @@ public class Boss extends Enemy {
      *
      * @param gimmick: gimmick entity
      */
-    public void setGimmick(Gimmick gimmick)
+    public void setGimmick(StatGimmickEntity gimmick)
     {
         this.gimmick = gimmick;
     }
@@ -62,7 +62,7 @@ public class Boss extends Enemy {
      * This method returns the enemy's gimmick
      *
      */
-    public Gimmick getGimmick() {
+    public StatGimmickEntity getGimmick() {
         return this.gimmick;
     }
 

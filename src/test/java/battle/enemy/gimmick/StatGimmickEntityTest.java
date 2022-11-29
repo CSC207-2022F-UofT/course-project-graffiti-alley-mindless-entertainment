@@ -11,7 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 
 import java.util.ArrayList;
 
-public class GimmickTest {
+public class StatGimmickEntityTest {
 
     @DisplayName("Test if the health gimmick works properly")
     @Test
@@ -21,8 +21,9 @@ public class GimmickTest {
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
         enemyInfo.changeHealth(-90);
-        Gimmick gimmick = new Gimmick(GimmickType.HEALTH, enemyInfo, 30, 0, 1, null);
-        UseGimmick usecase = new UseGimmick(gimmick);
+        StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.HEALTH, enemyInfo,
+                30).build();
+        StatGimmickStrategy usecase = new StatGimmickStrategy(gimmick);
         boolean used = usecase.useGimmick();
         Assertions.assertEquals(enemyInfo.getHealth(), 100);
     }
@@ -35,8 +36,9 @@ public class GimmickTest {
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
         enemyInfo.changeHealth(-90);
-        Gimmick gimmick = new Gimmick(GimmickType.ATTACK, enemyInfo, 20, 0, 1.2,null);
-        UseGimmick usecase = new UseGimmick(gimmick);
+        StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.ATTACK, enemyInfo,
+                20).setAttackIncrease(1.2).build();
+        StatGimmickStrategy usecase = new StatGimmickStrategy(gimmick);
         boolean used = usecase.useGimmick();
         Assertions.assertEquals(enemyInfo.getSkill(0).getDamage(), 24);
     }
@@ -49,8 +51,9 @@ public class GimmickTest {
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
         enemyInfo.changeHealth(-90);
-        Gimmick gimmick = new Gimmick(GimmickType.TYPE, enemyInfo, 20, 0, 1, SkillType.FIRE);
-        UseGimmick usecase = new UseGimmick(gimmick);
+        StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.TYPE, enemyInfo,
+                20).setNewType(SkillType.FIRE).build();
+        StatGimmickStrategy usecase = new StatGimmickStrategy(gimmick);
         boolean used = usecase.useGimmick();
         Assertions.assertEquals(enemyInfo.getType(), SkillType.FIRE);
     }
@@ -63,8 +66,9 @@ public class GimmickTest {
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 100, 10, SkillType.WATER);
         enemyInfo.changeHealth(-90);
-        Gimmick gimmick = new Gimmick(GimmickType.SPEED, enemyInfo, 25, 20, 1, null);
-        UseGimmick usecase = new UseGimmick(gimmick);
+        StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.SPEED, enemyInfo,
+                25).setSpeedIncrease(20).build();
+        StatGimmickStrategy usecase = new StatGimmickStrategy(gimmick);
         boolean used = usecase.useGimmick();
         Assertions.assertEquals(enemyInfo.getSpeed(), 120);
     }

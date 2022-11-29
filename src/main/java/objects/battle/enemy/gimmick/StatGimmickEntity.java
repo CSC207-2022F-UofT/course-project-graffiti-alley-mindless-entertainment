@@ -3,7 +3,7 @@ package objects.battle.enemy.gimmick;
 import objects.battle.SkillType;
 import objects.battle.enemy.EnemyInfo;
 
-public class Gimmick {
+public class StatGimmickEntity {
     /** This class is the entity of gimmick that holds information about the gimmick
      *
      */
@@ -18,14 +18,13 @@ public class Gimmick {
     /** This is a constructor of the gimmick class that takes name, enemyinfo, triggger health,
      * speed, attack, and type as parameters.
      */
-    public Gimmick(GimmickType name, EnemyInfo enemyInfo, int triggerHealth, int speed,
-                   double attack, SkillType type){
-        this.name = name;
-        this.enemyInfo = enemyInfo;
-        this.triggerHealth = triggerHealth;
-        this.attackIncrease = attack;
-        this.type = type;
-        this.speedIncrease = speed;
+    public StatGimmickEntity(StatGimmickBuilder builder){
+        this.name = builder.name;
+        this.enemyInfo = builder.enemyInfo;
+        this.triggerHealth = builder.triggerHealth;
+        this.speedIncrease = builder.speedIncrease;
+        this.attackIncrease = builder.attackIncrease;
+        this.type = builder.type;
     }
 
     /** This method will set the UsedGimmick to true. it is used once the gimmick is used
@@ -81,5 +80,40 @@ public class Gimmick {
      */
     public SkillType getType(){
         return this.type;
+    }
+
+    public static class StatGimmickBuilder{
+        private GimmickType name;
+        private EnemyInfo enemyInfo;
+        private int triggerHealth;
+        private boolean UsedGimmick = false;
+
+        private int speedIncrease;
+        private double attackIncrease;
+        private SkillType type;
+
+        public StatGimmickBuilder(GimmickType name, EnemyInfo enemyInfo, int triggerHealth){
+            this.name = name;
+            this.enemyInfo = enemyInfo;
+            this.triggerHealth = triggerHealth;
+        }
+
+        public StatGimmickBuilder setSpeedIncrease(int speedIncrease){
+            this.speedIncrease = speedIncrease;
+            return this;
+        }
+
+        public StatGimmickBuilder setAttackIncrease(double attackIncrease){
+            this.attackIncrease = attackIncrease;
+            return this;
+        }
+
+        public StatGimmickBuilder setNewType(SkillType type){
+            this.type = type;
+            return this;
+        }
+        public StatGimmickEntity build(){
+            return new StatGimmickEntity(this);
+        }
     }
 }
