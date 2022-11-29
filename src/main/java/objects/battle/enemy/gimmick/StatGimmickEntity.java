@@ -13,7 +13,7 @@ public class StatGimmickEntity {
     private int speedIncrease;
     private double attackIncrease;
     private SkillType type;
-    private boolean UsedGimmick = false;
+    private boolean usedGimmick = false;
 
     /** This is a constructor of the gimmick class that takes name, enemyinfo, triggger health,
      * speed, attack, and type as parameters.
@@ -30,7 +30,7 @@ public class StatGimmickEntity {
     /** This method will set the UsedGimmick to true. it is used once the gimmick is used
      */
     public void usedGimmick(){
-        this.UsedGimmick = true;
+        this.usedGimmick = true;
     }
 
     /** This method returns the enemyInfo that the gimmick has.
@@ -51,7 +51,7 @@ public class StatGimmickEntity {
      * @return true of the gimmick has already been used and false if is hasn't been used
      */
     public boolean getUsedGimmick(){
-        return this.UsedGimmick;
+        return this.usedGimmick;
     }
 
     /** This method returns name of the gimmick in enum
@@ -86,7 +86,7 @@ public class StatGimmickEntity {
         private GimmickType name;
         private EnemyInfo enemyInfo;
         private int triggerHealth;
-        private boolean UsedGimmick = false;
+        private boolean usedGimmick = false;
 
         private int speedIncrease;
         private double attackIncrease;
