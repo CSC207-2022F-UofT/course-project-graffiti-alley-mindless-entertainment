@@ -3,7 +3,9 @@ package battle.enemy.gimmick;
 import objects.battle.Skill;
 import objects.battle.SkillType;
 import objects.battle.enemy.EnemyInfo;
+import objects.battle.enemy.factory.EnemyFactory;
 import objects.battle.enemy.gimmick.*;
+import objects.character.BossFacade;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -11,7 +13,7 @@ import org.junit.jupiter.api.DisplayName;
 
 import java.util.ArrayList;
 
-public class StatGimmickEntityTest {
+public class StatGimmickStrategyTest {
 
     @DisplayName("Test if the health gimmick works properly")
     @Test
@@ -71,5 +73,18 @@ public class StatGimmickEntityTest {
         StatGimmickStrategy usecase = new StatGimmickStrategy(gimmick);
         boolean used = usecase.useGimmick();
         Assertions.assertEquals(enemyInfo.getSpeed(), 120);
+    }
+
+    @DisplayName("Test if the speed gimmick works properly")
+    @Test
+    public void UseGimmickTest(){
+        EnemyFactory enemyFactory = new EnemyFactory();
+        BossFacade boss = (BossFacade) enemyFactory.createEnemy("goblin warrior");
+        boss.changeHealth(-90);
+        boss.applyGimmick();
+        Assertions.assertEquals(100, boss.getHealth());
+        boss.changeHealth(-90);
+        boolean reuse = boss.applyGimmick();
+        Assertions.assertFalse(reuse);
     }
 }

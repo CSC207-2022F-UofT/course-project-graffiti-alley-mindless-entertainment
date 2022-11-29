@@ -3,7 +3,6 @@ import objects.battle.Skill;
 import objects.battle.SkillType;
 import objects.battle.enemy.EnemyInfo;
 import objects.battle.enemy.ai.EnemyAI;
-import objects.character.Character;
 
 import java.util.ArrayList;
 
@@ -13,7 +12,7 @@ import java.util.ArrayList;
  * health, skills, speed, reputation and Enemy AI in addition to name which is inherited from
  * parent class.
  */
-public class Enemy extends Character {
+public class EnemyFacade extends Character {
 
 
     public EnemyInfo enemyInfo;
@@ -26,7 +25,7 @@ public class Enemy extends Character {
      * @param enemyInfo: information about the enemy including health, skills, speed, and reputation
      * @param enemyAI: enemyAI that the enemy has
      */
-    public Enemy(String name, EnemyInfo enemyInfo, EnemyAI enemyAI) {
+    public EnemyFacade(String name, EnemyInfo enemyInfo, EnemyAI enemyAI) {
         super(name);
         this.enemyAI = enemyAI;
         this.enemyInfo = enemyInfo;
