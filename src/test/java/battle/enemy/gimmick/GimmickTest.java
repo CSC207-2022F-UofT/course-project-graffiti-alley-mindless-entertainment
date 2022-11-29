@@ -4,12 +4,12 @@ import objects.battle.Skill;
 import objects.battle.SkillType;
 import objects.battle.enemy.EnemyInfo;
 import objects.battle.enemy.gimmick.*;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
 
-        import java.util.ArrayList;
+import java.util.ArrayList;
 
 public class GimmickTest {
 
@@ -20,9 +20,10 @@ public class GimmickTest {
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
-        Gimmick gimmick = new HealthGimmick(enemyInfo, 30);
-        gimmick.useGimmick();
-        Assert.assertEquals(enemyInfo.getHealth(), 100);
+        Gimmick gimmick = new Gimmick(GimmickType.HEALTH, enemyInfo, 30, 0, 1, null);
+        UseGimmick usecase = new UseGimmick(gimmick);
+        usecase.useGimmick();
+        Assertions.assertEquals(enemyInfo.getHealth(), 100);
     }
 
     @DisplayName("Test if the attack gimmick works properly")
@@ -32,9 +33,10 @@ public class GimmickTest {
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
-        Gimmick gimmick = new AttackGimmick(enemyInfo, 20, 1.2);
-        gimmick.useGimmick();
-        Assert.assertEquals(enemyInfo.getSkill(0).getDamage(), 24);
+        Gimmick gimmick = new Gimmick(GimmickType.ATTACK, enemyInfo, 20, 0, 1.2,null);
+        UseGimmick usecase = new UseGimmick(gimmick);
+        usecase.useGimmick();
+        Assertions.assertEquals(enemyInfo.getSkill(0).getDamage(), 24);
     }
 
     @DisplayName("Test if the type gimmick works properly")
@@ -44,9 +46,10 @@ public class GimmickTest {
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
-        Gimmick gimmick = new TypeGimmick(enemyInfo, 20);
-        gimmick.useGimmick();
-        Assert.assertEquals(enemyInfo.getType(), SkillType.FIRE);
+        Gimmick gimmick = new Gimmick(GimmickType.TYPE, enemyInfo, 20, 0, 1, SkillType.FIRE);
+        UseGimmick usecase = new UseGimmick(gimmick);
+        usecase.useGimmick();
+        Assertions.assertEquals(enemyInfo.getType(), SkillType.FIRE);
     }
 
     @DisplayName("Test if the speed gimmick works properly")
@@ -56,8 +59,9 @@ public class GimmickTest {
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 100, 10, SkillType.WATER);
-        Gimmick gimmick = new SpeedGimmick(enemyInfo, 25, 20);
-        gimmick.useGimmick();
-        Assert.assertEquals(enemyInfo.getSpeed(), 120);
+        Gimmick gimmick = new Gimmick(GimmickType.SPEED, enemyInfo, 25, 20, 1, null);
+        UseGimmick usecase = new UseGimmick(gimmick);
+        usecase.useGimmick();
+        Assertions.assertEquals(enemyInfo.getSpeed(), 120);
     }
 }
