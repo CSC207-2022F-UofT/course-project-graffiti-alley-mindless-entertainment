@@ -21,11 +21,10 @@ public class EnemyInfoFactory {
     }
     /**
      * This method returns the EnemyInfo that the enemy with the name in the database has.
-     * @param name of the enemy
+     * @param enemyData Enemy data from the database
      * @return EnemyInfo of the enemy with the name given
      */
-    public EnemyInfo createEnemyInfo(String name){
-        EnemyData enemyData = this.enemyDataManager.fetchEnemyData(name);
+    public EnemyInfo createEnemyInfo(EnemyData enemyData){
         ArrayList<Skill> skills = new ArrayList<>();
         for (String i:enemyData.skills) {
             SkillData skillData = this.skillDataManager.fetchSkillData(i);

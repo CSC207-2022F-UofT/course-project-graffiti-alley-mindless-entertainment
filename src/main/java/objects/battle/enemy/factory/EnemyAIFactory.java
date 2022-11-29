@@ -25,12 +25,11 @@ public class EnemyAIFactory{
 
     /**
      * This method returns the Enemy AI that the enemy with the name in the database has.
-     * @param name of the enemy to create
+     * @param enemyInfo of the enemy to create
+     * @param enemyData of the enemy from the database
      * @return instance enemy AI tha the enemy with the name has
      */
-    public EnemyAI createEnemyAI(String name){
-        EnemyData enemyData = this.enemyDataManager.fetchEnemyData(name);
-        EnemyInfo enemyInfo = this.enemyInfoFactory.createEnemyInfo(name);
+    public EnemyAI createEnemyAI(EnemyData enemyData, EnemyInfo enemyInfo){
         EnemyAI AItype;
         String ai = enemyData.ai;
         AIData aiData = this.aiDataManager.fetchAIData(ai);

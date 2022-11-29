@@ -42,9 +42,9 @@ public class EnemyFactory {
      * @return instance of enemy
      */
     public EnemyFacade createEnemy(String name) {
-        EnemyInfo enemyInfo = this.enemyInfoFactory.createEnemyInfo(name);
-        EnemyAI enemyAI = this.enemyAIFactory.createEnemyAI(name);
         EnemyData enemyData = this.enemyDatabase.fetchEnemyData(name);
+        EnemyInfo enemyInfo = this.enemyInfoFactory.createEnemyInfo(enemyData);
+        EnemyAI enemyAI = this.enemyAIFactory.createEnemyAI(enemyData, enemyInfo);
         if(enemyData.gimmick != null){
             GimmickStrategy gimmick = translateGimmick(enemyData.gimmick, enemyInfo);
             return new BossFacade(name, enemyInfo, enemyAI, gimmick);
