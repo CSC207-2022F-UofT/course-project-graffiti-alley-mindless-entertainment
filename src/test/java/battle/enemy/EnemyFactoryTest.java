@@ -6,7 +6,6 @@ import objects.battle.enemy.factory.EnemyFactory;
 import objects.battle.enemy.EnemyInfo;
 import objects.battle.enemy.ai.DefaultAI;
 import objects.battle.enemy.ai.SmartAI;
-import objects.battle.enemy.gimmick.UseHealthGimmick;
 import objects.character.Boss;
 import objects.character.Enemy;
 
