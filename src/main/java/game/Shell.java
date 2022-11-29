@@ -1,13 +1,10 @@
 package game;
 
 import core.StateManager;
+import switch_managers.SwitchEventMediator;
+import switch_managers.SwitchEventType;
+import switch_managers.ManagerController;
 import io.InputHandler;
-import io.OutputHandler;
-import menus.PauseMenuChoiceStateFactory;
-import menus.PauseMenuManager;
-import menus.options.ChangeOptionsStateFactory;
-import options.Options;
-import playercreation.PlayerCreatorManager;
 
 /**
  * This class contains the shell, which connects the different systems of the program together.
@@ -17,17 +14,26 @@ public class Shell {
      * Attributes.
      */
     private StateManager currentManager;
-    private InputHandler inputHandler;
+
+    private final ManagerController managerController;
+    private final InputHandler inputHandler;
+
+    private final SwitchEventMediator switchEventMediator;
     private boolean running;
 
-    public Shell(InputHandler inputHandler) {
+    public Shell(InputHandler inputHandler, ManagerController managerController, StateManager startingManager, SwitchEventMediator switchEventMediator) {
         this.inputHandler = inputHandler;
+        this.managerController = managerController;
+        this.currentManager = startingManager;
+        this.switchEventMediator = switchEventMediator;
     }
 
+
+    /**
+     * Starts the game,
+     */
     public void startGame() {
-        currentManager = getStartingManager();
         running = true;
-        //initialize all the managers
 
         mainLoop();
     }
@@ -38,6 +44,11 @@ public class Shell {
     private void mainLoop() {
         // The game runs until the User decides to exit the game.
         while (running) {
+
+            if (switchEventMediator.ready()) {
+                switchManager();
+            }
+
             //!!! everything below need to be worked on!
             if (currentManager.awaitInput()) {
                 String input = inputHandler.getChoice(currentManager.getInputValidator());
@@ -45,10 +56,6 @@ public class Shell {
                 currentManager.postInput(input);
             } else {
                 currentManager.preInput();
-            }
-
-            if (currentManager.isDone()) {
-                switchManager();
             }
         }
     }
@@ -61,7 +68,7 @@ public class Shell {
             exitGame();
             return true;
         } else if (doesUserPause(input)) {
-            switchManager();
+            switchEventMediator.store(SwitchEventType.PAUSE);
             return true;
         }
         return false;
@@ -75,30 +82,17 @@ public class Shell {
         //do smth here like saving data to files to be implemented later
     }
 
-    //!!! Shouldn't there be the creation of game method?
-    // private void createStarterGame()
-
-    /**
-     * Returns the manager for the start of the game.
-     */
-    // !!! not sure that I got who the first manager is and how this part works.
-    private StateManager getStartingManager() {
-        //should change to a mainMenuManager when one gets created
-        PlayerCreatorManager playerCreatorManager = new PlayerCreatorManager();
-        //playerCreatorManager.initialize();
-        return playerCreatorManager;
-    }
-
     /**
      * Handles the system to switch between the different managers in the game.
      * (!!!)
      */
-    //!! Need to create the system when more managers within the game are created.
     private void switchManager() {
-        // !!! should assign the nextManager to this.currentManager.
-        //should have some arguments
-
-        currentManager = new PauseMenuManager(new PauseMenuChoiceStateFactory(), new ChangeOptionsStateFactory());
+        // !!! get switch event somehow - maybe through a mediator?
+        SwitchEventType switchEventType = switchEventMediator.retrieve();
+        this.currentManager = managerController.switchManagers(switchEventType, currentManager);
+        if (currentManager.isDone()) {
+            currentManager.initialize();
+        }
     }
 
     /**

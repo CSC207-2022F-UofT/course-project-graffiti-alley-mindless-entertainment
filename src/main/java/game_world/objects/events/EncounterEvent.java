@@ -1,5 +1,7 @@
 package game_world.objects.events;
 
+import io.InputValidator;
+
 public class EncounterEvent extends Event {
 
     /**
@@ -10,7 +12,6 @@ public class EncounterEvent extends Event {
         this.name = name;
         this.type = "Encounter";
         this.priority = priority;
-        this.eventState = 0;
     }
 
     @Override

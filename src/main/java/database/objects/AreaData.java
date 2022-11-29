@@ -9,29 +9,24 @@ public class AreaData {
      * All information needed for an arbitrary area
      */
 
+    public String id;
     public String name;
-    public String type;
     public String speaker;
+    public String zone;
     public ArrayList<String> texts;
-    public String next;
-    public Map<String, String> options;
     public ArrayList<String> events;
+    public ArrayList<String> next_ids;
+    public ArrayList<String> next_options;
 
-    public AreaData(String name, String type, String speaker, ArrayList<String> texts, String next, ArrayList<String> events) {
+    public AreaData(String id, String name, String speaker, String zone, ArrayList<String> texts,
+                    ArrayList<String> next_ids, ArrayList<String> next_options, ArrayList<String> events) {
+        this.id = id;
         this.name = name;
-        this.type = type;
         this.speaker = speaker;
+        this.zone = zone;
         this.texts = texts;
-        this.next = next;
-        this.events = events;
-    }
-
-    public AreaData(String name, String type, String speaker, ArrayList<String> texts, Map<String,String> options, ArrayList<String> events) {
-        this.name = name;
-        this.type = type;
-        this.speaker = speaker;
-        this.texts = texts;
-        this.options = options;
+        this.next_ids = next_ids;
+        this.next_options = next_options;
         this.events = events;
     }
 }
