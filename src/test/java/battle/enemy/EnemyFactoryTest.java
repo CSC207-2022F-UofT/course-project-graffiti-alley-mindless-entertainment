@@ -6,7 +6,7 @@ import objects.battle.enemy.factory.EnemyFactory;
 import objects.battle.enemy.EnemyInfo;
 import objects.battle.enemy.ai.DefaultAI;
 import objects.battle.enemy.ai.SmartAI;
-import objects.battle.enemy.gimmick.HealthGimmick;
+import objects.battle.enemy.gimmick.UseHealthGimmick;
 import objects.character.Boss;
 import objects.character.Enemy;
 
@@ -49,7 +49,7 @@ public class EnemyFactoryTest {
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 110, 20, SkillType.EARTH);
         SmartAI enemyAI = new SmartAI(enemyInfo, 80);
-        HealthGimmick gimmick = new HealthGimmick(enemyInfo, 30);
+        UseHealthGimmick gimmick = new UseHealthGimmick(enemyInfo, 30);
         EnemyFactory enemyFactory = new EnemyFactory();
         Boss boss = (Boss) enemyFactory.createEnemy("goblin warrior");
         Assertions.assertEquals(boss.getSkill(0).getDamage(), 25);
@@ -63,7 +63,7 @@ public class EnemyFactoryTest {
         Assertions.assertEquals(boss.getHealth(), 100);
         Assertions.assertEquals(boss.getName(), "goblin warrior");
         Assertions.assertTrue(boss.getGimmick() instanceof
-                HealthGimmick);
+                UseHealthGimmick);
         Assertions.assertTrue(boss.getEnemyAI() instanceof
                 SmartAI);
     }

@@ -1,29 +1,59 @@
 package objects.battle.enemy.gimmick;
 
-import objects.character.Boss;
+import objects.battle.Skill;
+import objects.battle.SkillType;
 
 public class UseGimmick {
-    private Boss boss;
-
-    public UseGimmick(Boss boss){
-        this.boss = boss;
+    private Gimmick gimmick;
+    public UseGimmick(Gimmick gimmick){
+        this.gimmick = gimmick;
     }
 
-    /**
-     * This method uses gimmick by calling a method in gimmick class. Returns true
-     * if the gimmick is successfully used and return false if its not triggered yet.
-     *
-     * @return true if the gimmick is used and false if its not triggered or
-     * if its already used once.
-     */
-    public boolean applyGimmick(){
-        if(!this.boss.checkGimmick() && this.boss.getGimmick().checkGimmick()){
-            this.boss.usedGimmick();
-            this.boss.getGimmick().useGimmick();
+    public boolean useGimmick(){
+        if(!this.gimmick.getUsedGimmick() && gimmick.getEnemyInfo().getHealth() <= gimmick.getTriggerHealth()){
+            GimmickType gimmickType = this.gimmick.getName();
+            if(gimmickType == GimmickType.HEALTH){
+                useHealth();
+            } else if (gimmickType == GimmickType.ATTACK) {
+                useAttack();
+            } else if (gimmickType == GimmickType.SPEED) {
+                useSpeed();
+            }else {
+                useType();
+            }
+            this.gimmick.usedGimmick();
             return true;
         } else{
             return false;
         }
 
+    }
+
+    private void useAttack(){
+        for(Skill skill: this.gimmick.getEnemyInfo().getSkills()){
+            int i = skill.getDamage();
+            skill.setDamage((int)Math.ceil(i * this.gimmick.getAttackIncrease()));
+            }
+    }
+
+    private void useHealth(){
+        this.gimmick.getEnemyInfo().setHealth(this.gimmick.getEnemyInfo().getMaxHealth());
+    }
+
+    private void useType(){
+        SkillType type = this.gimmick.getEnemyInfo().getType();
+        if(type == SkillType.WATER){
+            this.gimmick.getEnemyInfo().setType(SkillType.FIRE);
+        } else if(type == SkillType.FIRE){
+            this.gimmick.getEnemyInfo().setType(SkillType.EARTH);
+        } else if(type == SkillType.EARTH){
+            this.gimmick.getEnemyInfo().setType(SkillType.AIR);
+        } else{
+            this.gimmick.getEnemyInfo().setType(SkillType.WATER);
+        }
+    }
+
+    private void useSpeed(){
+        this.gimmick.getEnemyInfo().changeSpeed(this.gimmick.getSpeedIncrease());
     }
 }

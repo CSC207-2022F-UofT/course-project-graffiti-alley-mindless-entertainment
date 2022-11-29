@@ -1,9 +1,12 @@
 package objects.battle;
 
+import objects.battle.enemy.ai.EnemyAI;
+import objects.battle.enemy.ai.EnemyAction;
+
 import java.util.Dictionary;
 import java.util.Hashtable;
 
-public class Skill {
+public class Skill implements EnemyAction {
     /** A class for all skills to be used by any kinds of Characters in battles.
      * Attributes:
      * name: A string representing the name of the skill

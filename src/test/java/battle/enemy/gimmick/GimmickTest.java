@@ -20,8 +20,9 @@ public class GimmickTest {
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
-        Gimmick gimmick = new HealthGimmick(enemyInfo, 30);
-        gimmick.useGimmick();
+        HealthGimmick gimmick = new HealthGimmick(enemyInfo, 30);
+        UseGimmick usecase = new UseHealthGimmick(gimmick);
+        usecase.useGimmick();
         Assert.assertEquals(enemyInfo.getHealth(), 100);
     }
 
@@ -32,8 +33,9 @@ public class GimmickTest {
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
-        Gimmick gimmick = new AttackGimmick(enemyInfo, 20, 1.2);
-        gimmick.useGimmick();
+        AttackGimmick gimmick = new AttackGimmick(enemyInfo, 20, 1.2);
+        UseGimmick usecase =  new UseAttackGimmick(gimmick);
+        usecase.useGimmick();
         Assert.assertEquals(enemyInfo.getSkill(0).getDamage(), 24);
     }
 
@@ -44,8 +46,9 @@ public class GimmickTest {
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
-        Gimmick gimmick = new TypeGimmick(enemyInfo, 20);
-        gimmick.useGimmick();
+        TypeGimmick gimmick = new TypeGimmick(enemyInfo, 20);
+        UseGimmick usecase = new UseTypeGimmick(gimmick);
+        usecase.useGimmick();
         Assert.assertEquals(enemyInfo.getType(), SkillType.FIRE);
     }
 
@@ -56,8 +59,9 @@ public class GimmickTest {
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 100, 10, SkillType.WATER);
-        Gimmick gimmick = new SpeedGimmick(enemyInfo, 25, 20);
-        gimmick.useGimmick();
+        SpeedGimmick gimmick = new SpeedGimmick(enemyInfo, 25, 20);
+        UseGimmick usecase = new UseSpeedGimmick(gimmick);
+        usecase.useGimmick();
         Assert.assertEquals(enemyInfo.getSpeed(), 120);
     }
 }
