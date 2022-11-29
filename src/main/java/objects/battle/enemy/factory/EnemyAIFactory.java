@@ -28,7 +28,7 @@ public class EnemyAIFactory{
      * @param name of the enemy to create
      * @return instance enemy AI tha the enemy with the name has
      */
-    public EnemyAI createEnemyAI(String name) throws TypeNotFoundException {
+    public EnemyAI createEnemyAI(String name){
         EnemyData enemyData = this.enemyDataManager.fetchEnemyData(name);
         EnemyInfo enemyInfo = this.enemyInfoFactory.createEnemyInfo(name);
         EnemyAI AItype;

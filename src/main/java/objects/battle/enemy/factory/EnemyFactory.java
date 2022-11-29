@@ -6,6 +6,7 @@ import database.managers.GimmickDataManager;
 import database.managers.SkillDataManager;
 import database.objects.EnemyData;
 import database.objects.GimmickData;
+import objects.battle.SkillType;
 import objects.battle.enemy.EnemyInfo;
 import objects.battle.enemy.ai.EnemyAI;
 import objects.battle.enemy.gimmick.*;
@@ -57,33 +58,41 @@ public class EnemyFactory {
      * @param enemyInfo EnemeyInfo of the name given
      * @return gimmick that the enemy has (from the database)
      */
-    public Gimmick translateGimmick(String name, EnemyInfo enemyInfo)
-            throws GimmickNotFoundException {
+    public Gimmick translateGimmick(String name, EnemyInfo enemyInfo) {
         switch (name) {
             case "health":{
                 GimmickData healthGimmickData = this.gimmickDataManager.fetchGimmickData(name);
                 int triggerHealth = Integer.parseInt(healthGimmickData.trigger);
-                return new HealthGimmick(enemyInfo, triggerHealth);
+                return new Gimmick(GimmickType.HEALTH, enemyInfo, triggerHealth, 0, 1, null);
             }
             case "attack":{
                 GimmickData attackGimmickData = this.gimmickDataManager.fetchGimmickData(name);
                 int triggerHealth = Integer.parseInt(attackGimmickData.trigger);
                 double attackIncrease = Double.parseDouble(attackGimmickData.attack);
-                return new AttackGimmick(enemyInfo, triggerHealth, attackIncrease);
+                return new Gimmick(GimmickType.ATTACK, enemyInfo, triggerHealth, 0, attackIncrease, null);
             }
             case "speed":{
                 GimmickData speedGimmickData = this.gimmickDataManager.fetchGimmickData(name);
                 int triggerHealth = Integer.parseInt(speedGimmickData.trigger);
                 int speedIncrease = Integer.parseInt(speedGimmickData.speed);
-                return new SpeedGimmick(enemyInfo, triggerHealth, speedIncrease);
+                return new Gimmick(GimmickType.SPEED, enemyInfo, triggerHealth, speedIncrease, 1, null);
             }
             case "type":{
                 GimmickData typeGimmickData = this.gimmickDataManager.fetchGimmickData(name);
                 int triggerHealth = Integer.parseInt(typeGimmickData.trigger);
-                return new TypeGimmick(enemyInfo, triggerHealth);
+                SkillType type = enemyInfo.getType();
+                if(type == SkillType.WATER){
+                    return new Gimmick(GimmickType.TYPE, enemyInfo, triggerHealth, 0, 1, SkillType.FIRE);
+                } else if(type == SkillType.FIRE){
+                    return new Gimmick(GimmickType.TYPE, enemyInfo, triggerHealth, 0, 1, SkillType.EARTH);
+                } else if(type == SkillType.EARTH){
+                    return new Gimmick(GimmickType.TYPE, enemyInfo, triggerHealth, 0, 1, SkillType.AIR);
+                } else{
+                    return new Gimmick(GimmickType.TYPE, enemyInfo, triggerHealth, 0, 1, SkillType.WATER);
+                }
             }
         }
-        throw new GimmickNotFoundException("Gimmick is not found");
+        return null;
     }
 
 

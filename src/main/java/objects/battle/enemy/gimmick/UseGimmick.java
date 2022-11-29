@@ -41,16 +41,7 @@ public class UseGimmick {
     }
 
     private void useType(){
-        SkillType type = this.gimmick.getEnemyInfo().getType();
-        if(type == SkillType.WATER){
-            this.gimmick.getEnemyInfo().setType(SkillType.FIRE);
-        } else if(type == SkillType.FIRE){
-            this.gimmick.getEnemyInfo().setType(SkillType.EARTH);
-        } else if(type == SkillType.EARTH){
-            this.gimmick.getEnemyInfo().setType(SkillType.AIR);
-        } else{
-            this.gimmick.getEnemyInfo().setType(SkillType.WATER);
-        }
+        this.gimmick.getEnemyInfo().setType(this.gimmick.getType());
     }
 
     private void useSpeed(){
