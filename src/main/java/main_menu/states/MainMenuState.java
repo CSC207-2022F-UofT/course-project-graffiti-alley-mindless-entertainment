@@ -41,6 +41,8 @@ public class MainMenuState implements State {
     @Override
     public void postInput(String input) {
         // Assumes input has already been parsed and validated.
+        this.awaitInput = false;
+        this.isDone = true;
     }
 
     @Override
