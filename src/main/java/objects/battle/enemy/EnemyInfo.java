@@ -2,6 +2,7 @@ package objects.battle.enemy;
 
 import objects.battle.Skill;
 import objects.battle.SkillType;
+import objects.battle.enemy.ai.EnemyPotion;
 
 import java.util.ArrayList;
 
@@ -14,13 +15,15 @@ public class EnemyInfo {
     private int speed;
     private int reputation;
     private SkillType type;
+    private EnemyPotion potion;
 
-    public EnemyInfo(ArrayList<Skill> skills, int speed, int reputation, SkillType type){
+    public EnemyInfo(ArrayList<Skill> skills, int speed, int reputation, SkillType type, EnemyPotion potion){
         this.skills = skills;
         this.reputation = reputation;
         this.speed = speed;
         this.type = type;
         this.baseSpeed = speed;
+        this.potion = potion;
     }
 
     /**
@@ -174,5 +177,9 @@ public class EnemyInfo {
      */
     public int getBaseSpeed() {
         return this.baseSpeed;
+    }
+
+    public EnemyPotion getPotion(){
+        return this.potion;
     }
 }

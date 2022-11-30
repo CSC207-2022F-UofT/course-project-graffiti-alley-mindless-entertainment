@@ -25,6 +25,7 @@ public class EnemyDataFactory {
                     (String) jsonObject.get("reputation"),
                     (String) jsonObject.get("speed"),
                     (String) jsonObject.get("ai"),
+                    (String) jsonObject.get("potion"),
                     (String) jsonObject.get("gimmick")
             );
         }
@@ -35,7 +36,8 @@ public class EnemyDataFactory {
                     skills,
                     (String) jsonObject.get("reputation"),
                     (String) jsonObject.get("speed"),
-                    (String) jsonObject.get("ai")
+                    (String) jsonObject.get("ai"),
+                    (String) jsonObject.get("potion")
             );
         }
     }

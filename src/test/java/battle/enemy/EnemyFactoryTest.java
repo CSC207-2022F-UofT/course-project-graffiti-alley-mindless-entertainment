@@ -2,6 +2,7 @@ package battle.enemy;
 
 import objects.battle.Skill;
 import objects.battle.SkillType;
+import objects.battle.enemy.ai.EnemyPotion;
 import objects.battle.enemy.factory.EnemyFactory;
 import objects.battle.enemy.EnemyInfo;
 import objects.battle.enemy.ai.DefaultAI;
@@ -26,7 +27,7 @@ public class EnemyFactoryTest {
         Skill skill = new Skill("fireball", 20, 10, SkillType.FIRE);
         ArrayList<Skill> skills = new ArrayList<>();
         skills.add(skill);
-        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 5, SkillType.FIRE);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 5, SkillType.FIRE, new EnemyPotion(10));
         DefaultAI enemyAI = new DefaultAI(enemyInfo, 50);
         EnemyFactory enemyFactory = new EnemyFactory();
         EnemyFacade enemy = enemyFactory.createEnemy("goblin");
@@ -49,7 +50,7 @@ public class EnemyFactoryTest {
         Skill skill = new Skill("beam", 25, 10, SkillType.EARTH);
         ArrayList<Skill> skills = new ArrayList<>();
         skills.add(skill);
-        EnemyInfo enemyInfo = new EnemyInfo(skills, 110, 20, SkillType.EARTH);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, 110, 20, SkillType.EARTH, new EnemyPotion(20));
         SmartAI enemyAI = new SmartAI(enemyInfo, 80);
         StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.HEALTH, enemyInfo,
                 30).build();
