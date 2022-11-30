@@ -21,11 +21,10 @@ public class EnemyInfoFactory {
     }
     /**
      * This method returns the EnemyInfo that the enemy with the name in the database has.
-     * @param name of the enemy
+     * @param enemyData Enemy data from the database
      * @return EnemyInfo of the enemy with the name given
      */
-    public EnemyInfo createEnemyInfo(String name) throws TypeNotFoundException {
-        EnemyData enemyData = this.enemyDataManager.fetchEnemyData(name);
+    public EnemyInfo createEnemyInfo(EnemyData enemyData){
         ArrayList<Skill> skills = new ArrayList<>();
         for (String i:enemyData.skills) {
             SkillData skillData = this.skillDataManager.fetchSkillData(i);
@@ -50,7 +49,7 @@ public class EnemyInfoFactory {
      * @param name of the skill
      * @return skill with the name and all the other attributes in the database
      */
-    public SkillType translateSkill(String name) throws TypeNotFoundException {
+    public SkillType translateSkill(String name){
         switch (name){
             case "water":{
                 return SkillType.WATER;
@@ -67,7 +66,6 @@ public class EnemyInfoFactory {
                 return SkillType.AIR;
 
             }
-        }
-        throw new TypeNotFoundException("Type not found");
+        } return SkillType.WATER;
     }
 }
