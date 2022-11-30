@@ -6,9 +6,11 @@ import objects.battle.enemy.factory.EnemyFactory;
 import objects.battle.enemy.EnemyInfo;
 import objects.battle.enemy.ai.DefaultAI;
 import objects.battle.enemy.ai.SmartAI;
-import objects.battle.enemy.gimmick.HealthGimmick;
-import objects.character.Boss;
-import objects.character.Enemy;
+import objects.battle.enemy.gimmick.StatGimmickEntity;
+import objects.battle.enemy.gimmick.GimmickType;
+import objects.battle.enemy.gimmick.StatGimmickStrategy;
+import objects.character.BossFacade;
+import objects.character.EnemyFacade;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -27,7 +29,7 @@ public class EnemyFactoryTest {
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 5, SkillType.FIRE);
         DefaultAI enemyAI = new DefaultAI(enemyInfo, 50);
         EnemyFactory enemyFactory = new EnemyFactory();
-        Enemy enemy = enemyFactory.createEnemy("goblin");
+        EnemyFacade enemy = enemyFactory.createEnemy("goblin");
         Assertions.assertEquals(enemy.getSkill(0).getDamage(), 20);
         Assertions.assertEquals(enemy.getSkill(0).getType(), SkillType.FIRE);
         Assertions.assertEquals(enemy.getSkill(0).getLag(), 10);
@@ -43,15 +45,16 @@ public class EnemyFactoryTest {
 
     @Test
     @DisplayName("This test checks if the EnemyFactory class returns correct boss")
-    public void getBossTest() throws Exception {
+    public void getBossTest(){
         Skill skill = new Skill("beam", 25, 10, SkillType.EARTH);
         ArrayList<Skill> skills = new ArrayList<>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 110, 20, SkillType.EARTH);
         SmartAI enemyAI = new SmartAI(enemyInfo, 80);
-        HealthGimmick gimmick = new HealthGimmick(enemyInfo, 30);
+        StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.HEALTH, enemyInfo,
+                30).build();
         EnemyFactory enemyFactory = new EnemyFactory();
-        Boss boss = (Boss) enemyFactory.createEnemy("goblin warrior");
+        BossFacade boss = (BossFacade) enemyFactory.createEnemy("goblin warrior");
         Assertions.assertEquals(boss.getSkill(0).getDamage(), 25);
         Assertions.assertEquals(boss.getSkill(0).getType(), SkillType.EARTH);
         Assertions.assertEquals(boss.getSkill(0).getLag(), 10);
@@ -62,8 +65,7 @@ public class EnemyFactoryTest {
         Assertions.assertEquals(boss.getType(), SkillType.EARTH);
         Assertions.assertEquals(boss.getHealth(), 100);
         Assertions.assertEquals(boss.getName(), "goblin warrior");
-        Assertions.assertTrue(boss.getGimmick() instanceof
-                HealthGimmick);
+        Assertions.assertTrue(boss.getGimmick() instanceof StatGimmickStrategy);
         Assertions.assertTrue(boss.getEnemyAI() instanceof
                 SmartAI);
     }
