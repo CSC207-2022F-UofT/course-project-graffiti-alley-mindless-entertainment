@@ -23,7 +23,7 @@ public class EnemyAITest {
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
-        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
         DefaultAI defaultAI = new DefaultAI(enemyInfo, 100);
         EnemyAction enemyAction = defaultAI.respond("use skill");
         Assertions.assertTrue(enemyAction instanceof Skill);
@@ -35,7 +35,7 @@ public class EnemyAITest {
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
-        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
         DefaultAI defaultAI = new DefaultAI(enemyInfo, 0);
         Assertions.assertTrue(defaultAI.respond("use skill") instanceof EnemyPotion);
     }
@@ -46,7 +46,7 @@ public class EnemyAITest {
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
-        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 0, SkillType.WATER);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 0, SkillType.WATER, new EnemyPotion(10));
         DefaultAI defaultAI = new DefaultAI(enemyInfo, 50);
         EnemyAction respond = defaultAI.respond("use skill");
         Boolean check = respond instanceof Skill;
@@ -60,7 +60,7 @@ public class EnemyAITest {
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
-        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 0, SkillType.WATER);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 0, SkillType.WATER, new EnemyPotion(10));
         SmartAI smartAI = new SmartAI(enemyInfo, 50);
         EnemyAction respond = smartAI.respond("use skill");
         Boolean check = respond instanceof Skill;
