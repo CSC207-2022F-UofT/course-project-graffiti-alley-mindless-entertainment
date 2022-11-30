@@ -1,5 +1,7 @@
 package game_world.objects.events;
 
+import io.InputValidator;
+
 public class ItemPickUpEvent extends Event {
 
     /**
@@ -10,7 +12,6 @@ public class ItemPickUpEvent extends Event {
         this.name = name;
         this.type = "Item Pick-Up";
         this.priority = priority;
-        this.eventState = 0;
     }
 
     @Override

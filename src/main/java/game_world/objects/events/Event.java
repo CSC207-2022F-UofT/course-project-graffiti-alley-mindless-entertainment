@@ -1,5 +1,8 @@
 package game_world.objects.events;
 
+import interfaces.State;
+
+
 public abstract class Event {
 
     /**
@@ -10,7 +13,7 @@ public abstract class Event {
     public String type;
 
     public long priority;
-    public int eventState;
+    public State eventState;
 
     /**
      * Main abstract method, executes all code within an event

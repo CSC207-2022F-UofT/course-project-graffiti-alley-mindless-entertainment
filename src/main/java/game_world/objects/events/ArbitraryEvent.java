@@ -1,5 +1,7 @@
 package game_world.objects.events;
 
+import io.InputValidator;
+
 public class ArbitraryEvent extends Event {
 
     /**
@@ -10,7 +12,6 @@ public class ArbitraryEvent extends Event {
         this.name = name;
         this.type = "Arbitrary";
         this.priority = priority;
-        this.eventState = 0;
     }
 
     @Override
