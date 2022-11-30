@@ -1,9 +1,15 @@
 package objects.battle.enemy.ai;
 import objects.battle.enemy.EnemyInfo;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class SmartAI implements EnemyAI {
+    /**
+     * This class is a subclass of enemyAI and overrides the respond() function
+     * It is smart Ai that does decide the action depending on the enemy's health
+     * and also the player's input.
+     */
     private EnemyInfo enemyInfo;
     private int attackChance;
     private EnemyPotion potion;
@@ -37,15 +43,21 @@ public class SmartAI implements EnemyAI {
                 return enemyInfo.getSkill(rand.nextInt(enemyInfo.getSkills().size()));
             }
         } else {
-            Random r = new Random();
-            int upperbound = 101;
-            int int_r = r.nextInt(upperbound);
-            if (int_r < this.attackChance) {
+            if(Objects.equals(input, "use potion")) {
                 return enemyInfo.getSkill(rand.nextInt(enemyInfo.getSkills().size()));
-            } else {
-                return potion;
+            } else{
+                Random r = new Random();
+                int upperbound = 101;
+                int int_r = r.nextInt(upperbound);
+                if (int_r < this.attackChance) {
+                    return enemyInfo.getSkill(rand.nextInt(enemyInfo.getSkills().size()));
+                } else {
+                    return potion;
+                }
             }
+
         }
         return enemyInfo.getSkill(rand.nextInt(enemyInfo.getSkills().size()));
     }
+
 }

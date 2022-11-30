@@ -10,7 +10,9 @@ import java.util.Random;
 public class DefaultAI implements EnemyAI {
 
     /**
-     * Default AI that decides enemy's action depending on the User's input
+     * Default AI that decides enemy's action depending on the User's input.
+     * It is considered as default which does not do special thing. So it just
+     * responds to the player's input
      *
      */
 

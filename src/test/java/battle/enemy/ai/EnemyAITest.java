@@ -8,7 +8,6 @@ import objects.battle.enemy.ai.DefaultAI;
 import objects.battle.enemy.ai.EnemyAction;
 import objects.battle.enemy.ai.EnemyPotion;
 import objects.battle.enemy.ai.SmartAI;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -66,6 +65,6 @@ public class EnemyAITest {
         EnemyAction respond = smartAI.respond("use skill");
         Boolean check = respond instanceof Skill;
         Boolean check2 = respond instanceof EnemyPotion;
-        Assert.assertTrue(check||check2);
+        Assertions.assertTrue(check||check2);
     }
 }
