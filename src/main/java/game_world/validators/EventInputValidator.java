@@ -12,13 +12,11 @@ public class EventInputValidator implements InputValidator {
     private final ArrayList<String> possibleInputs;
 
     public EventInputValidator(Action currentAction) {
-        // Constructs a new PlayerCreatorInputValidator with currQuestion.
         this.currentAction = currentAction;
         this.possibleInputs = new ArrayList<>();
     }
 
     public EventInputValidator(Action currentAction, ArrayList<String> possibleInputs) {
-        // Constructs a new PlayerCreatorInputValidator with currQuestion.
         this.currentAction = currentAction;
         this.possibleInputs = possibleInputs;
     }

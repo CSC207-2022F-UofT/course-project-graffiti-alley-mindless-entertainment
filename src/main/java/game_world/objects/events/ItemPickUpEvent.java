@@ -6,6 +6,9 @@ import io.InputValidator;
 import io.Output;
 import io.OutputHandler;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class ItemPickUpEvent extends Event {
 
     /**
@@ -22,7 +25,8 @@ public class ItemPickUpEvent extends Event {
         this.type = "Item Pick-Up";
         this.item = item;
         // change what input you want in eventInputValidator parseAndValidate
-        this.inputValidator = new EventInputValidator(Action.ITEM_PICKUP);
+        this.inputValidator = new EventInputValidator(Action.ITEM_PICKUP,
+                new ArrayList<String>(Arrays.asList("yes", "no")));
         this.awaitInput = false;
         this.isDone = false;
     }
