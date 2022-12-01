@@ -10,11 +10,28 @@ public class EventDataFactory {
      * @return EventData with all instance attributes converted from jsonObject
      */
     public EventData createEventData(JSONObject jsonObject) {
-        return new EventData(
-                (String) jsonObject.get("name"),
-                (String) jsonObject.get("type"),
-                (long) jsonObject.get("priority")
-        );
+        String type = (String) jsonObject.get("type");
+        if (type.equals("Encounter")) {
+            return new EventData(
+                    (String) jsonObject.get("name"),
+                    type,
+                    (String) jsonObject.get("encounter-type"),
+                    (String) jsonObject.get("npc")
+            );
+        }
+        else if (type.equals("Item Pick-Up")) {
+            return new EventData(
+                    (String) jsonObject.get("name"),
+                    type,
+                    (String) jsonObject.get("item")
+            );
+        }
+        else {
+            return new EventData(
+                    (String) jsonObject.get("name"),
+                    type
+            );
+        }
     }
 
 }

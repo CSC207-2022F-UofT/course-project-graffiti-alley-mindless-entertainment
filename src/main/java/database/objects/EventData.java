@@ -8,12 +8,27 @@ public class EventData {
 
     public String name;
     public String type;
-    public long priority;
 
-    public EventData(String name, String type, long priority) {
+    public String item;
+    public String encounterType;
+    public String npc;
+
+    public EventData(String name, String type) {
         this.name = name;
         this.type = type;
-        this.priority = priority;
+    }
+
+    public EventData(String name, String type, String item) {
+        this.name = name;
+        this.type = type;
+        this.item = item;
+    }
+
+    public EventData(String name, String type, String encounterType, String npc) {
+        this.name = name;
+        this.type = type;
+        this.encounterType = encounterType;
+        this.npc = npc;
     }
 }
 

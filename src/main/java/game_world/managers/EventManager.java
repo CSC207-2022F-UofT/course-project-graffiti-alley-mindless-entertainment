@@ -21,7 +21,6 @@ public class EventManager {
 
     private ArrayList<Event> eventQueue;
     private EventDataManager database;
-    private Event currentEvent;
 
     public EventManager() {
         this.database = new EventDataManager();
@@ -41,19 +40,19 @@ public class EventManager {
         if (data.type.equals("Encounter")) {
             newEvent = new EncounterEvent(
                     data.name,
-                    data.priority
+                    data.encounterType,
+                    data.npc
             );
         }
         else if (data.type.equals("Item Pick-Up")) {
             newEvent = new ItemPickUpEvent(
                     data.name,
-                    data.priority
+                    data.item
             );
         }
         else {
             newEvent = new ArbitraryEvent(
-                    data.name,
-                    data.priority
+                    data.name
             );
         }
 
@@ -81,13 +80,15 @@ public class EventManager {
     }
 
     /**
-     * Executes all events in queue
+     * Executes next event in queue
      */
-    private void executeEventQueue() {
-        for (Event event : eventQueue) {
-            this.currentEvent = event;
-            event.execute();
-            this.eventQueue.remove(event);
-        }
+    public State getNextStateInQueue() {
+        State nextState = this.eventQueue.get(0);
+        this.eventQueue.remove(nextState);
+        return nextState;
+    }
+
+    public boolean queueCleared() {
+        return (this.eventQueue.size() == 0);
     }
 }
