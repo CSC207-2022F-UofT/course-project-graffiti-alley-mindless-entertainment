@@ -11,6 +11,8 @@ import menus.PauseMenuChoiceStateFactory;
 import menus.PauseMenuManager;
 import menus.options.ChangeOptionsStateFactory;
 import playercreation.PlayerCreatorManager;
+import switch_managers.SwitchEventMediator;
+import switch_managers.SwitchEventMediatorProxy;
 import switch_managers.handlers.PauseResumeEventHandler;
 import switch_managers.handlers.StartGameEventHandler;
 
@@ -26,15 +28,14 @@ public class Game {
         InputHandler inputHandler = new InputHandlerImpl();
         ManagerController managerController = createManagerController();
         StateManager startingManager = getStartingManager();
-        Shell s = new Shell(inputHandler, managerController, startingManager);
+        SwitchEventMediator switchEventMediator = SwitchEventMediatorProxy.getInstance();
+        Shell s = new Shell(inputHandler, managerController, startingManager, switchEventMediator);
         s.startGame();
     }
 
     private StateManager getStartingManager() {
         //should change to a mainMenuManager when one gets created
-        PlayerCreatorManager playerCreatorManager = new PlayerCreatorManager();
-        //playerCreatorManager.initialize();
-        return playerCreatorManager;
+        return new PlayerCreatorManager();
     }
 
     /**

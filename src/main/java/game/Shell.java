@@ -1,6 +1,7 @@
 package game;
 
 import core.StateManager;
+import switch_managers.SwitchEventMediator;
 import switch_managers.SwitchEventType;
 import switch_managers.ManagerController;
 import io.InputHandler;
@@ -16,13 +17,17 @@ public class Shell {
 
     private final ManagerController managerController;
     private final InputHandler inputHandler;
+
+    private final SwitchEventMediator switchEventMediator;
     private boolean running;
 
-    public Shell(InputHandler inputHandler, ManagerController managerController, StateManager startingManager) {
+    public Shell(InputHandler inputHandler, ManagerController managerController, StateManager startingManager, SwitchEventMediator switchEventMediator) {
         this.inputHandler = inputHandler;
         this.managerController = managerController;
         this.currentManager = startingManager;
+        this.switchEventMediator = switchEventMediator;
     }
+
 
     /**
      * Starts the game,
@@ -39,6 +44,11 @@ public class Shell {
     private void mainLoop() {
         // The game runs until the User decides to exit the game.
         while (running) {
+
+            if (switchEventMediator.ready()) {
+                switchManager();
+            }
+
             //!!! everything below need to be worked on!
             if (currentManager.awaitInput()) {
                 String input = inputHandler.getChoice(currentManager.getInputValidator());
@@ -46,10 +56,6 @@ public class Shell {
                 currentManager.postInput(input);
             } else {
                 currentManager.preInput();
-            }
-
-            if (currentManager.isDone()) {
-                switchManager();
             }
         }
     }
@@ -62,7 +68,7 @@ public class Shell {
             exitGame();
             return true;
         } else if (doesUserPause(input)) {
-            switchManager();
+            switchEventMediator.store(SwitchEventType.PAUSE);
             return true;
         }
         return false;
@@ -76,24 +82,17 @@ public class Shell {
         //do smth here like saving data to files to be implemented later
     }
 
-    //!!! Shouldn't there be the creation of game method?
-    // private void createStarterGame()
-
-    /**
-     * Returns the manager for the start of the game.
-     */
-    // !!! not sure that I got who the first manager is and how this part works.
-
-
     /**
      * Handles the system to switch between the different managers in the game.
      * (!!!)
      */
     private void switchManager() {
         // !!! get switch event somehow - maybe through a mediator?
-        SwitchEventType switchEventType = SwitchEventType.START_GAME;
+        SwitchEventType switchEventType = switchEventMediator.retrieve();
         this.currentManager = managerController.switchManagers(switchEventType, currentManager);
-        currentManager.initialize();
+        if (currentManager.isDone()) {
+            currentManager.initialize();
+        }
     }
 
     /**
