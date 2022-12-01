@@ -2,8 +2,9 @@ package objects.battle.enemy.ai;
 
 import objects.character.BossFacade;
 import objects.character.EnemyFacade;
+import objects.character.Player;
 
-public class EnemyPotionHandler {
+public class EnemyPotionHandler implements EnemyActionHandler{
     private EnemyPotion enemyPotion;
 
 
@@ -12,11 +13,13 @@ public class EnemyPotionHandler {
     }
 
 
-    public void usePotion(EnemyFacade enemy){
+    @Override
+    public void useAction(EnemyFacade enemy, Player player) {
         enemy.changeHealth(this.enemyPotion.getHp());
     }
 
-    public void usePotion(BossFacade boss){
+    @Override
+    public void useAction(BossFacade boss, Player player){
         boss.changeHealth(this.enemyPotion.getHp());
     }
 }

@@ -1,6 +1,6 @@
 package objects.battle.enemy.ai;
 
-public class EnemyPotion implements EnemyAction{
+public class EnemyPotion{
     /**
      * This class is only used by an enemy, and it is one of the enemy's actions.
      * This potion has instance attribute called hp which is the health that increases

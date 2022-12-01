@@ -32,32 +32,32 @@ public class SmartAI implements EnemyAI {
      * @return string that represents the enemy's action
      */
     @Override
-    public EnemyAction respond(String input) {
+    public EnemyActionHandler respond(String input) {
         Random rand = new Random();
         if (this.enemyInfo.getHealth() < 30) {
             int upper = 101;
             int int_random = rand.nextInt(upper);
             if (int_random < 70) {
-                return potion;
+                return new EnemyPotionHandler(potion);
             } else if (this.enemyInfo.getHealth() > 60) {
-                return enemyInfo.getSkill(rand.nextInt(enemyInfo.getSkills().size()));
+                return new EnemySkillHandler(enemyInfo.getSkill(rand.nextInt(enemyInfo.getSkills().size())));
             }
         } else {
             if(Objects.equals(input, "use potion")) {
-                return enemyInfo.getSkill(rand.nextInt(enemyInfo.getSkills().size()));
+                return new EnemySkillHandler(enemyInfo.getSkill(rand.nextInt(enemyInfo.getSkills().size())));
             } else{
                 Random r = new Random();
                 int upperbound = 101;
                 int int_r = r.nextInt(upperbound);
                 if (int_r < this.attackChance) {
-                    return enemyInfo.getSkill(rand.nextInt(enemyInfo.getSkills().size()));
+                    return new EnemySkillHandler(enemyInfo.getSkill(rand.nextInt(enemyInfo.getSkills().size())));
                 } else {
-                    return potion;
+                    return new EnemyPotionHandler(potion);
                 }
             }
 
         }
-        return enemyInfo.getSkill(rand.nextInt(enemyInfo.getSkills().size()));
+        return new EnemySkillHandler(enemyInfo.getSkill(rand.nextInt(enemyInfo.getSkills().size())));
     }
 
 }

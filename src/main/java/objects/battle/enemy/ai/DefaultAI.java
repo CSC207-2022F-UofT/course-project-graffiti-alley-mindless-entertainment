@@ -39,18 +39,18 @@ public class DefaultAI implements EnemyAI {
      * @return string that represents the enemy's action
      */
     @Override
-    public EnemyAction respond(String input) {
+    public EnemyActionHandler respond(String input) {
         Random rand = new Random();
         if (Objects.equals(input, "use skill")) {
             int upperbound = 101;
             int int_random = rand.nextInt(upperbound);
             if(int_random < this.attackChance){
-                return enemyInfo.getSkill(rand.nextInt(enemyInfo.getSkills().size()));
+                return new EnemySkillHandler(enemyInfo.getSkill(rand.nextInt(enemyInfo.getSkills().size())));
             } else{
-                return potion;
+                return new EnemyPotionHandler(potion);
             }
         } else{
-            return enemyInfo.getSkill(rand.nextInt(enemyInfo.getSkills().size()));
+            return new EnemySkillHandler(enemyInfo.getSkill(rand.nextInt(enemyInfo.getSkills().size())));
         }
     }
 }
