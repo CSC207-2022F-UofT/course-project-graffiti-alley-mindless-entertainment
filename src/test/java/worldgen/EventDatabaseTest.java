@@ -13,7 +13,7 @@ public class EventDatabaseTest {
         EventDataManager database = new EventDataManager();
         EventData test1 = database.fetchEvent("name", "test");
         assert test1.name.equals("test");
-        assert test1.type.equals("Encounter");
+        assert test1.type.equals("Arbitrary");
     }
 
 }
