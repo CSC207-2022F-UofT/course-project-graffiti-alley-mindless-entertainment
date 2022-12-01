@@ -28,6 +28,12 @@ public class EventInputValidator implements InputValidator {
             // Enter any key
             return "";
         }
-        return null;
+        else {
+            String lowerInput = input.toLowerCase();
+            if (this.possibleInputs.contains(lowerInput)) {
+                return lowerInput;
+            }
+            return null;
+        }
     }
 }
