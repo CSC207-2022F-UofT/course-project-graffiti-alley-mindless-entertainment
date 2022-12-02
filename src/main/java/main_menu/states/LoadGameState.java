@@ -32,9 +32,7 @@ public class LoadGameState implements State {
         OutputHandler output = Output.getScreen();
         // Can put a loop here once saving is implemented to show the user any saved game Player name and
         // description.
-        output.generateText("Type 'save1' if you would like to load a game in save slot 1.");
-        output.generateText("Type 'save2' if you would like to load a game in save slot 2.");
-        output.generateText("Type 'save3' if you would like to load a game in save slot 3.");
+        // Awaiting saving implementation.
         output.generateText("Type 'return' if you would like to return to the main menu.");
     }
 

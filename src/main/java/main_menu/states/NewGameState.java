@@ -30,13 +30,8 @@ public class NewGameState implements State {
         // OutputHandler.
         this.awaitInput = true;
         OutputHandler output = Output.getScreen();
-        output.generateText("WARNING: Saving to one of the three save slots will overwrite any old saves already" +
-                " in the save slot.");
-        // Can put a loop here once saving is implemented to let the user know if there is already a save present
-        // in one of the save slots.
-        output.generateText("Type 'save1' if you would like to start a new game in save slot 1.");
-        output.generateText("Type 'save2' if you would like to start a new game in save slot 2.");
-        output.generateText("Type 'save3' if you would like to start a new game in save slot 3.");
+        output.generateText("Are you sure you would like to start a new game?");
+        output.generateText("Type 'start' if you would like to start a new game.");
         output.generateText("Type 'return' if you would like to return to the main menu.");
     }
 

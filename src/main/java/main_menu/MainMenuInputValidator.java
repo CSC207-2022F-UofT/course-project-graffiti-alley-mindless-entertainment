@@ -28,12 +28,21 @@ public class MainMenuInputValidator implements InputValidator {
                 return null;
             }
         }
-        else if (this.currOption == MainMenuOptions.NEW || this.currOption == MainMenuOptions.LOAD) {
-            // Ensures the input corresponds to one of the save slots or returning to the main menu.
-            if (input.equalsIgnoreCase(MainMenuOptions.SAVE1.toString()) ||
-                    input.equalsIgnoreCase(MainMenuOptions.SAVE2.toString()) ||
-                    input.equalsIgnoreCase(MainMenuOptions.SAVE3.toString()) ||
+        else if (this.currOption == MainMenuOptions.NEW) {
+            // Ensures the input corresponds to starting a new game or returning to the main menu.
+            if (input.equalsIgnoreCase(MainMenuOptions.START.toString()) ||
                     input.equalsIgnoreCase(MainMenuOptions.RETURN.toString())) {
+                return input.toLowerCase();
+            }
+            else {
+                return null;
+            }
+        }
+        else if (this.currOption == MainMenuOptions.LOAD) {
+            // Ensures the input corresponds to one of the save slots or returning to the main menu.
+            // Awaiting saving implementation. Will make a loop here to calculate the number of save slots used and
+            // will verify if the number given by the user is a valid save slot with a Player saved.
+            if (input.equalsIgnoreCase(MainMenuOptions.RETURN.toString())) {
                 return input.toLowerCase();
             }
             else {
