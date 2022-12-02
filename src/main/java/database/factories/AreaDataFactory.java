@@ -10,46 +10,32 @@ public class AreaDataFactory {
 
     /**
      * @param jsonObject JSONObject with all information regarding area
-     * @param name name of Area
+     * @param id       id of Area
      * @return AreaData with all instance attributes converted from jsonObject
      */
-    public AreaData createAreaData(JSONObject jsonObject, String name) {
+    public AreaData createAreaData(JSONObject jsonObject, String id) {
         ArrayList<String> texts = new ArrayList<>();
-        for (Object obj: (JSONArray) jsonObject.get("texts"))
+        for (Object obj : (JSONArray) jsonObject.get("texts"))
             texts.add((String) obj);
 
         ArrayList<String> events = new ArrayList<>();
-        for (Object obj: (JSONArray) jsonObject.get("events"))
+        for (Object obj : (JSONArray) jsonObject.get("events"))
             events.add((String) obj);
 
-        String type = (String) jsonObject.get("type");
-        if (type.equals("One-Way")) {
-            return new AreaData(
-                    name,
-                    type,
-                    (String) jsonObject.get("speaker"),
-                    texts,
-                    (String) jsonObject.get("next"),
-                    events
-            );
-        }
-        else if (type.equals("Multi-Directional")) {
-            JSONObject jsonOptions = (JSONObject) jsonObject.get("options");
-            Set<String> options_keys = jsonOptions.keySet();
-            Map<String, String> options = new HashMap<String, String>();
-            for (String key : options_keys) {
-                options.put(key, jsonOptions.get(key).toString());
-            }
-            return new AreaData(
-                    name,
-                    type,
-                    (String) jsonObject.get("speaker"),
-                    texts,
-                    options,
-                    events
-            );
-        }
-        return null;
+        JSONObject jsonOptions = (JSONObject) jsonObject.get("options");
+        ArrayList<String> next_ids = new ArrayList<>(jsonOptions.keySet());
+        ArrayList<String> next_options = new ArrayList<>(jsonOptions.values());
+
+        return new AreaData(
+                id,
+                (String) jsonObject.get("name"),
+                (String) jsonObject.get("speaker"),
+                (String) jsonObject.get("zone"),
+                texts,
+                next_ids,
+                next_options,
+                events
+        );
     }
 
 }

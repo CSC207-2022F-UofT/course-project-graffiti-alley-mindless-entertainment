@@ -1,5 +1,6 @@
 package game_world.managers;
 
+import core.StateManager;
 import database.managers.EventDataManager;
 
 import database.objects.EventData;
@@ -8,6 +9,7 @@ import game_world.objects.events.ArbitraryEvent;
 import game_world.objects.events.EncounterEvent;
 import game_world.objects.events.ItemPickUpEvent;
 import game_world.objects.events.Event;
+import interfaces.State;
 
 import java.util.ArrayList;
 
@@ -19,6 +21,7 @@ public class EventManager {
 
     private ArrayList<Event> eventQueue;
     private EventDataManager database;
+    private Event currentEvent;
 
     public EventManager() {
         this.database = new EventDataManager();
@@ -74,14 +77,15 @@ public class EventManager {
      * Adds all events of new area to event queue to be executed
      */
     public void areaEntered(Area area) {
-        this.eventQueue.addAll(area.events);
+        this.eventQueue.addAll(area.getEvents());
     }
 
     /**
      * Executes all events in queue
      */
-    public void executeEventQueue() {
+    private void executeEventQueue() {
         for (Event event : eventQueue) {
+            this.currentEvent = event;
             event.execute();
             this.eventQueue.remove(event);
         }

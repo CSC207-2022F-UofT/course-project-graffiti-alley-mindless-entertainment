@@ -1,5 +1,7 @@
 package game;
 
+import game_world.managers.AreaManager;
+import game_world.managers.EventManager;
 import switch_managers.ManagerControllerImpl;
 import core.StateManager;
 import switch_managers.ManagerController;
@@ -12,6 +14,7 @@ import playercreation.PlayerCreatorManager;
 import switch_managers.SwitchEventMediator;
 import switch_managers.SwitchEventMediatorProxy;
 import switch_managers.handlers.PauseResumeEventHandler;
+import switch_managers.handlers.StartGameEventHandler;
 
 public class Game {
     public static void main(String[] args) {
@@ -45,9 +48,14 @@ public class Game {
         PauseMenuChoiceStateFactory pauseMenuChoiceStateFactory = new PauseMenuChoiceStateFactory();
         ChangeOptionsStateFactory changeOptionsStateFactory = new ChangeOptionsStateFactory();
         PauseMenuManager pauseMenuManager = new PauseMenuManager(pauseMenuChoiceStateFactory, changeOptionsStateFactory);
+        EventManager eventManager = new EventManager();
+        AreaManager areaManager = new AreaManager(eventManager);
 
         PauseResumeEventHandler pauseResumeEventHandler = new PauseResumeEventHandler(pauseMenuManager);
         managerController.addSwitchEventHandler(pauseResumeEventHandler);
+
+        StartGameEventHandler startGameEventHandler = new StartGameEventHandler(areaManager);
+        managerController.addSwitchEventHandler(startGameEventHandler);
 
         return managerController;
     }
