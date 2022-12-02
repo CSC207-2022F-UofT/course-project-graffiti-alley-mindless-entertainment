@@ -2,11 +2,13 @@ package game_world.factories;
 
 import database.objects.AreaData;
 import game_world.managers.EventManager;
-import game_world.objects.areas.Area;
-
-import java.util.ArrayList;
+import game_world.objects.Area;
 
 public class AreaFactory {
+
+    /**
+     * A factory class for creating new Areas. Used to avoid dependencies in AreaManager.
+     */
 
     private final EventManager eventManager;
 
@@ -19,7 +21,6 @@ public class AreaFactory {
      * @return the new area generated
      * @param data data from existing AreaData
      */
-
     public Area createArea(AreaData data) {
         return new Area(
                 data.id,

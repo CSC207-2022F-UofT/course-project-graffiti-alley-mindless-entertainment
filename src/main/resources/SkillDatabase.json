@@ -1,0 +1,16 @@
+{
+  "skills": [
+    {
+      "name": "fireball",
+      "type": "fire",
+      "lag": "10",
+      "damage": "20"
+    },
+    {
+      "name": "beam",
+      "type": "earth",
+      "lag": "10",
+      "damage": "25"
+    }
+  ]
+}

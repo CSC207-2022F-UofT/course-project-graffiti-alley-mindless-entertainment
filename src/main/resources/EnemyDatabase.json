@@ -1,0 +1,25 @@
+{
+  "enemies": [
+    {
+      "name": "goblin",
+      "type": "fire",
+      "skills": [
+        "fireball"
+      ],
+      "reputation": "5",
+      "speed": "90",
+      "ai": "default"
+    },
+    {
+      "name": "goblin warrior",
+      "type": "earth",
+      "skills": [
+        "beam"
+      ],
+      "reputation": "20",
+      "speed": "110",
+      "ai": "smart",
+      "gimmick": "health"
+    }
+  ]
+}

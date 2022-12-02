@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class EnemyData {
 
     /**
-     * All information needed for an arbitrary event
+     * All information needed for an enemy
      */
 
     public String name;

@@ -1,5 +1,4 @@
 {
-  "name": "PACT",
   "texts": {
     "0": {
       "zone": "Introduction",
@@ -110,91 +109,5 @@
       },
       "events": []
     }
-  },
-  "quests": [],
-  "characters": [],
-  "skills": [
-    {
-      "name": "fireball",
-      "type": "fire",
-      "lag": "10",
-      "damage": "20"
-    },
-    {
-      "name": "beam",
-      "type": "earth",
-      "lag": "10",
-      "damage": "25"
-    }
-  ],
-  "enemies": [
-    {
-      "name": "goblin",
-      "type": "fire",
-      "skills": [
-        "fireball"
-      ],
-      "reputation": "5",
-      "speed": "90",
-      "ai": "default"
-    },
-    {
-      "name": "goblin warrior",
-      "type": "earth",
-      "skills": [
-        "beam"
-      ],
-      "reputation": "20",
-      "speed": "110",
-      "ai": "smart",
-      "gimmick": "health"
-    }
-  ],
-  "ai_data": [
-    {
-      "name": "default",
-      "chance": "50"
-    },
-    {
-      "name": "smart",
-      "chance": "80"
-    }
-  ],
-  "gimmicks": [
-    {
-      "name": "health",
-      "trigger": "30"
-    },
-    {
-      "name": "attack",
-      "trigger": "20",
-      "attack": "1.2"
-    },
-    {
-      "name": "speed",
-      "trigger": "25",
-      "speed": "20"
-    },
-    {
-      "name": "type",
-      "trigger": "20"
-    }
-  ],
-  "events": [
-    {
-      "name": "test",
-      "type": "Arbitrary"
-    },
-    {
-      "name": "test 2",
-      "type": "Item Pick-Up",
-      "item": "Sword"
-    },
-    {
-      "name": "test 3",
-      "type": "Encounter",
-      "encounter-type": "Hostile",
-      "npc": "goblin"
-    }
-  ]
+  }
 }
