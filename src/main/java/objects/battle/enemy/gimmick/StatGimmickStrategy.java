@@ -1,6 +1,7 @@
 package objects.battle.enemy.gimmick;
 
 import objects.battle.Skill;
+import objects.battle.SkillType;
 
 public class StatGimmickStrategy implements GimmickStrategy{
     /** This class is the Gimmick use case that uses gimmick.
@@ -18,42 +19,60 @@ public class StatGimmickStrategy implements GimmickStrategy{
     /** This is a method that actually use the gimmick that is given in the constructor.
      * @return boolean: if return true if the gimmick is successfully used.
      */
-    public boolean useGimmick(){
+    public String useGimmick(){
         if(!this.gimmick.getUsedGimmick() && gimmick.getEnemyInfo().getHealth() <= gimmick.getTriggerHealth()){
             GimmickType gimmickType = this.gimmick.getName();
-            if(gimmickType == GimmickType.TYPE){
-                useType();
-            } else if (gimmickType == GimmickType.ATTACK) {
-                useAttack();
-            } else if (gimmickType == GimmickType.SPEED) {
-                useSpeed();
-            }else {
-                useHealth();
-            }
             this.gimmick.usedGimmick();
-            return true;
+            if(gimmickType == GimmickType.TYPE){
+                return useType();
+            } else if (gimmickType == GimmickType.ATTACK) {
+                return useAttack();
+            } else if (gimmickType == GimmickType.SPEED) {
+                return useSpeed();
+            }else {
+                return useHealth();
+            }
+
         } else{
-            return false;
+            return "";
         }
 
     }
 
-    private void useAttack(){
+    private String useAttack(){
         for(Skill skill: this.gimmick.getEnemyInfo().getSkills()){
             int i = skill.getDamage();
             skill.setDamage((int)Math.ceil(i * this.gimmick.getAttackIncrease()));
             }
+        return "!?!?!? Something is happening to the boss! It feels different! The gimmick is triggered! Now the " +
+                "damage of skills increased by " + this.gimmick.getAttackIncrease() + "!";
     }
 
-    private void useHealth(){
+    private String useHealth(){
         this.gimmick.getEnemyInfo().setHealth(this.gimmick.getEnemyInfo().getMaxHealth());
+        return "!?!?!? Something is happening to the boss! It feels different! The gimmick is triggered! Now the " +
+                "boss's health is fully healed!";
     }
 
-    private void useType(){
+    private String useType(){
         this.gimmick.getEnemyInfo().setType(this.gimmick.getType());
+        String type;
+        if(gimmick.getType() == SkillType.AIR){
+            type = "air";
+        } else if (gimmick.getType() == SkillType.EARTH) {
+            type = "earth";
+        } else if (gimmick.getType() == SkillType.FIRE) {
+            type = "fire";
+        } else{
+            type = "water";
+        }
+        return "!?!?!? Something is happening to the boss! It feels different! The gimmick is triggered! Now the " +
+                "boss's type changed to " + type + "!";
     }
 
-    private void useSpeed(){
+    private String useSpeed(){
         this.gimmick.getEnemyInfo().changeSpeed(this.gimmick.getSpeedIncrease());
+        return "!?!?!? Something is happening to the boss! It feels different! The gimmick is triggered! Now the " +
+                "boss's speed increased by " + this.gimmick.getSpeedIncrease() + "!";
     }
 }

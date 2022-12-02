@@ -31,8 +31,9 @@ public class EnemyPotionHandler implements EnemyActionHandler{
      * @param player of the game
      */
     @Override
-    public void useAction(EnemyFighter enemy, Player player) {
+    public String useAction(EnemyFighter enemy, Player player) {
         enemy.changeHealth(this.enemyPotion.getHp());
+        return "Enemy used a potion! Now " + enemy.getName() + " has " + enemy.getHealth() + " HP!";
     }
 
 }

@@ -30,9 +30,11 @@ public class EnemySkillHandler extends SkillHandler implements EnemyActionHandle
      * @param player : player that is attacked
      */
     @Override
-    public void useAction(EnemyFighter enemy, Player player){
+    public String useAction(EnemyFighter enemy, Player player){
         int damage = calculateDamage(skill, enemy.getType());
         player.changeCurrHealth(-damage);
+        return enemy.getName() + " has used " + this.skill.getName() + " with " + this.skill.getDamage()
+                + " damage!";
     }
 
 

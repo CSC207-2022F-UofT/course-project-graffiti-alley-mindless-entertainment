@@ -13,7 +13,7 @@ public interface EnemyActionHandler {
      * @param enemy that used the action
      * @param player of the game. Enemy uses the action to this player
      */
-    public void useAction(EnemyFighter enemy, Player player);
+    public String useAction(EnemyFighter enemy, Player player);
 
 
 }
