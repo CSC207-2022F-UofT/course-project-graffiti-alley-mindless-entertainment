@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * health, skills, speed, reputation and Enemy AI in addition to name which is inherited from
  * parent class.
  */
-public class EnemyFacade extends Character {
+public class EnemyFacade extends Character implements EnemyFighter{
 
 
     public EnemyInfo enemyInfo;

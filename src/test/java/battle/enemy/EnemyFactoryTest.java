@@ -13,6 +13,7 @@ import objects.battle.enemy.gimmick.StatGimmickStrategy;
 import objects.character.BossFacade;
 import objects.character.EnemyFacade;
 
+import objects.character.EnemyFighter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -30,7 +31,7 @@ public class EnemyFactoryTest {
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 5, SkillType.FIRE, new EnemyPotion(10));
         DefaultAI enemyAI = new DefaultAI(enemyInfo, 50);
         EnemyFactory enemyFactory = new EnemyFactory();
-        EnemyFacade enemy = enemyFactory.createEnemy("goblin");
+        EnemyFacade enemy = (EnemyFacade) enemyFactory.createEnemy("goblin");
         Assertions.assertEquals(enemy.getSkill(0).getDamage(), 20);
         Assertions.assertEquals(enemy.getSkill(0).getType(), SkillType.FIRE);
         Assertions.assertEquals(enemy.getSkill(0).getLag(), 10);

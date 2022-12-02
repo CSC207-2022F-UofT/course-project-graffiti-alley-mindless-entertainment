@@ -7,7 +7,7 @@ import objects.battle.enemy.ai.*;
 /**
  * This class represents the boss in a game
  */
-public class BossFacade extends EnemyFacade {
+public class BossFacade extends EnemyFacade implements EnemyFighter{
 
     private GimmickStrategy gimmick;
 

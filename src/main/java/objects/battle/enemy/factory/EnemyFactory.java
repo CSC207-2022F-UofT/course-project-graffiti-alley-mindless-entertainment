@@ -12,6 +12,7 @@ import objects.battle.enemy.ai.EnemyAI;
 import objects.battle.enemy.gimmick.*;
 import objects.character.BossFacade;
 import objects.character.EnemyFacade;
+import objects.character.EnemyFighter;
 
 
 public class EnemyFactory {
@@ -41,7 +42,7 @@ public class EnemyFactory {
      * @param name of the enemy to create
      * @return instance of enemy
      */
-    public EnemyFacade createEnemy(String name) {
+    public EnemyFighter createEnemy(String name) {
         EnemyData enemyData = this.enemyDatabase.fetchEnemyData(name);
         EnemyInfo enemyInfo = this.enemyInfoFactory.createEnemyInfo(enemyData);
         EnemyAI enemyAI = this.enemyAIFactory.createEnemyAI(enemyData, enemyInfo);

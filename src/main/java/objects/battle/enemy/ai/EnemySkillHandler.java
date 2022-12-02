@@ -3,6 +3,7 @@ package objects.battle.enemy.ai;
 import objects.battle.Skill;
 import objects.character.BossFacade;
 import objects.character.EnemyFacade;
+import objects.character.EnemyFighter;
 import objects.character.Player;
 
 public class EnemySkillHandler extends SkillHandler implements EnemyActionHandler{
@@ -29,21 +30,11 @@ public class EnemySkillHandler extends SkillHandler implements EnemyActionHandle
      * @param player : player that is attacked
      */
     @Override
-    public void useAction(EnemyFacade enemy, Player player){
+    public void useAction(EnemyFighter enemy, Player player){
         int damage = calculateDamage(skill, enemy.getType());
         player.changeCurrHealth(-damage);
     }
 
-    /**
-     * This method calculates the damage of the skill to the user and
-     * updates the stats
-     * @param boss: boss that is attacking
-     * @param player : player that is attacked
-     */
-    @Override
-    public void useAction(BossFacade boss, Player player) {
-        int damage = calculateDamage(skill, boss.getType());
-        player.changeCurrHealth(-damage);
-    }
+
 
 }
