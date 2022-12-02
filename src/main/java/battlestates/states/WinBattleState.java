@@ -2,6 +2,7 @@ package battlestates.states;
 
 import interfaces.State;
 import io.InputValidator;
+import io.Output;
 import io.OutputHandler;
 import io.OutputHandlerImpl;
 import objects.character.EnemyFacade;
@@ -29,6 +30,7 @@ public class WinBattleState implements State {
      */
     @Override
     public void preInput() {
+        OutputHandler output = Output.getScreen();
         int expGain = 100; // Will be changed later depending on final exp mechanic
         // int repChange = foe.getReputation();
 
@@ -38,9 +40,9 @@ public class WinBattleState implements State {
         // user.changeReputation(repChange); // Currently no implementation
 
         // Displaying victory text!
-        String winText = "You defeated the " + foe.getName() + "! You earned " + expGain
+        String winText = foe.getName() + " has been defeated! You earned " + expGain
                 + " experience points, unless you cheated ;)";
-        OutputHandlerImpl.getScreen().generateText(winText);
+        output.generateText(winText);
         user.changeSpeed(100 - user.getSpeed()); // Resets speed to 100
         this.done = true;
     }
