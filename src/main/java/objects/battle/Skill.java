@@ -1,8 +1,5 @@
 package objects.battle;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Skill {
     /** A class for all skills to be used by any kinds of Characters in battles.
      * Attributes:
@@ -16,12 +13,7 @@ public class Skill {
     private int lag;
     private SkillType type;
 
-    public Skill() {
-        this.name = "dummy";
-        this.damage = 0;
-        this.lag = 0;
-        this.type = SkillType.WATER;
-    }
+
     public Skill(String name, int damage, int lag, SkillType type) {
         // Allows for creation and customization of skills
         this.name = name;
@@ -59,5 +51,4 @@ public class Skill {
     public void setType(SkillType type) {
         this.type = type;
     }
-
 }
