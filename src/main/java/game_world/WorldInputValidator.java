@@ -1,30 +1,32 @@
-package game_world.validators;
+package game_world;
 
-import game_world.objects.Action;
 import io.InputValidator;
 
 import java.util.ArrayList;
 
 
-public class EventInputValidator implements InputValidator {
+public class WorldInputValidator implements InputValidator {
 
-    private final Action currentAction;
     private final ArrayList<String> possibleInputs;
 
-    public EventInputValidator(Action currentAction) {
-        this.currentAction = currentAction;
+
+    public WorldInputValidator() {
         this.possibleInputs = new ArrayList<>();
     }
 
-    public EventInputValidator(Action currentAction, ArrayList<String> possibleInputs) {
-        this.currentAction = currentAction;
+    public WorldInputValidator(ArrayList<String> possibleInputs) {
         this.possibleInputs = possibleInputs;
     }
 
+    /**
+     * @param input current input from the user
+     * @return If the input exists in possible inputs or possible inputs is empty, validates string
+     *         Otherwise user must input again, the input is not valid
+     */
     @Override
     public String parseAndValidate(String input) {
         // Validates and parses user input if valid, returns null if invalid.
-        if (currentAction == Action.ARBITRARY) {
+        if (this.possibleInputs.isEmpty()) {
             // Enter any key
             return "";
         }
@@ -33,7 +35,7 @@ public class EventInputValidator implements InputValidator {
             if (this.possibleInputs.contains(lowerInput)) {
                 return lowerInput;
             }
-            return null;
         }
+        return null;
     }
 }

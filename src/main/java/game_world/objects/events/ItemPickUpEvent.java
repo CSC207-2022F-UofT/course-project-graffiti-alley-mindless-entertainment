@@ -1,7 +1,6 @@
 package game_world.objects.events;
 
-import game_world.objects.Action;
-import game_world.validators.EventInputValidator;
+import game_world.WorldInputValidator;
 import io.InputValidator;
 import io.Output;
 import io.OutputHandler;
@@ -16,17 +15,20 @@ public class ItemPickUpEvent extends Event {
      */
 
     private final String item;
-    private final EventInputValidator inputValidator;
+    private final WorldInputValidator inputValidator;
     private boolean isDone;
     private boolean awaitInput;
+
+    // change below for inputs u want
+    private final ArrayList<String> inputs = new ArrayList<String>(Arrays.asList(
+            "yes", "no"
+    ));
 
     public ItemPickUpEvent(String name, String item) {
         this.name = name;
         this.type = "Item Pick-Up";
         this.item = item;
-        // change what input you want in eventInputValidator parseAndValidate
-        this.inputValidator = new EventInputValidator(Action.ITEM_PICKUP,
-                new ArrayList<String>(Arrays.asList("yes", "no")));
+        this.inputValidator = new WorldInputValidator(inputs);
         this.awaitInput = false;
         this.isDone = false;
     }
@@ -36,13 +38,18 @@ public class ItemPickUpEvent extends Event {
         this.awaitInput = true;
         OutputHandler output = Output.getScreen();
         // change text below
-        output.generateText("This is an Item Pick-Up event. Press enter to continue.");
+        output.generateText("[ITEM PICK-UP EVENT] What would you like to do?");
+        for (String input : inputs) {
+            output.generateText("\t◈ " + input);
+        }
     }
 
     @Override
     public void postInput(String input) {
         this.awaitInput = false;
         this.isDone = true;
+        OutputHandler output = Output.getScreen();
+        output.generateText("You decided to " + input + ".");
     }
 
     @Override

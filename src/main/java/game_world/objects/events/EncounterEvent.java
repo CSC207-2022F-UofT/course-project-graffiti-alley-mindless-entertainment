@@ -1,10 +1,12 @@
 package game_world.objects.events;
 
-import game_world.objects.Action;
-import game_world.validators.EventInputValidator;
+import game_world.WorldInputValidator;
 import io.InputValidator;
 import io.Output;
 import io.OutputHandler;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class EncounterEvent extends Event {
 
@@ -14,17 +16,21 @@ public class EncounterEvent extends Event {
 
     private final String encounterType;
     private final String npc;
-    private final EventInputValidator inputValidator;
+    private final WorldInputValidator inputValidator;
     private boolean isDone;
     private boolean awaitInput;
+
+    // change below for inputs u want
+    private final ArrayList<String> inputs = new ArrayList<String>(Arrays.asList(
+            "yes", "no"
+    ));
 
     public EncounterEvent(String name, String encounterType, String npc) {
         this.name = name;
         this.type = "Encounter";
         this.encounterType = encounterType;
         this.npc = npc;
-        // change what input you want in eventInputValidator parseAndValidate
-        this.inputValidator = new EventInputValidator(Action.ENCOUNTER);
+        this.inputValidator = new WorldInputValidator(inputs);
         this.awaitInput = false;
         this.isDone = false;
     }
@@ -34,13 +40,21 @@ public class EncounterEvent extends Event {
         this.awaitInput = true;
         OutputHandler output = Output.getScreen();
         // change text below
-        output.generateText("This is an Encounter event. Press enter to continue.");
+        output.generateText("[ENCOUNTER EVENT] What would you like to do?");
+        for (String input : inputs) {
+            output.generateText("\t◈ " + input);
+        }
     }
 
     @Override
     public void postInput(String input) {
         this.awaitInput = false;
         this.isDone = true;
+        OutputHandler output = Output.getScreen();
+        output.generateText("You decided to " + input + ".");
+        // switch manager here
+        /// SwitchEventMediator s = SwitchEventMediatorProxy.getInstance();
+        /// s.store(SwitchEventType.--name of your switchevent--);
     }
 
     @Override

@@ -1,0 +1,19 @@
+{
+  "events": [
+    {
+      "name": "test",
+      "type": "Arbitrary"
+    },
+    {
+      "name": "test 2",
+      "type": "Item Pick-Up",
+      "item": "Sword"
+    },
+    {
+      "name": "test 3",
+      "type": "Encounter",
+      "encounter-type": "Hostile",
+      "npc": "goblin"
+    }
+  ]
+}

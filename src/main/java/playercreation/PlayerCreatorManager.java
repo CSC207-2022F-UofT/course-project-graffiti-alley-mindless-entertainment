@@ -4,6 +4,9 @@ import interfaces.State;
 import core.StateManager;
 import playercreation.factories.PlayerConfirmStateFactory;
 import playercreation.factories.PlayerQuestionStateFactory;
+import switch_managers.SwitchEventMediator;
+import switch_managers.SwitchEventMediatorProxy;
+import switch_managers.SwitchEventType;
 
 public class PlayerCreatorManager extends StateManager {
     /** A controller class that helps create a new Player character at the beginning of the game.
@@ -71,6 +74,8 @@ public class PlayerCreatorManager extends StateManager {
                     // PlayerCreatorManager has asked all questions, and Shell switches to a different Manager to start
                     // the game.
                     // Awaiting Shell implementation.
+                    SwitchEventMediator s = SwitchEventMediatorProxy.getInstance();
+                    s.store(SwitchEventType.START_GAME);
                     return null;
                 }
                 else {
