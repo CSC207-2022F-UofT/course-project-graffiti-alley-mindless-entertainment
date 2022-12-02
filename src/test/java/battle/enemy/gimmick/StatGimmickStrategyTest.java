@@ -80,7 +80,7 @@ public class StatGimmickStrategyTest {
     @Test
     public void UseGimmickTest(){
         EnemyFactory enemyFactory = new EnemyFactory();
-        BossFacade boss = (BossFacade) enemyFactory.createEnemy("goblin warrior");
+        BossFacade boss = enemyFactory.createBoss("goblin warrior");
         boss.changeHealth(-90);
         boss.applyGimmick();
         Assertions.assertEquals(100, boss.getHealth());

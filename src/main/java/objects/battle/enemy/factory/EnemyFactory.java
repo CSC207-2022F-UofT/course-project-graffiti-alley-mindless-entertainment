@@ -31,26 +31,43 @@ public class EnemyFactory {
         this.enemyAIFactory = new EnemyAIFactory(this.aiDataManager, this.enemyDatabase, this.enemyInfoFactory);
         this.gimmickDataManager = new GimmickDataManager();
 
+    }
 
+    private EnemyData getEnemyData(String name){
+        return this.enemyDatabase.fetchEnemyData(name);
+    }
 
+    private EnemyInfo getEnemyInfo(EnemyData enemyData){
+        return this.enemyInfoFactory.createEnemyInfo(enemyData);
+    }
+
+    private EnemyAI getEnemyAI(EnemyData enemyData, EnemyInfo enemyInfo){
+        return this.enemyAIFactory.createEnemyAI(enemyData, enemyInfo);
     }
 
     /**
-     * This method returns the enemy or boss instance using the information given by database
-     * This method returns Enemy so if the boss is returned, make sure you cast, so that the object
-     * is Boss.
+     * This method returns the enemy instance using the information given by database
      * @param name of the enemy to create
      * @return instance of enemy
      */
-    public EnemyFighter createEnemy(String name) {
-        EnemyData enemyData = this.enemyDatabase.fetchEnemyData(name);
-        EnemyInfo enemyInfo = this.enemyInfoFactory.createEnemyInfo(enemyData);
-        EnemyAI enemyAI = this.enemyAIFactory.createEnemyAI(enemyData, enemyInfo);
-        if(enemyData.gimmick != null){
-            GimmickStrategy gimmick = translateGimmick(enemyData.gimmick, enemyInfo);
-            return new BossFacade(name, enemyInfo, enemyAI, gimmick);
-        }
-        return new EnemyFacade(enemyData.name, enemyInfo, enemyAI);
+    public EnemyFacade createEnemy(String name){
+        return new EnemyFacade(name, getEnemyInfo(getEnemyData(name)), getEnemyAI(getEnemyData(name),
+                getEnemyInfo(getEnemyData(name))));
+    }
+
+    /**
+     * This method returns the boss instance using the information given by database
+     * @param name of the enemy to create
+     * @return instance of boss
+     */
+    public BossFacade createBoss(String name){
+        EnemyData enemyData = getEnemyData(name);
+        EnemyInfo enemyInfo = getEnemyInfo(getEnemyData(name));
+        return new BossFacade(name, enemyInfo, getEnemyAI(getEnemyData(name),
+                getEnemyInfo(getEnemyData(name))), translateGimmick(enemyData.gimmick, enemyInfo));
+
+
+
     }
 
     /**

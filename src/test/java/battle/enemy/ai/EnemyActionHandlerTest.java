@@ -3,7 +3,6 @@ package battle.enemy.ai;
 import objects.battle.SkillType;
 import objects.battle.enemy.ai.EnemyActionHandler;
 import objects.battle.enemy.ai.EnemyPotionHandler;
-import objects.battle.enemy.ai.EnemySkillHandler;
 import objects.battle.enemy.factory.EnemyFactory;
 import objects.character.BossFacade;
 import objects.character.EnemyFacade;
@@ -20,7 +19,7 @@ public class EnemyActionHandlerTest {
     public void EnemyPotionHandlerTest1(){
         Player player = new Player("Yasu", SkillType.AIR);
         EnemyFactory enemyFactory = new EnemyFactory();
-        EnemyFacade enemyFacade = (EnemyFacade) enemyFactory.createEnemy("goblin");
+        EnemyFacade enemyFacade = enemyFactory.createEnemy("goblin");
         EnemyPotionHandler potion = new EnemyPotionHandler(enemyFacade.getPotion());
         enemyFacade.changeHealth(-90);
         EnemyActionHandler action = enemyFacade.enemyAction("use skill");
@@ -32,7 +31,7 @@ public class EnemyActionHandlerTest {
     public void EnemyPotionHandlerTest2(){
         Player player = new Player("Yasu", SkillType.EARTH);
         EnemyFactory enemyFactory = new EnemyFactory();
-        BossFacade bossFacade = (BossFacade) enemyFactory.createEnemy("goblin warrior");
+        BossFacade bossFacade = enemyFactory.createBoss("goblin warrior");
         EnemyPotionHandler potion = new EnemyPotionHandler(bossFacade.getPotion());
         bossFacade.changeHealth(-90);
         EnemyActionHandler action = bossFacade.enemyAction("use skill");
