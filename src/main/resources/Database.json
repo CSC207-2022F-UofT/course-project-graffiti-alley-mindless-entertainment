@@ -137,7 +137,8 @@
       ],
       "reputation": "5",
       "speed": "90",
-      "ai": "default"
+      "ai": "default",
+      "potion": "10"
     },
     {
       "name": "goblin warrior",
@@ -148,7 +149,8 @@
       "reputation": "20",
       "speed": "110",
       "ai": "smart",
-      "gimmick": "health"
+      "gimmick": "health",
+      "potion": "20"
     }
   ],
   "ai_data": [

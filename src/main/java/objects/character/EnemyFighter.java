@@ -1,44 +1,20 @@
 package objects.character;
+
 import objects.battle.Skill;
 import objects.battle.SkillType;
-import objects.battle.enemy.EnemyInfo;
-import objects.battle.enemy.ai.*;
+import objects.battle.enemy.ai.EnemyAI;
+import objects.battle.enemy.ai.EnemyActionHandler;
+import objects.battle.enemy.ai.EnemyPotion;
 
 import java.util.ArrayList;
 
-
-/**
- * This is a class for enemy that inherits character class. This enemy class includes
- * health, skills, speed, reputation and Enemy AI in addition to name which is inherited from
- * parent class.
- */
-public class EnemyFacade extends Character implements EnemyFighter{
-
-
-    public EnemyInfo enemyInfo;
-    private EnemyAI enemyAI;
-
-    /**
-     * This is a constructor of the enemy.
-     *
-     * @param name: name if the enemy
-     * @param enemyInfo: information about the enemy including health, skills, speed, and reputation
-     * @param enemyAI: enemyAI that the enemy has
-     */
-    public EnemyFacade(String name, EnemyInfo enemyInfo, EnemyAI enemyAI) {
-        super(name);
-        this.enemyAI = enemyAI;
-        this.enemyInfo = enemyInfo;
-    }
-
+public interface EnemyFighter {
     /**
      * This method returns the enemy's health
      *
      * @return  enemy's health in int
      */
-    public int getHealth() {
-        return this.enemyInfo.getHealth();
-    }
+    int getHealth();
 
     /**
      * This method changes the Enemy's health
@@ -47,9 +23,7 @@ public class EnemyFacade extends Character implements EnemyFighter{
      *
      * @param n: the amount of health to change in int
      */
-    public void changeHealth(int n){
-        this.enemyInfo.changeHealth(n);
-    }
+    void changeHealth(int n);
 
     /**
      * This method decreases the enemy's speed
@@ -57,9 +31,7 @@ public class EnemyFacade extends Character implements EnemyFighter{
      * @param n: the amount of speed that the enemy looses by using a skill
      *
      */
-    public void changeSpeed(int n){
-        this.enemyInfo.changeSpeed(n);
-    }
+    void changeSpeed(int n);
 
 
     /**
@@ -67,9 +39,7 @@ public class EnemyFacade extends Character implements EnemyFighter{
      *
      * @return speed of this enemy in int
      */
-    public int getSpeed(){
-        return this.enemyInfo.getSpeed();
-    }
+    int getSpeed();
 
     /**
      * This method checks if the enemy is alive or not
@@ -78,40 +48,28 @@ public class EnemyFacade extends Character implements EnemyFighter{
      * @return true if the enemy is alive and return false
      * if the enemy is dead
      */
-    public boolean checkAlive()
-    {
-        return this.enemyInfo.checkAlive();
-    }
+    boolean checkAlive();
 
     /**
      * This function sets the enemy's health
      *
      * @param n: new health in int
      */
-    public void setHealth(int n)
-    {
-        this.enemyInfo.setHealth(n);
-    }
+    void setHealth(int n);
 
     /**
      * This method sets the enemy's speed
      *
      * @param speed: new speed in int
      */
-    public void setSpeed(int speed)
-    {
-        this.enemyInfo.setSpeed(speed);
-    }
+    void setSpeed(int speed);
 
     /**
      * This method returns the enemy's reputation
      *
      * @return the reputation that the player gets by killing this enemy
      */
-    public int getReputation()
-    {
-        return this.enemyInfo.getReputation();
-    }
+    int getReputation();
 
     /**
      * This method returns the skill at index n
@@ -119,36 +77,28 @@ public class EnemyFacade extends Character implements EnemyFighter{
      * @param n: the index of the skill
      * @return the skill at index n
      */
-    public Skill getSkill(int n){
-        return this.enemyInfo.getSkill(n);
-    }
+    Skill getSkill(int n);
 
     /**
      * This method returns the skills that the enemy has
      *
      * @return the skills as a arraylist of skill
      */
-    public ArrayList<Skill> getSkills(){
-        return this.enemyInfo.getSkills();
-    }
+    ArrayList<Skill> getSkills();
 
     /**
      * This method returns the type that the enemy has
      *
      * @return the enemy's type
      */
-    public SkillType getType() {
-        return this.enemyInfo.getType();
-    }
+    SkillType getType();
 
     /**
      * This method sets the new type that the enemy  has
      *
      * @param type: new type of the enemy
      */
-    public void setType(SkillType type){
-        this.enemyInfo.setType(type);
-    }
+    void setType(SkillType type);
 
     /**
      * This method returns the enemy actions depending on the user's action
@@ -156,26 +106,19 @@ public class EnemyFacade extends Character implements EnemyFighter{
      * @param input: input by the user
      * @return enemy's action in string (use skill or use potion)
      */
-    public EnemyActionHandler enemyAction(String input){
-        return this.enemyAI.respond(input);
-    }
+    EnemyActionHandler enemyAction(String input);
 
     /**
      * This method returns the AI that the enemy has
      *
      * @return enemy's type of enemyAI
      */
-    public EnemyAI getEnemyAI() {
-        return this.enemyAI;
-    }
+    EnemyAI getEnemyAI();
 
     /**
      * This method returns the potion that this enemy has
      *
      * @return the potion that the enemy has
      */
-    public EnemyPotion getPotion(){
-        return this.enemyInfo.getPotion();
-    }
+    EnemyPotion getPotion();
 }
-

@@ -7,6 +7,7 @@ import database.objects.SkillData;
 import objects.battle.Skill;
 import objects.battle.SkillType;
 import objects.battle.enemy.EnemyInfo;
+import objects.battle.enemy.ai.EnemyPotion;
 
 import java.util.ArrayList;
 
@@ -37,11 +38,12 @@ public class EnemyInfoFactory {
         }
         int reputation = Integer.parseInt(enemyData.reputation);
         int speed = Integer.parseInt(enemyData.speed);
+        int potion = Integer.parseInt(enemyData.potion);
 
         String typeStr = enemyData.type;
         SkillType type = translateSkill(typeStr);
 
-        return new EnemyInfo(skills, speed, reputation, type);
+        return new EnemyInfo(skills, speed, reputation, type, new EnemyPotion(potion));
     }
 
     /**

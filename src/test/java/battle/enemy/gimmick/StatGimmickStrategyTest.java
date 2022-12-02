@@ -3,6 +3,7 @@ package battle.enemy.gimmick;
 import objects.battle.Skill;
 import objects.battle.SkillType;
 import objects.battle.enemy.EnemyInfo;
+import objects.battle.enemy.ai.EnemyPotion;
 import objects.battle.enemy.factory.EnemyFactory;
 import objects.battle.enemy.gimmick.*;
 import objects.character.BossFacade;
@@ -21,7 +22,7 @@ public class StatGimmickStrategyTest {
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
-        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
         enemyInfo.changeHealth(-90);
         StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.HEALTH, enemyInfo,
                 30).build();
@@ -36,7 +37,7 @@ public class StatGimmickStrategyTest {
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
-        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
         enemyInfo.changeHealth(-90);
         StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.ATTACK, enemyInfo,
                 20).setAttackIncrease(1.2).build();
@@ -51,7 +52,7 @@ public class StatGimmickStrategyTest {
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
-        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
         enemyInfo.changeHealth(-90);
         StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.TYPE, enemyInfo,
                 20).setNewType(SkillType.FIRE).build();
@@ -66,7 +67,7 @@ public class StatGimmickStrategyTest {
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
-        EnemyInfo enemyInfo = new EnemyInfo(skills, 100, 10, SkillType.WATER);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, 100, 10, SkillType.WATER, new EnemyPotion(10));
         enemyInfo.changeHealth(-90);
         StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.SPEED, enemyInfo,
                 25).setSpeedIncrease(20).build();
@@ -79,7 +80,7 @@ public class StatGimmickStrategyTest {
     @Test
     public void UseGimmickTest(){
         EnemyFactory enemyFactory = new EnemyFactory();
-        BossFacade boss = (BossFacade) enemyFactory.createEnemy("goblin warrior");
+        BossFacade boss = enemyFactory.createBoss("goblin warrior");
         boss.changeHealth(-90);
         boss.applyGimmick();
         Assertions.assertEquals(100, boss.getHealth());
