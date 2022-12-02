@@ -35,14 +35,4 @@ public class EnemyPotionHandler implements EnemyActionHandler{
         enemy.changeHealth(this.enemyPotion.getHp());
     }
 
-    /**
-     * This method uses a potion for the enemy depending on the health value that the
-     * potion has. This method has Player which is not used, but the EnemySkillHandler which
-     * also implements the EnemyActionHandler uses Player, so it takes player as a parameter.
-     * In this way, the controller who is using the EnemyActionHandler does not have to know
-     * if the enemy used potion or skill.
-     * @param boss that uses potion
-     * @param player of the game
-     */
-
 }

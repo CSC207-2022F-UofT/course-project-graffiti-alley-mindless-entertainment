@@ -160,10 +160,20 @@ public class EnemyFacade extends Character implements EnemyFighter{
         return this.enemyAI.respond(input);
     }
 
+    /**
+     * This method returns the AI that the enemy has
+     *
+     * @return enemy's type of enemyAI
+     */
     public EnemyAI getEnemyAI() {
         return this.enemyAI;
     }
 
+    /**
+     * This method returns the potion that this enemy has
+     *
+     * @return the potion that the enemy has
+     */
     public EnemyPotion getPotion(){
         return this.enemyInfo.getPotion();
     }
