@@ -108,7 +108,17 @@ public interface EnemyFighter {
      */
     EnemyActionHandler enemyAction(String input);
 
+    /**
+     * This method returns the AI that the enemy has
+     *
+     * @return enemy's type of enemyAI
+     */
     EnemyAI getEnemyAI();
 
+    /**
+     * This method returns the potion that this enemy has
+     *
+     * @return the potion that the enemy has
+     */
     EnemyPotion getPotion();
 }
