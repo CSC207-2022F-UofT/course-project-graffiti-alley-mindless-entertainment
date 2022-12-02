@@ -12,15 +12,12 @@ public class SkillHandler {
      * @return the damage of the skill to a character with type in int
      */
     protected int calculateDamage(Skill skill, SkillType type) {
-        int damage = skill.getDamage();
-
         if (hasTypeAdv(skill.getType(), type)) {
-            damage *= 1.2;
+            return ((int)Math.ceil(1.2 * skill.getDamage()));
+        } else if (hasTypeAdv(type, skill.getType())) {
+            return ((int)Math.ceil(0.8 * skill.getDamage()));
         }
-        if (hasTypeAdv(type, skill.getType())) {
-            damage *= 0.8;
-        }
-        return Math.max((int) damage, 0);
+        return skill.getDamage();
     }
 
 
