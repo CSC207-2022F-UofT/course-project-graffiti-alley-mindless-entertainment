@@ -1,5 +1,9 @@
 package battlestates;
 
+import battlestates.states.EnemyTurnState;
+import battlestates.states.LoseBattleState;
+import battlestates.states.UserTurnState;
+import battlestates.states.WinBattleState;
 import core.StateManager;
 import game_world.objects.areas.Area;
 import interfaces.State;
@@ -18,18 +22,15 @@ public class BattleStateManager extends StateManager {
     private Area currArea;
     private Enemy foe;
 
-    public BattleStateManager(Player user, Area currArea) throws Exception {
+    public BattleStateManager(Player user) {
         this.user = user;
-        this.currArea = currArea;
-        EnemyFactory enemyFactory = new EnemyFactory();
-        this.foe = (Enemy) enemyFactory.createEnemy("goblin"); // Temporary, use-case needed once decide which enemy
     }
 
     /**
      * Returns the next state based on the current state. If either enemy or user are dead, ends battle and
      * provides win or lose state accordingly.
      * @param input string input to dictate the next state, currently unused
-     * @return the state that comes next in the battle.
+     * @return the state that comes next in the battle. someitmes when the user enters the wrong number this class would be used to fix the difference between the se
      */
     @Override
     protected State nextState(String input) {
@@ -59,6 +60,7 @@ public class BattleStateManager extends StateManager {
     }
     @Override
     public void initialize() {
-
+        EnemyFactory enemyFactory = new EnemyFactory();
+        this.foe = enemyFactory.createEnemy("goblin"); // Temporary, use-case needed once decide which enemy
     }
 }

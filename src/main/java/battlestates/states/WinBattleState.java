@@ -1,4 +1,4 @@
-package battlestates;
+package battlestates.states;
 
 import interfaces.State;
 import io.InputValidator;

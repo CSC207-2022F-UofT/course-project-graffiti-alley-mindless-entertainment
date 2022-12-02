@@ -10,7 +10,7 @@ public abstract class StateManager{
 
     abstract protected State nextState(String input);
 
-    abstract public void initialize();
+    abstract public void initialize() throws Exception;
 
     /**
      * @return whether the state is done or not

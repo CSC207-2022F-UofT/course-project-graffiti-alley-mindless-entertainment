@@ -3,8 +3,8 @@ package objects.battle;
 import objects.character.Enemy;
 import objects.character.Player;
 
-public class SkillHandler {
-    public SkillHandler() {
+public class PlayerSkillHandler extends SkillHandler{
+    public PlayerSkillHandler() {
 
     }
     /**

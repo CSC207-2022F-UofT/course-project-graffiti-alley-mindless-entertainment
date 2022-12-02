@@ -1,13 +1,12 @@
-package battlestates;
+package battlestates.states;
 
 import interfaces.State;
 import io.InputValidator;
 import io.OutputHandlerImpl;
 import objects.battle.Skill;
-import objects.battle.SkillHandler;
+import objects.battle.PlayerSkillHandler;
 import objects.character.Enemy;
 import objects.character.Player;
-import java.util.ArrayList;
 
 public class EnemyTurnState implements State {
     private Player user;
@@ -23,7 +22,7 @@ public class EnemyTurnState implements State {
     @Override
     public void preInput() {
         String action = foe.enemyAction(this.userAction);
-        SkillHandler skillHandler = new SkillHandler();
+        PlayerSkillHandler playerSkillHandler = new PlayerSkillHandler();
 
         // If the enemy uses a skill
         if (action.equals("use skill")) {
@@ -34,7 +33,7 @@ public class EnemyTurnState implements State {
             // Outputs and uses the chosen skill
             Skill chosenSkill = foe.getSkill(skillIndex);
             OutputHandlerImpl.getScreen().generateText(foe.getName() + " used " + chosenSkill.getName() +
-                    " to do " + skillHandler.useSkill(chosenSkill, user, foe) + " damage!");
+                    " to do " + playerSkillHandler.useSkill(chosenSkill, user, foe) + " damage!");
         }
         // TEMPORARY SOLUTION: Just heal flat amount of 20
         if (action.equals("use potion")) {
@@ -43,6 +42,7 @@ public class EnemyTurnState implements State {
             OutputHandlerImpl.getScreen().generateText(foe.getName() + " used a potion to heal " +
                     hpIncrease + " health!");
         }
+
         foe.changeSpeed(-20);
         this.done = true;
     }

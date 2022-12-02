@@ -1,14 +1,18 @@
-package battlestates;
+package battlestates.states;
 
+import core.ChoiceInputValidator;
 import interfaces.State;
 import io.InputValidator;
+import io.Output;
+import io.OutputHandler;
 import io.OutputHandlerImpl;
 import objects.battle.Skill;
-import objects.battle.SkillHandler;
+import objects.battle.PlayerSkillHandler;
 import objects.battle.enemy.SkillHelper;
 import objects.character.Enemy;
 import objects.character.Player;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class UserTurnState implements State {
@@ -27,11 +31,13 @@ public class UserTurnState implements State {
     private List<String> skillList;
     private boolean awaitingInp = false;
     private InputValidator validator;
+    private int questionNum = 0;
 
     public UserTurnState(Player user, Enemy foe) {
         // Will need to change later to accommodate other options, like inventory
         SkillHelper dummy = new SkillHelper();
         this.skillList = dummy.toSkillString(user.getSkillList());
+        this.skillList.add("Back");
         this.user = user;
         this.foe = foe;
     }
@@ -41,10 +47,23 @@ public class UserTurnState implements State {
      */
     @Override
     public void preInput() {
-        if () {
+        OutputHandler output = Output.getScreen();
+
+        if (questionNum == 0) {
             // Asking the user for input
-            OutputHandlerImpl.getScreen().generateTextWithOptions("Pick a skill", skillList);
-            this.validator = new ChoicesInputValidator(this.skillList);
+            output.generateTextWithOptions("Select a menu", Arrays.asList("Skills", "Inventory"));
+            this.validator = new ChoiceInputValidator(Arrays.asList("Skills", "Inventory"));
+        }
+        else if (questionNum == 1) {
+            output.generateTextWithOptions("Pick a skill", );
+            this.validator = new ChoiceInputValidator(this.skillList);
+        }
+        else if (questionNum == 2) {
+            output.generateTextWithOptions("Pick an item," user.getInventory());
+        }
+        else {
+
+        }
         awaitingInp = true;
     }
 
@@ -64,7 +83,7 @@ public class UserTurnState implements State {
             OutputHandlerImpl.getScreen().generateText("That skill doesn't exist, please enter a valid skill.");
         }
         else {
-            SkillHandler skillHandler = new SkillHandler();
+            PlayerSkillHandler skillHandler = new PlayerSkillHandler();
             int damage = skillHandler.useSkill(chosenSkill, foe, user);
 
             // Outputs and uses the chosen skill.
