@@ -50,22 +50,21 @@ public class UserTurnState implements State {
     public void preInput() {
         OutputHandler output = Output.getScreen();
 
-        if (questionNum == 0) {
-            // Asking the user for input
-            output.generateTextWithOptions("Select a menu", Arrays.asList("Skills", "Inventory"));
-            this.validator = new ChoiceInputValidator(Arrays.asList("Skills", "Inventory"));
-        }
-        else if (questionNum == 1) {
-            output.generateTextWithOptions("Pick a skill", skillList);
-            this.validator = new ChoiceInputValidator(this.skillList);
-        }
-        else if (questionNum == 2) {
-            output.generateText("Inventory not implemented yet, try again.");
+        switch (questionNum) {
+            case 0:
+                // Asking the user for input
+                output.generateTextWithOptions("Select a menu", Arrays.asList("Skills", "Inventory"));
+                this.validator = new ChoiceInputValidator(Arrays.asList("Skills", "Inventory"));
+            case 1:
+                output.generateTextWithOptions("Pick a skill", skillList);
+                this.validator = new ChoiceInputValidator(this.skillList);
+            case 2:
+                output.generateText("Inventory not implemented yet, try again.");
 //            output.generateTextWithOptions("Pick an item", user.getInventory()); // No inventory yet
+            case 3:
+                output.generateText("Not implemented yet, try again.");
         }
-        else {
-            output.generateText("Not implemented yet, try again.");
-        }
+
         awaitingInp = true;
     }
 
@@ -80,36 +79,44 @@ public class UserTurnState implements State {
     public void postInput(String input) {
         OutputHandler output = Output.getScreen();
         String cleanInput = validator.parseAndValidate(input);
-
-        if (questionNum == 0) {
-            if (cleanInput.equals("Skills")) {
-                questionNum = 1; // Redirects to asking which skill
-            }
-
+        if (cleanInput == null) {
+            questionNum = -1;
         }
-        else if (questionNum == 1) {
-            SkillHelper dummy = new SkillHelper();
-            Skill chosenSkill = dummy.findSkill(input, user.getSkillList());
 
-            if (chosenSkill == null) {
-                output.generateText("That skill doesn't exist, please enter a valid skill.");
-            } else {
-                PlayerSkillHandler skillHandler = new PlayerSkillHandler();
-                int damage = skillHandler.useSkill(chosenSkill, foe, user);
+        switch (questionNum) {
+            case 0:
+                if (cleanInput.equals("Skills")) {
+                    questionNum = 1; // Redirects to asking which skill
+                }
+                if (cleanInput.equals("Inventory")) {
+                    questionNum = 2;
+                }
+                break;
+            case 1:
+                SkillHelper skillHelper = new SkillHelper();
+                Skill chosenSkill = skillHelper.findSkill(input, user.getSkillList());
 
-                // Outputs and uses the chosen skill.
-                OutputHandlerImpl.getScreen().generateText("You used " + chosenSkill.getName() +
-                        " to do " + damage + " damage!");
+                if (chosenSkill == null) {
+                    output.generateText("That skill doesn't exist, please enter a valid skill.");
+                } else {
+                    PlayerSkillHandler skillHandler = new PlayerSkillHandler();
+                    int damage = skillHandler.useSkill(chosenSkill, foe, user);
 
-                // Each turn takes 20 speed, preventing too many turns.
-                user.changeSpeed(user.getSpeed() - 20);
+                    // Outputs and uses the chosen skill.
+                    output.generateText(chosenSkill.getName() + " did " + damage + " damage!");
 
-                // Later change so that the state will stay to ask more questions like menu or inventory.
-                this.done = true;
-            }
-        }
-        else {
-            questionNum = 0; // Redirects to skill or inv options
+                    // Each turn takes 20 speed, preventing too many turns.
+                    user.changeSpeed(user.getSpeed() - 20);
+
+                    // Later change so that the state will stay to ask more questions like menu or inventory.
+                    this.done = true;
+                }
+                break;
+            case 2:
+                questionNum = 0; // TEMP until inventory implementation
+                break;
+            default:
+                questionNum = 0; // Redirects to Skill Inv question
         }
     }
 
