@@ -27,10 +27,9 @@ public class StatGimmickStrategyTest {
         StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.HEALTH, enemyInfo,
                 30).build();
         StatGimmickStrategy usecase = new StatGimmickStrategy(gimmick);
-        String text = usecase.useGimmick();
+        usecase.useGimmick();
         Assertions.assertEquals(enemyInfo.getHealth(), 100);
-        Assertions.assertEquals("!?!?!? Something is happening to the boss! It feels different! The gimmick is triggered! Now the " +
-                "boss's health is fully healed!", text);
+
 
 
     }
@@ -46,10 +45,9 @@ public class StatGimmickStrategyTest {
         StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.ATTACK, enemyInfo,
                 20).setAttackIncrease(1.2).build();
         StatGimmickStrategy usecase = new StatGimmickStrategy(gimmick);
-        String text = usecase.useGimmick();
+        usecase.useGimmick();
         Assertions.assertEquals(enemyInfo.getSkill(0).getDamage(), 24);
-        Assertions.assertEquals("!?!?!? Something is happening to the boss! It feels different! The gimmick is triggered! Now the " +
-                "damage of skills increased by 1.2!", text);
+
     }
 
     @DisplayName("Test if the type gimmick works properly")
@@ -63,10 +61,8 @@ public class StatGimmickStrategyTest {
         StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.TYPE, enemyInfo,
                 20).setNewType(SkillType.FIRE).build();
         StatGimmickStrategy usecase = new StatGimmickStrategy(gimmick);
-        String text = usecase.useGimmick();
+        usecase.useGimmick();
         Assertions.assertEquals(enemyInfo.getType(), SkillType.FIRE);
-        Assertions.assertEquals("!?!?!? Something is happening to the boss! It feels different! The gimmick is triggered! Now the " +
-                "boss's type changed to fire!", text);
     }
 
     @DisplayName("Test if the speed gimmick works properly")
@@ -80,10 +76,9 @@ public class StatGimmickStrategyTest {
         StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.SPEED, enemyInfo,
                 25).setSpeedIncrease(20).build();
         StatGimmickStrategy usecase = new StatGimmickStrategy(gimmick);
-        String text = usecase.useGimmick();
+        usecase.useGimmick();
         Assertions.assertEquals(enemyInfo.getSpeed(), 120);
-        Assertions.assertEquals("!?!?!? Something is happening to the boss! It feels different! The gimmick is triggered! Now the " +
-                "boss's speed increased by 20!", text);
+
     }
 
     @DisplayName("Test if the speed gimmick works properly")
@@ -95,7 +90,8 @@ public class StatGimmickStrategyTest {
         boss.applyGimmick();
         Assertions.assertEquals(100, boss.getHealth());
         boss.changeHealth(-90);
-        String text = boss.applyGimmick();
-        Assertions.assertEquals("", text);
+        boss.applyGimmick();
+        Assertions.assertNotEquals(100, boss.getHealth());
+
     }
 }

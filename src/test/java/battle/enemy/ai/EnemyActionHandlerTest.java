@@ -25,9 +25,8 @@ public class EnemyActionHandlerTest {
         EnemyPotionHandler potion = new EnemyPotionHandler(enemyFacade.getPotion());
         enemyFacade.changeHealth(-90);
         EnemyActionHandler action = enemyFacade.enemyAction("use skill");
-        String text = action.useAction(enemyFacade, player);
+        action.useAction(enemyFacade, player);
         Assertions.assertEquals(20, enemyFacade.getHealth());
-        Assertions.assertEquals("Goblin warrior used a potion! Now goblin has 20 HP!", text);
     }
 
     @Test
@@ -39,9 +38,7 @@ public class EnemyActionHandlerTest {
         EnemyPotionHandler potion = new EnemyPotionHandler(bossFacade.getPotion());
         bossFacade.changeHealth(-90);
         EnemyActionHandler action = bossFacade.enemyAction("use skill");
-        String text = action.useAction(bossFacade, player);
+        action.useAction(bossFacade, player);
         boolean check = player.getCurrHealth() == 75 || bossFacade.getHealth() == 30;
-        boolean check2 = Objects.equals(text, "goblin warrior used a potion! Now goblin warrior has 30 HP!")
-                || Objects.equals(text, "goblin warrior has used beam with 25 damage!");
-        Assertions.assertTrue(check && check2);}
+        Assertions.assertTrue(check);}
 }
