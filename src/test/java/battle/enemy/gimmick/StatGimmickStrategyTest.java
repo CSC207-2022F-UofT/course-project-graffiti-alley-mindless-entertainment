@@ -95,7 +95,7 @@ public class StatGimmickStrategyTest {
         boss.applyGimmick();
         Assertions.assertEquals(100, boss.getHealth());
         boss.changeHealth(-90);
-        boolean reuse = boss.applyGimmick();
-        Assertions.assertFalse(reuse);
+        String text = boss.applyGimmick();
+        Assertions.assertEquals("", text);
     }
 }
