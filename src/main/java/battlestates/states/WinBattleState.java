@@ -4,7 +4,7 @@ import interfaces.State;
 import io.InputValidator;
 import io.OutputHandler;
 import io.OutputHandlerImpl;
-import objects.character.Enemy;
+import objects.character.EnemyFacade;
 import objects.character.Player;
 
 public class WinBattleState implements State {
@@ -12,14 +12,14 @@ public class WinBattleState implements State {
      *  Handles the case in where the user wins the battle, giving the user relevant stat changes and/or items
      *  Attributes:
      *  user: The Player that is participating in the battle
-     *  foe: The Enemy that the user is fighting
+     *  foe: The EnemyFacade that the user is fighting
      *  done: represents whether the state is done
      */
     private Player user;
-    private Enemy foe;
+    private EnemyFacade foe;
     private boolean done = false;
 
-    public WinBattleState(Player user, Enemy foe) {
+    public WinBattleState(Player user, EnemyFacade foe) {
         this.user = user;
         this.foe = foe;
     }

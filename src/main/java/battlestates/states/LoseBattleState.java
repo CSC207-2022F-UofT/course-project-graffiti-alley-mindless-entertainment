@@ -3,7 +3,7 @@ package battlestates.states;
 import interfaces.State;
 import io.InputValidator;
 import io.OutputHandlerImpl;
-import objects.character.Enemy;
+import objects.character.EnemyFacade;
 import objects.character.Player;
 
 import java.util.ArrayList;
@@ -14,15 +14,15 @@ public class LoseBattleState implements State {
      *  Handles the case in where the user loses the battle, giving the user different options to proceed.
      *  Attributes:
      *  user: The Player that is participating in the battle
-     *  foe: The Enemy that the user is fighting
+     *  foe: The EnemyFacade that the user is fighting
      *  done: represents whether the state is done
      */
     private Player user;
-    private Enemy foe;
+    private EnemyFacade foe;
     private boolean done = false;
     private boolean awaitingInput = false;
 
-    public LoseBattleState(Player user, Enemy foe) {
+    public LoseBattleState(Player user, EnemyFacade foe) {
         this.user = user;
         this.foe = foe;
     }

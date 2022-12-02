@@ -8,26 +8,26 @@ import core.StateManager;
 import game_world.objects.areas.Area;
 import interfaces.State;
 import objects.battle.enemy.factory.EnemyFactory;
-import objects.character.Enemy;
+import objects.character.EnemyFacade;
 import objects.character.Player;
 
 public class BattleStateManager extends StateManager {
     /** Class that manages the Turn states during a battle encounter. In particular, the order of
-     *  Enemy and User turns. Uses PreBattle and PostBattle to determine set-up and results of battle.
+     *  EnemyFacade and User turns. Uses PreBattle and PostBattle to determine set-up and results of battle.
      *  Attributes:
      *  user: Player object representing the user
-     *  foe: Enemy object representing who the user is battling
+     *  foe: EnemyFacade object representing who the user is battling
      */
     private Player user;
     private Area currArea;
-    private Enemy foe;
+    private EnemyFacade foe;
 
     public BattleStateManager(Player user) {
         this.user = user;
     }
 
     /**
-     * Returns the next state based on the current state. If either enemy or user are dead, ends battle and
+     * Returns the next state based on the current state. If either EnemyFacade or user are dead, ends battle and
      * provides win or lose state accordingly.
      * @param input string input to dictate the next state, currently unused
      * @return the state that comes next in the battle. someitmes when the user enters the wrong number this class would be used to fix the difference between the se
