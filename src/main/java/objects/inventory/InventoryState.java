@@ -14,18 +14,16 @@ public class InventoryState implements State {
      * removeItemCommand: user command when user want to remove item
      * quitCommand: user command when user want to quit inventory
      */
-    private Inventory inventory;
+    private final Inventory inventory;
     private boolean isDone = false;
     private boolean awaitingInput = false;
     private final String removeItemCommand;
-
     private final String quitCommand;
 
     /**
      * @param inventory inventory contains items
      */
     public InventoryState(Inventory inventory){
-
         this.inventory = inventory;
         this.quitCommand = "quit";
         this.removeItemCommand = "remove";
@@ -37,11 +35,10 @@ public class InventoryState implements State {
     @Override
     public void preInput() {
         awaitingInput = true;
-        StringBuilder textToDisplay = new StringBuilder(inventory.viewInventory());
-        textToDisplay.append("Commands: \n");
-        textToDisplay.append("quit: type 'quit' inventory to quit inventory.\n");
-        textToDisplay.append("remove i: type 'remove i' (i is the i-th item in inventory) to remove item.\n");
-        Output.getScreen().generateText(textToDisplay.toString());
+        String textToDisplay = inventory.viewInventory() + "Commands: \n" +
+                "quit: type 'quit' inventory to quit inventory.\n" +
+                "remove i: type 'remove i' (i is the i-th item in inventory) to remove item.\n";
+        Output.getScreen().generateText(textToDisplay);
     }
 
     /**
@@ -50,13 +47,13 @@ public class InventoryState implements State {
      */
     @Override
     public void postInput(String input) {
-        String[] inputarr = input.split(" ");
-        String command = inputarr[0];
+        String[] inputArray = input.split(" ");
+        String command = inputArray[0];
         if (command.equals(quitCommand)) {
             isDone = true;
             return;
         } else if (command.equals(removeItemCommand)) {
-            inventory.removeItem(Integer.parseInt(inputarr[1]));
+            inventory.removeItem(Integer.parseInt(inputArray[1]));
             awaitingInput = false;
             Output.getScreen().generateText("The item is successfully removed!");
             return;
