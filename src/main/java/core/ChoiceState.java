@@ -22,11 +22,7 @@ public class ChoiceState implements State {
 
     public ChoiceState(List<String> choices, List<String> choiceDisplayText) {
         this.choices = choices;
-        StringBuilder displayTextBuilder = new StringBuilder();
-        for (int i = 0;i< choices.size(); i++) {
-            displayTextBuilder.append(choices.get(i)).append(": ").append(choiceDisplayText.get(i));
-        }
-        textToDisplay = displayTextBuilder.toString();
+        textToDisplay = String.join("\n", choiceDisplayText);
         inputValidator = new ChoiceInputValidator(choices);
 
     }
