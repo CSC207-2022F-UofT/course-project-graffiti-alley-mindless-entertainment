@@ -64,6 +64,9 @@ public class OutputHandlerImpl implements OutputHandler {
      */
     @Override
     public void generateText(Message message) {
+        if (message == null) {
+            return;
+        }
         generateTextWithOptions(message.getText(), message.getOptions());
     }
 }
