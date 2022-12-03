@@ -43,7 +43,7 @@ public class ItemPickUpEvent extends Event {
     @Override
     public void preInput() {
         this.awaitInput = true;
-        StringBuilder textToDisplay = new StringBuilder(this.text);
+        StringBuilder textToDisplay = new StringBuilder("[ITEM PICK-UP EVENT] " + this.text);
         textToDisplay.append("\n Do you want to pick up the item?");
         for (String input : inputs) {
             textToDisplay.append("\t◈ ").append(input).append("\n");
