@@ -11,6 +11,8 @@ import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 
+import java.util.Objects;
+
 
 public class EnemyActionHandlerTest {
 
@@ -24,7 +26,8 @@ public class EnemyActionHandlerTest {
         enemyFacade.changeHealth(-90);
         EnemyActionHandler action = enemyFacade.enemyAction("use skill");
         action.useAction(enemyFacade, player);
-        Assertions.assertEquals(20, enemyFacade.getHealth());}
+        Assertions.assertEquals(20, enemyFacade.getHealth());
+    }
 
     @Test
     @DisplayName("This is a test for enemy action handler when the object is boss")
