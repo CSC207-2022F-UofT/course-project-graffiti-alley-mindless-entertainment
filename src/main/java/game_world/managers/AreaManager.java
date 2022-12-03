@@ -3,7 +3,7 @@ package game_world.managers;
 import core.StateManager;
 import game_world.factories.DialogueStateFactory;
 import game_world.factories.SelectionStateFactory;
-import game_world.objects.areas.Area;
+import game_world.objects.Area;
 import interfaces.State;
 import io.Output;
 import io.OutputHandler;
