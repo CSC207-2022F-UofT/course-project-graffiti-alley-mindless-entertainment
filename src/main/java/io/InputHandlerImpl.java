@@ -1,7 +1,6 @@
 package io;
 
 import java.util.Scanner;
-import java.util.List;
 
 public class InputHandlerImpl implements InputHandler {
 
@@ -26,15 +25,10 @@ public class InputHandlerImpl implements InputHandler {
             }
             OutputHandler screen = Output.getScreen();
             String msg = validator.getErrorMessage(choice);
+            Message message = screen.getLastMessage();
             screen.generateText(msg);
             screen.generateText("Your choice is not valid. Please attempt again.");
-            String text = screen.getLastText();
-            List<String> options = screen.getLastOptions();
-            if (options == null) {
-                //screen.generateText(text);
-            } else {
-                screen.generateTextWithOptions(text, options);
-            }
+            screen.generateText(message);
 
         }
     }
