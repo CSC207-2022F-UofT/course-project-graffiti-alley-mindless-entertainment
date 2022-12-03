@@ -42,7 +42,7 @@ public class DefaultAI implements EnemyAI {
     public EnemyActionHandler respond(String input) {
         Random rand = new Random();
         if (Objects.equals(input, "use skill")) {
-            int upperbound = 101;
+            int upperbound = 100;
             int int_random = rand.nextInt(upperbound);
             if(int_random < this.attackChance){
                 return new EnemySkillHandler(enemyInfo.getSkill(rand.nextInt(enemyInfo.getSkills().size())));
