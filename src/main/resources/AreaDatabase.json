@@ -188,22 +188,9 @@
       "type": "Arbitrary"
     },
     {
-      "name": "Gold Chest",
+      "name": "test 2",
       "type": "Item Pick-Up",
-      "item": "Sword",
-      "text": "You discovered a sword on the ground!"
-    },
-    {
-      "name": "Silver Chest",
-      "type": "Item Pick-Up",
-      "item": "Armor",
-      "text": "You discovered an armor on the ground!"
-    },
-    {
-      "name": "Bronze Chest",
-      "type": "Item Pick-Up",
-      "item": "Potion",
-      "text": "You discovered a potion on the ground!"
+      "item": "Sword"
     },
     {
       "name": "test 3",
