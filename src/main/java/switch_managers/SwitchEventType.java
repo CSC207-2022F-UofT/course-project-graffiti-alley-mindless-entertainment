@@ -3,6 +3,9 @@ package switch_managers;
 public enum SwitchEventType {
     PAUSE,
     RESUME,
-
-    START_GAME
+    START_GAME,
+    NEW_GAME,
+    LOAD_GAME,
+    MAIN_MENU,
+    PLAYER_CREATED
 }
