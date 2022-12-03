@@ -3,7 +3,7 @@ package database.objects;
 public class GimmickData {
 
     /**
-     * All information needed for an arbitrary gimmick
+     * All information needed for a gimmick
      */
 
     public String name;

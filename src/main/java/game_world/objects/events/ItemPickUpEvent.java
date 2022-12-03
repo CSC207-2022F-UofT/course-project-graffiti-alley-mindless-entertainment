@@ -38,10 +38,11 @@ public class ItemPickUpEvent extends Event {
         this.awaitInput = true;
         OutputHandler output = Output.getScreen();
         // change text below
-        output.generateText("[ITEM PICK-UP EVENT] What would you like to do?");
+        StringBuilder newMessage = new StringBuilder("[ITEM PICK-UP EVENT] What would you like to do?");
         for (String input : inputs) {
-            output.generateText("\t◈ " + input);
+            newMessage.append("\n\t◈ ").append(input);
         }
+        output.generateText(String.valueOf(newMessage));
     }
 
     @Override

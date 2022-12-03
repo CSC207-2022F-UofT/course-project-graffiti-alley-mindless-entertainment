@@ -31,10 +31,11 @@ public class SelectionState implements State {
     public void preInput() {
         this.awaitInput = true;
         OutputHandler output = Output.getScreen();
-        output.generateText("What would you like to do?");
+        StringBuilder newMessage = new StringBuilder("What would you like to do?");
         for (String input : inputs) {
-            output.generateText("\t◈ " + input);
+            newMessage.append("\n\t◈ ").append(input);
         }
+        output.generateText(String.valueOf(newMessage));
     }
 
     @Override
