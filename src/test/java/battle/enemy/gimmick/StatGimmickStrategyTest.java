@@ -27,8 +27,11 @@ public class StatGimmickStrategyTest {
         StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.HEALTH, enemyInfo,
                 30).build();
         StatGimmickStrategy usecase = new StatGimmickStrategy(gimmick);
-        boolean used = usecase.useGimmick();
+        usecase.useGimmick();
         Assertions.assertEquals(enemyInfo.getHealth(), 100);
+
+
+
     }
 
     @DisplayName("Test if the attack gimmick works properly")
@@ -42,8 +45,9 @@ public class StatGimmickStrategyTest {
         StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.ATTACK, enemyInfo,
                 20).setAttackIncrease(1.2).build();
         StatGimmickStrategy usecase = new StatGimmickStrategy(gimmick);
-        boolean used = usecase.useGimmick();
+        usecase.useGimmick();
         Assertions.assertEquals(enemyInfo.getSkill(0).getDamage(), 24);
+
     }
 
     @DisplayName("Test if the type gimmick works properly")
@@ -57,7 +61,7 @@ public class StatGimmickStrategyTest {
         StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.TYPE, enemyInfo,
                 20).setNewType(SkillType.FIRE).build();
         StatGimmickStrategy usecase = new StatGimmickStrategy(gimmick);
-        boolean used = usecase.useGimmick();
+        usecase.useGimmick();
         Assertions.assertEquals(enemyInfo.getType(), SkillType.FIRE);
     }
 
@@ -72,8 +76,9 @@ public class StatGimmickStrategyTest {
         StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.SPEED, enemyInfo,
                 25).setSpeedIncrease(20).build();
         StatGimmickStrategy usecase = new StatGimmickStrategy(gimmick);
-        boolean used = usecase.useGimmick();
+        usecase.useGimmick();
         Assertions.assertEquals(enemyInfo.getSpeed(), 120);
+
     }
 
     @DisplayName("Test if the speed gimmick works properly")
@@ -85,7 +90,8 @@ public class StatGimmickStrategyTest {
         boss.applyGimmick();
         Assertions.assertEquals(100, boss.getHealth());
         boss.changeHealth(-90);
-        boolean reuse = boss.applyGimmick();
-        Assertions.assertFalse(reuse);
+        boss.applyGimmick();
+        Assertions.assertNotEquals(100, boss.getHealth());
+
     }
 }

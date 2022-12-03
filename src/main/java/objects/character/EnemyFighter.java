@@ -9,6 +9,8 @@ import objects.battle.enemy.ai.EnemyPotion;
 import java.util.ArrayList;
 
 public interface EnemyFighter {
+
+    public String getName();
     /**
      * This method returns the enemy's health
      *

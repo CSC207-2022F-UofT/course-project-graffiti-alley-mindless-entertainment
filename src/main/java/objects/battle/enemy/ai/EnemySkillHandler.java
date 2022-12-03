@@ -1,5 +1,7 @@
 package objects.battle.enemy.ai;
 
+import io.Output;
+import io.OutputHandler;
 import objects.battle.Skill;
 import objects.character.BossFacade;
 import objects.character.EnemyFacade;
@@ -33,6 +35,9 @@ public class EnemySkillHandler extends SkillHandler implements EnemyActionHandle
     public void useAction(EnemyFighter enemy, Player player){
         int damage = calculateDamage(skill, enemy.getType());
         player.changeCurrHealth(-damage);
+        OutputHandler output = Output.getScreen();
+        output.generateText(enemy.getName() + " has used " + this.skill.getName() + " with " + this.skill.getDamage()
+                + " damage!");
     }
 
 
