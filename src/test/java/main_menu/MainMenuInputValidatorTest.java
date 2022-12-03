@@ -26,13 +26,9 @@ class MainMenuInputValidatorTest {
         assert(validator.parseAndValidate("no") == null);
         assert(validator.parseAndValidate("") == null);
         assert(validator.parseAndValidate("new") == null);
-        assert(validator.parseAndValidate("save1").equals("save1"));
-        assert(validator.parseAndValidate("SAVE1").equals("save1"));
-        assert(validator.parseAndValidate("sAve1").equals("save1"));
-        assert(validator.parseAndValidate("save2").equals("save2"));
-        assert(validator.parseAndValidate("SAVE2").equals("save2"));
-        assert(validator.parseAndValidate("save3").equals("save3"));
-        assert(validator.parseAndValidate("SAVE3").equals("save3"));
+        assert(validator.parseAndValidate("start").equals("start"));
+        assert(validator.parseAndValidate("START").equals("save"));
+        assert(validator.parseAndValidate("sTART").equals("save"));
         assert(validator.parseAndValidate("return").equals("return"));
         assert(validator.parseAndValidate("RETURN").equals("return"));
     }
@@ -43,13 +39,6 @@ class MainMenuInputValidatorTest {
         assert(validator.parseAndValidate("no") == null);
         assert(validator.parseAndValidate("") == null);
         assert(validator.parseAndValidate("new") == null);
-        assert(validator.parseAndValidate("save1").equals("save1"));
-        assert(validator.parseAndValidate("SAVE1").equals("save1"));
-        assert(validator.parseAndValidate("sAve1").equals("save1"));
-        assert(validator.parseAndValidate("save2").equals("save2"));
-        assert(validator.parseAndValidate("SAVE2").equals("save2"));
-        assert(validator.parseAndValidate("save3").equals("save3"));
-        assert(validator.parseAndValidate("SAVE3").equals("save3"));
         assert(validator.parseAndValidate("return").equals("return"));
         assert(validator.parseAndValidate("RETURN").equals("return"));
     }
