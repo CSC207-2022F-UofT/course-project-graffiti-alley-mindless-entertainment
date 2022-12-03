@@ -45,7 +45,7 @@ public class AreaManager extends StateManager {
         OutputHandler output = Output.getScreen();
         if (this.currentArea.getCurrTextIndex() == 0) {
             // Texts have initialized
-            output.generateText("<> " + this.currentArea.getSpeaker() + " <>");
+            output.generateText("◈ " + this.currentArea.getSpeaker() + " ◈");
             eventManager.areaEntered(this.currentArea);
         }
         if (this.currentArea.getCurrTextIndex() == this.currentArea.getTexts().size()) {
