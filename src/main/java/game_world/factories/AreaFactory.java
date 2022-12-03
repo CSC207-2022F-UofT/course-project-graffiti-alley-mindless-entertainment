@@ -6,6 +6,10 @@ import game_world.objects.Area;
 
 public class AreaFactory {
 
+    /**
+     * A factory class for creating new Areas. Used to avoid dependencies in AreaManager.
+     */
+
     private final EventManager eventManager;
 
     public AreaFactory(EventManager eventManager) {
@@ -17,7 +21,6 @@ public class AreaFactory {
      * @return the new area generated
      * @param data data from existing AreaData
      */
-
     public Area createArea(AreaData data) {
         return new Area(
                 data.id,

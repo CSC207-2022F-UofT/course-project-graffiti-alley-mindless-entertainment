@@ -16,16 +16,10 @@ public abstract class DatabaseManager implements IDatabase {
     /**
      * Manages all matters regarding JSON database, JSON library is used nowhere else
      */
-
-    public final String FILE_NAME = "src/main/resources/Database.json";
     public JSONObject fullDatabase;
 
-    public DatabaseManager() {
-        // Initialize Full Database
-        initializeDatabase(FILE_NAME);
-    }
-
     /**
+     * Initializes json file to a readable JSONObject
      * @param fileName The JSON file name used
      */
     public void initializeDatabase(String fileName) {

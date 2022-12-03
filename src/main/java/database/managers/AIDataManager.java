@@ -12,7 +12,8 @@ public class AIDataManager extends DatabaseManager {
     private final DatabaseHelper databaseHelper;
 
     /**
-     * @return AIData with all data from json converted to variables
+     * @param name of AIData
+     * @return AIData with all data from json converted to String/long variables
      */
     public AIData fetchAIData(String name) {
         JSONArray aisData = (JSONArray) super.fullDatabase.get("ai_data");
@@ -22,6 +23,9 @@ public class AIDataManager extends DatabaseManager {
     }
 
     public AIDataManager() {
+        // change file below to required json file
+        String FILE_NAME = "src/main/resources/AIDatabase.json";
+        super.initializeDatabase(FILE_NAME);
         this.databaseHelper = new DatabaseHelper();
         this.dataFactory = new AIDataFactory();
     }

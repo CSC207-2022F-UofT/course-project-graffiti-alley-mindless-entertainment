@@ -53,7 +53,7 @@
         "4": "follow the grassy trail",
         "3": "walk along the beach"
       },
-      "events": ["test 2"]
+      "events": ["test 2", "test"]
     },
     "3": {
       "name": "Beach 2",

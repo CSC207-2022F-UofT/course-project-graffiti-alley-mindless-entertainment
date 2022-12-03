@@ -3,7 +3,7 @@ package database.objects;
 public class SkillData {
 
     /**
-     * All information needed for an arbitrary event
+     * All information needed for a skill
      */
 
     public String name;
