@@ -27,8 +27,8 @@ class MainMenuInputValidatorTest {
         assert(validator.parseAndValidate("") == null);
         assert(validator.parseAndValidate("new") == null);
         assert(validator.parseAndValidate("start").equals("start"));
-        assert(validator.parseAndValidate("START").equals("save"));
-        assert(validator.parseAndValidate("sTART").equals("save"));
+        assert(validator.parseAndValidate("START").equals("start"));
+        assert(validator.parseAndValidate("sTART").equals("start"));
         assert(validator.parseAndValidate("return").equals("return"));
         assert(validator.parseAndValidate("RETURN").equals("return"));
     }
