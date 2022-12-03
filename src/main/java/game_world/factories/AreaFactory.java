@@ -2,9 +2,7 @@ package game_world.factories;
 
 import database.objects.AreaData;
 import game_world.managers.EventManager;
-import game_world.objects.areas.Area;
-
-import java.util.ArrayList;
+import game_world.objects.Area;
 
 public class AreaFactory {
 

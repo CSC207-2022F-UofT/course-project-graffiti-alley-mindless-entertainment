@@ -1,7 +1,6 @@
 package game_world.objects.states;
 
-import game_world.objects.Action;
-import game_world.validators.AreaInputValidator;
+import game_world.WorldInputValidator;
 import interfaces.State;
 import io.InputValidator;
 import io.Output;
@@ -11,14 +10,19 @@ import java.util.ArrayList;
 
 public class SelectionState implements State {
 
-    private final AreaInputValidator inputValidator;
+    /**
+     * State for when there is a choice to be made
+     * User must choose a valid choice to continue
+     */
+
+    private final WorldInputValidator inputValidator;
     private boolean isDone;
     private boolean awaitInput;
     private ArrayList<String> inputs;
 
     public SelectionState(ArrayList<String> inputs) {
         this.inputs = inputs;
-        this.inputValidator = new AreaInputValidator(Action.LEAVING_AREA, inputs);
+        this.inputValidator = new WorldInputValidator(inputs);
         this.awaitInput = false;
         this.isDone = false;
     }
