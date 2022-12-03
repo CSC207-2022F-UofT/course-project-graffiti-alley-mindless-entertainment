@@ -1,5 +1,7 @@
 package objects.battle.enemy.ai;
 
+import io.Output;
+import io.OutputHandler;
 import objects.character.BossFacade;
 import objects.character.EnemyFacade;
 import objects.character.EnemyFighter;
@@ -33,6 +35,9 @@ public class EnemyPotionHandler implements EnemyActionHandler{
     @Override
     public void useAction(EnemyFighter enemy, Player player) {
         enemy.changeHealth(this.enemyPotion.getHp());
+        OutputHandler output = Output.getScreen();
+        output.generateText(enemy.getName() + " used a potion! Now " + enemy.getName() + " has " + enemy.getHealth() +
+                " HP!");
     }
 
 }

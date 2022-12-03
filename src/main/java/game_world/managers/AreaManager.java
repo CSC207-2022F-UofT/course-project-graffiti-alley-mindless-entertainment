@@ -3,7 +3,7 @@ package game_world.managers;
 import core.StateManager;
 import game_world.factories.DialogueStateFactory;
 import game_world.factories.SelectionStateFactory;
-import game_world.objects.areas.Area;
+import game_world.objects.Area;
 import interfaces.State;
 import io.Output;
 import io.OutputHandler;
@@ -40,10 +40,11 @@ public class AreaManager extends StateManager {
         if (this.currentArea.getCurrTextIndex() == 0) {
             // Texts have initialized
             output.generateText("◈ " + this.currentArea.getSpeaker() + "");
+            eventManager.areaEntered(this.currentArea);
         }
         if (this.currentArea.getCurrTextIndex() == this.currentArea.getTexts().size()) {
             // Texts are all completed
-            if (this.currentArea.getEvents().size() == 0) {
+            if (eventManager.queueCleared()) {
                 // Events are completed (or there are none)
                 if (this.currentArea.getNextInputs().contains(input.toLowerCase())) {
                     // Player entered a valid area to go next
@@ -59,9 +60,7 @@ public class AreaManager extends StateManager {
                 return this.currState;
             }
             else {
-                // Events are to be played
-                eventManager.areaEntered(this.currentArea);
-                this.currState = null;
+                return eventManager.getNextStateInQueue();
             }
         }
         else {

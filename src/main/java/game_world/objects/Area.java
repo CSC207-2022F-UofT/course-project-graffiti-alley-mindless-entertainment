@@ -1,4 +1,4 @@
-package game_world.objects.areas;
+package game_world.objects;
 
 import game_world.objects.events.Event;
 
