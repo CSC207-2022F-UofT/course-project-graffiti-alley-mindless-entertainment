@@ -94,7 +94,7 @@ public class UserTurnState implements State {
                 break;
             case 1:
                 SkillHelper skillHelper = new SkillHelper();
-                Skill chosenSkill = skillHelper.findSkill(input, user.getSkillList());
+                Skill chosenSkill = skillHelper.findSkill(cleanInput, user.getSkillList());
 
                 if (chosenSkill == null) {
                     output.generateText("That skill doesn't exist, please enter a valid skill.");
@@ -132,6 +132,6 @@ public class UserTurnState implements State {
 
     @Override
     public InputValidator getInputValidator() {
-        return null;
+        return this.validator;
     }
 }

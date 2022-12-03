@@ -1,7 +1,10 @@
 package battlestates.states;
 
+import core.ChoiceInputValidator;
 import interfaces.State;
 import io.InputValidator;
+import io.Output;
+import io.OutputHandler;
 import io.OutputHandlerImpl;
 import objects.character.EnemyFacade;
 import objects.character.Player;
@@ -21,6 +24,7 @@ public class LoseBattleState implements State {
     private EnemyFacade foe;
     private boolean done = false;
     private boolean awaitingInput = false;
+    private InputValidator validator;
 
     public LoseBattleState(Player user, EnemyFacade foe) {
         this.user = user;
@@ -32,12 +36,14 @@ public class LoseBattleState implements State {
      */
     @Override
     public void preInput() {
+        OutputHandler output = Output.getScreen();
         String displayText = "You lost the battle. How would you like to proceed?";
         List<String> loseOptions = new ArrayList<>(); // TEMPORARY options
         loseOptions.add("Cheat and heal to full");
         loseOptions.add("Pretend you won");
 
-        OutputHandlerImpl.getScreen().generateTextWithOptions(displayText, loseOptions);
+        output.generateTextWithOptions(displayText, loseOptions);
+        this.validator = new ChoiceInputValidator(loseOptions);
         this.awaitingInput = true;
     }
 
@@ -48,10 +54,11 @@ public class LoseBattleState implements State {
      */
     @Override
     public void postInput(String input) {
-        switch(input) {
-            case "A": // TEMPORARY CASE, continue the battle with full health
+        String cleanInput = validator.parseAndValidate(input);
+        switch(cleanInput) {
+            case "A": // TEMP, continue the battle with full health
                 this.user.changeCurrHealth(user.getMaxHealth());
-            case "B": // TEMPORARY CASE, pretending to win
+            case "B": // TEMP, pretending to win
                 this.user.changeCurrHealth(1);
                 this.foe.setHealth(0);
         }

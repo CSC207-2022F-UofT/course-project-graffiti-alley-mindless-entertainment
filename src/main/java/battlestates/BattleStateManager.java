@@ -5,7 +5,6 @@ import battlestates.states.LoseBattleState;
 import battlestates.states.UserTurnState;
 import battlestates.states.WinBattleState;
 import core.StateManager;
-import game_world.objects.areas.Area;
 import interfaces.State;
 import objects.battle.enemy.factory.EnemyFactory;
 import objects.character.EnemyFacade;
@@ -19,7 +18,6 @@ public class BattleStateManager extends StateManager {
      *  foe: EnemyFacade object representing who the user is battling
      */
     private Player user;
-    private Area currArea;
     private EnemyFacade foe;
 
     public BattleStateManager(Player user) {
@@ -61,6 +59,6 @@ public class BattleStateManager extends StateManager {
     @Override
     public void initialize() {
         EnemyFactory enemyFactory = new EnemyFactory();
-        this.foe = enemyFactory.createEnemy("goblin"); // Temporary, use-case needed once decide which enemy
+        this.foe = enemyFactory.createEnemy("goblin"); // TEMP, later decide which enemy
     }
 }

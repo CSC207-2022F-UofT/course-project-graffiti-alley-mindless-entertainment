@@ -4,7 +4,6 @@ import interfaces.State;
 import io.InputValidator;
 import io.Output;
 import io.OutputHandler;
-import io.OutputHandlerImpl;
 import objects.character.EnemyFacade;
 import objects.character.Player;
 

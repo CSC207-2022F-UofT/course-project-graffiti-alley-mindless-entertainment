@@ -2,8 +2,6 @@ package battlestates.states;
 
 import interfaces.State;
 import io.InputValidator;
-import io.Output;
-import io.OutputHandler;
 import objects.battle.enemy.ai.EnemyActionHandler;
 import objects.character.EnemyFacade;
 import objects.character.Player;
