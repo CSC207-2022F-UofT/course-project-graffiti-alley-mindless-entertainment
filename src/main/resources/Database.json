@@ -191,19 +191,19 @@
       "name": "Gold Chest",
       "type": "Item Pick-Up",
       "item": "Sword",
-      "texts": ["You discovered a sword on the ground!"]
+      "texts": "You discovered a sword on the ground!"
     },
     {
       "name": "Silver Chest",
       "type": "Item Pick-Up",
       "item": "Armor",
-      "texts": ["You discovered an armor on the ground!"]
+      "texts": "You discovered an armor on the ground!"
     },
     {
       "name": "Bronze Chest",
       "type": "Item Pick-Up",
       "item": "Potion",
-      "texts": ["You discovered a potion on the ground!"]
+      "texts": "You discovered a potion on the ground!"
     },
     {
       "name": "test 3",

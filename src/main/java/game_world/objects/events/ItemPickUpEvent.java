@@ -4,7 +4,6 @@ import game_world.WorldInputValidator;
 import game_world.factories.ItemFactory;
 import io.InputValidator;
 import io.Output;
-import io.OutputHandler;
 import objects.character.Player;
 import objects.inventory.Inventory;
 
@@ -28,8 +27,9 @@ public class ItemPickUpEvent extends Event {
     ));
     public Inventory inventory;
     private final int maxSize = 5;
+    public String text;
 
-    public ItemPickUpEvent(String name, String item) {
+    public ItemPickUpEvent(String name, String item, String text) {
         this.name = name;
         this.type = "Item Pick-Up";
         this.item = item;
@@ -37,17 +37,18 @@ public class ItemPickUpEvent extends Event {
         this.awaitInput = false;
         this.isDone = false;
         this.inventory = Player.getInventory();
+        this.text = text;
     }
 
     @Override
     public void preInput() {
         this.awaitInput = true;
-        OutputHandler output = Output.getScreen();
-        // change text below
-        output.generateText("[ITEM PICK-UP EVENT] Would you pick up the item?");
+        StringBuilder textToDisplay = new StringBuilder(this.text);
+        textToDisplay.append("\n Do you want to pick up the item?");
         for (String input : inputs) {
-            output.generateText("\t◈ " + input);
+            textToDisplay.append("\t◈ ").append(input).append("\n");
         }
+        Output.getScreen().generateText(textToDisplay.toString());
     }
 
     @Override
