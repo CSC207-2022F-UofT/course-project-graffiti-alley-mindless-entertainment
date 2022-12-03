@@ -13,8 +13,7 @@ public class Inventory {
      * inventory: list of items the user have
      */
 
-    private ArrayList inventory;
-    private final int maxSize = 5;
+    private ArrayList<Item> inventory;
 
     /**
      * Initialize new inventory.
@@ -26,14 +25,14 @@ public class Inventory {
     /**
      * Getter for inventory.
      */
-    public ArrayList getInventory() {
+    public ArrayList<Item> getInventory() {
         return inventory;
     }
 
     /**
      * Setter for inventory.
      */
-    public void setInventory(ArrayList inventory) {
+    public void setInventory(ArrayList<Item> inventory) {
         this.inventory = inventory;
     }
 
@@ -41,27 +40,27 @@ public class Inventory {
      * @Return all items' name and their ability in the inventory as a string.
      */
     public String viewInventory(){
-        String itemInfo = "";
+        StringBuilder itemInfo = new StringBuilder();
 
         for(int i = 0; i < inventory.size(); i++){
             Item item = (Item) inventory.get(i);
             String[] stats = item.getStats();
-            itemInfo = itemInfo + i + ". "+ stats[0] + ": " + stats[1] + "\n";
+            itemInfo.append(i).append(". ").append(stats[0]).append(": ").append(stats[1]).append("\n");
 
         }
-        return itemInfo;
+        return itemInfo.toString();
     }
 
     /**
      * @Return list of item's name
      */
     public String viewItemList(){
-        String items = "";
+        StringBuilder items = new StringBuilder();
         for (int i = 0; i < inventory.size(); i++) {
             Item item = (Item) inventory.get(i);
-            items = items + i + ". " + item.getName() + "\n";
+            items.append(i).append(". ").append(item.getName()).append("\n");
         }
-        return items;
+        return items.toString();
     }
 
     /**
@@ -69,6 +68,7 @@ public class Inventory {
      * @return whether item is added.
      */
     public boolean addItem(Item item){
+        int maxSize = 5;
         if (inventory.size() >= maxSize){
             return false;
         }
