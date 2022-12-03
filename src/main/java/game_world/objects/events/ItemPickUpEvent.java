@@ -26,8 +26,8 @@ public class ItemPickUpEvent extends Event {
             "yes", "no"
     ));
     public Inventory inventory;
-    private final int maxSize = 5;
     public String text;
+    public ItemFactory itemFactory;
 
     public ItemPickUpEvent(String name, String item, String text) {
         this.name = name;
@@ -60,13 +60,13 @@ public class ItemPickUpEvent extends Event {
         if (input.equals("yes")){
             switch (this.item) {
                 case "Sword":
-                    success = inventory.addItem(ItemFactory.createItem("Sword"));
+                    success = inventory.addItem(itemFactory.createItem("Sword"));
                     break;
                 case "Armor":
-                    success = inventory.addItem(ItemFactory.createItem("Armor"));
+                    success = inventory.addItem(itemFactory.createItem("Armor"));
                     break;
                 case "Potion":
-                    success = inventory.addItem(ItemFactory.createItem("Potion"));
+                    success = inventory.addItem(itemFactory.createItem("Potion"));
                     break;
             }
 

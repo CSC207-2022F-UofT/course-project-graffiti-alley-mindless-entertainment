@@ -13,7 +13,7 @@ public class ItemFactory {
      * @param itemType type of item
      * @return Item object based on the itemType
      */
-    public static Item createItem(String itemType){
+    public Item createItem(String itemType){
         switch (itemType) {
             case "Sword":
                 return new Sword(Player.getLevel());
