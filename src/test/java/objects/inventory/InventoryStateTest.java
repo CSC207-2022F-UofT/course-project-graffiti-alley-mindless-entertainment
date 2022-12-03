@@ -13,8 +13,8 @@ class InventoryStateTest {
         Inventory inventory = new Inventory();
         InventoryState i = new InventoryState(inventory);
         i.preInput();
-        assertFalse(i.awaitInput());
-        assertTrue(i.isDone());
+        assertTrue(i.awaitInput());
+        assertFalse(i.isDone());
     }
 
     @Test
@@ -34,7 +34,7 @@ class InventoryStateTest {
         InventoryState i = new InventoryState(inventory);
         i.postInput("remove 0");
         assertFalse(i.awaitInput());
-        assertTrue(i.isDone());
+        assertFalse(i.isDone());
     }
 
     @Test
@@ -43,7 +43,7 @@ class InventoryStateTest {
         InventoryState i = new InventoryState(inventory);
         i.postInput("remove 1000"); // invalid input; index out of range
         assertFalse(i.isDone());
-        assertTrue(i.awaitInput());
+        assertFalse(i.awaitInput());
     }
 
 }
