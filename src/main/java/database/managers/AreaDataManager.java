@@ -11,7 +11,8 @@ public class AreaDataManager extends DatabaseManager {
     private final AreaDataFactory dataFactory;
 
     /**
-     * @return AreaData with all data from json converted to variables
+     * @param id of Area
+     * @return AreaData with all data from json converted to String/long variables
      */
     public AreaData fetchArea(String id) {
         JSONObject textData = (JSONObject) super.fullDatabase.get("texts");
@@ -22,6 +23,9 @@ public class AreaDataManager extends DatabaseManager {
     }
 
     public AreaDataManager() {
+        // change file below to required json file
+        String FILE_NAME = "src/main/resources/AreaDatabase.json";
+        super.initializeDatabase(FILE_NAME);
         this.dataFactory = new AreaDataFactory();
     }
 }

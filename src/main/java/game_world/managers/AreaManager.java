@@ -29,17 +29,23 @@ public class AreaManager extends StateManager {
 
     @Override
     public void initialize() {
+        // NOTE: area manager initialization will only be called once
+        // area manager should not be recreated, same with event manager helper class
         this.currState = dialogueStateFactory.createDialogueState(
                 "The game will now begin. To advance dialogue, press enter. Enjoy!"
         );
     }
 
+    /**
+     * @param input current valid input from the user
+     * @return next State depending on the current State
+     */
     @Override
     protected State nextState(String input) {
         OutputHandler output = Output.getScreen();
         if (this.currentArea.getCurrTextIndex() == 0) {
             // Texts have initialized
-            output.generateText("◈ " + this.currentArea.getSpeaker() + "");
+            output.generateText("◈ " + this.currentArea.getSpeaker() + " ◈");
             eventManager.areaEntered(this.currentArea);
         }
         if (this.currentArea.getCurrTextIndex() == this.currentArea.getTexts().size()) {
@@ -81,7 +87,8 @@ public class AreaManager extends StateManager {
     }
 
     /**
-     * gets to next area
+     * Changes current area to next loaded area from id
+     * @param id of Area to be loaded and changed to
      */
     public void getToNextArea(String id) {
         // save events and data here

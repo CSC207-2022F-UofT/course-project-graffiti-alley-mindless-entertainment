@@ -1,0 +1,12 @@
+{
+  "ai_data": [
+    {
+      "name": "default",
+      "chance": "50"
+    },
+    {
+      "name": "smart",
+      "chance": "80"
+    }
+  ]
+}
