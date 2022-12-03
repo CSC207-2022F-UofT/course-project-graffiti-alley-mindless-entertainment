@@ -5,7 +5,6 @@ import interfaces.State;
 import io.InputValidator;
 import io.Output;
 import io.OutputHandler;
-import io.OutputHandlerImpl;
 import objects.battle.Skill;
 import objects.battle.PlayerSkillHandler;
 import objects.battle.enemy.SkillHelper;
@@ -14,7 +13,6 @@ import objects.character.Player;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class UserTurnState implements State {
     /**
@@ -68,6 +66,7 @@ public class UserTurnState implements State {
                 output.generateText("Not implemented yet, try again.");
                 break;
         }
+        output.generateText("PRE TRIGGERED");
         awaitingInp = true;
     }
 
@@ -83,19 +82,19 @@ public class UserTurnState implements State {
         String cleanInput = validator.parseAndValidate(input);
         if (cleanInput == null) {
             questionNum = -1;
-            output.generateText("");
+            output.generateText("Please enter valid input.");
         }
         output.generateText("TESTING" + cleanInput);
 
         switch (questionNum) {
             case 0:
-                if (cleanInput.equals("Skills")) {
+                if (cleanInput.equals("skills")) {
                     questionNum = 1; // Redirects to asking which skill
                 }
-                if (cleanInput.equals("Inventory")) {
+                if (cleanInput.equals("inventory")) {
                     questionNum = 2;
                 }
-                if (cleanInput.equals("Stats")) {
+                if (cleanInput.equals("stats")) {
                     String foeStats = "Name: " + foe.getName() +
                             " | HP: " + foe.getHealth() +
                             " | Speed: " + foe.getSpeed() +
@@ -105,10 +104,15 @@ public class UserTurnState implements State {
                             " | Speed: " + user.getSpeed() +
                             " | Type: " + user.getSkillType();
                     output.generateText("[ENEMY STATS] " + foeStats + "\n" +
-                            "[PLAYER STATS]" + userStats + "\n");
+                            "[PLAYER STATS] " + userStats + "\n");
                 }
                 break;
             case 1:
+                if (cleanInput.equals("back")) {
+                    questionNum = 0; // Escape back to battle options
+                    break;
+                }
+
                 SkillHelper skillHelper = new SkillHelper();
                 Skill chosenSkill = skillHelper.findSkill(cleanInput, user.getSkillList());
 
@@ -122,9 +126,8 @@ public class UserTurnState implements State {
                     output.generateText(chosenSkill.getName() + " did " + damage + " damage!");
 
                     // Each turn takes 20 speed, preventing too many turns.
-                    user.changeSpeed(user.getSpeed() - 20);
+                    user.changeSpeed(-20);
 
-                    // Later change so that the state will stay to ask more questions like menu or inventory.
                     this.done = true;
                 }
                 break;

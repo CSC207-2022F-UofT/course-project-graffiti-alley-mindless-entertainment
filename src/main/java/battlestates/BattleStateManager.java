@@ -72,7 +72,6 @@ public class BattleStateManager extends StateManager {
             this.currState = this.nextState("");
             if (this.currState == null) {
                 this.isDone = true;
-                return;
             }
         }
     }
@@ -85,7 +84,6 @@ public class BattleStateManager extends StateManager {
             this.currState = this.nextState(input);
             if (this.currState == null) {
                 this.isDone = true;
-                return;
             }
         }
     }
@@ -98,9 +96,11 @@ public class BattleStateManager extends StateManager {
     public void initialize() {
         EnemyFactory enemyFactory = new EnemyFactory();
         this.foe = enemyFactory.createEnemy("goblin"); // TEMP, later decide which enemy
-        currState = nextState("");
 
-        user.addSkill(new Skill("fireball", 20, 10, SkillType.FIRE));
-        user.addSkill(new Skill("waterball", 20, 10, SkillType.WATER));
+        OutputHandler output = Output.getScreen();
+        output.generateText(Boolean.toString(user.addSkill(new Skill("fireball", 20, 10, SkillType.FIRE))));
+        output.generateText(Boolean.toString(user.addSkill(new Skill("waterball", 20, 10, SkillType.WATER))));
+
+        currState = nextState("");
     }
 }

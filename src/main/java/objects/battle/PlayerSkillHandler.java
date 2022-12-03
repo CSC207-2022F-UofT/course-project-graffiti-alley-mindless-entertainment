@@ -20,7 +20,7 @@ public class PlayerSkillHandler extends SkillHandler {
         int totalDamage = calculateDamage(skill, foe.getType());
 
         foe.changeHealth(-totalDamage);
-        user.changeSpeed(user.getSpeed() - skill.getLag());
+        user.changeSpeed(-skill.getLag());
 
         return totalDamage;
     }
