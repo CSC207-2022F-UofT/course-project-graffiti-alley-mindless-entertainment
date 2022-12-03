@@ -15,17 +15,20 @@ public class EnemyData {
     public String speed;
     public String ai;
     public String gimmick;
+    public String potion;
 
-    public EnemyData(String name, String type, ArrayList<String> skills, String reputation, String speed, String ai) {
+    public EnemyData(String name, String type, ArrayList<String> skills, String reputation, String speed, String ai,
+                     String potion) {
         this.name = name;
         this.type = type;
         this.skills = skills;
         this.reputation = reputation;
         this.speed = speed;
         this.ai = ai;
+        this.potion = potion;
     }
     public EnemyData(String name, String type, ArrayList<String> skills,
-                     String reputation, String speed, String ai, String gimmick) {
+                     String reputation, String speed, String ai, String potion, String gimmick) {
         this.name = name;
         this.type = type;
         this.skills = skills;
@@ -33,6 +36,7 @@ public class EnemyData {
         this.speed = speed;
         this.ai = ai;
         this.gimmick = gimmick;
+        this.potion = potion;
     }
 }
 

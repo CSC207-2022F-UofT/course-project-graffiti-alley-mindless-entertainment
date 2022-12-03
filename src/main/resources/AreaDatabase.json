@@ -1,4 +1,5 @@
 {
+  "name": "PACT",
   "texts": {
     "0": {
       "zone": "Introduction",
@@ -52,7 +53,7 @@
         "4": "follow the grassy trail",
         "3": "walk along the beach"
       },
-      "events": ["test"]
+      "events": []
     },
     "3": {
       "name": "Beach 2",
@@ -109,5 +110,96 @@
       },
       "events": []
     }
-  }
+  },
+  "quests": [],
+  "characters": [],
+  "items": [],
+  "skills": [
+    {
+      "name": "fireball",
+      "type": "fire",
+      "lag": "10",
+      "damage": "20"
+    },
+    {
+      "name": "beam",
+      "type": "earth",
+      "lag": "10",
+      "damage": "25"
+    }
+  ],
+  "enemies": [
+    {
+      "name": "goblin",
+      "type": "fire",
+      "skills": [
+        "fireball"
+      ],
+      "reputation": "5",
+      "speed": "90",
+      "ai": "default",
+      "potion": "10"
+    },
+    {
+      "name": "goblin warrior",
+      "type": "earth",
+      "skills": [
+        "beam"
+      ],
+      "reputation": "20",
+      "speed": "110",
+      "ai": "smart",
+      "gimmick": "health",
+      "potion": "20"
+    }
+  ],
+  "ai_data": [
+    {
+      "name": "default",
+      "chance": "50"
+    },
+    {
+      "name": "smart",
+      "chance": "80"
+    }
+  ],
+  "gimmicks": [
+    {
+      "name": "health",
+      "trigger": "30"
+    },
+    {
+      "name": "attack",
+      "trigger": "20",
+      "attack": "1.2"
+    },
+    {
+      "name": "speed",
+      "trigger": "25",
+      "speed": "20"
+    },
+    {
+      "name": "type",
+      "trigger": "20"
+    }
+  ],
+  "events": [
+    {
+      "name": "test",
+      "type": "Encounter",
+      "encounter-type": "Hostile",
+      "enemy": "goblin",
+      "priority": 1
+    },
+    {
+      "name": "test 2",
+      "type": "Item Pick-Up",
+      "priority": 1
+    },
+    {
+      "name": "test 3",
+      "type": "Item Pick-Up",
+      "priority": 1
+    }
+  ]
 }
