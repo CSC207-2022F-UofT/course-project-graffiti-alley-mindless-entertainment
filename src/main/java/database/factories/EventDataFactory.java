@@ -40,7 +40,7 @@ public class EventDataFactory {
                 (String) jsonObject.get("name"),
                 (String) jsonObject.get("type"),
                 (String) jsonObject.get("item"),
-                (String) jsonObject.get("texts")
+                (String) jsonObject.get("text")
         );
     }
 }
