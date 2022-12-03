@@ -6,6 +6,10 @@ import battlestates.states.UserTurnState;
 import battlestates.states.WinBattleState;
 import core.StateManager;
 import interfaces.State;
+import io.Output;
+import io.OutputHandler;
+import objects.battle.Skill;
+import objects.battle.SkillType;
 import objects.battle.enemy.factory.EnemyFactory;
 import objects.character.EnemyFacade;
 import objects.character.Player;
@@ -19,9 +23,12 @@ public class BattleStateManager extends StateManager {
      */
     private Player user;
     private EnemyFacade foe;
+    private boolean awaitingInput = false;
 
     public BattleStateManager(Player user) {
         this.user = user;
+        initialize();
+//        OutputHandler output = Output.getScreen();
     }
 
     /**
@@ -41,7 +48,7 @@ public class BattleStateManager extends StateManager {
             this.isDone = true;
         }
         // Lose condition
-        else if (this.user.getCurrHealth() <= 0) {
+        else if (user.getCurrHealth() <= 0) {
             chosenState = new LoseBattleState(user, foe);
             this.isDone = true;
         }
@@ -49,16 +56,51 @@ public class BattleStateManager extends StateManager {
         else {
             if (userNext) {
                 chosenState = new UserTurnState(user, foe);
-            }
-            else {
+            } else {
                 chosenState = new EnemyTurnState(user, foe, input);
             }
+            awaitingInput = chosenState.awaitInput();
         }
         return chosenState;
+    }
+    @Override
+    public void preInput() {
+        currState.preInput();
+        awaitingInput = currState.awaitInput(); // Making sure await is updated
+        boolean currPreInput = currState.isDone();
+        if (currPreInput) {
+            this.currState = this.nextState("");
+            if (this.currState == null) {
+                this.isDone = true;
+                return;
+            }
+        }
+    }
+    @Override
+    public void postInput(String input) {
+        currState.postInput(input);
+        awaitingInput = currState.awaitInput(); // Making sure await is updated
+        boolean currPostInput = currState.isDone();
+        if (currPostInput) {
+            this.currState = this.nextState(input);
+            if (this.currState == null) {
+                this.isDone = true;
+                return;
+            }
+        }
+    }
+
+    @Override
+    public boolean awaitInput() {
+        return awaitingInput;
     }
     @Override
     public void initialize() {
         EnemyFactory enemyFactory = new EnemyFactory();
         this.foe = enemyFactory.createEnemy("goblin"); // TEMP, later decide which enemy
+        currState = nextState("");
+
+        user.addSkill(new Skill("fireball", 20, 10, SkillType.FIRE));
+        user.addSkill(new Skill("waterball", 20, 10, SkillType.WATER));
     }
 }

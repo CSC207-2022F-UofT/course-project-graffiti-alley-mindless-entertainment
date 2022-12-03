@@ -33,6 +33,8 @@ public class UserTurnState implements State {
     private boolean awaitingInp = false;
     private InputValidator validator;
     private int questionNum = 0;
+    private final OutputHandler output = Output.getScreen();
+    private final List<String> menuList = Arrays.asList("Skills", "Inventory", "Stats");
 
     public UserTurnState(Player user, EnemyFacade foe) {
         // Will need to change later to accommodate other options, like inventory
@@ -48,23 +50,24 @@ public class UserTurnState implements State {
      */
     @Override
     public void preInput() {
-        OutputHandler output = Output.getScreen();
-
         switch (questionNum) {
             case 0:
                 // Asking the user for input
-                output.generateTextWithOptions("Select a menu", Arrays.asList("Skills", "Inventory"));
-                this.validator = new ChoiceInputValidator(Arrays.asList("Skills", "Inventory"));
+                output.generateTextWithOptions("Select an option:", menuList);
+                this.validator = new ChoiceInputValidator(menuList);
+                break;
             case 1:
-                output.generateTextWithOptions("Pick a skill", skillList);
+                output.generateTextWithOptions("Pick a skill:", skillList);
                 this.validator = new ChoiceInputValidator(this.skillList);
+                break;
             case 2:
                 output.generateText("Inventory not implemented yet, try again.");
 //            output.generateTextWithOptions("Pick an item", user.getInventory()); // No inventory yet
+                break;
             case 3:
                 output.generateText("Not implemented yet, try again.");
+                break;
         }
-
         awaitingInp = true;
     }
 
@@ -77,11 +80,12 @@ public class UserTurnState implements State {
      */
     @Override
     public void postInput(String input) {
-        OutputHandler output = Output.getScreen();
         String cleanInput = validator.parseAndValidate(input);
         if (cleanInput == null) {
             questionNum = -1;
+            output.generateText("");
         }
+        output.generateText("TESTING" + cleanInput);
 
         switch (questionNum) {
             case 0:
@@ -90,6 +94,18 @@ public class UserTurnState implements State {
                 }
                 if (cleanInput.equals("Inventory")) {
                     questionNum = 2;
+                }
+                if (cleanInput.equals("Stats")) {
+                    String foeStats = "Name: " + foe.getName() +
+                            " | HP: " + foe.getHealth() +
+                            " | Speed: " + foe.getSpeed() +
+                            " | Type: " + foe.getType();
+                    String userStats = "Name: " + user.getName() +
+                            " | HP: " + user.getCurrHealth() +
+                            " | Speed: " + user.getSpeed() +
+                            " | Type: " + user.getSkillType();
+                    output.generateText("[ENEMY STATS] " + foeStats + "\n" +
+                            "[PLAYER STATS]" + userStats + "\n");
                 }
                 break;
             case 1:
@@ -118,6 +134,8 @@ public class UserTurnState implements State {
             default:
                 questionNum = 0; // Redirects to Skill Inv question
         }
+        output.generateText("POST TRIGGERED");
+        awaitingInp = false;
     }
 
     @Override
