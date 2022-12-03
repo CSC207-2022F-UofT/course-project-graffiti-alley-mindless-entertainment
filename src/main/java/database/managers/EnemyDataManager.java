@@ -12,7 +12,7 @@ public class EnemyDataManager extends DatabaseManager {
     private final DatabaseHelper databaseHelper;
 
     /**
-     * @return SkillData with all data from json converted to variables
+     * @return EnemyData with all data from json converted to String/long variables
      */
     public EnemyData fetchEnemyData(String name) {
         JSONArray enemiesData = (JSONArray) super.fullDatabase.get("enemies");
@@ -22,6 +22,9 @@ public class EnemyDataManager extends DatabaseManager {
     }
 
     public EnemyDataManager() {
+        // change file below to required json file
+        String FILE_NAME = "src/main/resources/EnemyDatabase.json";
+        super.initializeDatabase(FILE_NAME);
         this.databaseHelper = new DatabaseHelper();
         this.dataFactory = new EnemyDataFactory();
     }

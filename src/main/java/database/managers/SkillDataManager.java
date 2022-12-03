@@ -12,7 +12,7 @@ public class SkillDataManager extends DatabaseManager {
     private final DatabaseHelper databaseHelper;
 
     /**
-     * @return SkillData with all data from json converted to variables
+     * @return SkillData with all data from json converted to String/long variables
      */
     public SkillData fetchSkillData(String name) {
         JSONArray skillsData = (JSONArray) super.fullDatabase.get("skills");
@@ -22,6 +22,9 @@ public class SkillDataManager extends DatabaseManager {
     }
 
     public SkillDataManager() {
+        // change file below to required json file
+        String FILE_NAME = "src/main/resources/SkillDatabase.json";
+        super.initializeDatabase(FILE_NAME);
         this.databaseHelper = new DatabaseHelper();
         this.dataFactory = new SkillDataFactory();
     }
