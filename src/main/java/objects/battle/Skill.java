@@ -1,8 +1,5 @@
 package objects.battle;
 
-import java.util.Dictionary;
-import java.util.Hashtable;
-
 public class Skill {
     /** A class for all skills to be used by any kinds of Characters in battles.
      * Attributes:

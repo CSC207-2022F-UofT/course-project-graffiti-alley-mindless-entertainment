@@ -3,7 +3,9 @@ package battle.enemy;
 import objects.battle.Skill;
 import objects.battle.SkillType;
 import objects.battle.enemy.EnemyInfo;
+import objects.battle.enemy.ai.EnemyPotion;
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
@@ -17,8 +19,8 @@ public class EnemyInfoTest {
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
-        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
-        Assert.assertEquals(enemyInfo.getHealth(), 100);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
+        Assertions.assertEquals(enemyInfo.getHealth(), 100);
     }
 
     @DisplayName("Test for changeHealth method")
@@ -27,9 +29,9 @@ public class EnemyInfoTest {
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
-        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
         enemyInfo.changeHealth(-10);
-        Assert.assertEquals(enemyInfo.getHealth(), 90);
+        Assertions.assertEquals(enemyInfo.getHealth(), 90);
     }
 
     @DisplayName("Test for getSpeed method")
@@ -38,8 +40,8 @@ public class EnemyInfoTest {
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
-        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
-        Assert.assertEquals(enemyInfo.getSpeed(), 90);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
+        Assertions.assertEquals(enemyInfo.getSpeed(), 90);
     }
 
     @DisplayName("Test for changeSpeed method")
@@ -48,9 +50,9 @@ public class EnemyInfoTest {
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
-        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
         enemyInfo.changeSpeed(10);
-        Assert.assertEquals(enemyInfo.getSpeed(), 100);
+        Assertions.assertEquals(enemyInfo.getSpeed(), 100);
     }
 
     @DisplayName("Test for checkAlive method")
@@ -59,9 +61,9 @@ public class EnemyInfoTest {
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
-        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
         enemyInfo.setHealth(0);
-        Assert.assertEquals(enemyInfo.checkAlive(), false);
+        Assertions.assertEquals(enemyInfo.checkAlive(), false);
     }
 
     @DisplayName("Test for setHealth method")
@@ -70,9 +72,9 @@ public class EnemyInfoTest {
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
-        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
         enemyInfo.setHealth(50);
-        Assert.assertEquals(enemyInfo.getHealth(), 50);
+        Assertions.assertEquals(enemyInfo.getHealth(), 50);
     }
 
     @DisplayName("Test for setSpeed method")
@@ -81,9 +83,9 @@ public class EnemyInfoTest {
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
-        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
         enemyInfo.setSpeed(80);
-        Assert.assertEquals(enemyInfo.getSpeed(), 80);
+        Assertions.assertEquals(enemyInfo.getSpeed(), 80);
     }
 
     @DisplayName("Test for getReputation method")
@@ -92,8 +94,8 @@ public class EnemyInfoTest {
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
-        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
-        Assert.assertEquals(enemyInfo.getReputation(), 10);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
+        Assertions.assertEquals(enemyInfo.getReputation(), 10);
     }
 
     @DisplayName("Test for getSkill method")
@@ -102,8 +104,8 @@ public class EnemyInfoTest {
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
-        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
-        Assert.assertEquals(enemyInfo.getSkill(0), skill);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
+        Assertions.assertEquals(enemyInfo.getSkill(0), skill);
     }
 
     @DisplayName("Test for getSkills method")
@@ -112,8 +114,8 @@ public class EnemyInfoTest {
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
-        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
-        Assert.assertEquals(enemyInfo.getSkills(), skills);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
+        Assertions.assertEquals(enemyInfo.getSkills(), skills);
     }
 
     @DisplayName("Test for getType method")
@@ -122,8 +124,8 @@ public class EnemyInfoTest {
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
-        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
-        Assert.assertEquals(enemyInfo.getType(), SkillType.WATER);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
+        Assertions.assertEquals(enemyInfo.getType(), SkillType.WATER);
     }
 
     @DisplayName("Test for setType method")
@@ -132,9 +134,19 @@ public class EnemyInfoTest {
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
-        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
         enemyInfo.setType(SkillType.FIRE);
-        Assert.assertEquals(enemyInfo.getType(), SkillType.FIRE);
+        Assertions.assertEquals(enemyInfo.getType(), SkillType.FIRE);
     }
 
+    @DisplayName("Test for getPotion method")
+    @Test
+    public void getPotionTest(){
+        Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
+        ArrayList<Skill> skills = new ArrayList<Skill>();
+        skills.add(skill);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
+        enemyInfo.setType(SkillType.FIRE);
+        Assertions.assertEquals(10, enemyInfo.getPotion().getHp());
+    }
 }
