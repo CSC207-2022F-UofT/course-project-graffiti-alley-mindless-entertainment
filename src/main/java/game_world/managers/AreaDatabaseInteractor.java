@@ -3,7 +3,7 @@ package game_world.managers;
 import database.managers.AreaDataManager;
 import database.objects.AreaData;
 import game_world.factories.AreaFactory;
-import game_world.objects.areas.Area;
+import game_world.objects.Area;
 
 public class AreaDatabaseInteractor {
     private final AreaDataManager database;

@@ -2,8 +2,7 @@ package objects.character;
 import objects.battle.Skill;
 import objects.battle.SkillType;
 import objects.battle.enemy.EnemyInfo;
-import objects.battle.enemy.ai.EnemyAI;
-import objects.character.Character;
+import objects.battle.enemy.ai.*;
 
 import java.util.ArrayList;
 
@@ -13,7 +12,7 @@ import java.util.ArrayList;
  * health, skills, speed, reputation and Enemy AI in addition to name which is inherited from
  * parent class.
  */
-public class Enemy extends Character {
+public class EnemyFacade extends Character implements EnemyFighter{
 
 
     public EnemyInfo enemyInfo;
@@ -26,7 +25,7 @@ public class Enemy extends Character {
      * @param enemyInfo: information about the enemy including health, skills, speed, and reputation
      * @param enemyAI: enemyAI that the enemy has
      */
-    public Enemy(String name, EnemyInfo enemyInfo, EnemyAI enemyAI) {
+    public EnemyFacade(String name, EnemyInfo enemyInfo, EnemyAI enemyAI) {
         super(name);
         this.enemyAI = enemyAI;
         this.enemyInfo = enemyInfo;
@@ -157,12 +156,26 @@ public class Enemy extends Character {
      * @param input: input by the user
      * @return enemy's action in string (use skill or use potion)
      */
-    public String enemyAction(String input){
+    public EnemyActionHandler enemyAction(String input){
         return this.enemyAI.respond(input);
     }
 
+    /**
+     * This method returns the AI that the enemy has
+     *
+     * @return enemy's type of enemyAI
+     */
     public EnemyAI getEnemyAI() {
         return this.enemyAI;
+    }
+
+    /**
+     * This method returns the potion that this enemy has
+     *
+     * @return the potion that the enemy has
+     */
+    public EnemyPotion getPotion(){
+        return this.enemyInfo.getPotion();
     }
 }
 

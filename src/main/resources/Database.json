@@ -53,7 +53,7 @@
         "4": "follow the grassy trail",
         "3": "walk along the beach"
       },
-      "events": []
+      "events": ["test 2"]
     },
     "3": {
       "name": "Beach 2",
@@ -113,7 +113,6 @@
   },
   "quests": [],
   "characters": [],
-  "items": [],
   "skills": [
     {
       "name": "fireball",
@@ -137,7 +136,8 @@
       ],
       "reputation": "5",
       "speed": "90",
-      "ai": "default"
+      "ai": "default",
+      "potion": "10"
     },
     {
       "name": "goblin warrior",
@@ -148,7 +148,8 @@
       "reputation": "20",
       "speed": "110",
       "ai": "smart",
-      "gimmick": "health"
+      "gimmick": "health",
+      "potion": "20"
     }
   ],
   "ai_data": [
@@ -184,20 +185,18 @@
   "events": [
     {
       "name": "test",
-      "type": "Encounter",
-      "encounter-type": "Hostile",
-      "enemy": "goblin",
-      "priority": 1
+      "type": "Arbitrary"
     },
     {
       "name": "test 2",
       "type": "Item Pick-Up",
-      "priority": 1
+      "item": "Sword"
     },
     {
       "name": "test 3",
-      "type": "Item Pick-Up",
-      "priority": 1
+      "type": "Encounter",
+      "encounter-type": "Hostile",
+      "npc": "goblin"
     }
   ]
 }

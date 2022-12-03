@@ -1,13 +1,12 @@
 package game_world.managers;
 
-import core.StateManager;
 import database.managers.EventDataManager;
 
-import database.objects.EventData;
-import game_world.objects.areas.Area;
-import game_world.objects.events.ArbitraryEvent;
-import game_world.objects.events.EncounterEvent;
-import game_world.objects.events.ItemPickUpEvent;
+import database.objects.ArbitraryEventData;
+import database.objects.EncounterEventData;
+import database.objects.ItemPickUpEventData;
+import game_world.factories.EventFactory;
+import game_world.objects.Area;
 import game_world.objects.events.Event;
 import interfaces.State;
 
@@ -20,12 +19,13 @@ public class EventManager {
      */
 
     private ArrayList<Event> eventQueue;
-    private EventDataManager database;
-    private Event currentEvent;
+    private final EventDataManager database;
+    private final EventFactory eventFactory;
 
     public EventManager() {
         this.database = new EventDataManager();
         this.eventQueue = new ArrayList<>();
+        this.eventFactory = new EventFactory();
     }
 
     /**
@@ -35,26 +35,20 @@ public class EventManager {
      * @param exec adds Event to eventQueue to be executed if set to true
      */
     public Event createEvent(String name, boolean exec) {
-        EventData data = this.database.fetchEvent("name", name);
+        String type = this.database.fetchEventType(name);
         Event newEvent;
 
-        if (data.type.equals("Encounter")) {
-            newEvent = new EncounterEvent(
-                    data.name,
-                    data.priority
-            );
+        if (type.equals("Encounter")) {
+            EncounterEventData data = this.database.fetchEncounterEvent("name", name);
+            newEvent = eventFactory.createEncounterEvent(data);
         }
-        else if (data.type.equals("Item Pick-Up")) {
-            newEvent = new ItemPickUpEvent(
-                    data.name,
-                    data.priority
-            );
+        else if (type.equals("Item Pick-Up")) {
+            ItemPickUpEventData data = this.database.fetchItemPickUpEvent("name", name);
+            newEvent = eventFactory.createItemPickUpEvent(data);
         }
         else {
-            newEvent = new ArbitraryEvent(
-                    data.name,
-                    data.priority
-            );
+            ArbitraryEventData data = this.database.fetchArbitraryEvent("name", name);
+            newEvent = eventFactory.createArbitraryEvent(data);
         }
 
         if (exec)
@@ -63,7 +57,8 @@ public class EventManager {
     }
 
     /**
-     * Gets all names of events to be generated and returns an array of events to be added to Area
+     * @param names of events to be generated
+     * @return array of events to be added to Area
      */
     public ArrayList<Event> getEventsFromArea(ArrayList<String> names) {
         ArrayList<Event> events = new ArrayList<>();
@@ -75,19 +70,26 @@ public class EventManager {
 
     /**
      * Adds all events of new area to event queue to be executed
+     * @param area of the new area entered
      */
     public void areaEntered(Area area) {
         this.eventQueue.addAll(area.getEvents());
     }
 
     /**
-     * Executes all events in queue
+     * Executes next event in queue
+     * @return next State to be returned in nextState
      */
-    private void executeEventQueue() {
-        for (Event event : eventQueue) {
-            this.currentEvent = event;
-            event.execute();
-            this.eventQueue.remove(event);
-        }
+    public State getNextStateInQueue() {
+        State nextState = this.eventQueue.get(0);
+        this.eventQueue.remove(nextState);
+        return nextState;
+    }
+
+    /**
+     * @return true if the event queue contains no events
+     */
+    public boolean queueCleared() {
+        return (this.eventQueue.size() == 0);
     }
 }

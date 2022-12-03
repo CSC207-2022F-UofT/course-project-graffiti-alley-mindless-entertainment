@@ -7,6 +7,7 @@ import database.objects.SkillData;
 import objects.battle.Skill;
 import objects.battle.SkillType;
 import objects.battle.enemy.EnemyInfo;
+import objects.battle.enemy.ai.EnemyPotion;
 
 import java.util.ArrayList;
 
@@ -21,11 +22,10 @@ public class EnemyInfoFactory {
     }
     /**
      * This method returns the EnemyInfo that the enemy with the name in the database has.
-     * @param name of the enemy
+     * @param enemyData Enemy data from the database
      * @return EnemyInfo of the enemy with the name given
      */
-    public EnemyInfo createEnemyInfo(String name) throws TypeNotFoundException {
-        EnemyData enemyData = this.enemyDataManager.fetchEnemyData(name);
+    public EnemyInfo createEnemyInfo(EnemyData enemyData){
         ArrayList<Skill> skills = new ArrayList<>();
         for (String i:enemyData.skills) {
             SkillData skillData = this.skillDataManager.fetchSkillData(i);
@@ -38,11 +38,12 @@ public class EnemyInfoFactory {
         }
         int reputation = Integer.parseInt(enemyData.reputation);
         int speed = Integer.parseInt(enemyData.speed);
+        int potion = Integer.parseInt(enemyData.potion);
 
         String typeStr = enemyData.type;
         SkillType type = translateSkill(typeStr);
 
-        return new EnemyInfo(skills, speed, reputation, type);
+        return new EnemyInfo(skills, speed, reputation, type, new EnemyPotion(potion));
     }
 
     /**
@@ -50,7 +51,7 @@ public class EnemyInfoFactory {
      * @param name of the skill
      * @return skill with the name and all the other attributes in the database
      */
-    public SkillType translateSkill(String name) throws TypeNotFoundException {
+    public SkillType translateSkill(String name){
         switch (name){
             case "water":{
                 return SkillType.WATER;
@@ -67,7 +68,6 @@ public class EnemyInfoFactory {
                 return SkillType.AIR;
 
             }
-        }
-        throw new TypeNotFoundException("Type not found");
+        } return SkillType.WATER;
     }
 }

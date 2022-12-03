@@ -6,11 +6,13 @@ import database.managers.GimmickDataManager;
 import database.managers.SkillDataManager;
 import database.objects.EnemyData;
 import database.objects.GimmickData;
+import objects.battle.SkillType;
 import objects.battle.enemy.EnemyInfo;
 import objects.battle.enemy.ai.EnemyAI;
 import objects.battle.enemy.gimmick.*;
-import objects.character.Boss;
-import objects.character.Enemy;
+import objects.character.BossFacade;
+import objects.character.EnemyFacade;
+import objects.character.EnemyFighter;
 
 
 public class EnemyFactory {
@@ -29,26 +31,43 @@ public class EnemyFactory {
         this.enemyAIFactory = new EnemyAIFactory(this.aiDataManager, this.enemyDatabase, this.enemyInfoFactory);
         this.gimmickDataManager = new GimmickDataManager();
 
+    }
 
+    private EnemyData getEnemyData(String name){
+        return this.enemyDatabase.fetchEnemyData(name);
+    }
 
+    private EnemyInfo getEnemyInfo(EnemyData enemyData){
+        return this.enemyInfoFactory.createEnemyInfo(enemyData);
+    }
+
+    private EnemyAI getEnemyAI(EnemyData enemyData, EnemyInfo enemyInfo){
+        return this.enemyAIFactory.createEnemyAI(enemyData, enemyInfo);
     }
 
     /**
-     * This method returns the enemy or boss instance using the information given by database
-     * This method returns Enemy so if the boss is returned, make sure you cast, so that the object
-     * is Boss.
+     * This method returns the enemy instance using the information given by database
      * @param name of the enemy to create
      * @return instance of enemy
      */
-    public Enemy createEnemy(String name) throws Exception {
-        EnemyInfo enemyInfo = this.enemyInfoFactory.createEnemyInfo(name);
-        EnemyAI enemyAI = this.enemyAIFactory.createEnemyAI(name);
-        EnemyData enemyData = this.enemyDatabase.fetchEnemyData(name);
-        if(enemyData.gimmick != null){
-            Gimmick gimmick = translateGimmick(enemyData.gimmick, enemyInfo);
-            return new Boss(name, enemyInfo, enemyAI, gimmick);
-        }
-        return new Enemy(enemyData.name, enemyInfo, enemyAI);
+    public EnemyFacade createEnemy(String name){
+        return new EnemyFacade(name, getEnemyInfo(getEnemyData(name)), getEnemyAI(getEnemyData(name),
+                getEnemyInfo(getEnemyData(name))));
+    }
+
+    /**
+     * This method returns the boss instance using the information given by database
+     * @param name of the enemy to create
+     * @return instance of boss
+     */
+    public BossFacade createBoss(String name){
+        EnemyData enemyData = getEnemyData(name);
+        EnemyInfo enemyInfo = getEnemyInfo(getEnemyData(name));
+        return new BossFacade(name, enemyInfo, getEnemyAI(getEnemyData(name),
+                getEnemyInfo(getEnemyData(name))), translateGimmick(enemyData.gimmick, enemyInfo));
+
+
+
     }
 
     /**
@@ -57,33 +76,56 @@ public class EnemyFactory {
      * @param enemyInfo EnemeyInfo of the name given
      * @return gimmick that the enemy has (from the database)
      */
-    public Gimmick translateGimmick(String name, EnemyInfo enemyInfo)
-            throws GimmickNotFoundException {
+    public GimmickStrategy translateGimmick(String name, EnemyInfo enemyInfo) {
         switch (name) {
             case "health":{
                 GimmickData healthGimmickData = this.gimmickDataManager.fetchGimmickData(name);
                 int triggerHealth = Integer.parseInt(healthGimmickData.trigger);
-                return new HealthGimmick(enemyInfo, triggerHealth);
+                StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.HEALTH,
+                        enemyInfo, triggerHealth).build();
+                return new StatGimmickStrategy(gimmick);
             }
             case "attack":{
                 GimmickData attackGimmickData = this.gimmickDataManager.fetchGimmickData(name);
                 int triggerHealth = Integer.parseInt(attackGimmickData.trigger);
                 double attackIncrease = Double.parseDouble(attackGimmickData.attack);
-                return new AttackGimmick(enemyInfo, triggerHealth, attackIncrease);
+                StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.ATTACK, enemyInfo,
+                        triggerHealth).setAttackIncrease(attackIncrease).build();
+                return new StatGimmickStrategy(gimmick);
             }
             case "speed":{
                 GimmickData speedGimmickData = this.gimmickDataManager.fetchGimmickData(name);
                 int triggerHealth = Integer.parseInt(speedGimmickData.trigger);
                 int speedIncrease = Integer.parseInt(speedGimmickData.speed);
-                return new SpeedGimmick(enemyInfo, triggerHealth, speedIncrease);
+                StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.SPEED, enemyInfo,
+                        triggerHealth).setSpeedIncrease(speedIncrease).build();
+                return new StatGimmickStrategy(gimmick);
             }
             case "type":{
                 GimmickData typeGimmickData = this.gimmickDataManager.fetchGimmickData(name);
                 int triggerHealth = Integer.parseInt(typeGimmickData.trigger);
-                return new TypeGimmick(enemyInfo, triggerHealth);
+                SkillType type = enemyInfo.getType();
+                if(type == SkillType.WATER){
+                    StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.TYPE, enemyInfo,
+                            triggerHealth).setNewType(SkillType.FIRE).build();
+                    return new StatGimmickStrategy(gimmick);
+                } else if(type == SkillType.FIRE){
+                    StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.TYPE, enemyInfo,
+                            triggerHealth).setNewType(SkillType.EARTH).build();
+                    return new StatGimmickStrategy(gimmick);
+                } else if(type == SkillType.EARTH){
+                    StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.TYPE, enemyInfo,
+                            triggerHealth).setNewType(SkillType.AIR).build();
+                    return new StatGimmickStrategy(gimmick);
+                } else{
+                    StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.TYPE, enemyInfo,
+                            triggerHealth).setNewType(SkillType.WATER).build();
+                    return new StatGimmickStrategy(gimmick);
+                }
+
             }
         }
-        throw new GimmickNotFoundException("Gimmick is not found");
+        return null;
     }
 
 
