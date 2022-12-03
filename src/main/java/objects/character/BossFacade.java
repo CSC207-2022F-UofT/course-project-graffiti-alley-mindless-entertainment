@@ -33,7 +33,11 @@ public class BossFacade extends EnemyFacade implements EnemyFighter{
         return this.gimmick;
     }
 
-    public boolean applyGimmick(){
-        return gimmick.useGimmick();
+    /**
+     * This method uses the gimmick and displays the string on the console
+     *
+     */
+    public void applyGimmick(){
+        this.gimmick.useGimmick();
     }
 }
