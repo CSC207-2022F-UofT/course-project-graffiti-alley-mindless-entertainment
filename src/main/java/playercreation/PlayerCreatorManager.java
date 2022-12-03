@@ -8,9 +8,10 @@ import switch_managers.SwitchEventMediator;
 import switch_managers.SwitchEventMediatorProxy;
 import switch_managers.SwitchEventType;
 
+/** A controller class that helps create a new Player character at the beginning of the game.
+ */
 public class PlayerCreatorManager extends StateManager {
-    /** A controller class that helps create a new Player character at the beginning of the game.
-     * Attributes:
+    /**
      * currPlayerQuestion: The current question about the Player character being asked of the user. An enum of
      *                     type PlayerQuestion.
      * currState: The current State saved in the PlayerCreatorManager.
@@ -18,46 +19,61 @@ public class PlayerCreatorManager extends StateManager {
      * questionStateFactory: A PlayerQuestionStateFactory used to create new PlayerQuestionStates.
      * confirmStateFactory: A PlayerConfirmStateFactory used to create new PlayerConfirmStates.
      */
-
     private PlayerQuestion currPlayerQuestion;
     private int completedQuestions;
     private final PlayerQuestionStateFactory questionStateFactory;
     private final PlayerConfirmStateFactory confirmStateFactory;
 
+    /**
+     * Initializes a new PlayerCreatorManager.
+     */
     public PlayerCreatorManager() {
-        // Initializes a new PlayerCreatorManager.
         this.completedQuestions = 0;
         this.questionStateFactory = new PlayerQuestionStateFactory();
         this.confirmStateFactory = new PlayerConfirmStateFactory();
         initialize();
     }
 
+    /**
+     * Helper method for the PlayerCreatorManager.
+     */
     @Override
     public void initialize() {
-        // Initializes the PlayerCreatorManager.
         this.currPlayerQuestion = PlayerQuestion.NAME;
         currState = questionStateFactory.createPlayerQuestionState(currPlayerQuestion);
     }
 
+    /**
+     * @return The current PlayerQuestion being asked of the user.
+     */
     public PlayerQuestion getCurrPlayerQuestion() {
         // Return the current PlayerQuestion.
         return this.currPlayerQuestion;
     }
 
+    /**
+     * @return The current State.
+     */
     public State getCurrState() {
-        // Return the current State.
         return this.currState;
     }
 
+    /**
+     * @return The completed questions.
+     */
     public int getCompletedQuestions() {
-        // Return the completedQuestions.
         return this.completedQuestions;
     }
 
+    /**
+     * Switches the question state to the next state in order to ask for input from the user. Assumes input has
+     * already been parsed and validated by InputHandler.
+     * @param input The input from the user, already parsed and validated.
+     * @return The next State to be initialized. Returns null if this StateManager has completed asking all questions
+     *         of the user to tell Shell to switch to the next StateManager.
+     */
     @Override
     protected State nextState(String input) {
-        // Switches the question state to the next state in order to ask for more input from the user. Assumes input
-        // has already been parsed and validated by InputHandler.
         if (this.currPlayerQuestion == PlayerQuestion.NAME ||
                 this.currPlayerQuestion == PlayerQuestion.DESCRIPTION ||
                 this.currPlayerQuestion == PlayerQuestion.SKILLTYPE) {
@@ -73,7 +89,6 @@ public class PlayerCreatorManager extends StateManager {
                 if (this.completedQuestions == 3) {
                     // PlayerCreatorManager has asked all questions, and Shell switches to a different Manager to start
                     // the game.
-                    // Awaiting Shell implementation.
                     SwitchEventMediator s = SwitchEventMediatorProxy.getInstance();
                     s.store(SwitchEventType.START_GAME);
                     return null;
@@ -93,10 +108,12 @@ public class PlayerCreatorManager extends StateManager {
         return null;
     }
 
+    /**
+     * Helper method for nextState. Changes currPlayerQuestion in order to match the PlayerQuestionState.
+     * @return A PlayerQuestionState depending on completedQuestions. 0 = PlayerQuestion.NAME,
+     *         1 = PlayerQuestion.DESCRIPTION, 2 = PlayerQuestion.SKILLTYPE.
+     */
     private State stateDecider() {
-        // Helper method for nextState that returns a PlayerQuestionState depending on this.completedQuestions, and
-        // changes currPlayerQuestion in order to match the PlayerQuestionState.
-        // 0 = PlayerQuestion.NAME, 1 = PlayerQuestion.DESCRIPTION, 2 = PlayerQuestion.SKILLTYPE.
         if (this.completedQuestions == 0) {
             this.currPlayerQuestion = PlayerQuestion.NAME;
             this.currState = this.questionStateFactory.createPlayerQuestionState(this.currPlayerQuestion);

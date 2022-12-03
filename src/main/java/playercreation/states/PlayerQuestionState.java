@@ -9,9 +9,11 @@ import playercreation.PlayerCreatorInputValidator;
 import playercreation.PlayerCreatorInteractor;
 import playercreation.PlayerQuestion;
 
+/**
+ * A class for the current question being asked of the Player. Implements State in order to take user input.
+ */
 public class PlayerQuestionState implements State {
-    /** A class for the current question being asked of the Player. Implements State in order to take user input.
-     * Attributes:
+    /**
      * currQuestion: The current question to be asked of the user. Is an enum of PlayerQuestion, either NAME,
      *               DESCRIPTION, or SKILLTYPE.
      * awaitInput: A boolean describing if the state is awaiting input.
@@ -26,8 +28,12 @@ public class PlayerQuestionState implements State {
     private final PlayerCreatorInteractor creatorInteractor;
     private final PlayerCreatorInputValidator inputValidator;
 
+    /**
+     * Initializes a new PlayerQuestionState.
+     * @param currQuestion The current question to ask of the user. An enum of type PlayerQuestion.
+     * @param creatorInteractor The PlayerCreatorInteractor that saves user input as player creation progresses.
+     */
     public PlayerQuestionState(PlayerQuestion currQuestion, PlayerCreatorInteractor creatorInteractor) {
-        // Initializes a new PlayerQuestionState with currQuestion.
         this.currQuestion = currQuestion;
         this.awaitInput = false;
         this.isDone = false;
@@ -35,14 +41,18 @@ public class PlayerQuestionState implements State {
         this.inputValidator = new PlayerCreatorInputValidator(this.currQuestion);
     }
 
+    /**
+     * @return The current PlayerQuestion.
+     */
     public PlayerQuestion getCurrQuestion() {
-        // Return the current PlayerQuestion.
         return this.currQuestion;
     }
 
+    /**
+     * Utilizes OutputHandler to ask the user a question based on the currQuestion.
+     */
     @Override
     public void preInput() {
-        // Utilizes OutputHandler to ask the user a question based on the currQuestion.
         this.awaitInput = true;
         OutputHandler output = Output.getScreen();
         if (this.currQuestion == PlayerQuestion.NAME) {
@@ -57,10 +67,13 @@ public class PlayerQuestionState implements State {
         }
     }
 
+    /**
+     * Saves uer-inputted Player attributes into the PlayerCreatorInteractor. Assumes input has already been parsed
+     * and validated by InputHandler.
+     * @param input String input from the user, already parsed and validated.
+     */
     @Override
     public void postInput(String input) {
-        // Saves user-inputted Player attributes into the PlayerCreatorInteractor. Assumes input has already been
-        // parsed and validated.
         if (this.currQuestion == PlayerQuestion.NAME) {
             this.creatorInteractor.addName(input);
             this.isDone = true;
@@ -78,16 +91,25 @@ public class PlayerQuestionState implements State {
         }
     }
 
+    /**
+     * @return Boolean awaitInput.
+     */
     @Override
     public boolean awaitInput() {
         return this.awaitInput;
     }
 
+    /**
+     * @return Boolean isDone.
+     */
     @Override
     public boolean isDone() {
         return this.isDone;
     }
 
+    /**
+     * @return The PlayerCreatorInputValidator of this PlayerQuestionState.
+     */
     @Override
     public InputValidator getInputValidator() {
         return this.inputValidator;

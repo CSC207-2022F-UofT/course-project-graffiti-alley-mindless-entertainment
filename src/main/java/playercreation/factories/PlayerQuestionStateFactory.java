@@ -1,22 +1,32 @@
 package playercreation.factories;
 
+import interfaces.State;
 import playercreation.PlayerCreatorInteractor;
 import playercreation.PlayerQuestion;
 import playercreation.states.PlayerQuestionState;
 
+/**
+ * A factory class for creating new PlayerQuestionStates. Used to avoid dependencies in PlayerCreatorManager.
+ */
 public class PlayerQuestionStateFactory {
-    /** A factory class for creating new PlayerQuestionStates. Used to avoid dependencies in PlayerCreatorManager.
-     * Attributes:
+    /**
      * interactor: The PlayerCreatorInteractor that saves the Player information.
      */
     private final PlayerCreatorInteractor interactor;
 
+    /**
+     * Constructs a new PlayerQuestionState with an empty PlayerCreatorInteractor.
+     */
     public PlayerQuestionStateFactory() {
-        // Constructs a new PlayerQuestionState with an empty PlayerCreatorInteractor.
         this.interactor = new PlayerCreatorInteractor();
     }
 
-    public PlayerQuestionState createPlayerQuestionState(PlayerQuestion currQuestion) {
+    /**
+     * Creates new PlayerQuestionStates based on input.
+     * @param currQuestion The current question being asked of the user.
+     * @return A new PlayerQuestionState with params currQuestion and this.interactor.
+     */
+    public State createPlayerQuestionState(PlayerQuestion currQuestion) {
         // Returns a new PlayerQuestionState utilizing currQuestion.
         return new PlayerQuestionState(currQuestion, this.interactor);
     }
