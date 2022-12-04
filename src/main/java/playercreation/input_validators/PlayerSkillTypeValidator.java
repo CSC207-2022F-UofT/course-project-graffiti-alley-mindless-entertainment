@@ -20,10 +20,10 @@ public class PlayerSkillTypeValidator implements InputValidator {
      */
     @Override
     public String parseAndValidate(String input) {
-        if (!(input.equalsIgnoreCase(SkillType.FIRE.toString())) &&
-                !(input.equalsIgnoreCase(SkillType.AIR.toString())) &&
-                !(input.equalsIgnoreCase(SkillType.EARTH.toString())) &&
-                !(input.equalsIgnoreCase(SkillType.WATER.toString()))) {
+        if ((input.equalsIgnoreCase(SkillType.FIRE.toString())) ||
+                (input.equalsIgnoreCase(SkillType.AIR.toString())) ||
+                (input.equalsIgnoreCase(SkillType.EARTH.toString())) ||
+                (input.equalsIgnoreCase(SkillType.WATER.toString()))) {
             return input.toLowerCase();
         }
         return null;
