@@ -29,10 +29,6 @@ public class ChangeOptionsState implements State {
 
     private final String changeCommand;
 
-    private final String ANSI_BLUE = "\u001B[34m";
-
-    private final String ANSI_RESET = "\u001B[0m";
-
     /**
      * @param options stored options of the game. Injected dependency.
      */
@@ -40,7 +36,7 @@ public class ChangeOptionsState implements State {
         this.options = options;
         this.textSpeedCommand = "textSpeed";
         this.autoSaveCommand = "autoSave";
-        this.quitCommand = "quit";
+        this.quitCommand = "return";
         this.changeCommand = "change";
     }
 
@@ -52,6 +48,8 @@ public class ChangeOptionsState implements State {
         awaitingInput = true;
         StringBuilder textToDisplay = new StringBuilder("Options: \n");
         textToDisplay.append(this.autoSaveCommand).append(": ");
+        String ANSI_BLUE = "\u001B[34m";
+        String ANSI_RESET = "\u001B[0m";
         textToDisplay.append(options.isEnableAutoSave() ? ANSI_BLUE : "").append("true ").append(ANSI_RESET);
         textToDisplay.append(!options.isEnableAutoSave() ? ANSI_BLUE : "").append("false ").append(ANSI_RESET);
 
@@ -60,7 +58,7 @@ public class ChangeOptionsState implements State {
         int[] textSpeedOptions = {1, 2, 3, 4, 5};
         for (int textSpeedOption : textSpeedOptions) {
             textToDisplay.append(options.getTextSpeed() == textSpeedOption ? ANSI_BLUE : "")
-                    .append(textSpeedOption).append(" " + ANSI_RESET);
+                    .append(textSpeedOption).append(" ").append(ANSI_RESET);
         }
 
         textToDisplay.append("\nTo change options, enter `").append(changeCommand).append(" settingName").append(" newValue`");
