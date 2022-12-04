@@ -9,5 +9,5 @@ public abstract class Reward {
     /**
      * Distributes the reward to the receiving player. Will be defined depending on the more specific type of reward.
      */
-    protected abstract void distribute(Player receiver);
+    public abstract void distribute(Player receiver);
 }

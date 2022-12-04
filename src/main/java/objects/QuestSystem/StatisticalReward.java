@@ -27,7 +27,7 @@ public class StatisticalReward extends Reward {
      * @param receiver: player that will receive the reward when distributed.
      */
     @Override
-    protected void distribute(Player receiver) {
+    public void distribute(Player receiver) {
         switch (this.statistic) {
             // case where the receiver gets extra health from the reward.
             case HEALTH:
