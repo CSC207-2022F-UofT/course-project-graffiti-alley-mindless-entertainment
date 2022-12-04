@@ -4,56 +4,73 @@ import io.InputValidator;
 import interfaces.State;
 import io.Output;
 import io.OutputHandler;
-import playercreation.PlayerCreatorInputValidator;
-import playercreation.PlayerQuestion;
+import playercreation.input_validators.PlayerConfirmValidator;
 
+/**
+ * A class for the user to either confirm or return to the previous question during Player creation at the start
+ * of the game.
+ */
 public class PlayerConfirmState implements State {
-    /** A class for the user to either confirm or return to the previous question during Player creation at the
-     * start of the game.
-     * Attributes:
+    /**
      * awaitInput: A boolean describing if the state is awaiting input.
      * isDone: A boolean describing if the state is done running the postInput process.
-     * inputValidator: A PlayerCreatorInputValidator that is used to validate the user's input for confirming or
+     * inputValidator: A PlayerConfirmValidator that is used to validate the user's input for confirming or
      *                 returning to the previous question.
      */
     private boolean awaitInput;
     private boolean isDone;
-    private final PlayerCreatorInputValidator inputValidator;
+    private final PlayerConfirmValidator inputValidator;
 
+    /**
+     * Initializes a new PlayerConfirmState that has not been completed and is not awaiting input.
+     */
     public PlayerConfirmState() {
-        // Initializes a new PlayerConfirmState that has not been completed and is not awaiting input.
         this.awaitInput = false;
         this.isDone = false;
-        this.inputValidator = new PlayerCreatorInputValidator(PlayerQuestion.CONFIRM);
+        this.inputValidator = new PlayerConfirmValidator();
     }
 
+    /**
+     * Utilizes OutputHandler to ask the user if they would like to confirm their decision or return to the previous
+     * question.
+     */
     @Override
     public void preInput() {
-        // Utilizes OutputHandler to ask the user if they would like to confirm their decision or return to the
-        // previous question.
         this.awaitInput = true;
         OutputHandler output = Output.getScreen();
         output.generateText("Are you satisfied with your choice? Type 'confirm' if you are, or 'return' if you" +
                 " would like to return to the previous question.");
     }
 
+    /**
+     * Assumes the input has been parsed and validated already. Executes after receiving input from the user.
+     * @param input from the user
+     */
     @Override
     public void postInput(String input) {
-        // Assumes the input has been parsed and validated already.
             this.awaitInput = false;
             this.isDone = true;
     }
 
+    /**
+     * @return Boolean awaitInput.
+     */
     @Override
     public boolean awaitInput() {
         return this.awaitInput;
     }
 
+    /**
+     * @return Boolean isDone.
+     */
     @Override
     public boolean isDone() {
         return this.isDone;
     }
 
+    /**
+     * @return The PlayerConfirmValidator of this PlayerConfirmState.
+     */
     @Override
     public InputValidator getInputValidator() {
         return this.inputValidator;
