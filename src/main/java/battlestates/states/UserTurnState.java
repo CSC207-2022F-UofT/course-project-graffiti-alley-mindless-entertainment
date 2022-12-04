@@ -65,7 +65,7 @@ public class UserTurnState implements State {
 //            output.generateTextWithOptions("Pick an item", user.getInventory()); // No inventory yet
                 break;
             case 3:
-                output.generateText("Not implemented yet, try again.");
+                output.generateText("Not implemented yet, sorry try again.");
                 break;
         }
         awaitingInp = true;
@@ -85,7 +85,6 @@ public class UserTurnState implements State {
             questionNum = -1;
             output.generateText("Please enter valid input.");
         }
-        output.generateText("TESTING" + cleanInput);
 
         switch (questionNum) {
             case 0:
@@ -126,7 +125,6 @@ public class UserTurnState implements State {
             default:
                 questionNum = 0; // Redirects to Skill Inv question
         }
-        output.generateText("POST TRIGGERED");
         awaitingInp = false;
     }
 
