@@ -9,7 +9,12 @@ import objects.item.*;
 public class ItemFactory {
 
     /**
-     *
+     * default constructor for ItemFactory
+     */
+    public ItemFactory(){
+    }
+
+    /**
      * @param itemType type of item
      * @return Item object based on the itemType
      */

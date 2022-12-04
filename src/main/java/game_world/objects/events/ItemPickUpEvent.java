@@ -21,13 +21,12 @@ public class ItemPickUpEvent extends Event {
     private boolean isDone;
     private boolean awaitInput;
 
-    // change below for inputs u want
     private final ArrayList<String> inputs = new ArrayList<String>(Arrays.asList(
             "yes", "no"
     ));
     public Inventory inventory;
     public String text;
-    public ItemFactory itemFactory;
+    public ItemFactory itemFactory = new ItemFactory();
 
     public ItemPickUpEvent(String name, String item, String text) {
         this.name = name;
@@ -53,22 +52,12 @@ public class ItemPickUpEvent extends Event {
 
     @Override
     public void postInput(String input) {
-        boolean success = false;
+        boolean success;
         this.awaitInput = false;
         this.isDone = true;
 
         if (input.equals("yes")){
-            switch (this.item) {
-                case "Sword":
-                    success = inventory.addItem(itemFactory.createItem("Sword"));
-                    break;
-                case "Armor":
-                    success = inventory.addItem(itemFactory.createItem("Armor"));
-                    break;
-                case "Potion":
-                    success = inventory.addItem(itemFactory.createItem("Potion"));
-                    break;
-            }
+            success = inventory.addItem(itemFactory.createItem(this.item));
 
             if (success){
                 Output.getScreen().generateText("The item is added to your inventory.");
