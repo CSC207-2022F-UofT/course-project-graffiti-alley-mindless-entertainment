@@ -6,6 +6,7 @@ import io.InputValidator;
 import io.Output;
 import io.OutputHandler;
 import objects.character.EnemyFacade;
+import objects.character.EnemyFighter;
 import objects.character.Player;
 
 import java.util.ArrayList;
@@ -20,14 +21,14 @@ public class LoseBattleState implements State {
      *  done: represents whether the state is done
      */
     private Player user;
-    private EnemyFacade foe;
+    private EnemyFighter foe;
     private boolean done = false;
     private boolean awaitingInput = false;
     private InputValidator validator;
     private final OutputHandler output = Output.getScreen();
 
 
-    public LoseBattleState(Player user, EnemyFacade foe) {
+    public LoseBattleState(Player user, EnemyFighter foe) {
         this.user = user;
         this.foe = foe;
     }

@@ -10,6 +10,7 @@ import objects.battle.PlayerSkillHandler;
 import objects.battle.StatDisplayer;
 import objects.battle.enemy.SkillHelper;
 import objects.character.EnemyFacade;
+import objects.character.EnemyFighter;
 import objects.character.Player;
 
 import java.util.Arrays;
@@ -26,7 +27,7 @@ public class UserTurnState implements State {
      * awaitingInp: Boolean showing whether the state is waiting for input
      */
     private Player user;
-    private EnemyFacade foe;
+    private EnemyFighter foe;
     private boolean done = false;
     private List<String> skillList;
     private boolean awaitingInp = false;
@@ -35,7 +36,7 @@ public class UserTurnState implements State {
     private final OutputHandler output = Output.getScreen();
     private final List<String> menuList = Arrays.asList("Skills", "Inventory", "Stats");
 
-    public UserTurnState(Player user, EnemyFacade foe) {
+    public UserTurnState(Player user, EnemyFighter foe) {
         // Will need to change later to accommodate other options, like inventory
         SkillHelper dummy = new SkillHelper();
         this.skillList = dummy.toSkillString(user.getSkillList());

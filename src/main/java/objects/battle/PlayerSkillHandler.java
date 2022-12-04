@@ -2,6 +2,7 @@ package objects.battle;
 
 import objects.battle.enemy.ai.SkillHandler;
 import objects.character.EnemyFacade;
+import objects.character.EnemyFighter;
 import objects.character.Player;
 
 public class PlayerSkillHandler extends SkillHandler {
@@ -16,7 +17,7 @@ public class PlayerSkillHandler extends SkillHandler {
      * @param foe The EnemyFacade being attacked by the user by skill
      * @param user The user attacking the enemy
      */
-    public int useSkill(Skill skill, EnemyFacade foe, Player user) {
+    public int useSkill(Skill skill, EnemyFighter foe, Player user) {
         int totalDamage = calculateDamage(skill, foe.getType());
 
         foe.changeHealth(-totalDamage);
