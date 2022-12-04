@@ -5,6 +5,7 @@ import io.InputValidator;
 import io.Output;
 import io.OutputHandler;
 import objects.character.EnemyFacade;
+import objects.character.EnemyFighter;
 import objects.character.Player;
 
 public class WinBattleState implements State {
@@ -16,7 +17,7 @@ public class WinBattleState implements State {
      *  done: represents whether the state is done
      */
     private Player user;
-    private EnemyFacade foe;
+    private EnemyFighter foe;
     private boolean done = false;
 
     public WinBattleState(Player user, EnemyFacade foe) {
