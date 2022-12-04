@@ -26,7 +26,7 @@ public class ItemPickUpEvent extends Event {
     ));
     public Inventory inventory;
     public String text;
-    public ItemFactory itemFactory = new ItemFactory();
+    public ItemFactory itemFactory;
 
     public ItemPickUpEvent(String name, String item, String text) {
         this.name = name;
@@ -37,6 +37,7 @@ public class ItemPickUpEvent extends Event {
         this.isDone = false;
         this.inventory = Player.getInventory();
         this.text = text;
+        this.itemFactory = new ItemFactory();
     }
 
     @Override
