@@ -2,8 +2,7 @@ package playercreation;
 
 import interfaces.State;
 import org.junit.jupiter.api.Test;
-import playercreation.states.PlayerConfirmState;
-import playercreation.states.PlayerQuestionState;
+import playercreation.states.*;
 
 class PlayerCreatorManagerTest {
 
@@ -11,8 +10,7 @@ class PlayerCreatorManagerTest {
     void initialize() {
         PlayerCreatorManager a = new PlayerCreatorManager();
         assert(a.getCurrPlayerQuestion() == PlayerQuestion.NAME);
-        assert(a.getCurrState() instanceof PlayerQuestionState);
-        assert(((PlayerQuestionState) a.getCurrState()).getCurrQuestion() == PlayerQuestion.NAME);
+        assert(a.getCurrState() instanceof PlayerNameState);
     }
 
     @Test
@@ -30,8 +28,7 @@ class PlayerCreatorManagerTest {
         a.nextState("MyName");
         State returnedState = a.nextState("confirm");
         assert(a.getCurrPlayerQuestion() == PlayerQuestion.DESCRIPTION);
-        assert(returnedState instanceof PlayerQuestionState);
-        assert(a.getCompletedQuestions() == 1);
+        assert(returnedState instanceof PlayerDescriptionState);
     }
 
     @Test
@@ -40,7 +37,7 @@ class PlayerCreatorManagerTest {
         a.nextState("MyName");
         State returnedState = a.nextState("return");
         assert(a.getCurrPlayerQuestion() == PlayerQuestion.NAME);
-        assert(returnedState instanceof PlayerQuestionState);
+        assert(returnedState instanceof PlayerNameState);
         assert(a.getCompletedQuestions() == 0);
     }
 
@@ -52,7 +49,7 @@ class PlayerCreatorManagerTest {
         a.nextState("MyDescription");
         State returnedState = a.nextState("confirm");
         assert(a.getCurrPlayerQuestion() == PlayerQuestion.SKILLTYPE);
-        assert(returnedState instanceof PlayerQuestionState);
+        assert(returnedState instanceof PlayerSkillTypeState);
         assert(a.getCompletedQuestions() == 2);
     }
 
@@ -66,7 +63,7 @@ class PlayerCreatorManagerTest {
         a.nextState("air");
         State returnedState = a.nextState("return");
         assert(a.getCurrPlayerQuestion() == PlayerQuestion.SKILLTYPE);
-        assert(returnedState instanceof PlayerQuestionState);
+        assert(returnedState instanceof PlayerSkillTypeState);
         assert(a.getCompletedQuestions() == 2);
     }
 }
