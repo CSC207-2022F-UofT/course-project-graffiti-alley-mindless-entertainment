@@ -4,5 +4,7 @@ public enum SwitchEventType {
     PAUSE,
     RESUME,
 
-    START_GAME
+    START_GAME,
+
+    END_GAME,
 }
