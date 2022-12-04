@@ -3,7 +3,7 @@ package database.objects;
 public class AIData {
 
     /**
-     * All information needed for an arbitrary event
+     * All information needed for an AIData
      */
 
     public String name;

@@ -73,7 +73,6 @@ public class PlayerCreatorManager extends StateManager {
                 if (this.completedQuestions == 3) {
                     // PlayerCreatorManager has asked all questions, and Shell switches to a different Manager to start
                     // the game.
-                    // Awaiting Shell implementation.
                     SwitchEventMediator s = SwitchEventMediatorProxy.getInstance();
                     s.store(SwitchEventType.START_GAME);
                     return null;

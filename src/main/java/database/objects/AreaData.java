@@ -6,7 +6,7 @@ import java.util.Map;
 public class AreaData {
 
     /**
-     * All information needed for an arbitrary area
+     * All information needed for an area
      */
 
     public String id;
