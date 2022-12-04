@@ -31,7 +31,7 @@ public class EnemyFactoryTest {
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 5, SkillType.FIRE, new EnemyPotion(10));
         DefaultAI enemyAI = new DefaultAI(enemyInfo, 50);
         EnemyFactory enemyFactory = new EnemyFactory();
-        EnemyFacade enemy = enemyFactory.createEnemy("goblin");
+        EnemyFighter enemy = enemyFactory.createEnemy("goblin");
         Assertions.assertEquals(enemy.getSkill(0).getDamage(), 20);
         Assertions.assertEquals(enemy.getSkill(0).getType(), SkillType.FIRE);
         Assertions.assertEquals(enemy.getSkill(0).getLag(), 10);
@@ -56,7 +56,7 @@ public class EnemyFactoryTest {
         StatGimmickEntity gimmick = new StatGimmickEntity.StatGimmickBuilder(GimmickType.HEALTH, enemyInfo,
                 30).build();
         EnemyFactory enemyFactory = new EnemyFactory();
-        BossFacade boss = enemyFactory.createBoss("goblin warrior");
+        EnemyFighter boss = enemyFactory.createEnemy("goblin warrior");
         Assertions.assertEquals(boss.getSkill(0).getDamage(), 25);
         Assertions.assertEquals(boss.getSkill(0).getType(), SkillType.EARTH);
         Assertions.assertEquals(boss.getSkill(0).getLag(), 10);
@@ -67,7 +67,6 @@ public class EnemyFactoryTest {
         Assertions.assertEquals(boss.getType(), SkillType.EARTH);
         Assertions.assertEquals(boss.getHealth(), 100);
         Assertions.assertEquals(boss.getName(), "goblin warrior");
-        Assertions.assertTrue(boss.getGimmick() instanceof StatGimmickStrategy);
         Assertions.assertTrue(boss.getEnemyAI() instanceof
                 SmartAI);
     }

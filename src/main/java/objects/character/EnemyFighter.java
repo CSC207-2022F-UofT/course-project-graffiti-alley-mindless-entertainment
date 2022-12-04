@@ -123,4 +123,6 @@ public interface EnemyFighter {
      * @return the potion that the enemy has
      */
     EnemyPotion getPotion();
+
+    void applyGimmick();
 }
