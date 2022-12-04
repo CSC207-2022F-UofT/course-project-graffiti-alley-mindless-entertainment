@@ -7,6 +7,7 @@ import objects.battle.enemy.ai.EnemyPotion;
 import objects.battle.enemy.factory.EnemyFactory;
 import objects.battle.enemy.gimmick.*;
 import objects.character.BossFacade;
+import objects.character.EnemyFighter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -85,7 +86,7 @@ public class StatGimmickStrategyTest {
     @Test
     public void UseGimmickTest(){
         EnemyFactory enemyFactory = new EnemyFactory();
-        BossFacade boss = enemyFactory.createBoss("goblin warrior");
+        EnemyFighter boss = enemyFactory.createEnemy("goblin warrior");
         boss.changeHealth(-90);
         boss.applyGimmick();
         Assertions.assertEquals(100, boss.getHealth());

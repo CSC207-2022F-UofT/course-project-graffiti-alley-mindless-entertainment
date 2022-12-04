@@ -35,6 +35,7 @@ public class EnemySkillHandler extends SkillHandler implements EnemyActionHandle
     public void useAction(EnemyFighter enemy, Player player){
         int damage = calculateDamage(skill, enemy.getType());
         player.changeCurrHealth(-damage);
+        enemy.changeSpeed(-skill.getLag());
         OutputHandler output = Output.getScreen();
         output.generateText(enemy.getName() + " has used " + this.skill.getName() + " with " + this.skill.getDamage()
                 + " damage!");

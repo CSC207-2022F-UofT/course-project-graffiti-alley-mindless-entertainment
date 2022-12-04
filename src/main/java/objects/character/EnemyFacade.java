@@ -177,5 +177,12 @@ public class EnemyFacade extends Character implements EnemyFighter{
     public EnemyPotion getPotion(){
         return this.enemyInfo.getPotion();
     }
+
+    /**
+     * This method uses the gimmick and displays the string on the console
+     *
+     */
+    public void applyGimmick(){
+    }
 }
 
