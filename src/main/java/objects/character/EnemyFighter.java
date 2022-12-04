@@ -123,4 +123,10 @@ public interface EnemyFighter {
      * @return the potion that the enemy has
      */
     EnemyPotion getPotion();
+
+    /**
+     * This method uses the gimmick and displays the string on the console
+     *
+     */
+    void applyGimmick();
 }

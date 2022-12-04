@@ -38,7 +38,8 @@ public class EventFactory {
     public ItemPickUpEvent createItemPickUpEvent(ItemPickUpEventData data) {
         return new ItemPickUpEvent(
                 data.name,
-                data.item
+                data.item,
+                data.text
         );
     }
 }

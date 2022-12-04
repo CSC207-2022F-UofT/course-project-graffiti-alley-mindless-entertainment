@@ -26,14 +26,6 @@ public class BossFacade extends EnemyFacade implements EnemyFighter{
     }
 
     /**
-     * This method returns the enemy's gimmick
-     *
-     */
-    public GimmickStrategy getGimmick() {
-        return this.gimmick;
-    }
-
-    /**
      * This method uses the gimmick and displays the string on the console
      *
      */

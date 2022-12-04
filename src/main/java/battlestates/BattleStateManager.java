@@ -12,6 +12,7 @@ import objects.battle.Skill;
 import objects.battle.SkillType;
 import objects.battle.enemy.factory.EnemyFactory;
 import objects.character.EnemyFacade;
+import objects.character.EnemyFighter;
 import objects.character.Player;
 
 public class BattleStateManager extends StateManager {
@@ -22,7 +23,7 @@ public class BattleStateManager extends StateManager {
      *  foe: EnemyFacade object representing who the user is battling
      */
     private Player user;
-    private EnemyFacade foe;
+    private EnemyFighter foe;
     private boolean awaitingInput = false;
     private final OutputHandler output = Output.getScreen();
 

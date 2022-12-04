@@ -5,15 +5,16 @@ import io.InputValidator;
 import objects.battle.StatDisplayer;
 import objects.battle.enemy.ai.EnemyActionHandler;
 import objects.character.EnemyFacade;
+import objects.character.EnemyFighter;
 import objects.character.Player;
 
 public class EnemyTurnState implements State {
     private Player user;
-    private EnemyFacade foe;
+    private EnemyFighter foe;
     private boolean done = false;
     private String userAction;
 
-    public EnemyTurnState(Player user, EnemyFacade foe, String userAction) {
+    public EnemyTurnState(Player user, EnemyFighter foe, String userAction) {
         this.user = user;
         this.foe = foe;
         this.userAction = userAction;

@@ -3,6 +3,7 @@ package objects.battle;
 import io.Output;
 import io.OutputHandler;
 import objects.character.EnemyFacade;
+import objects.character.EnemyFighter;
 import objects.character.Player;
 
 public class StatDisplayer {
@@ -27,7 +28,7 @@ public class StatDisplayer {
                 " | Type: " + user.getSkillType();
         output.generateText("[PLAYER STATS] " + userStats + "\n");
     }
-    public void displayStats(EnemyFacade foe) {
+    public void displayStats(EnemyFighter foe) {
         String foeStats = "Name: " + foe.getName() +
                 " | HP: " + foe.getHealth() +
                 " | Speed: " + foe.getSpeed() +
