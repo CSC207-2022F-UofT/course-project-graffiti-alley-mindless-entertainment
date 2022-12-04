@@ -39,7 +39,8 @@ public class EventDataFactory {
         return new ItemPickUpEventData(
                 (String) jsonObject.get("name"),
                 (String) jsonObject.get("type"),
-                (String) jsonObject.get("item")
+                (String) jsonObject.get("item"),
+                (String) jsonObject.get("text")
         );
     }
 }

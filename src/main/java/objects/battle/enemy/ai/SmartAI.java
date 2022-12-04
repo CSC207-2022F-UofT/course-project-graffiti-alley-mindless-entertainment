@@ -35,7 +35,7 @@ public class SmartAI implements EnemyAI {
     public EnemyActionHandler respond(String input) {
         Random rand = new Random();
         if (this.enemyInfo.getHealth() < 30) {
-            int upper = 101;
+            int upper = 100;
             int int_random = rand.nextInt(upper);
             if (int_random < 70) {
                 return new EnemyPotionHandler(potion);
@@ -47,7 +47,7 @@ public class SmartAI implements EnemyAI {
                 return new EnemySkillHandler(enemyInfo.getSkill(rand.nextInt(enemyInfo.getSkills().size())));
             } else{
                 Random r = new Random();
-                int upperbound = 101;
+                int upperbound = 100;
                 int int_r = r.nextInt(upperbound);
                 if (int_r < this.attackChance) {
                     return new EnemySkillHandler(enemyInfo.getSkill(rand.nextInt(enemyInfo.getSkills().size())));
