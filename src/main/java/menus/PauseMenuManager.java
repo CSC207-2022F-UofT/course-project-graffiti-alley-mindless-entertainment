@@ -3,6 +3,8 @@ package menus;
 import interfaces.State;
 import core.StateManager;
 import menus.options.ChangeOptionsStateFactory;
+import switch_managers.SwitchEventMediatorProxy;
+import switch_managers.SwitchEventType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -62,6 +64,7 @@ public class PauseMenuManager extends StateManager {
                 //to be implemented later
                 return null;
             } else {
+                SwitchEventMediatorProxy.getInstance().store(SwitchEventType.RESUME);
                 return null;
             }
         } else {

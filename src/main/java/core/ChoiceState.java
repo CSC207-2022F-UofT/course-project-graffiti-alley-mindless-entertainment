@@ -2,6 +2,7 @@ package core;
 
 import io.InputValidator;
 import interfaces.State;
+import io.Output;
 
 import java.util.List;
 
@@ -21,9 +22,7 @@ public class ChoiceState implements State {
 
     public ChoiceState(List<String> choices, List<String> choiceDisplayText) {
         this.choices = choices;
-
-        //this algorithm can be changed depending on how the text should display
-        this.textToDisplay = String.join("\n", choiceDisplayText);
+        textToDisplay = String.join("\n", choiceDisplayText);
         inputValidator = new ChoiceInputValidator(choices);
 
     }
@@ -35,22 +34,21 @@ public class ChoiceState implements State {
     }
 
     /**
-     * @return whether the state is done and ready to move to the next state
+     * Executes when the state is not awaiting input
      */
     @Override
     public void preInput() {
-        //display using Output handler text
-        //OutputHandler.generateText(textToDisplay);
+        Output.getScreen().generateTextWithOptions(textToDisplay, choices);
         awaitingInput = true;
     }
 
     /**
      * @param input from the user
-     * @return whether the state is done and ready to move to the next state
+     * Executes when the state is awaiting input
+     * Nothing needs to be done. Manager will send the game to the next state.
      */
     @Override
     public void postInput(String input) {
-        //nothing needs to be done. Manager will send the game to the next state.
         isDone = true;
     }
 
