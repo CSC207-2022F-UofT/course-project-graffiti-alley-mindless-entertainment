@@ -20,7 +20,7 @@ public class WinBattleState implements State {
     private EnemyFighter foe;
     private boolean done = false;
 
-    public WinBattleState(Player user, EnemyFacade foe) {
+    public WinBattleState(Player user, EnemyFighter foe) {
         this.user = user;
         this.foe = foe;
     }
