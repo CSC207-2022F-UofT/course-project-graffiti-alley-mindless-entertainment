@@ -3,6 +3,8 @@ package switch_managers;
 
 /**
  * This is a proxy for the switchEventMediator.
+ * Could have been implemented by adding a switchEventMediator instance to every class that needed it
+ * However this is a lot of work, so this singleton was chosen instead.
  */
 public class SwitchEventMediatorProxy implements SwitchEventMediator {
 
