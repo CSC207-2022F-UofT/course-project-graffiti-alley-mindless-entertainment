@@ -2,11 +2,13 @@ package playercreation.factories;
 
 import interfaces.State;
 import playercreation.PlayerCreatorInteractor;
-import playercreation.PlayerQuestion;
-import playercreation.states.PlayerQuestionState;
+import playercreation.states.PlayerDescriptionState;
+import playercreation.states.PlayerNameState;
+import playercreation.states.PlayerSkillTypeState;
 
 /**
- * A factory class for creating new PlayerQuestionStates. Used to avoid dependencies in PlayerCreatorManager.
+ * A factory class for creating new questions for the user, including methods for creating new PlayerNameStates,
+ * PlayerDescriptionStates, and PlayerSkillTypeStates. Used to avoid dependencies in PlayerCreatorManager.
  */
 public class PlayerQuestionStateFactory {
     /**
@@ -15,19 +17,33 @@ public class PlayerQuestionStateFactory {
     private final PlayerCreatorInteractor interactor;
 
     /**
-     * Constructs a new PlayerQuestionState with an empty PlayerCreatorInteractor.
+     * Constructs a new PlayerQuestionStateFactory with an empty PlayerCreatorInteractor.
      */
     public PlayerQuestionStateFactory() {
         this.interactor = new PlayerCreatorInteractor();
     }
 
     /**
-     * Creates new PlayerQuestionStates based on input.
-     * @param currQuestion The current question being asked of the user.
-     * @return A new PlayerQuestionState with params currQuestion and this.interactor.
+     * Creates a new PlayerNameState.
+     * @return A new PlayerNameState with param this.interactor.
      */
-    public State createPlayerQuestionState(PlayerQuestion currQuestion) {
-        // Returns a new PlayerQuestionState utilizing currQuestion.
-        return new PlayerQuestionState(currQuestion, this.interactor);
+    public State createPlayerNameState() {
+        return new PlayerNameState(this.interactor);
+    }
+
+    /**
+     * Creates a new PlayerDescriptionState.
+     * @return A new PlayerDescriptionState with param this.interactor.
+     */
+    public State createPlayerDescriptionState() {
+        return new PlayerDescriptionState(this.interactor);
+    }
+
+    /**
+     * Creates a new PlayerSkillTypeState.
+     * @return A new PlayerSkillTypeState with param this.interactor.
+     */
+    public State createPlayerSkillTypeState() {
+        return new PlayerSkillTypeState(this.interactor);
     }
 }

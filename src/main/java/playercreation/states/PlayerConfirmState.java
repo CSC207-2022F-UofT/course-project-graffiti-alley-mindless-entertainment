@@ -4,8 +4,7 @@ import io.InputValidator;
 import interfaces.State;
 import io.Output;
 import io.OutputHandler;
-import playercreation.PlayerCreatorInputValidator;
-import playercreation.PlayerQuestion;
+import playercreation.input_validators.PlayerConfirmValidator;
 
 /**
  * A class for the user to either confirm or return to the previous question during Player creation at the start
@@ -15,12 +14,12 @@ public class PlayerConfirmState implements State {
     /**
      * awaitInput: A boolean describing if the state is awaiting input.
      * isDone: A boolean describing if the state is done running the postInput process.
-     * inputValidator: A PlayerCreatorInputValidator that is used to validate the user's input for confirming or
+     * inputValidator: A PlayerConfirmValidator that is used to validate the user's input for confirming or
      *                 returning to the previous question.
      */
     private boolean awaitInput;
     private boolean isDone;
-    private final PlayerCreatorInputValidator inputValidator;
+    private final PlayerConfirmValidator inputValidator;
 
     /**
      * Initializes a new PlayerConfirmState that has not been completed and is not awaiting input.
@@ -28,7 +27,7 @@ public class PlayerConfirmState implements State {
     public PlayerConfirmState() {
         this.awaitInput = false;
         this.isDone = false;
-        this.inputValidator = new PlayerCreatorInputValidator(PlayerQuestion.CONFIRM);
+        this.inputValidator = new PlayerConfirmValidator();
     }
 
     /**
@@ -70,7 +69,7 @@ public class PlayerConfirmState implements State {
     }
 
     /**
-     * @return The PlayerCreatorInputValidator of this PlayerConfirmState.
+     * @return The PlayerConfirmValidator of this PlayerConfirmState.
      */
     @Override
     public InputValidator getInputValidator() {

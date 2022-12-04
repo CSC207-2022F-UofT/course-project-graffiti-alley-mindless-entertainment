@@ -16,7 +16,8 @@ public class PlayerCreatorManager extends StateManager {
      *                     type PlayerQuestion.
      * currState: The current State saved in the PlayerCreatorManager.
      * completedQuestions: A counter of completed PlayerQuestions. Does not count completed CONFIRM questions.
-     * questionStateFactory: A PlayerQuestionStateFactory used to create new PlayerQuestionStates.
+     * questionStateFactory: A PlayerQuestionStateFactory used to create new questions for the user. Includes methods
+     *                       for creating new PlayerNameStates, PlayerDescriptionStates, and PlayerSkillTypeStates.
      * confirmStateFactory: A PlayerConfirmStateFactory used to create new PlayerConfirmStates.
      */
     private PlayerQuestion currPlayerQuestion;
@@ -40,7 +41,7 @@ public class PlayerCreatorManager extends StateManager {
     @Override
     public void initialize() {
         this.currPlayerQuestion = PlayerQuestion.NAME;
-        currState = questionStateFactory.createPlayerQuestionState(currPlayerQuestion);
+        currState = questionStateFactory.createPlayerNameState();
     }
 
     /**
@@ -94,13 +95,13 @@ public class PlayerCreatorManager extends StateManager {
                     return null;
                 }
                 else {
-                    // User has confirmed the choice, uses stateDecider to switch to the next PlayerQuestionState.
+                    // User has confirmed the choice, uses stateDecider to switch to the next question State.
                     return this.stateDecider();
                 }
             }
             else if (input.equals("return")) {
                 // User wishes to return to the previous question, uses stateDecider to switch to the previous
-                // PlayerQuestionState.
+                // question State.
                 this.completedQuestions -= 1;
                 return this.stateDecider();
             }
@@ -109,24 +110,24 @@ public class PlayerCreatorManager extends StateManager {
     }
 
     /**
-     * Helper method for nextState. Changes currPlayerQuestion in order to match the PlayerQuestionState.
-     * @return A PlayerQuestionState depending on completedQuestions. 0 = PlayerQuestion.NAME,
-     *         1 = PlayerQuestion.DESCRIPTION, 2 = PlayerQuestion.SKILLTYPE.
+     * Helper method for nextState. Changes currPlayerQuestion in order to match the currState.
+     * @return The State for the question to be asked of the user, which depending on completedQuestions.
+     *         0 = PlayerQuestion.NAME, 1 = PlayerQuestion.DESCRIPTION, 2 = PlayerQuestion.SKILLTYPE.
      */
     private State stateDecider() {
         if (this.completedQuestions == 0) {
             this.currPlayerQuestion = PlayerQuestion.NAME;
-            this.currState = this.questionStateFactory.createPlayerQuestionState(this.currPlayerQuestion);
+            this.currState = this.questionStateFactory.createPlayerNameState();
             return this.currState;
         }
         else if (this.completedQuestions == 1) {
             this.currPlayerQuestion = PlayerQuestion.DESCRIPTION;
-            this.currState = this.questionStateFactory.createPlayerQuestionState(this.currPlayerQuestion);
+            this.currState = this.questionStateFactory.createPlayerDescriptionState();
             return this.currState;
         }
         else if (this.completedQuestions == 2) {
             this.currPlayerQuestion = PlayerQuestion.SKILLTYPE;
-            this.currState = this.questionStateFactory.createPlayerQuestionState(this.currPlayerQuestion);
+            this.currState = this.questionStateFactory.createPlayerSkillTypeState();
             return this.currState;
         }
         return null;
