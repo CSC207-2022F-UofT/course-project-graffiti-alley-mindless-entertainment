@@ -50,24 +50,15 @@ public class EnemyFactory {
      * @param name of the enemy to create
      * @return instance of enemy
      */
-    public EnemyFacade createEnemy(String name){
-        return new EnemyFacade(name, getEnemyInfo(getEnemyData(name)), getEnemyAI(getEnemyData(name),
-                getEnemyInfo(getEnemyData(name))));
-    }
-
-    /**
-     * This method returns the boss instance using the information given by database
-     * @param name of the enemy to create
-     * @return instance of boss
-     */
-    public BossFacade createBoss(String name){
+    public EnemyFighter createEnemy(String name) {
         EnemyData enemyData = getEnemyData(name);
         EnemyInfo enemyInfo = getEnemyInfo(getEnemyData(name));
-        return new BossFacade(name, enemyInfo, getEnemyAI(getEnemyData(name),
-                getEnemyInfo(getEnemyData(name))), translateGimmick(enemyData.gimmick, enemyInfo));
-
-
-
+        if (!(enemyData.gimmick == null)) {
+            return new BossFacade(name, enemyInfo, getEnemyAI(getEnemyData(name),
+                    getEnemyInfo(getEnemyData(name))), translateGimmick(enemyData.gimmick, enemyInfo));
+        }
+        return new EnemyFacade(name, getEnemyInfo(getEnemyData(name)), getEnemyAI(getEnemyData(name),
+                getEnemyInfo(getEnemyData(name))));
     }
 
     /**

@@ -2,6 +2,7 @@ package objects.character;
 
 import objects.battle.SkillType;
 import objects.battle.Skill;
+import objects.inventory.Inventory;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ public class Player extends Character {
      * speed: The speed of the Player. A higher int corresponds to a higher priority in a battle.
      * money: The amount of money the Player owns.
      * skillList: A List of Skills of the Player.
-     * inventory: An Inventory of the Player. Awaiting Inventory implementation.
+     * inventory: An Inventory of the player.
      */
     private String name;
     private String description;
@@ -29,11 +30,12 @@ public class Player extends Character {
     private int maxHealth;
     private int armor;
     private int experience;
-    private int level;
     private SkillType skillType;
     private int speed;
     private int money;
     private final ArrayList<Skill> skillList;
+    public static int level = 0;
+    public static Inventory inventory = new Inventory();
 
     public Player(String name, SkillType skillType) {
         // Initializes a new Player character with name and skillType, an empty description, 100 currHealth,
@@ -45,7 +47,6 @@ public class Player extends Character {
         this.maxHealth = 100;
         this.armor = 0;
         this.experience = 0;
-        this.level = 0;
         this.speed = 100;
         this.money = 20;
         this.skillList = new ArrayList<>();
@@ -133,20 +134,20 @@ public class Player extends Character {
         }
     }
 
-    public int getLevel() {
+    public static int getLevel() {
         // Return the level of the Player.
-        return this.level;
+        return level;
     }
 
     public void changeLevel(int changeBy) {
         // Change the Player's level by changeBy. Level cannot be negative, so decreasing level to make it negative
         // sets level to 0.
-        int newLevel = this.level + changeBy;
+        int newLevel = level + changeBy;
         if (newLevel < 0) {
-            this.level = 0;
+            level = 0;
         }
         else {
-            this.level += changeBy;
+            level += changeBy;
         }
     }
 
@@ -202,4 +203,7 @@ public class Player extends Character {
         this.skillList.remove(toRemove);
     }
 
+    public static Inventory getInventory(){
+        return inventory;
+    }
 }
