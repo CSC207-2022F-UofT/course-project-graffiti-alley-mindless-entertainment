@@ -2,6 +2,7 @@ package battlestates.states;
 
 import interfaces.State;
 import io.InputValidator;
+import objects.battle.StatDisplayer;
 import objects.battle.enemy.ai.EnemyActionHandler;
 import objects.character.EnemyFacade;
 import objects.character.Player;
@@ -23,27 +24,9 @@ public class EnemyTurnState implements State {
 
         action.useAction(foe, user);
 
-//        String action = foe.enemyAction(this.userAction);
-//        PlayerSkillHandler playerSkillHandler = new PlayerSkillHandler();
-//
-//        // If the EnemyFacade uses a skill
-//        if (action.equals("use skill")) {
-//            int max = foe.getSkills().size() - 1;
-//            int min = 0;
-//            int skillIndex = (int) Math.floor(Math.random()*(max-min+1)+min);
-//
-//            // Outputs and uses the chosen skill
-//            Skill chosenSkill = foe.getSkill(skillIndex);
-//            OutputHandlerImpl.getScreen().generateText(foe.getName() + " used " + chosenSkill.getName() +
-//                    " to do " + playerSkillHandler.useSkill(chosenSkill, user, foe) + " damage!");
-//        }
-//        // TEMPORARY SOLUTION: Just heal flat amount of 20
-//        if (action.equals("use potion")) {
-//            int hpIncrease = 20;
-//            foe.changeHealth(hpIncrease);
-//            OutputHandlerImpl.getScreen().generateText(foe.getName() + " used a potion to heal " +
-//                    hpIncrease + " health!");
-//        }
+        StatDisplayer statDisplayer = new StatDisplayer();
+        statDisplayer.displayStats(foe);
+        statDisplayer.displayStats(user);
 
         foe.changeSpeed(-20); // Speed tax per turn
         this.done = true;

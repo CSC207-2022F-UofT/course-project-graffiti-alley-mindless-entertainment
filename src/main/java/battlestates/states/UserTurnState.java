@@ -7,6 +7,7 @@ import io.Output;
 import io.OutputHandler;
 import objects.battle.Skill;
 import objects.battle.PlayerSkillHandler;
+import objects.battle.StatDisplayer;
 import objects.battle.enemy.SkillHelper;
 import objects.character.EnemyFacade;
 import objects.character.Player;
@@ -60,13 +61,13 @@ public class UserTurnState implements State {
                 break;
             case 2:
                 output.generateText("Inventory not implemented yet, try again.");
+                questionNum = 0;
 //            output.generateTextWithOptions("Pick an item", user.getInventory()); // No inventory yet
                 break;
             case 3:
                 output.generateText("Not implemented yet, try again.");
                 break;
         }
-        output.generateText("PRE TRIGGERED");
         awaitingInp = true;
     }
 
@@ -95,16 +96,9 @@ public class UserTurnState implements State {
                     questionNum = 2;
                 }
                 if (cleanInput.equals("stats")) {
-                    String foeStats = "Name: " + foe.getName() +
-                            " | HP: " + foe.getHealth() +
-                            " | Speed: " + foe.getSpeed() +
-                            " | Type: " + foe.getType();
-                    String userStats = "Name: " + user.getName() +
-                            " | HP: " + user.getCurrHealth() +
-                            " | Speed: " + user.getSpeed() +
-                            " | Type: " + user.getSkillType();
-                    output.generateText("[ENEMY STATS] " + foeStats + "\n" +
-                            "[PLAYER STATS] " + userStats + "\n");
+                    StatDisplayer statDisplayer = new StatDisplayer();
+                    statDisplayer.displayStats(foe);
+                    statDisplayer.displayStats(user);
                 }
                 break;
             case 1:
@@ -115,21 +109,16 @@ public class UserTurnState implements State {
 
                 SkillHelper skillHelper = new SkillHelper();
                 Skill chosenSkill = skillHelper.findSkill(cleanInput, user.getSkillList());
+                PlayerSkillHandler skillHandler = new PlayerSkillHandler();
+                int damage = skillHandler.useSkill(chosenSkill, foe, user);
 
-                if (chosenSkill == null) {
-                    output.generateText("That skill doesn't exist, please enter a valid skill.");
-                } else {
-                    PlayerSkillHandler skillHandler = new PlayerSkillHandler();
-                    int damage = skillHandler.useSkill(chosenSkill, foe, user);
+                // Outputs and uses the chosen skill.
+                output.generateText(chosenSkill.getName() + " did " + damage + " damage!");
 
-                    // Outputs and uses the chosen skill.
-                    output.generateText(chosenSkill.getName() + " did " + damage + " damage!");
+                // Each turn takes 20 speed, preventing too many turns.
+                user.changeSpeed(-20);
 
-                    // Each turn takes 20 speed, preventing too many turns.
-                    user.changeSpeed(-20);
-
-                    this.done = true;
-                }
+                this.done = true;
                 break;
             case 2:
                 questionNum = 0; // TEMP until inventory implementation

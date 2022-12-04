@@ -24,11 +24,11 @@ public class BattleStateManager extends StateManager {
     private Player user;
     private EnemyFacade foe;
     private boolean awaitingInput = false;
+    private final OutputHandler output = Output.getScreen();
 
     public BattleStateManager(Player user) {
         this.user = user;
         initialize();
-//        OutputHandler output = Output.getScreen();
     }
 
     /**
@@ -55,8 +55,10 @@ public class BattleStateManager extends StateManager {
         // Normal battle turn ordering, characters can get multiple turns in a row if high enough speed.
         else {
             if (userNext) {
+                output.generateText("You outsped the enemy. What would you like to do?");
                 chosenState = new UserTurnState(user, foe);
             } else {
+                output.generateText(foe.getName() + " outsped you!");
                 chosenState = new EnemyTurnState(user, foe, input);
             }
             awaitingInput = chosenState.awaitInput();
@@ -97,9 +99,8 @@ public class BattleStateManager extends StateManager {
         EnemyFactory enemyFactory = new EnemyFactory();
         this.foe = enemyFactory.createEnemy("goblin"); // TEMP, later decide which enemy
 
-        OutputHandler output = Output.getScreen();
-        output.generateText(Boolean.toString(user.addSkill(new Skill("fireball", 20, 10, SkillType.FIRE))));
-        output.generateText(Boolean.toString(user.addSkill(new Skill("waterball", 20, 10, SkillType.WATER))));
+        user.addSkill(new Skill("fireball", 20, 10, SkillType.FIRE));
+        user.addSkill(new Skill("waterball", 20, 10, SkillType.WATER));
 
         currState = nextState("");
     }

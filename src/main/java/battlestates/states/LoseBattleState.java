@@ -5,7 +5,6 @@ import interfaces.State;
 import io.InputValidator;
 import io.Output;
 import io.OutputHandler;
-import io.OutputHandlerImpl;
 import objects.character.EnemyFacade;
 import objects.character.Player;
 
@@ -25,6 +24,8 @@ public class LoseBattleState implements State {
     private boolean done = false;
     private boolean awaitingInput = false;
     private InputValidator validator;
+    private final OutputHandler output = Output.getScreen();
+
 
     public LoseBattleState(Player user, EnemyFacade foe) {
         this.user = user;
@@ -36,7 +37,6 @@ public class LoseBattleState implements State {
      */
     @Override
     public void preInput() {
-        OutputHandler output = Output.getScreen();
         String displayText = "You lost the battle. How would you like to proceed?";
         List<String> loseOptions = new ArrayList<>(); // TEMPORARY options
         loseOptions.add("Cheat and heal to full");
@@ -48,22 +48,28 @@ public class LoseBattleState implements State {
     }
 
     /**
-     * Decides which route to go depending on what the user chooses when they lost.
+     * Decides which route to go depending on what the user chooses
      * @param input from the user
      * Executes after state awaited input
      */
     @Override
     public void postInput(String input) {
         String cleanInput = validator.parseAndValidate(input);
+
         switch(cleanInput) {
-            case "A": // TEMP, continue the battle with full health
+            case "cheat and heal to full": // TEMP, continue the battle with full health
                 this.user.changeCurrHealth(user.getMaxHealth());
-            case "B": // TEMP, pretending to win
+                this.done = true;
+                break;
+            case "pretend you won": // TEMP, pretending to win
                 this.user.changeCurrHealth(1);
                 this.foe.setHealth(0);
+                this.done = true;
+                break;
+            default:
+                output.generateText("Please enter a valid input.");
         }
-        user.changeSpeed(100 - user.getSpeed());
-        this.done = true;
+        user.changeSpeed(100-user.getSpeed());
     }
     @Override
     public boolean awaitInput() {
