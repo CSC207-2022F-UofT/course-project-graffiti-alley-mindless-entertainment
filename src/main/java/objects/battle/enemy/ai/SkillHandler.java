@@ -6,10 +6,10 @@ import objects.battle.SkillType;
 public class SkillHandler {
 
     /**
-     * This method calculates the damage of the skill to the opponent.
+     * This method calculates the damage to the opponent.
      * @param skill: skill that is used
      * @param type : type of the character that is attacked
-     * @return the damage of the skill to a character with type in int
+     * @return the damage to a character with type in int
      */
     protected int calculateDamage(Skill skill, SkillType type) {
         if (hasTypeAdv(skill.getType(), type)) {
