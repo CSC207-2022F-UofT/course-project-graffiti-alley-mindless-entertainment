@@ -1,6 +1,5 @@
 package objects.battle.enemy.factory;
 
-import database.managers.EnemyDataManager;
 import database.managers.SkillDataManager;
 import database.objects.EnemyData;
 import database.objects.SkillData;
@@ -13,11 +12,9 @@ import java.util.ArrayList;
 
 public class EnemyInfoFactory {
 
-    private final EnemyDataManager enemyDataManager;
     private final SkillDataManager skillDataManager;
 
-    public EnemyInfoFactory(EnemyDataManager enemyDataManager, SkillDataManager skillDataManager){
-        this.enemyDataManager = enemyDataManager;
+    public EnemyInfoFactory(SkillDataManager skillDataManager){
         this.skillDataManager = skillDataManager;
     }
     /**
