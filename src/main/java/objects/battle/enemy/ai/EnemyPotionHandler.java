@@ -2,8 +2,6 @@ package objects.battle.enemy.ai;
 
 import io.Output;
 import io.OutputHandler;
-import objects.character.BossFacade;
-import objects.character.EnemyFacade;
 import objects.character.EnemyFighter;
 import objects.character.Player;
 
@@ -12,7 +10,7 @@ public class EnemyPotionHandler implements EnemyActionHandler{
      * This class is EnemyPotionHandler which handles the EnemyPotion. This is
      * a use case of EnemyPotion. It has useAction which uses the potion for the given enemy
      */
-    private EnemyPotion enemyPotion;
+    private final EnemyPotion enemyPotion;
 
 
     /**

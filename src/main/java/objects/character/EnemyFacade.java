@@ -15,8 +15,8 @@ import java.util.ArrayList;
 public class EnemyFacade extends Character implements EnemyFighter{
 
 
-    public EnemyInfo enemyInfo;
-    private EnemyAI enemyAI;
+    private final EnemyInfo enemyInfo;
+    private final EnemyAI enemyAI;
 
     /**
      * This is a constructor of the enemy.

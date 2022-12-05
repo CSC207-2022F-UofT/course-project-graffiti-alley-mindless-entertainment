@@ -9,7 +9,7 @@ import objects.battle.enemy.ai.*;
  */
 public class BossFacade extends EnemyFacade implements EnemyFighter{
 
-    private GimmickStrategy gimmick;
+    private final GimmickStrategy gimmick;
 
     /**
      * This is a constructor of the boss

@@ -9,7 +9,7 @@ public class StatGimmickStrategy implements GimmickStrategy{
     /** This class is the Gimmick use case that uses gimmick.
      * Attribute: gimmick that has been used
      */
-    private StatGimmickEntity gimmick;
+    private final StatGimmickEntity gimmick;
 
     /** This is the constructor of the UseGimmick class that takes gimmick as a parameter
      * @param gimmick: gimmick that has been used
@@ -19,7 +19,7 @@ public class StatGimmickStrategy implements GimmickStrategy{
     }
 
     /** This is a method that actually use the gimmick that is given in the constructor.
-     * @return boolean: if return true if the gimmick is successfully used.
+     *
      */
     public void useGimmick(){
         if(!this.gimmick.getUsedGimmick() && gimmick.getEnemyInfo().getHealth() <= gimmick.getTriggerHealth()){

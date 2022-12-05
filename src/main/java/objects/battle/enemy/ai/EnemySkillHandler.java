@@ -3,8 +3,6 @@ package objects.battle.enemy.ai;
 import io.Output;
 import io.OutputHandler;
 import objects.battle.Skill;
-import objects.character.BossFacade;
-import objects.character.EnemyFacade;
 import objects.character.EnemyFighter;
 import objects.character.Player;
 
@@ -26,7 +24,7 @@ public class EnemySkillHandler extends SkillHandler implements EnemyActionHandle
         this.skill = skill;
     }
     /**
-     * This method calculates the damage of the skill to the user and
+     * This method calculates the damage to the user and
      * updates the stats
      * @param enemy: enemy that is attacking
      * @param player : player that is attacked
