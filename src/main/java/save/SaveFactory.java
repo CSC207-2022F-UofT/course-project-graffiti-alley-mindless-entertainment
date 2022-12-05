@@ -1,22 +1,26 @@
 package save;
 
-import core.SaveableEntity;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import java.util.ArrayList;
+public class SaveFactory {
 
-
-public abstract class SaveFactory {
-    ArrayList<SaveableEntity> entities;
-    ArrayList<Save> saves;
-    SaveLoader loader = new SaveLoader();
-    SaveCreator creator = new SaveCreator();
-
-    public void loadFromSlot(int slot) {
-        loader.loadSave(saves.get(slot), entities);
-    }
-
-    public void saveAtSlot() {
-        saves.add(creator.createSave(entities));
+    /**
+     * @param entities the list of Saveable entities
+     * @return a Save created
+     */
+    public Save createSave(List<SaveableEntity> entities) {
+        Map<Id, SaveableEntity> dataToSave = new HashMap<Id, SaveableEntity>();
+        int size = entities.size();
+        int i = 0;
+        for (Id id : Id.values()) {
+            dataToSave.put(id, entities.get(i ++));
+            if (i == size) {
+                break;
+            }
+        }
+        return new Save(dataToSave);
     }
 }
-

@@ -1,7 +1,5 @@
 package save;
 
-import core.SaveableEntity;
-
 import java.util.List;
 
 public class SaveLoader {
