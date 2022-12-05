@@ -7,27 +7,35 @@ import main_menu.states.MainMenuState;
 import main_menu.states.NewGameState;
 import main_menu.states.QuitState;
 
+/** A factory class for creating new States from main_menu.states. Used to avoid dependencies in MainMenuManager.
+ */
 public class MainMenuFactory {
-    /** A factory class for creating new States from main_menu.states. Used to avoid dependencies in MainMenuManager.
-     */
 
+    /**
+     * @return A new MainMenuState.
+     */
     public State createMainMenuState() {
-        // Returns a new MainMenuState.
         return new MainMenuState();
     }
 
+    /**
+     * @return A new LoadGameState.
+     */
     public State createLoadGameState() {
-        // Returns a new LoadGameState.
         return new LoadGameState();
     }
 
+    /**
+     * @return A new NewGameState.
+     */
     public State createNewGameState() {
-        // Returns a new NewGameState.
         return new NewGameState();
     }
 
+    /**
+     * @return A new QuitState.
+     */
     public State createQuitState() {
-        // Returns a new QuitState.
         return new QuitState();
     }
 }

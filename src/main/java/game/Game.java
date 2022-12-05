@@ -11,12 +11,10 @@ import io.InputHandlerImpl;
 import menus.PauseMenuChoiceStateFactory;
 import menus.PauseMenuManager;
 import menus.options.ChangeOptionsStateFactory;
-import playercreation.PlayerCreatorManager;
 import switch_managers.SwitchEventMediator;
 import switch_managers.SwitchEventMediatorProxy;
 import switch_managers.handlers.MainMenuEventHandler;
 import switch_managers.handlers.PauseResumeEventHandler;
-import switch_managers.handlers.PlayerCreatorEventHandler;
 import switch_managers.handlers.StartGameEventHandler;
 
 public class Game {
@@ -37,8 +35,7 @@ public class Game {
     }
 
     private StateManager getStartingManager() {
-        //should change to a mainMenuManager when one gets created
-        return new PlayerCreatorManager();
+        return new MainMenuManager();
     }
 
     /**
@@ -63,10 +60,6 @@ public class Game {
         MainMenuManager mainMenuManager = new MainMenuManager();
         MainMenuEventHandler mainMenuEventHandler = new MainMenuEventHandler(mainMenuManager);
         managerController.addSwitchEventHandler(mainMenuEventHandler);
-
-        PlayerCreatorManager playerCreatorManager = new PlayerCreatorManager();
-        PlayerCreatorEventHandler playerCreatorEventHandler = new PlayerCreatorEventHandler(playerCreatorManager);
-        managerController.addSwitchEventHandler(playerCreatorEventHandler);
 
         return managerController;
     }

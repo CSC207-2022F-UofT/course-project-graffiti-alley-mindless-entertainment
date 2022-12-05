@@ -6,21 +6,31 @@ import playercreation.PlayerCreatorManager;
 import switch_managers.SwitchEventHandler;
 import switch_managers.SwitchEventType;
 
+/**
+ * SwitchEventHandler for the main menu. Aids Shell in switching StateManagers while the main menu is running.
+ */
 public class MainMenuEventHandler implements SwitchEventHandler {
-    /** SwitchEventHandler for the main menu. Aids Shell in switching StateManagers while the main menu is running.
-     * Attributes:
+    /**
      * mainMenuManager: A MainMenuManager.
      */
     private final MainMenuManager mainMenuManager;
 
+    /**
+     * Initializes a new MainMenuEventHandler with mainMenuManager.
+     * @param mainMenuManager The MainMenuManager of this MainMenuEventHandler.
+     */
     public MainMenuEventHandler(MainMenuManager mainMenuManager) {
-        // Initializes a new MainMenuEventHandler with mainMenuManager.
         this.mainMenuManager = mainMenuManager;
     }
 
+    /**
+     * Gives the next StateManager to Shell based on user inputs.
+     * @param eventType The switch event to handle.
+     * @param currManager The current manager.
+     * @return A StateManager based on the eventType inputted. Returns null if the eventType cannot be handled.
+     */
     @Override
     public StateManager handleSwitchEvent(SwitchEventType eventType, StateManager currManager) {
-        // Returns a StateManager based on the eventType inputted. Returns null if the eventType cannot be handled.
         switch (eventType) {
             case NEW_GAME:
                 return new PlayerCreatorManager();

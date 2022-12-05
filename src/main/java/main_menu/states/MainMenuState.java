@@ -7,10 +7,12 @@ import io.OutputHandler;
 import main_menu.MainMenuInputValidator;
 import main_menu.MainMenuOptions;
 
+/**
+ * The default State of the main menu. Gives the user options to start a new game, load saved games, enter the
+ * options, or quit the game.
+ */
 public class MainMenuState implements State {
-    /** The default State of the main menu. Gives the user options to start a new game, load saved games, enter the
-     * options, or quit the game.
-     * Attributes:
+    /**
      * awaitInput: A boolean describing if the state is awaiting input.
      * isDone: A boolean describing if the state is done running the postInput process.
      * inputValidator: A MainMenuInputValidator that is used to validate the input from the user.
@@ -19,16 +21,20 @@ public class MainMenuState implements State {
     private boolean isDone;
     private final MainMenuInputValidator inputValidator;
 
+    /**
+     * Initializes a new MainMenuState.
+     */
     public MainMenuState() {
-        // Initializes a new MainMenuState.
         this.awaitInput = false;
         this.isDone = false;
         this.inputValidator = new MainMenuInputValidator(MainMenuOptions.MAINMENU);
     }
 
+    /**
+     * Uses OutputHandler to set up the main menu and give options to the user.
+     */
     @Override
     public void preInput() {
-        // Uses OutputHandler to set up the main menu and give options to the user.
         this.awaitInput = true;
         OutputHandler output = Output.getScreen();
         output.generateText("PACT: A Text-Based Adventure Game");
@@ -38,23 +44,36 @@ public class MainMenuState implements State {
         output.generateText("Type 'quit' if you would like to quit the game.");
     }
 
+    /**
+     * Assumes input has already been parsed and validated.
+     * @param input From the user.
+     * Executes when the state is awaiting input.
+     */
     @Override
     public void postInput(String input) {
-        // Assumes input has already been parsed and validated.
         this.awaitInput = false;
         this.isDone = true;
     }
 
+    /**
+     * @return Boolean awaitInput.
+     */
     @Override
     public boolean awaitInput() {
         return this.awaitInput;
     }
 
+    /**
+     * @return Boolean isDone.
+     */
     @Override
     public boolean isDone() {
         return this.isDone;
     }
 
+    /**
+     * @return The MainMenuInputValidator of this MainMenuState.
+     */
     @Override
     public InputValidator getInputValidator() {
         return this.inputValidator;
