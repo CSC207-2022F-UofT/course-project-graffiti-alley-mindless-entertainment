@@ -7,13 +7,13 @@ import java.util.Map;
 public class SaveFactory {
 
     /**
-     * @param entities the list of Saveable entities
+     * @param entities the list of Savable entities
      * @return a Save created
      */
-    public Save createSave(List<SaveableEntity> entities) {
+    public Save createSave(List<SavableEntity> entities) {
         Map<SaveEntityId, String> dataToSave = new HashMap<SaveEntityId, String>();
-        for (SaveableEntity e : entities) {
-            dataToSave.put(e.getId(), e.toString());
+        for (SavableEntity e : entities) {
+            dataToSave.put(e.getId(), e.toSavableString());
         }
         return new Save(dataToSave);
     }

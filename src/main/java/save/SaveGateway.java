@@ -5,10 +5,10 @@ import java.util.List;
 public interface SaveGateway {
 
     /**
-     * @param s the save to be saved
-     * saves s into file
+     * @param saves the saves to be saved
+     * saves saves into file
      */
-    public void storeSaves(List<Save> s);
+    public void storeSaves(List<Save> saves);
 
     /**
      * @return the save

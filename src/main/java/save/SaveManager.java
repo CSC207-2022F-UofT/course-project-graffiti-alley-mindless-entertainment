@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 public class SaveManager {
-    ArrayList<SaveableEntity> entities;
+    ArrayList<SavableEntity> entities;
     ArrayList<Save> saves;
     SaveLoader loader;
     SaveFactory creator;
