@@ -47,6 +47,7 @@ public class Shell {
 
             if (switchEventMediator.ready()) {
                 switchManager();
+                continue;
             }
 
             //!!! everything below need to be worked on!
@@ -89,6 +90,10 @@ public class Shell {
     private void switchManager() {
         // !!! get switch event somehow - maybe through a mediator?
         SwitchEventType switchEventType = switchEventMediator.retrieve();
+        if (switchEventType == SwitchEventType.END_GAME) {
+            exitGame();
+        }
+
         this.currentManager = managerController.switchManagers(switchEventType, currentManager);
         if (currentManager.isDone()) {
             currentManager.initialize();
