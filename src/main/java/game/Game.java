@@ -3,6 +3,7 @@ package game;
 import game_world.managers.AreaManager;
 import game_world.managers.EventManager;
 import main_menu.MainMenuManager;
+import playercreation.PlayerCreatorManager;
 import switch_managers.ManagerControllerImpl;
 import core.StateManager;
 import switch_managers.ManagerController;
@@ -58,7 +59,8 @@ public class Game {
         managerController.addSwitchEventHandler(startGameEventHandler);
 
         MainMenuManager mainMenuManager = new MainMenuManager();
-        MainMenuEventHandler mainMenuEventHandler = new MainMenuEventHandler(mainMenuManager);
+        PlayerCreatorManager playerCreatorManager = new PlayerCreatorManager();
+        MainMenuEventHandler mainMenuEventHandler = new MainMenuEventHandler(mainMenuManager, playerCreatorManager);
         managerController.addSwitchEventHandler(mainMenuEventHandler);
 
         return managerController;
