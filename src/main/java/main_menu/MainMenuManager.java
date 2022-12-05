@@ -16,7 +16,6 @@ public class MainMenuManager extends StateManager {
      * currStateEnum: Keeps track of the current state of the main menu using the MainMenuOptions enum.
      * menuFactory: The MainMenuFactory. Used to create new States for the main menu while switching States.
      */
-    private State currState;
     private MainMenuOptions currStateEnum;
     private final MainMenuFactory menuFactory;
 
@@ -95,7 +94,7 @@ public class MainMenuManager extends StateManager {
      */
     @Override
     public void initialize() {
-        this.currState = this.menuFactory.createMainMenuState();
+        currState = this.menuFactory.createMainMenuState();
         this.currStateEnum = MainMenuOptions.MAINMENU;
     }
 }

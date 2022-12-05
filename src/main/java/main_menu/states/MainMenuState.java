@@ -37,11 +37,11 @@ public class MainMenuState implements State {
     public void preInput() {
         this.awaitInput = true;
         OutputHandler output = Output.getScreen();
-        output.generateText("PACT: A Text-Based Adventure Game");
-        output.generateText("Welcome to the world of PACT! You are currently at the main menu.");
-        output.generateText("Type 'new' if you would like to start a new game.");
-        output.generateText("Type 'load' if you would like to load a previous game.");
-        output.generateText("Type 'quit' if you would like to quit the game.");
+        output.generateText("PACT: A Text-Based Adventure Game" + "\n" +
+                "Welcome to the world of PACT! You are currently at the main menu." + "\n" +
+                "Type 'new' if you would like to start a new game." + "\n" +
+                "Type 'load' if you would like to load a previous game." + "\n" +
+                "Type 'quit' if you would like to quit the game.");
     }
 
     /**

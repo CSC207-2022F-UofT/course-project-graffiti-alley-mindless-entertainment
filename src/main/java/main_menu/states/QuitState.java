@@ -37,9 +37,8 @@ public class QuitState implements State {
     public void preInput() {
         this.awaitInput = true;
         OutputHandler output = Output.getScreen();
-        output.generateText("Are you sure you would like to quit the game?");
-        output.generateText("Type 'quit' to close the game.");
-        output.generateText("Type 'return' to return to the main menu.");
+        output.generateText("Are you sure you would like to quit the game?" + "\n" + "Type 'quit' to close the game." +
+                "\n" + "Type 'return' to return to the main menu.");
     }
 
     /**

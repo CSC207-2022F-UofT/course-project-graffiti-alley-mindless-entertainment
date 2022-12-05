@@ -12,6 +12,10 @@ import main_menu.states.QuitState;
 public class MainMenuFactory {
 
     /**
+     * Initializes a new MainMenuFactory
+     */
+    public MainMenuFactory() {}
+    /**
      * @return A new MainMenuState.
      */
     public State createMainMenuState() {

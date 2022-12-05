@@ -36,9 +36,9 @@ public class NewGameState implements State {
     public void preInput() {
         this.awaitInput = true;
         OutputHandler output = Output.getScreen();
-        output.generateText("Are you sure you would like to start a new game?");
-        output.generateText("Type 'start' if you would like to start a new game.");
-        output.generateText("Type 'return' if you would like to return to the main menu.");
+        output.generateText("Are you sure you would like to start a new game?" + "\n" +
+                "Type 'start' if you would like to start a new game." + "\n" +
+                "Type 'return' if you would like to return to the main menu.");
     }
 
     /**
