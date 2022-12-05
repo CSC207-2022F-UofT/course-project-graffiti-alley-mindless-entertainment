@@ -8,4 +8,6 @@ import core.StateManager;
  */
 public interface ManagerController {
     StateManager switchManagers(SwitchEventType type, StateManager currManager);
+    void initializeAll();
+    void addManager(StateManager manager);
 }
