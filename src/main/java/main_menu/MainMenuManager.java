@@ -70,7 +70,10 @@ public class MainMenuManager extends StateManager {
                 this.currStateEnum = MainMenuOptions.MAINMENU;
                 return this.currState;
             }
-
+        }
+        else if (input.equalsIgnoreCase("exit")) {
+            SwitchEventMediator mediator = SwitchEventMediatorProxy.getInstance();
+            mediator.store(SwitchEventType.END_GAME);
         }
         return null;
     }
