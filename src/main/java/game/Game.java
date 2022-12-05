@@ -70,7 +70,7 @@ public class Game {
         MainMenuManager mainMenuManager = new MainMenuManager();
         PlayerCreatorManager playerCreatorManager = new PlayerCreatorManager();
         MainMenuEventHandler mainMenuEventHandler = new MainMenuEventHandler(mainMenuManager, playerCreatorManager);
-        managerController.addSwitchEventHandler(mainMenuEventHandler);
+        switchEventManager.addSwitchEventHandler(mainMenuEventHandler);
 
         return managerController;
     }
