@@ -17,6 +17,6 @@ public interface SaveableEntity {
     /**
      * @return the id of this entity in the saved entities list
      */
-    public Id getId();
+    public SaveEntityId getId();
 }
 

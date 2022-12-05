@@ -3,9 +3,9 @@ package save;
 import java.util.Map;
 
 public class Save {
-    Map<Id, SaveableEntity> savedData;
+    Map<SaveEntityId, String> savedData;
 
-    public Save(Map<Id, SaveableEntity> dataToSave) {
+    public Save(Map<SaveEntityId, String> dataToSave) {
         savedData = dataToSave;
     }
 
@@ -13,8 +13,8 @@ public class Save {
      * @param id id of an object to be saved
      * @return the corresponding string representation
      */
-    public String getFromId(Id id) {
-        return savedData.get(id).toString();
+    public String getFromId(SaveEntityId id) {
+        return savedData.get(id);
     }
 }
 
