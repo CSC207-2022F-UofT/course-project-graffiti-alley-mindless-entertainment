@@ -41,7 +41,7 @@ public class PauseMenuManager extends StateManager {
         this.changeOptionsStateFactory = changeOptionsStateFactory;
         this.optionsCommand = "options";
         this.saveCommand = "save";
-        this.exitCommand = "quit";
+        this.exitCommand = "return";
         this.pauseMenuOptions = Arrays.asList(optionsCommand, saveCommand, exitCommand);
 
         initialize();
