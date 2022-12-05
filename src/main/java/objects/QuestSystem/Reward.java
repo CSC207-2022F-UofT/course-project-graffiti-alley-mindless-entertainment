@@ -1,4 +1,4 @@
-package quests;
+package objects.QuestSystem;
 
 import objects.character.Player;
 
@@ -9,5 +9,5 @@ public abstract class Reward {
     /**
      * Distributes the reward to the receiving player. Will be defined depending on the more specific type of reward.
      */
-    public abstract void distribute(Player receiver);
+    protected abstract void distribute(Player receiver);
 }

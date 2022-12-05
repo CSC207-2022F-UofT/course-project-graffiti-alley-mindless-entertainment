@@ -1,4 +1,4 @@
-package quests;
+package objects.QuestSystem;
 
 import objects.character.Player;
 
@@ -12,7 +12,7 @@ public abstract class Task {
     // Stores the name of the task.
     protected String name;
     // Stores whether the task has been completed.
-    protected boolean isCompleted;
+     protected boolean isCompleted;
 
     /**
      * Constructor.
@@ -23,7 +23,21 @@ public abstract class Task {
     }
 
     /**
-     * @return whether the task is completed or not.
+     * Returns the name of the task.
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    /**
+     * Sets the name of the task.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Returns whether the task is completed or not.
      */
     public boolean isCompleted() {
         return isCompleted;
@@ -31,7 +45,7 @@ public abstract class Task {
 
     /**
      * Completes the task.
-     * @return true if the task has been completed properly. Returns false otherwise.
+     * Returns true if the task has been completed properly. Returns false otherwise.
      */
     public abstract boolean isCompleted(Player assignee);
 }
