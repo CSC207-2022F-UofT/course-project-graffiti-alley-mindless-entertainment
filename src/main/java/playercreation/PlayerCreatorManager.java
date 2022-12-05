@@ -48,7 +48,6 @@ public class PlayerCreatorManager extends StateManager {
      * @return The current PlayerQuestion being asked of the user.
      */
     public PlayerQuestion getCurrPlayerQuestion() {
-        // Return the current PlayerQuestion.
         return this.currPlayerQuestion;
     }
 

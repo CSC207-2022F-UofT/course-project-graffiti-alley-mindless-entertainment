@@ -20,12 +20,14 @@ public class Shell {
 
     private final SwitchEventMediator switchEventMediator;
     private boolean running;
+    private boolean saveLoaded;
 
     public Shell(InputHandler inputHandler, ManagerController managerController, StateManager startingManager, SwitchEventMediator switchEventMediator) {
         this.inputHandler = inputHandler;
         this.managerController = managerController;
         this.currentManager = startingManager;
         this.switchEventMediator = switchEventMediator;
+        this.saveLoaded = false;
     }
 
 
@@ -66,10 +68,20 @@ public class Shell {
      */
     private boolean detectedMenuInput(String input) {
         if (doesUserExit(input)) {
-            exitGame();
+            if (saveLoaded) {
+                switchEventMediator.store(SwitchEventType.MAIN_MENU);
+            }
+            else {
+                exitGame();
+            }
             return true;
         } else if (doesUserPause(input)) {
-            switchEventMediator.store(SwitchEventType.PAUSE);
+            if (saveLoaded) {
+                switchEventMediator.store(SwitchEventType.PAUSE);
+            }
+            else {
+                currentManager.preInput();
+            }
             return true;
         }
         return false;
@@ -90,8 +102,21 @@ public class Shell {
     private void switchManager() {
         // !!! get switch event somehow - maybe through a mediator?
         SwitchEventType switchEventType = switchEventMediator.retrieve();
+
+        if (switchEventType == SwitchEventType.START_GAME || switchEventType == SwitchEventType.LOAD_GAME) {
+            this.saveLoaded = true;
+        }
+        else if (switchEventType == SwitchEventType.MAIN_MENU) {
+            this.saveLoaded = false;
+        }
+
         if (switchEventType == SwitchEventType.END_GAME) {
-            exitGame();
+            if (!this.saveLoaded) {
+                exitGame();
+            }
+            else {
+                this.currentManager = managerController.switchManagers(SwitchEventType.MAIN_MENU, currentManager);
+            }
         }
 
         this.currentManager = managerController.switchManagers(switchEventType, currentManager);
