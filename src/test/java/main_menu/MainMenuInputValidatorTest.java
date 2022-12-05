@@ -15,9 +15,6 @@ class MainMenuInputValidatorTest {
         assert(validator.parseAndValidate("load").equals("load"));
         assert(validator.parseAndValidate("LOAD").equals("load"));
         assert(validator.parseAndValidate("lOAD").equals("load"));
-        assert(validator.parseAndValidate("quit").equals("quit"));
-        assert(validator.parseAndValidate("QUIT").equals("quit"));
-        assert(validator.parseAndValidate("qUIT").equals("quit"));
     }
 
     @Test
