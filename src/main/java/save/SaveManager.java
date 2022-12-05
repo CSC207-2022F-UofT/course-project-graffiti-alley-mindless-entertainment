@@ -24,6 +24,9 @@ public class SaveManager {
      * @return whether loaded successfully or not
      */
     public boolean loadFromSlot(int slot) {
+        if (slot >= MAX_SLOTS) {
+            return false;
+        }
         Save s = saves.get(slot);
         if (s == null) {
             return false;
@@ -37,7 +40,7 @@ public class SaveManager {
      * @return whether saved successfully or not
      */
     public boolean saveAtSlot(int slot) {
-        if (slot > MAX_SLOTS) {
+        if (slot >= MAX_SLOTS) {
             return false;
         }
         if (saves.get(slot) == null) {
