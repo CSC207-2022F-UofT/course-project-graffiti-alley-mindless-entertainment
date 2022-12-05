@@ -7,5 +7,5 @@ import core.StateManager;
  * Used to handle switches between managers.
  */
 public interface ManagerController {
-    public StateManager switchManagers(SwitchEventType type, StateManager currManager);
+    StateManager switchManagers(SwitchEventType type, StateManager currManager);
 }
