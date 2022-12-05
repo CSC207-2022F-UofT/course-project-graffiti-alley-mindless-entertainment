@@ -43,7 +43,7 @@ class InventoryStateTest {
         InventoryState i = new InventoryState(inventory);
         i.postInput("remove 1000"); // invalid input; index out of range
         assertFalse(i.isDone());
-        assertFalse(i.awaitInput());
+        assertTrue(i.awaitInput());
     }
 
 }

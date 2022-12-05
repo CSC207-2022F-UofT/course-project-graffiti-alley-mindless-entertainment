@@ -21,12 +21,12 @@ public class ItemPickUpEvent extends Event {
     private boolean isDone;
     private boolean awaitInput;
 
-    private final ArrayList<String> inputs = new ArrayList<String>(Arrays.asList(
+    private final ArrayList<String> inputs = new ArrayList<>(Arrays.asList(
             "yes", "no"
     ));
-    public Inventory inventory;
-    public String text;
-    public ItemFactory itemFactory;
+    public final Inventory inventory;
+    public final String text;
+    public final ItemFactory itemFactory;
 
     public ItemPickUpEvent(String name, String item, String text) {
         this.name = name;

@@ -43,7 +43,7 @@ public class Inventory {
         StringBuilder itemInfo = new StringBuilder();
 
         for(int i = 0; i < inventory.size(); i++){
-            Item item = (Item) inventory.get(i);
+            Item item = inventory.get(i);
             String[] stats = item.getStats();
             itemInfo.append(i).append(". ").append(stats[0]).append(": ").append(stats[1]).append("\n");
 
@@ -57,7 +57,7 @@ public class Inventory {
     public String viewItemList(){
         StringBuilder items = new StringBuilder();
         for (int i = 0; i < inventory.size(); i++) {
-            Item item = (Item) inventory.get(i);
+            Item item = inventory.get(i);
             items.append(i).append(". ").append(item.getName()).append("\n");
         }
         return items.toString();
@@ -97,7 +97,7 @@ public class Inventory {
      */
     public String useItem(int i) {
         if (inventory.size() > i){
-            Item item = (Item) inventory.get(i);
+            Item item = inventory.get(i);
             String ability = item.getAbility();
             removeItem(i);
             return ability;
