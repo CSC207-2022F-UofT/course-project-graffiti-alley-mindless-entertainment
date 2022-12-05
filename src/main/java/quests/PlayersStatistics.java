@@ -1,4 +1,4 @@
-package objects.QuestSystem;
+package quests;
 
 /**
  * This enum contains the different numerical statistics that the player has.

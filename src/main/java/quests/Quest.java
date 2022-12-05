@@ -1,17 +1,17 @@
-package objects.QuestSystem;
+package quests;
 
-import objects.character.Bystander;
-import objects.character.Player;
+import objects.character.*;
 
-import java.util.*;
+import java.util.List;
 
 /**
  * This class contains a quest object that can be completed by
  */
 public class Quest {
+
     /**
      * Attributes.
-      */
+     */
     // Stores the name of the quest.
     private String name;
     // Stores the description of the quest.

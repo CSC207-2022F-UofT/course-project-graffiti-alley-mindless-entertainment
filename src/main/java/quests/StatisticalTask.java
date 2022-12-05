@@ -1,4 +1,5 @@
-package objects.QuestSystem;
+package quests;
+
 import objects.character.Player;
 
 /**

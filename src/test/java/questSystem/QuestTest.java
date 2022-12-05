@@ -1,7 +1,7 @@
 package questSystem;
 
-import objects.QuestSystem.*;
 import objects.character.*;
+import quests.*;
 
 import org.junit.jupiter.api.Test;
 

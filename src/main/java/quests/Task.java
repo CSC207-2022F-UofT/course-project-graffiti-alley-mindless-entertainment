@@ -1,4 +1,4 @@
-package objects.QuestSystem;
+package quests;
 
 import objects.character.Player;
 
@@ -12,7 +12,7 @@ public abstract class Task {
     // Stores the name of the task.
     protected String name;
     // Stores whether the task has been completed.
-     protected boolean isCompleted;
+    protected boolean isCompleted;
 
     /**
      * Constructor.
