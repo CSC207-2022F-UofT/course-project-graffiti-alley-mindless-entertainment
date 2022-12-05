@@ -32,7 +32,9 @@ public class Game {
 
     private StateManager createStartingManager(ManagerController managerController) {
         //should change to a mainMenuManager when one gets created
-        return new PlayerCreatorManager();
+        StateManager m = new PlayerCreatorManager();
+        managerController.addManager(m);
+        return m;
     }
 
     /**
