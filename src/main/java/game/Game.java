@@ -16,6 +16,10 @@ import switch_managers.SwitchEventMediatorProxy;
 import switch_managers.handlers.PauseResumeEventHandler;
 import switch_managers.handlers.StartGameEventHandler;
 
+/**
+ * The main class that initializes objects and starts the game.
+ * Run this main method to play the game.
+ */
 public class Game {
     public static void main(String[] args) {
 
@@ -24,6 +28,9 @@ public class Game {
 
     }
 
+    /**
+     * main function to initialize the shell and start the game.
+     */
     public void startGame() {
         InputHandler inputHandler = new InputHandlerImpl();
         ManagerController managerController = createManagerController();
@@ -33,6 +40,9 @@ public class Game {
         s.startGame();
     }
 
+    /**
+     * @return the starting manager of the game.
+     */
     private StateManager getStartingManager() {
         //should change to a mainMenuManager when one gets created
         return new PlayerCreatorManager();
