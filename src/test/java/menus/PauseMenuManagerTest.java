@@ -22,10 +22,10 @@ class PauseMenuManagerTest {
         assert(!options.isEnableAutoSave());
         assert(!pauseMenuManager.isDone());
         pauseMenuManager.preInput();
-        pauseMenuManager.postInput("quit");
+        pauseMenuManager.postInput("return");
         assert(!pauseMenuManager.isDone());
         pauseMenuManager.preInput();
-        pauseMenuManager.postInput("quit");
+        pauseMenuManager.postInput("return");
         assert(pauseMenuManager.isDone());
     }
 }

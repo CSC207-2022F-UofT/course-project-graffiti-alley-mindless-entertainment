@@ -64,7 +64,7 @@ class ChangeOptionsStateTest {
         Options options = Options.getOptions();
         ChangeOptionsState s = new ChangeOptionsState(options);
         s.preInput();
-        s.postInput("quit");
+        s.postInput("return");
         assert(s.isDone());
     }
 
