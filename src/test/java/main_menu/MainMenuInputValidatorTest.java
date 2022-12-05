@@ -42,16 +42,4 @@ class MainMenuInputValidatorTest {
         assert(validator.parseAndValidate("return").equals("return"));
         assert(validator.parseAndValidate("RETURN").equals("return"));
     }
-
-    @Test
-    void parseAndValidateQuitCases() {
-        MainMenuInputValidator validator = new MainMenuInputValidator(MainMenuOptions.QUIT);
-        assert(validator.parseAndValidate("no") == null);
-        assert(validator.parseAndValidate("") == null);
-        assert(validator.parseAndValidate("new") == null);
-        assert(validator.parseAndValidate("return").equals("return"));
-        assert(validator.parseAndValidate("RETURN").equals("return"));
-        assert(validator.parseAndValidate("quit").equals("quit"));
-        assert(validator.parseAndValidate("QUIT").equals("quit"));
-    }
 }

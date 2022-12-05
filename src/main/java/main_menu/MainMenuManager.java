@@ -37,6 +37,7 @@ public class MainMenuManager extends StateManager {
     @Override
     protected State nextState(String input) {
         if (currStateEnum == MainMenuOptions.MAINMENU) {
+            // Exiting case is handled by Shell.
             switch (input) {
                 case "new":
                     this.currState = this.menuFactory.createNewGameState();
@@ -45,10 +46,6 @@ public class MainMenuManager extends StateManager {
                 case "load":
                     this.currState = this.menuFactory.createLoadGameState();
                     this.currStateEnum = MainMenuOptions.LOAD;
-                    return this.currState;
-                case "quit":
-                    this.currState = this.menuFactory.createQuitState();
-                    this.currStateEnum = MainMenuOptions.QUIT;
                     return this.currState;
             }
         }
@@ -74,17 +71,6 @@ public class MainMenuManager extends StateManager {
                 return this.currState;
             }
 
-        }
-        else if (currStateEnum == MainMenuOptions.QUIT) {
-            if (input.equals("return")) {
-                this.currState = this.menuFactory.createMainMenuState();
-                this.currStateEnum = MainMenuOptions.MAINMENU;
-                return this.currState;
-            }
-            else if (input.equals("quit")) {
-                // Shell quits the game
-                return null;
-            }
         }
         return null;
     }

@@ -41,7 +41,7 @@ public class MainMenuState implements State {
                 "Welcome to the world of PACT! You are currently at the main menu." + "\n" +
                 "Type 'new' if you would like to start a new game." + "\n" +
                 "Type 'load' if you would like to load a previous game." + "\n" +
-                "Type 'quit' if you would like to quit the game.");
+                "Type 'exit' if you would like to quit the game.");
     }
 
     /**

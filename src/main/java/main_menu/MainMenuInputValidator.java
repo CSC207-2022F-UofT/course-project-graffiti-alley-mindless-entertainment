@@ -31,8 +31,7 @@ public class MainMenuInputValidator implements InputValidator {
         if (this.currOption == MainMenuOptions.MAINMENU) {
             // Ensures the input corresponds to one of the main menu options.
             if (input.equalsIgnoreCase(MainMenuOptions.NEW.toString()) ||
-                    input.equalsIgnoreCase(MainMenuOptions.LOAD.toString()) ||
-                    input.equalsIgnoreCase(MainMenuOptions.QUIT.toString())) {
+                    input.equalsIgnoreCase(MainMenuOptions.LOAD.toString())) {
                 return input.toLowerCase();
             }
             else {
@@ -55,22 +54,13 @@ public class MainMenuInputValidator implements InputValidator {
             // will verify if the number given by the user is a valid save slot with a Player saved.
             if (input.equalsIgnoreCase(MainMenuOptions.RETURN.toString())) {
                 return input.toLowerCase();
-            }
-            else {
+            } else {
                 return null;
             }
         }
-        else if (this.currOption == MainMenuOptions.QUIT) {
-            // Ensures the input corresponds to either returning to the main menu or quitting the game.
-            if (input.equalsIgnoreCase(MainMenuOptions.RETURN.toString()) ||
-                    input.equalsIgnoreCase(MainMenuOptions.QUIT.toString())) {
-                return input.toLowerCase();
-            }
-            else {
-                return null;
-            }
+        else {
+            return null;
         }
-        return null;
     }
 
     /**
@@ -83,8 +73,7 @@ public class MainMenuInputValidator implements InputValidator {
         switch (this.currOption) {
             case MAINMENU:
                 if (!(input.equalsIgnoreCase(MainMenuOptions.NEW.toString())) &&
-                        !(input.equalsIgnoreCase(MainMenuOptions.LOAD.toString())) &&
-                        !(input.equalsIgnoreCase(MainMenuOptions.QUIT.toString()))) {
+                        !(input.equalsIgnoreCase(MainMenuOptions.LOAD.toString()))) {
                     return "Please choose one of the main menu options.";
                 }
             case NEW:
@@ -95,11 +84,6 @@ public class MainMenuInputValidator implements InputValidator {
             case LOAD:
                 if (!(input.equalsIgnoreCase(MainMenuOptions.RETURN.toString()))) {
                     return "Please choose to start a save file or return to the main menu.";
-                }
-            case QUIT:
-                if (!(input.equalsIgnoreCase(MainMenuOptions.RETURN.toString())) &&
-                        !(input.equalsIgnoreCase(MainMenuOptions.QUIT.toString()))) {
-                    return "Please choose to quit the game or return to the main menu.";
                 }
         }
         return null;
