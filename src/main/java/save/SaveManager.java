@@ -37,6 +37,9 @@ public class SaveManager {
      * @return whether saved successfully or not
      */
     public boolean saveAtSlot(int slot) {
+        if (slot > MAX_SLOTS) {
+            return false;
+        }
         if (saves.get(slot) == null) {
             Save s = creator.createSave(entities);
             saves.set(slot, s);
@@ -45,4 +48,3 @@ public class SaveManager {
         return false;
     }
 }
-
