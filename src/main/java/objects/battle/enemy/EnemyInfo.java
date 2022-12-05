@@ -8,21 +8,19 @@ import java.util.ArrayList;
 
 public class EnemyInfo {
     private final int maxHealth = 100;
-    private int baseSpeed;
     private int health = maxHealth; //does not have to be static since there are multiple enemies and
     // we create an enemy every time the user encounters an enemy.
-    public ArrayList<Skill> skills;
+    private final ArrayList<Skill> skills;
     private int speed;
-    private int reputation;
+    private final int reputation;
     private SkillType type;
-    private EnemyPotion potion;
+    private final EnemyPotion potion;
 
     public EnemyInfo(ArrayList<Skill> skills, int speed, int reputation, SkillType type, EnemyPotion potion){
         this.skills = skills;
         this.reputation = reputation;
         this.speed = speed;
         this.type = type;
-        this.baseSpeed = speed;
         this.potion = potion;
     }
 
@@ -79,11 +77,7 @@ public class EnemyInfo {
      */
     public boolean checkAlive()
     {
-        if(this.health <= 0){
-            return false;
-        } else{
-            return true;
-        }
+        return this.health > 0;
     }
 
     /**
@@ -160,23 +154,6 @@ public class EnemyInfo {
      */
     public int getMaxHealth(){
         return this.maxHealth;
-    }
-
-    /**
-     * This method resets the enemy's speed to base speed
-     *
-     */
-    public void resetSpeed(){
-        this.speed = baseSpeed;
-    }
-
-    /**
-     * This method returns the base speed that the enemy has
-     *
-     * @return the base speed of the enemy.
-     */
-    public int getBaseSpeed() {
-        return this.baseSpeed;
     }
 
     public EnemyPotion getPotion(){

@@ -16,10 +16,10 @@ public class DefaultAI implements EnemyAI {
      *
      */
 
-    private EnemyInfo enemyInfo;
-    private int attackChance;
+    private final EnemyInfo enemyInfo;
+    private final int attackChance;
 
-    private EnemyPotion potion;
+    private final EnemyPotion potion;
 
     /**
      * This is a constructor of Default AI

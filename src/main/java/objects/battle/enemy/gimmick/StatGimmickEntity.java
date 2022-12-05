@@ -7,12 +7,12 @@ public class StatGimmickEntity {
     /** This class is the entity of gimmick that holds information about the gimmick
      *
      */
-    private GimmickType name;
-    private EnemyInfo enemyInfo;
-    private int triggerHealth;
-    private int speedIncrease;
-    private double attackIncrease;
-    private SkillType type;
+    private final GimmickType name;
+    private final EnemyInfo enemyInfo;
+    private final int triggerHealth;
+    private final int speedIncrease;
+    private final double attackIncrease;
+    private final SkillType type;
     private boolean usedGimmick = false;
 
     /** This is a constructor of the gimmick class that takes name, enemyinfo, triggger health,
@@ -83,10 +83,9 @@ public class StatGimmickEntity {
     }
 
     public static class StatGimmickBuilder{
-        private GimmickType name;
-        private EnemyInfo enemyInfo;
-        private int triggerHealth;
-        private boolean usedGimmick = false;
+        private final GimmickType name;
+        private final EnemyInfo enemyInfo;
+        private final int triggerHealth;
 
         private int speedIncrease;
         private double attackIncrease;

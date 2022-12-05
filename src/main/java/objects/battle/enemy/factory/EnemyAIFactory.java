@@ -1,7 +1,6 @@
 package objects.battle.enemy.factory;
 
 import database.managers.AIDataManager;
-import database.managers.EnemyDataManager;
 import database.objects.AIData;
 import database.objects.EnemyData;
 import objects.battle.enemy.EnemyInfo;
@@ -14,13 +13,9 @@ import java.util.Objects;
 public class EnemyAIFactory{
 
     private final AIDataManager aiDataManager;
-    private final EnemyDataManager enemyDataManager;
-    private final EnemyInfoFactory enemyInfoFactory;
-    public EnemyAIFactory(AIDataManager aiDataManager, EnemyDataManager enemyDataManager, EnemyInfoFactory
-                          enemyInfoFactory){
+
+    public EnemyAIFactory(AIDataManager aiDataManager){
         this.aiDataManager = aiDataManager;
-        this.enemyDataManager = enemyDataManager;
-        this.enemyInfoFactory = enemyInfoFactory;
     }
 
     /**

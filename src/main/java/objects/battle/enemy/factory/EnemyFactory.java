@@ -18,17 +18,15 @@ import objects.character.EnemyFighter;
 public class EnemyFactory {
 
     private final EnemyDataManager enemyDatabase;
-    private final AIDataManager aiDataManager;
     private final EnemyInfoFactory enemyInfoFactory;
-    private final SkillDataManager skillDataManager;
     private final EnemyAIFactory enemyAIFactory;
     private final GimmickDataManager gimmickDataManager;
     public EnemyFactory() {
         this.enemyDatabase = new EnemyDataManager();
-        this.aiDataManager = new AIDataManager();
-        this.skillDataManager = new SkillDataManager();
-        this.enemyInfoFactory = new EnemyInfoFactory(this.enemyDatabase, this.skillDataManager);
-        this.enemyAIFactory = new EnemyAIFactory(this.aiDataManager, this.enemyDatabase, this.enemyInfoFactory);
+        AIDataManager aiDataManager = new AIDataManager();
+        SkillDataManager skillDataManager = new SkillDataManager();
+        this.enemyInfoFactory = new EnemyInfoFactory(skillDataManager);
+        this.enemyAIFactory = new EnemyAIFactory(aiDataManager);
         this.gimmickDataManager = new GimmickDataManager();
 
     }

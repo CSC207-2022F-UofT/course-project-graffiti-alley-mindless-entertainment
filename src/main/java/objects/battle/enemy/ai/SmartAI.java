@@ -6,13 +6,13 @@ import java.util.Random;
 
 public class SmartAI implements EnemyAI {
     /**
-     * This class is a subclass of enemyAI and overrides the respond() function
+     * This class is a subclass of enemyAI and overrides the "respond()" function
      * It is smart Ai that does decide the action depending on the enemy's health
      * and also the player's input.
      */
-    private EnemyInfo enemyInfo;
-    private int attackChance;
-    private EnemyPotion potion;
+    private final EnemyInfo enemyInfo;
+    private final int attackChance;
+    private final EnemyPotion potion;
 
     /**
      * This is a constructor of Smart AI
