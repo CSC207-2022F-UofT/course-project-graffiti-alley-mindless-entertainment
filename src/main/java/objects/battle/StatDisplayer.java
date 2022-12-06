@@ -2,9 +2,10 @@ package objects.battle;
 
 import io.Output;
 import io.OutputHandler;
-import objects.character.EnemyFacade;
 import objects.character.EnemyFighter;
 import objects.character.Player;
+
+import java.util.List;
 
 public class StatDisplayer {
     /**
@@ -17,10 +18,26 @@ public class StatDisplayer {
     public StatDisplayer() {
 
     }
+    public void displayPostBar() {
+        output.generateText(
+                "--------------------------------------------------------------------------------\n"
+        );
+    }
+    public void displayPreBar() {
+        output.generateText(
+                "\n--------------------------------------------------------------------------------"
+        );
+    }
 
     /**
      * Displays the stats of the user and the enemy.
      */
+    public void displayStats(Player user, EnemyFighter foe) {
+        displayPreBar();
+        displayStats(foe);
+        displayStats(user);
+        displayPostBar();
+    }
     public void displayStats(Player user) {
         String userStats = "Name: " + user.getName() +
                 " | HP: " + user.getCurrHealth() +
@@ -34,6 +51,22 @@ public class StatDisplayer {
                 " | Speed: " + foe.getSpeed() +
                 " | Type: " + foe.getType();
         output.generateText("[ENEMY STATS] " + foeStats + "\n");
+    }
+    public String skillStats(Skill skill) {
+        return "Name: " + skill.getName() +
+                " | DMG: " + skill.getDamage() +
+                " | Speed: " + -skill.getLag() +
+                " | Type: " + skill.getType();
+    }
+    public void displayStats(List<Skill> skillList) {
+        int num = 1;
+        displayPreBar();
+        for (Skill skill : skillList) {
+            String stats = "Skill " + num + " ~ " + skillStats(skill);
+            output.generateText(stats + "\n");
+            num++;
+        }
+        displayPostBar();
     }
 
 }

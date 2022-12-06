@@ -11,7 +11,6 @@ import io.OutputHandler;
 import objects.battle.Skill;
 import objects.battle.SkillType;
 import objects.battle.enemy.factory.EnemyFactory;
-import objects.character.EnemyFacade;
 import objects.character.EnemyFighter;
 import objects.character.Player;
 
@@ -26,9 +25,11 @@ public class BattleStateManager extends StateManager {
     private EnemyFighter foe;
     private boolean awaitingInput = false;
     private final OutputHandler output = Output.getScreen();
+    private Location location;
 
-    public BattleStateManager(Player user) {
+    public BattleStateManager(Player user, Location location) {
         this.user = user;
+        this.location = location;
         initialize();
     }
 
@@ -59,7 +60,6 @@ public class BattleStateManager extends StateManager {
                 output.generateText("You outsped the enemy. What would you like to do?");
                 chosenState = new UserTurnState(user, foe);
             } else {
-                output.generateText(foe.getName() + " outsped you!");
                 chosenState = new EnemyTurnState(user, foe, input);
             }
             awaitingInput = chosenState.awaitInput();
@@ -73,7 +73,7 @@ public class BattleStateManager extends StateManager {
         boolean currPreInput = currState.isDone();
         if (currPreInput) {
             this.currState = this.nextState("");
-            if (this.currState == null) {
+            if (this.currState == null || this.currState instanceof WinBattleState) {
                 this.isDone = true;
             }
         }
@@ -85,7 +85,7 @@ public class BattleStateManager extends StateManager {
         boolean currPostInput = currState.isDone();
         if (currPostInput) {
             this.currState = this.nextState(input);
-            if (this.currState == null) {
+            if (this.currState == null || this.currState instanceof WinBattleState) {
                 this.isDone = true;
             }
         }
@@ -98,11 +98,14 @@ public class BattleStateManager extends StateManager {
     @Override
     public void initialize() {
         EnemyFactory enemyFactory = new EnemyFactory();
-        this.foe = enemyFactory.createEnemy("goblin"); // TEMP, later decide which enemy
+        String chosenEnemy = location.getCurrentArea().getCurrEvent().getNPC();
+        this.foe = enemyFactory.createEnemy(chosenEnemy); // TEMP, later decide which enemy
 
         user.addSkill(new Skill("fireball", 20, 10, SkillType.FIRE));
         user.addSkill(new Skill("waterball", 20, 10, SkillType.WATER));
-
+        user.addSkill(new Skill("earthball", 20, 10, SkillType.EARTH));
+        user.addSkill(new Skill("cheat move", 40, -10, SkillType.WATER));
+        // Initialize is called at the beginning of the game, make sure it is able to do it without proper area
         currState = nextState("");
     }
 }
