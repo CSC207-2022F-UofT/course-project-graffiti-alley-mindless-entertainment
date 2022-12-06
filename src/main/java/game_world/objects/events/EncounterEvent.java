@@ -25,6 +25,10 @@ public class EncounterEvent extends Event {
             "yes", "no"
     ));
 
+    public String getNPC() {
+        return this.npc;
+    }
+
     public EncounterEvent(String name, String encounterType, String npc) {
         this.name = name;
         this.type = "Encounter";
