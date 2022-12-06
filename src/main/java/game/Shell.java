@@ -104,6 +104,7 @@ public class Shell {
         SwitchEventType switchEventType = switchEventMediator.retrieve();
 
         if (switchEventType == SwitchEventType.START_GAME || switchEventType == SwitchEventType.LOAD_GAME) {
+            managerController.initializeAll();
             this.saveLoaded = true;
         }
         else if (switchEventType == SwitchEventType.MAIN_MENU) {
@@ -113,9 +114,6 @@ public class Shell {
         if (switchEventType == SwitchEventType.END_GAME) {
             if (!this.saveLoaded) {
                 exitGame();
-            }
-            else {
-                this.currentManager = managerController.switchManagers(SwitchEventType.MAIN_MENU, currentManager);
             }
         }
 

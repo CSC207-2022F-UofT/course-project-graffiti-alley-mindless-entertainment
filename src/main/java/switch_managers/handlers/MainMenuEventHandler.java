@@ -42,6 +42,7 @@ public class MainMenuEventHandler implements SwitchEventHandler {
                 // Awaiting saving implementation to return an AreaManager based on information from a database.
                 return null;
             case MAIN_MENU:
+            case END_GAME:
                 return mainMenuManager;
             default:
                 return null;
