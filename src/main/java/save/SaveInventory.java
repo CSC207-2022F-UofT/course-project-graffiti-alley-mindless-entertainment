@@ -6,6 +6,10 @@ import objects.item.*;
 
 public class SaveInventory implements SavableEntity {
     final Inventory inventory = Player.getInventory();
+
+    /**
+     * @return a string representation of inventory to be saved
+     */
     @Override
     public String toSavableString() {
         if (inventory.getInventory().size() == 0) {
@@ -16,6 +20,10 @@ public class SaveInventory implements SavableEntity {
         }
     }
 
+    /**
+     * @param str a string representation of inventory
+     * map the string representation to the corresponding object
+     */
     @Override
     public void fromSavableString(String str) {
        String[] items = str.split(System.lineSeparator());
