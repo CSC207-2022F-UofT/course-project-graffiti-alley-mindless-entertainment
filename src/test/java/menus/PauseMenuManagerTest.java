@@ -1,6 +1,8 @@
 package menus;
 
 import menus.options.ChangeOptionsStateFactory;
+import objects.inventory.Inventory;
+import objects.inventory.InventoryStateFactory;
 import options.Options;
 import org.junit.jupiter.api.Test;
 
@@ -9,9 +11,11 @@ class PauseMenuManagerTest {
     @Test
     void changeOptionsAndQuit() {
         Options options = Options.getOptions();
-        PauseMenuChoiceStateFactory pauseMenuChoiceStateFactory = new PauseMenuChoiceStateFactory();
+        Inventory inventory = new Inventory();
         ChangeOptionsStateFactory changeOptionsStateFactory = new ChangeOptionsStateFactory();
-        PauseMenuManager pauseMenuManager = new PauseMenuManager(pauseMenuChoiceStateFactory, changeOptionsStateFactory);
+        InventoryStateFactory inventoryStateFactory = new InventoryStateFactory(inventory);
+        MenuStateFactory menuStateFactory = new MenuStateFactory(changeOptionsStateFactory, inventoryStateFactory);
+        PauseMenuManager pauseMenuManager = new PauseMenuManager(menuStateFactory);
         pauseMenuManager.initialize();
         pauseMenuManager.preInput();
         pauseMenuManager.postInput("options");
