@@ -2,6 +2,7 @@ package game;
 
 import game_world.managers.AreaManager;
 import game_world.managers.EventManager;
+import game_world.objects.Location;
 import main_menu.MainMenuManager;
 import menus.MenuStateFactory;
 import menus.PauseMenuManager;
@@ -21,12 +22,13 @@ import switch_managers.handlers.StartGameEventHandler;
  */
 public class ManagerControllerFactory {
 
+    private final Location location;
     private final ManagerController managerController;
     private final SwitchEventManager switchEventManager;
     public ManagerControllerFactory() {
         switchEventManager = new SwitchEventManager();
         managerController = new ManagerControllerImpl(switchEventManager);
-
+        location = new Location();
     }
 
     /**
@@ -62,7 +64,7 @@ public class ManagerControllerFactory {
      */
     void createStartGameEventHandler() {
         EventManager eventManager = new EventManager();
-        AreaManager areaManager = new AreaManager(eventManager);
+        AreaManager areaManager = new AreaManager(eventManager, location);
         managerController.addManager(areaManager);
 
         StartGameEventHandler startGameEventHandler = new StartGameEventHandler(areaManager);
