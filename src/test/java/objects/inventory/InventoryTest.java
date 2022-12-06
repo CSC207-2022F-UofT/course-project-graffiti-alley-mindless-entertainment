@@ -8,20 +8,16 @@ import static org.junit.jupiter.api.Assertions.*;
  * Test methods Inventory.java
  */
 class InventoryTest {
-    /**
-     * Test addItem() method: testing whether item is added
-     */
+
     @Test
     void testAddItem_whenInventoryNotFull_thenShouldBeAdded(){
         Inventory inventory = new Inventory();
         Item item = new Armor(15);
+        item.setLevel(item.getPrice());
         inventory.addItem(item);
         assertEquals("0. LEVEL 15 ARMOR: Gain 15 Armor\n", inventory.viewInventory());
     }
 
-    /**
-     * Test addItem() method: testing whether the method returns true after adding an item
-     */
     @Test
     void testAddItem_whenInventoryNotFull_thenShouldReturnTrue(){
         Inventory inventory = new Inventory();
@@ -30,9 +26,6 @@ class InventoryTest {
         assertTrue(expectedBool);
     }
 
-    /**
-     * Test addItem() method: testing whether the method returns false when inventory is full
-     */
     @Test
     void testAddItem_whenInventoryFull_thenShouldReturnFalse(){
         Inventory inventory = new Inventory();
@@ -46,9 +39,6 @@ class InventoryTest {
         assertFalse(expectedBool);
     }
 
-    /**
-     * Test viewInventory() method
-     */
     @Test
     void testViewInventory_whenNotEmpty_thenShouldDisplay(){
         // given
@@ -62,6 +52,7 @@ class InventoryTest {
                 "1. LEVEL 10 SWORD: Grant 10 Damage\n";
         assertEquals(expected, result);
     }
+
     @Test
     void testViewInventory_whenEmpty_thenShouldNotDisplayEmptyString(){
         Inventory inventory = new Inventory();
@@ -70,10 +61,6 @@ class InventoryTest {
         assertEquals(expected, result);
     }
 
-
-    /**
-     * Test removeItem() method: whether item is removed
-     */
     @Test
     void testRemoveItem_whenRemove_thenShouldDisappear(){
         Item item1 = new Armor(12);
@@ -87,9 +74,6 @@ class InventoryTest {
         assertEquals(expected, result);
     }
 
-    /**
-     * Test removeItem() method: whether method returns true after removing
-     */
     @Test
     void testRemoveItem_whenItemFound_thenShouldReturnTrue(){
         Item item1 = new Armor(12);
@@ -101,9 +85,6 @@ class InventoryTest {
         assertTrue(result);
     }
 
-    /**
-     * Test removeItem() method: whether method returns false if item not found
-     */
     @Test
     void testRemoveItem_whenItemNotFound_thenShouldReturnFalse(){
         // given
@@ -116,9 +97,6 @@ class InventoryTest {
         assertFalse(result);
     }
 
-    /**
-     * Test useItem() method: when item found in the inventory
-     */
     @Test
     void testUseItem_whenUse_thenShouldReturnItemAbility(){
         Item item1 = new Armor(12);
@@ -131,13 +109,22 @@ class InventoryTest {
         assertEquals(result, expected);
     }
 
-    /**
-     * Test useItem() method: when item not found
-     */
     @Test
     void testUseItem_whenIndexOutOfRange_thenShouldReturnNull(){
         Inventory inventory = new Inventory();
         String result = inventory.useItem(10);
         assertNull(result);
+    }
+
+    @Test
+    void testViewItemList_whenNotEmpty_thenShouldReturnItemList(){
+        Item item1 = new Armor(12);
+        Item item2 = new Potion(10);
+        Inventory inventory = new Inventory();
+        inventory.addItem(item1);
+        inventory.addItem(item2);
+        String expected = "0. LEVEL 12 ARMOR\n1. LEVEL 10 POTION\n";
+        String result = inventory.viewItemList();
+        assertEquals(expected, result);
     }
 }
