@@ -21,7 +21,7 @@ class InventoryStateTest {
     void testPostInput_whenQuit_thenShouldBeDone(){
         Inventory inventory = new Inventory();
         InventoryState i = new InventoryState(inventory);
-        i.postInput("quit");
+        i.postInput("return");
         assertTrue(i.isDone());
         assertFalse(i.awaitInput());
     }
