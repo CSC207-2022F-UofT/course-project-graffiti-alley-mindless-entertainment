@@ -13,17 +13,17 @@ public class Quest {
      * Attributes.
      */
     // Stores the name of the quest.
-    private String name;
+    private final String name;
     // Stores the description of the quest.
-    private String description;
+    private final String description;
     // Stores the status of the quest. If true: quest is completed. Otherwise, false: ongoing quest.
     private boolean isCompleted;
     // Stores the overseer (NPC) of the quest.
     private Bystander overseer;
     // Stores the list of tasks that need to be completed.
-    private List<Task> tasks;
+    private final List<Task> tasks;
     // Stores the reward that can be assigned by Quest Manager to the player, when quest is completed.
-    private Reward reward;
+    private final Reward reward;
     // Stores whether the Reward has been received by the player.
     private boolean isRewardDistributed;
 
@@ -33,6 +33,7 @@ public class Quest {
     // Constructor requesting all the attributes to define a quest.
     public Quest(String name, String description, Bystander overseer, Reward reward, List<Task> tasks) {
         this.name = name;
+        // Stores the description of the quest.
         this.description = description;
         this.isCompleted = false;
         this.setOverseer(overseer);
@@ -44,18 +45,15 @@ public class Quest {
     /**
      * Sets a new overseer, to be assigned to this quest.
      * @param overseer: Bystander in charge of quest.
-     * @return whether action has been completed (true) or not (false).
      */
-    private boolean setOverseer(Bystander overseer) {
+    private void setOverseer(Bystander overseer) {
         // Checks whether the overseer is already assigned to a Quest or not.
         if (!overseer.hasQuest()) {
             // Sets the overseer as overseer of the quest.
             this.overseer = overseer;
             // Changes the status of overseer's
             this.overseer.switchHasQuest();
-            return true;
         }
-        return false;
     }
 
     /**
@@ -90,8 +88,8 @@ public class Quest {
      * Checks whether the Quest is completed.
      *
      * @return true, if the status of the quest is completed.
-     * @return true, if all the quest's tasks are completed (in addition to change the quest's status to completed).
-     * @return false otherwise.
+     *         true, if all the quest's tasks are completed (in addition to change the quest's status to completed).
+     *         false otherwise.
      */
     public boolean isCompleted() {
         // Checks whether the status is set to completed.
@@ -108,13 +106,13 @@ public class Quest {
     /**
      * Checks whether all the tasks in the quest have been completed.
      * @return true if all the tasks in the quest have been completed.
-     * @return false otherwise.
+     *         false otherwise.
      */
     private boolean areTasksCompleted() {
         boolean areTasksCompleted = true;
 
-        for (int i = 0; i < this.tasks.size(); i++) {
-            areTasksCompleted = areTasksCompleted && this.tasks.get(i).isCompleted();
+        for (Task task : this.tasks) {
+            areTasksCompleted = areTasksCompleted && task.isCompleted();
         }
 
         return areTasksCompleted;
