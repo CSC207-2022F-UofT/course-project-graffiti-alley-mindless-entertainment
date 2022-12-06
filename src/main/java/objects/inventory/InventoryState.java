@@ -25,7 +25,7 @@ public class InventoryState implements State {
      */
     public InventoryState(Inventory inventory){
         this.inventory = inventory;
-        this.quitCommand = "quit";
+        this.quitCommand = "return";
         this.removeItemCommand = "remove";
     }
 
@@ -36,7 +36,7 @@ public class InventoryState implements State {
     public void preInput() {
         awaitingInput = true;
         String textToDisplay = inventory.viewInventory() + "Commands: \n" +
-                "quit: type 'quit' inventory to quit inventory.\n" +
+                "return: type 'return' inventory to return to the pause menu.\n" +
                 "remove i: type 'remove i' (i is the i-th item in inventory) to remove item.\n";
         Output.getScreen().generateText(textToDisplay);
     }
@@ -59,7 +59,7 @@ public class InventoryState implements State {
             return;
         }
 
-        Output.getScreen().generateText("Please enter a valid command! e.g. 'quit', 'remove 0'");
+        Output.getScreen().generateText("Please enter a valid command! e.g. 'return', 'remove 0'");
     }
 
     /**
