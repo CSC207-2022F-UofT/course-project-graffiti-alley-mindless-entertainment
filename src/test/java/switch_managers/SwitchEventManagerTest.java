@@ -6,11 +6,11 @@ import menus.options.ChangeOptionsStateFactory;
 import org.junit.jupiter.api.Test;
 import switch_managers.handlers.PauseResumeEventHandler;
 
-class ManagerControllerImplTest {
+class SwitchEventManagerTest {
 
     @Test
     void switchManagers() {
-        ManagerControllerImpl managerController = new ManagerControllerImpl();
+        SwitchEventManager managerController = new SwitchEventManager();
 
         assert(managerController.switchManagers(SwitchEventType.PAUSE, null) == null);
 
