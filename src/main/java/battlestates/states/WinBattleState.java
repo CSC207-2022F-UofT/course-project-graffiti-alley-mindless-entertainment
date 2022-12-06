@@ -7,6 +7,8 @@ import io.OutputHandler;
 import objects.character.EnemyFacade;
 import objects.character.EnemyFighter;
 import objects.character.Player;
+import switch_managers.SwitchEventMediatorProxy;
+import switch_managers.SwitchEventType;
 
 public class WinBattleState implements State {
     /** State which handles the result of a battle from BattleStateManager, thus ending the battle.
@@ -44,7 +46,9 @@ public class WinBattleState implements State {
                 + " experience points, unless you cheated ;)";
         output.generateText(winText);
         user.changeSpeed(100 - user.getSpeed()); // Resets speed to 100
+
         this.done = true;
+        SwitchEventMediatorProxy.getInstance().store(SwitchEventType.ENCOUNTER); // Moves to a new event
     }
 
     @Override
@@ -53,7 +57,7 @@ public class WinBattleState implements State {
     }
     @Override
     public boolean awaitInput() {
-        return false;
+        return true;
     }
 
     @Override

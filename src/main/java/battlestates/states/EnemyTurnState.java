@@ -2,6 +2,8 @@ package battlestates.states;
 
 import interfaces.State;
 import io.InputValidator;
+import io.Output;
+import io.OutputHandler;
 import objects.battle.StatDisplayer;
 import objects.battle.enemy.ai.EnemyActionHandler;
 import objects.character.EnemyFacade;
@@ -21,15 +23,20 @@ public class EnemyTurnState implements State {
     }
     @Override
     public void preInput() {
+        StatDisplayer statDisplayer = new StatDisplayer();
+        OutputHandler output = Output.getScreen();
+
+        foe.applyGimmick();
         EnemyActionHandler action = foe.enemyAction(userAction);
 
+        statDisplayer.displayPreBar();
+        output.generateText(foe.getName() + " outsped you!");
         action.useAction(foe, user);
-
-        StatDisplayer statDisplayer = new StatDisplayer();
-        statDisplayer.displayStats(foe);
-        statDisplayer.displayStats(user);
+        statDisplayer.displayPostBar();
 
         foe.changeSpeed(-20); // Speed tax per turn
+        statDisplayer.displayStats(user, foe);
+
         this.done = true;
     }
 
