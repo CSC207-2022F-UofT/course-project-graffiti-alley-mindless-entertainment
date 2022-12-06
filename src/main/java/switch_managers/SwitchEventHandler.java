@@ -15,6 +15,6 @@ public interface SwitchEventHandler {
      * @param currManager the current manager
      * @return the manager to switch to, or null if this handler cannot handle the event
      */
-    public StateManager handleSwitchEvent(SwitchEventType eventType, StateManager currManager);
+    StateManager handleSwitchEvent(SwitchEventType eventType, StateManager currManager);
 
 }
