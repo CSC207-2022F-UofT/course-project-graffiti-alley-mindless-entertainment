@@ -14,7 +14,7 @@ class SaveInventoryTest {
         inventory.addItem(item);
         inventory.addItem(item);
         SaveInventory s = new SaveInventory(inventory);
-        String expected = "0. LEVEL 15 ARMOR\n1. LEVEL 15 ARMOR\n";
+        String expected = "0. LEVEL 16 ARMOR\n1. LEVEL 16 ARMOR\n";
         String actual = s.toSavableString();
         assertEquals(expected, actual);
     }
