@@ -21,7 +21,7 @@ import switch_managers.handlers.PauseResumeEventHandler;
 import switch_managers.handlers.StartGameEventHandler;
 
 public class Game {
-    private static Location location;
+    private Location location;
     public static void main(String[] args) {
 
         Game g = new Game();
@@ -45,15 +45,12 @@ public class Game {
         return m;
     }
 
-    public static void setLocation(Location currentLocation) {
-        location = currentLocation;
-    }
-
     /**
      * Creates the manager controller and all switch event handlers.
      * @return the manager controller to pass to the shell.
      */
     public ManagerController createManagerController() {
+        this.location = new Location();
 
         SwitchEventManager switchEventManager = new SwitchEventManager();
         ManagerController managerController = new ManagerControllerImpl(switchEventManager);

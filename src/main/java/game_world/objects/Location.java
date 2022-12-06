@@ -10,14 +10,17 @@ import java.util.ArrayList;
 public class Location implements SavableEntity {
 
     private Area currentArea;
-    private final AreaDatabaseInteractor databaseController;
+    private AreaDatabaseInteractor databaseController;
 
     public Area getCurrentArea() {
         return currentArea;
     }
 
-    public Location(Area currentArea, AreaDatabaseInteractor databaseController) {
+    public void setCurrentArea(Area currentArea) {
         this.currentArea = currentArea;
+    }
+
+    public void setDatabaseController(AreaDatabaseInteractor databaseController) {
         this.databaseController = databaseController;
     }
 

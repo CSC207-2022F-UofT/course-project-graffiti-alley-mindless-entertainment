@@ -31,14 +31,13 @@ public class AreaManager extends StateManager {
                 "The game will now begin. To advance dialogue, press enter. Enjoy!"
         );
         this.location = location;
+        this.location.setDatabaseController(databaseController);
         initialize();
     }
 
     @Override
     public void initialize() {
-        if (this.location != null) {
-            this.currentArea = this.location.getCurrentArea();
-        }
+        this.location.setCurrentArea(this.currentArea);
     }
 
     /**
@@ -85,7 +84,6 @@ public class AreaManager extends StateManager {
             );
             this.currentArea.setCurrTextIndex(this.currentArea.getCurrTextIndex() + 1);
         }
-        Game.setLocation(new Location(this.currentArea, databaseController));
         return this.currState;
     }
 
@@ -104,6 +102,7 @@ public class AreaManager extends StateManager {
         // save events and data here
         assert this.currentArea.getNextAreas().contains(id);
         this.currentArea = databaseController.loadArea(id);
+        this.location.setCurrentArea(this.currentArea);
     }
 
 }
