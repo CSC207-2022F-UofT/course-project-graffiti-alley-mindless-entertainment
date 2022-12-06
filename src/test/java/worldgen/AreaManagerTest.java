@@ -9,7 +9,7 @@ public class AreaManagerTest {
     @Test
     void testAreaManagerMethods() {
         EventManager eventManager = new EventManager();
-        AreaManager areaManager = new AreaManager(eventManager);
+        AreaManager areaManager = new AreaManager(eventManager, null);
         assert areaManager.getCurrentArea().getName().equals("[GAME]");
         areaManager.getToNextArea("2");
         assert areaManager.getCurrentArea().getName().equals("Beach 1");

@@ -1,9 +1,11 @@
 package game_world.managers;
 
 import core.StateManager;
+import game.Game;
 import game_world.factories.DialogueStateFactory;
 import game_world.factories.SelectionStateFactory;
 import game_world.objects.Area;
+import game_world.objects.Location;
 import interfaces.State;
 import io.Output;
 import io.OutputHandler;
@@ -19,21 +21,24 @@ public class AreaManager extends StateManager {
     private final AreaDatabaseInteractor databaseController;
     private final EventManager eventManager;
     private Area currentArea;
+    private Location location;
 
-    public AreaManager(EventManager eventManager) {
+    public AreaManager(EventManager eventManager, Location location) {
         this.eventManager = eventManager;
         this.databaseController = new AreaDatabaseInteractor(this.eventManager);
         this.currentArea = databaseController.loadArea("1");
+        this.currState = dialogueStateFactory.createDialogueState(
+                "The game will now begin. To advance dialogue, press enter. Enjoy!"
+        );
+        this.location = location;
         initialize();
     }
 
     @Override
     public void initialize() {
-        // NOTE: area manager initialization will only be called once
-        // area manager should not be recreated, same with event manager helper class
-        this.currState = dialogueStateFactory.createDialogueState(
-                "The game will now begin. To advance dialogue, press enter. Enjoy!"
-        );
+        if (this.location != null) {
+            this.currentArea = this.location.getCurrentArea();
+        }
     }
 
     /**
@@ -66,7 +71,11 @@ public class AreaManager extends StateManager {
                 return this.currState;
             }
             else {
-                return eventManager.getNextStateInQueue();
+                this.currentArea.setCurrEventIndex(this.currentArea.getCurrTextIndex() + 1);
+                State nextState = eventManager.getNextStateInQueue();
+                if (nextState != null)
+                    return nextState;
+                return nextState(input);
             }
         }
         else {
@@ -74,8 +83,9 @@ public class AreaManager extends StateManager {
             this.currState = dialogueStateFactory.createDialogueState(
                     this.currentArea.getTexts().get(this.currentArea.getCurrTextIndex())
             );
-            this.currentArea.incrementCurrTextIndex();
+            this.currentArea.setCurrTextIndex(this.currentArea.getCurrTextIndex() + 1);
         }
+        Game.setLocation(new Location(this.currentArea, databaseController));
         return this.currState;
     }
 

@@ -3,7 +3,6 @@ package game_world.objects;
 import game_world.objects.events.Event;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class Area {
 
@@ -20,6 +19,7 @@ public class Area {
     private final ArrayList<String> next_options;
     private final ArrayList<Event> events;
     private int currTextIndex;
+    private int currEventIndex;
 
     public Area(String id, String name, String speaker, String zone, ArrayList<String> texts,
                 ArrayList<String> next_ids, ArrayList<String> next_options, ArrayList<Event> events) {
@@ -32,6 +32,7 @@ public class Area {
         this.next_options = next_options;
         this.events = events;
         this.currTextIndex = 0;
+        this.currEventIndex = 0;
     }
 
     public String getId() { return id; }
@@ -51,8 +52,17 @@ public class Area {
         return currTextIndex;
     }
 
-    public void incrementCurrTextIndex() {
-        this.currTextIndex += 1;
+    public void setCurrTextIndex(int newValue) {
+        this.currTextIndex = newValue;
+    }
+
+    public Event getCurrEvent() {
+        if (this.events.size() == 0) return null;
+        return this.events.get(this.currEventIndex);
+    }
+
+    public void setCurrEventIndex(int newValue) {
+        this.currEventIndex = newValue;
     }
 
     public String getType() {

@@ -9,7 +9,7 @@ public class EventManagerTest {
     @Test
     void testEventManagerMethods() {
         EventManager eventManager = new EventManager();
-        AreaManager areaManager = new AreaManager(eventManager);
+        AreaManager areaManager = new AreaManager(eventManager, null);
     }
 
 }

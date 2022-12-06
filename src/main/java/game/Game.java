@@ -2,6 +2,7 @@ package game;
 
 import game_world.managers.AreaManager;
 import game_world.managers.EventManager;
+import game_world.objects.Location;
 import switch_managers.ManagerControllerImpl;
 import core.StateManager;
 import switch_managers.ManagerController;
@@ -17,6 +18,9 @@ import switch_managers.handlers.PauseResumeEventHandler;
 import switch_managers.handlers.StartGameEventHandler;
 
 public class Game {
+
+    private static Location location;
+
     public static void main(String[] args) {
 
         Game g = new Game();
@@ -38,6 +42,10 @@ public class Game {
         return new PlayerCreatorManager();
     }
 
+    public static void setLocation(Location currentLocation) {
+        location = currentLocation;
+    }
+
     /**
      * Creates the manager controller and all switch event handlers.
      * @return the manager controller to pass to the shell.
@@ -49,7 +57,7 @@ public class Game {
         ChangeOptionsStateFactory changeOptionsStateFactory = new ChangeOptionsStateFactory();
         PauseMenuManager pauseMenuManager = new PauseMenuManager(pauseMenuChoiceStateFactory, changeOptionsStateFactory);
         EventManager eventManager = new EventManager();
-        AreaManager areaManager = new AreaManager(eventManager);
+        AreaManager areaManager = new AreaManager(eventManager, location);
 
         PauseResumeEventHandler pauseResumeEventHandler = new PauseResumeEventHandler(pauseMenuManager);
         managerController.addSwitchEventHandler(pauseResumeEventHandler);
