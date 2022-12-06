@@ -1,6 +1,5 @@
 package save;
 
-import objects.character.Player;
 import objects.inventory.Inventory;
 import objects.item.*;
 
@@ -10,8 +9,8 @@ public class SaveInventory implements SavableEntity {
     /**
      * Constructor for SaveInventory;
      */
-    public SaveInventory(){
-        inventory = Player.getInventory();
+    public SaveInventory(Inventory inventory){
+        this.inventory = inventory;
     }
 
     /**

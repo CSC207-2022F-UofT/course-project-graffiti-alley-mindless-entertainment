@@ -9,11 +9,11 @@ class SaveInventoryTest {
 
     @Test
     void testToSavableString(){
-        SaveInventory s = new SaveInventory();
-        s.inventory = new Inventory();
+        Inventory inventory = new Inventory();
         Item item = new Armor(15);
-        s.inventory.addItem(item);
-        s.inventory.addItem(item);
+        inventory.addItem(item);
+        inventory.addItem(item);
+        SaveInventory s = new SaveInventory(inventory);
         String expected = "0. LEVEL 15 ARMOR\n1. LEVEL 15 ARMOR\n";
         String actual = s.toSavableString();
         assertEquals(expected, actual);
@@ -21,8 +21,8 @@ class SaveInventoryTest {
 
     @Test
     void testToSavableString_whenEmptyInventory(){
-        SaveInventory s = new SaveInventory();
-        s.inventory = new Inventory();
+        Inventory inventory = new Inventory();
+        SaveInventory s = new SaveInventory(inventory);
         String expected = "";
         String actual = s.toSavableString();
         assertEquals(expected, actual);
@@ -30,7 +30,8 @@ class SaveInventoryTest {
 
     @Test
     void testFromSaveAbleString(){
-        SaveInventory s = new SaveInventory();
+        Inventory inventory = new Inventory();
+        SaveInventory s = new SaveInventory(inventory);
         s.fromSavableString("0. LEVEL 15 ARMOR\n1. LEVEL 15 SWORD\n2. LEVEL 10 POTION");
         String actual = s.inventory.viewItemList();
         String expected = "0. LEVEL 15 ARMOR\n1. LEVEL 15 SWORD\n2. LEVEL 10 POTION\n";
@@ -39,8 +40,8 @@ class SaveInventoryTest {
 
     @Test
     void testFromSaveAbleString_whenEmptyString_thenShouldBeEmptyInventory(){
-        SaveInventory s = new SaveInventory();
-        s.inventory = new Inventory();
+        Inventory inventory = new Inventory();
+        SaveInventory s = new SaveInventory(inventory);
         s.fromSavableString("");
         String actual = s.inventory.viewItemList();
         String expected = "";
@@ -49,7 +50,8 @@ class SaveInventoryTest {
 
     @Test
     void testGetId(){
-        SaveInventory s = new SaveInventory();
+        Inventory inventory = new Inventory();
+        SaveInventory s = new SaveInventory(inventory);
         Enum<SaveEntityId> expected = SaveEntityId.INVENTORY;
         Enum<SaveEntityId> actual = s.getId();
         assertEquals(expected, actual);
