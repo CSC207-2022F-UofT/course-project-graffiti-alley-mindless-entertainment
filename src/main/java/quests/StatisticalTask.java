@@ -31,7 +31,11 @@ public class StatisticalTask extends Task {
      */
     @Override
     public boolean isCompleted(Player assignee) {
-        return getPlayersStatistic(assignee) >= this.value;
+        if (getPlayersStatistic(assignee) >= this.value) {
+            this.isCompleted = true;
+            return true;
+        }
+        return false;
     }
 
     /**
