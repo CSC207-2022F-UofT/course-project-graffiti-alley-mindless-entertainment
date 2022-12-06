@@ -6,8 +6,6 @@ import io.Output;
 import io.OutputHandler;
 import main_menu.MainMenuInputValidator;
 import main_menu.MainMenuOptions;
-import switch_managers.SwitchEventMediatorProxy;
-import switch_managers.SwitchEventType;
 
 /**
  * The State for starting a new game.
@@ -50,7 +48,6 @@ public class NewGameState implements State {
      */
     @Override
     public void postInput(String input) {
-        SwitchEventMediatorProxy.getInstance().store(SwitchEventType.NEW_GAME);
         this.awaitInput = false;
         this.isDone = true;
     }

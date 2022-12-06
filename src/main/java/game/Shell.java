@@ -22,9 +22,10 @@ public class Shell {
     private boolean running;
     private boolean saveLoaded;
 
-    public Shell(InputHandler inputHandler, ManagerController managerController, SwitchEventMediator switchEventMediator) {
+    public Shell(InputHandler inputHandler, ManagerController managerController, StateManager startingManager, SwitchEventMediator switchEventMediator) {
         this.inputHandler = inputHandler;
         this.managerController = managerController;
+        this.currentManager = startingManager;
         this.switchEventMediator = switchEventMediator;
         this.saveLoaded = false;
     }
