@@ -6,6 +6,7 @@ import main_menu.MainMenuManager;
 import menus.MenuStateFactory;
 import menus.PauseMenuManager;
 import menus.options.ChangeOptionsStateFactory;
+import objects.character.Player;
 import objects.inventory.Inventory;
 import objects.inventory.InventoryStateFactory;
 import playercreation.PlayerCreatorManager;
@@ -73,7 +74,7 @@ public class ManagerControllerFactory {
      * Creates the pause resume event handler.
      */
     void createPauseResumeEventHandler() {
-        Inventory inventory = new Inventory(); //TODO: get this from a different place
+        Inventory inventory = Player.getInventory(); //TODO: get this from a different place
         ChangeOptionsStateFactory changeOptionsStateFactory = new ChangeOptionsStateFactory();
         InventoryStateFactory inventoryStateFactory = new InventoryStateFactory(inventory);
         MenuStateFactory menuStateFactory = new MenuStateFactory(changeOptionsStateFactory, inventoryStateFactory);
