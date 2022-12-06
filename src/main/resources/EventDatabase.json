@@ -23,6 +23,13 @@
       "text": "You discovered a potion on the ground!"
     },
     {
+      "name": "test 4",
+      "type": "Encounter",
+      "encounter-type": "Quest",
+      "npc": "Charlotte",
+      "quest-name": "becoming rich"
+    },
+    {
       "name": "test 3",
       "type": "Encounter",
       "encounter-type": "Hostile",

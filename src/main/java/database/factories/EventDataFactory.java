@@ -23,11 +23,16 @@ public class EventDataFactory {
      * @return EncounterEventData with all instance attributes converted from jsonObject
      */
     public EncounterEventData createEncounterEventData(JSONObject jsonObject) {
+        String questName = "";
+        if (jsonObject.containsKey("quest-name")) {
+            questName = (String) jsonObject.get("quest-name");
+        }
         return new EncounterEventData(
                 (String) jsonObject.get("name"),
                 (String) jsonObject.get("type"),
                 (String) jsonObject.get("encounter-type"),
-                (String) jsonObject.get("npc")
+                (String) jsonObject.get("npc"),
+                questName
         );
     }
 

@@ -10,12 +10,14 @@ public class EncounterEventData {
     public String type;
     public String encounterType;
     public String npc;
+    public String questName;
 
-    public EncounterEventData(String name, String type, String encounterType, String npc) {
+    public EncounterEventData(String name, String type, String encounterType, String npc, String questName) {
         this.name = name;
         this.type = type;
         this.encounterType = encounterType;
         this.npc = npc;
+        this.questName = questName;
     }
 
 }

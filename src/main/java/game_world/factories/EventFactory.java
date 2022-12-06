@@ -27,7 +27,8 @@ public class EventFactory {
         return new EncounterEvent(
                 data.name,
                 data.encounterType,
-                data.npc
+                data.npc,
+                data.questName
         );
     }
 
