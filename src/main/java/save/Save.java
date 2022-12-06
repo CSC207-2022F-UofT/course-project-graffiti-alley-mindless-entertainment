@@ -9,6 +9,10 @@ public class Save {
         savedData = dataToSave;
     }
 
+    public Map<SaveEntityId, String> getSavedData() {
+        return savedData;
+    }
+
     /**
      * @param id id of an object to be saved
      * @return the corresponding string representation

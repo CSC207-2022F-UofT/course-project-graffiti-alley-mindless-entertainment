@@ -6,12 +6,12 @@ public interface SaveGateway {
 
     /**
      * @param saves the saves to be saved
-     * saves saves into file
+     * store the save in file
      */
     public void storeSaves(List<Save> saves);
 
     /**
-     * @return the save
+     * @return the list of saves
      */
     public List<Save> retrieveSave();
 }
