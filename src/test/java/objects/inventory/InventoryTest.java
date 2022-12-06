@@ -2,6 +2,8 @@ package objects.inventory;
 
 import objects.item.*;
 import org.junit.jupiter.api.Test;
+import save.SaveEntityId;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -126,5 +128,50 @@ class InventoryTest {
         String expected = "0. LEVEL 13 ARMOR\n1. LEVEL 11 POTION\n";
         String result = inventory.viewItemList();
         assertEquals(expected, result);
+    }
+
+    @Test
+    void testToSavableString(){
+        Inventory inventory = new Inventory();
+        Item item = new Armor(15);
+        inventory.addItem(item);
+        inventory.addItem(item);
+        String expected = "0. LEVEL 16 ARMOR\n1. LEVEL 16 ARMOR\n";
+        String actual = inventory.toSavableString();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testToSavableString_whenEmptyInventory(){
+        Inventory inventory = new Inventory();
+        String expected = "";
+        String actual = inventory.toSavableString();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testFromSaveAbleString(){
+        Inventory inventory = new Inventory();
+        inventory.fromSavableString("0. LEVEL 15 ARMOR\n1. LEVEL 15 SWORD\n2. LEVEL 10 POTION");
+        String actual = inventory.viewItemList();
+        String expected = "0. LEVEL 15 ARMOR\n1. LEVEL 15 SWORD\n2. LEVEL 10 POTION\n";
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testFromSaveAbleString_whenEmptyString_thenShouldBeEmptyInventory(){
+        Inventory inventory = new Inventory();
+        inventory.fromSavableString("");
+        String actual = inventory.viewInventory();
+        String expected = "";
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testGetId(){
+        Inventory inventory = new Inventory();
+        Enum<SaveEntityId> expected = SaveEntityId.INVENTORY;
+        Enum<SaveEntityId> actual = inventory.getId();
+        assertEquals(expected, actual);
     }
 }
