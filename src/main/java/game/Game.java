@@ -20,7 +20,8 @@ public class Game {
      * Private constructor to prevent outside access.
      */
     private Game() {
-        managerControllerFactory = new ManagerControllerFactory();
+        GameEntities gameEntities = new GameEntities();
+        managerControllerFactory = new ManagerControllerFactory(gameEntities);
     }
 
     public void startGame() {
