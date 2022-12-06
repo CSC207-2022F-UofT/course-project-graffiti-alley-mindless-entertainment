@@ -10,9 +10,9 @@ public class StatisticalReward extends Reward {
      * Attributes.
      */
     // Stores the player's numerical statistic that will be affected by this reward.
-    private PlayersStatistics statistic;
+    private final PlayersStatistics statistic;
     // Stores the amount by which the reward's receiver's chosen statistic is affected.
-    private int value;
+    private final int value;
 
     /**
      * Constructor.
