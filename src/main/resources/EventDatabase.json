@@ -23,7 +23,7 @@
       "text": "You discovered a potion on the ground!"
     },
     {
-      "name": "test 3",
+      "name": "Goblin Hut",
       "type": "Encounter",
       "encounter-type": "Hostile",
       "npc": "goblin"
