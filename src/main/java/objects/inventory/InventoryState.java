@@ -62,7 +62,7 @@ public class InventoryState implements State {
             return;
         } else if (command.equals(removeItemCommand)) {
             int itemIndex = Integer.parseInt(inputArray[1]);
-            if (itemIndex > inventory.getInventory().size()){
+            if (itemIndex >= inventory.getInventory().size()){
                 Output.getScreen().generateText("Make sure you have the item!\n");
                 return;
             }
