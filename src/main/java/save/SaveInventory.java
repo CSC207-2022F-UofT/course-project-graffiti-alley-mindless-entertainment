@@ -5,7 +5,14 @@ import objects.inventory.Inventory;
 import objects.item.*;
 
 public class SaveInventory implements SavableEntity {
-    final Inventory inventory = Player.getInventory();
+    Inventory inventory;
+
+    /**
+     * Constructor for SaveInventory;
+     */
+    public SaveInventory(){
+        inventory = Player.getInventory();
+    }
 
     /**
      * @return a string representation of inventory to be saved
@@ -13,7 +20,7 @@ public class SaveInventory implements SavableEntity {
     @Override
     public String toSavableString() {
         if (inventory.getInventory().size() == 0) {
-            return null;
+            return "";
         }
         else {
             return inventory.viewItemList();
@@ -59,6 +66,6 @@ public class SaveInventory implements SavableEntity {
      */
     @Override
     public SaveEntityId getId() {
-        return SaveEntityId.INVENTORY_ID;
+        return SaveEntityId.INVENTORY;
     }
 }
