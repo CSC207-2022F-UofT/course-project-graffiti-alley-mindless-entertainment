@@ -36,11 +36,11 @@ public class SaveInventory implements SavableEntity {
      */
     public Item createItem(String level, String itemType){
         switch (itemType) {
-            case "Sword":
+            case "SWORD":
                 return new Sword(Integer.parseInt(level));
-            case "Potion":
+            case "POTION":
                 return new Potion(Integer.parseInt(level));
-            case "Armor":
+            case "ARMOR":
                 return new Armor(Integer.parseInt(level));
         }
         return null;
