@@ -20,12 +20,21 @@ class SaveInventoryTest {
     }
 
     @Test
+    void testToSavableString_whenEmptyInventory(){
+        SaveInventory s = new SaveInventory();
+        s.inventory = new Inventory();
+        String expected = "";
+        String actual = s.toSavableString();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void testFromSaveAbleString(){
         SaveInventory s = new SaveInventory();
-        s.fromSavableString("0. LEVEL 15 ARMOR\n1. LEVEL 15 ARMOR\n");
+        s.fromSavableString("0. LEVEL 15 ARMOR\n1. LEVEL 15 SWORD\n2. LEVEL 10 POTION");
         String actual = s.inventory.viewItemList();
-        String expected = "0. LEVEL 15 ARMOR\n1. LEVEL 15 ARMOR\n";
-        assertEquals(actual, expected);
+        String expected = "0. LEVEL 15 ARMOR\n1. LEVEL 15 SWORD\n2. LEVEL 10 POTION\n";
+        assertEquals(expected, actual);
     }
 
     @Test
