@@ -27,9 +27,6 @@ public class AreaManager extends StateManager {
         this.eventManager = eventManager;
         this.databaseController = new AreaDatabaseInteractor(this.eventManager);
         this.currentArea = databaseController.loadArea("1");
-        this.currState = dialogueStateFactory.createDialogueState(
-                "The game will now begin. To advance dialogue, press enter. Enjoy!"
-        );
         this.location = location;
         this.location.setDatabaseController(databaseController);
         initialize();
@@ -37,6 +34,9 @@ public class AreaManager extends StateManager {
 
     @Override
     public void initialize() {
+        this.currState = dialogueStateFactory.createDialogueState(
+                "The game will now begin. To advance dialogue, press enter. Enjoy!"
+        );
         this.location.setCurrentArea(this.currentArea);
     }
 

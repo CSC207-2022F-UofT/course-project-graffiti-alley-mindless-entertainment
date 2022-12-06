@@ -22,13 +22,13 @@ import switch_managers.handlers.StartGameEventHandler;
  */
 public class ManagerControllerFactory {
 
-    private final Location location;
+    private Location location;
     private final ManagerController managerController;
     private final SwitchEventManager switchEventManager;
     public ManagerControllerFactory() {
         switchEventManager = new SwitchEventManager();
         managerController = new ManagerControllerImpl(switchEventManager);
-        location = new Location();
+
     }
 
     /**
@@ -38,6 +38,7 @@ public class ManagerControllerFactory {
      */
     ManagerController createManagerController() {
 
+        location = new Location();
         createPauseResumeEventHandler();
         createStartGameEventHandler();
         createMainMenuEventHandler();
