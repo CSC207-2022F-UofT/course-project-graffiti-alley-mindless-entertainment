@@ -2,5 +2,6 @@ package save;
 
 public enum SaveEntityId {
     LOCATION,
-    Options
+    Options,
+    INVENTORY
 }
