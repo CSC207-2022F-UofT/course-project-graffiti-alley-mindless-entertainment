@@ -17,10 +17,10 @@ public class PlayerQuestionStateFactory {
     private final PlayerCreatorInteractor interactor;
 
     /**
-     * Constructs a new PlayerQuestionStateFactory with an empty PlayerCreatorInteractor.
+     * Constructs a new PlayerQuestionStateFactory with creatorInteractor.
      */
-    public PlayerQuestionStateFactory() {
-        this.interactor = new PlayerCreatorInteractor();
+    public PlayerQuestionStateFactory(PlayerCreatorInteractor creatorInteractor) {
+        this.interactor = creatorInteractor;
     }
 
     /**

@@ -7,6 +7,7 @@ import main_menu.MainMenuManager;
 import menus.MenuStateFactory;
 import menus.PauseMenuManager;
 import menus.options.ChangeOptionsStateFactory;
+import objects.character.Player;
 import objects.inventory.Inventory;
 import objects.inventory.InventoryStateFactory;
 import playercreation.PlayerCreatorManager;
@@ -53,7 +54,8 @@ public class ManagerControllerFactory {
         MainMenuManager mainMenuManager = new MainMenuManager();
         managerController.addManager(mainMenuManager);
 
-        PlayerCreatorManager playerCreatorManager = new PlayerCreatorManager();
+        Player player = new Player("", null);
+        PlayerCreatorManager playerCreatorManager = new PlayerCreatorManager(player);
         managerController.addManager(playerCreatorManager);
 
         MainMenuEventHandler mainMenuEventHandler = new MainMenuEventHandler(mainMenuManager, playerCreatorManager);
