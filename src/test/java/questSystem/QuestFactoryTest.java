@@ -34,20 +34,20 @@ public class QuestFactoryTest {
         );
     }
 
-    /**
-     * @return Quest object created using the factory and QuestData.
-     */
-    Quest createQuest(QuestData data) {
-        QuestFactory factory = new QuestFactory();
+    ///**
+    // * @return Quest object created using the factory and QuestData.
+    // */
+    //Quest createQuest(QuestData data) {
+    //    QuestFactory factory = new QuestFactory();
 
-        return factory.createQuest(data);
-    }
+    //    return factory.createQuest(data);
+    //}
 
-    @Test
-    void questCreationTest() {
-        Quest quest = createQuest(createQuestData());
+    //@Test
+    //void questCreationTest() {
+        //Quest quest = createQuest(createQuestData());
 
         // add the assert statements here.
-    }
+    //}
 
 }
