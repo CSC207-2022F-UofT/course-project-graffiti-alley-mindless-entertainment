@@ -1,22 +1,26 @@
 package switch_managers;
 
-import menus.PauseMenuChoiceStateFactory;
+import menus.MenuStateFactory;
 import menus.PauseMenuManager;
 import menus.options.ChangeOptionsStateFactory;
+import objects.inventory.Inventory;
+import objects.inventory.InventoryStateFactory;
 import org.junit.jupiter.api.Test;
 import switch_managers.handlers.PauseResumeEventHandler;
 
-class ManagerControllerImplTest {
+class SwitchEventManagerTest {
 
     @Test
     void switchManagers() {
-        ManagerControllerImpl managerController = new ManagerControllerImpl();
+        SwitchEventManager managerController = new SwitchEventManager();
 
         assert(managerController.switchManagers(SwitchEventType.PAUSE, null) == null);
 
-        PauseMenuChoiceStateFactory pauseMenuChoiceStateFactory = new PauseMenuChoiceStateFactory();
+        Inventory inventory = new Inventory();
         ChangeOptionsStateFactory changeOptionsStateFactory = new ChangeOptionsStateFactory();
-        PauseMenuManager pauseMenuManager = new PauseMenuManager(pauseMenuChoiceStateFactory, changeOptionsStateFactory);
+        InventoryStateFactory inventoryStateFactory = new InventoryStateFactory(inventory);
+        MenuStateFactory menuStateFactory = new MenuStateFactory(changeOptionsStateFactory, inventoryStateFactory);
+        PauseMenuManager pauseMenuManager = new PauseMenuManager(menuStateFactory);
 
         PauseResumeEventHandler pauseResumeEventHandler = new PauseResumeEventHandler(pauseMenuManager);
         managerController.addSwitchEventHandler(pauseResumeEventHandler);

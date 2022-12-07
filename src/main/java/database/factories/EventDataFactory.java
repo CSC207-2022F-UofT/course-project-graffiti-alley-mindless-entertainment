@@ -3,6 +3,7 @@ package database.factories;
 import database.objects.ArbitraryEventData;
 import database.objects.EncounterEventData;
 import database.objects.ItemPickUpEventData;
+import database.objects.QuestGiverEventData;
 import org.json.simple.JSONObject;
 
 public class EventDataFactory {
@@ -27,6 +28,19 @@ public class EventDataFactory {
                 (String) jsonObject.get("name"),
                 (String) jsonObject.get("type"),
                 (String) jsonObject.get("encounter-type"),
+                (String) jsonObject.get("npc")
+        );
+    }
+
+    /**
+     * @param jsonObject JSONObject with all information regarding event
+     * @return QuestGiverEventData with all instance attributes converted from jsonObject
+     */
+    public QuestGiverEventData createQuestGiverEventData(JSONObject jsonObject) {
+        return new QuestGiverEventData(
+                (String) jsonObject.get("name"),
+                (String) jsonObject.get("type"),
+                (String) jsonObject.get("quest"),
                 (String) jsonObject.get("npc")
         );
     }

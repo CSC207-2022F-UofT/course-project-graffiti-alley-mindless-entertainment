@@ -2,6 +2,7 @@ package playercreation;
 
 import interfaces.State;
 import core.StateManager;
+import objects.character.Player;
 import playercreation.factories.PlayerConfirmStateFactory;
 import playercreation.factories.PlayerQuestionStateFactory;
 import switch_managers.SwitchEventMediator;
@@ -19,6 +20,7 @@ public class PlayerCreatorManager extends StateManager {
      * questionStateFactory: A PlayerQuestionStateFactory used to create new questions for the user. Includes methods
      *                       for creating new PlayerNameStates, PlayerDescriptionStates, and PlayerSkillTypeStates.
      * confirmStateFactory: A PlayerConfirmStateFactory used to create new PlayerConfirmStates.
+     * creatorInteractor: A PlayerCreatorInteractor to store the Player entity being created.
      */
     private PlayerQuestion currPlayerQuestion;
     private int completedQuestions;
@@ -26,11 +28,13 @@ public class PlayerCreatorManager extends StateManager {
     private final PlayerConfirmStateFactory confirmStateFactory;
 
     /**
-     * Initializes a new PlayerCreatorManager.
+     * Initializes a new PlayerCreatorManager with creatorInteractor using player.
+     * @param player The Player entity passed into the manager.
      */
-    public PlayerCreatorManager() {
+    public PlayerCreatorManager(Player player) {
         this.completedQuestions = 0;
-        this.questionStateFactory = new PlayerQuestionStateFactory();
+        PlayerCreatorInteractor creatorInteractor = new PlayerCreatorInteractor(player);
+        this.questionStateFactory = new PlayerQuestionStateFactory(creatorInteractor);
         this.confirmStateFactory = new PlayerConfirmStateFactory();
         initialize();
     }
@@ -48,7 +52,6 @@ public class PlayerCreatorManager extends StateManager {
      * @return The current PlayerQuestion being asked of the user.
      */
     public PlayerQuestion getCurrPlayerQuestion() {
-        // Return the current PlayerQuestion.
         return this.currPlayerQuestion;
     }
 

@@ -25,7 +25,7 @@ public class InventoryState implements State {
      */
     public InventoryState(Inventory inventory){
         this.inventory = inventory;
-        this.quitCommand = "quit";
+        this.quitCommand = "return";
         this.removeItemCommand = "remove";
     }
 
@@ -35,10 +35,18 @@ public class InventoryState implements State {
     @Override
     public void preInput() {
         awaitingInput = true;
-        String textToDisplay = inventory.viewInventory() + "Commands: \n" +
-                "quit: type 'quit' inventory to quit inventory.\n" +
-                "remove i: type 'remove i' (i is the i-th item in inventory) to remove item.\n";
-        Output.getScreen().generateText(textToDisplay);
+        StringBuilder textToDisplay = new StringBuilder();
+        if (inventory.getInventory().size() == 0){
+            textToDisplay.append("There is no item in your inventory!\n");
+        }
+        else{
+            textToDisplay.append("Inventory: \n\n");
+            textToDisplay.append(inventory.viewInventory());
+        }
+        textToDisplay.append("\nCommands: \n\n" +
+                "return: type 'return' inventory to return to the pause menu.\n" +
+                "remove i: type 'remove i' (i is the i-th item in inventory) to remove item.\n");
+        Output.getScreen().generateText(textToDisplay.toString());
     }
 
     /**
@@ -53,13 +61,18 @@ public class InventoryState implements State {
             isDone = true;
             return;
         } else if (command.equals(removeItemCommand)) {
+            int itemIndex = Integer.parseInt(inputArray[1]);
+            if (itemIndex >= inventory.getInventory().size()){
+                Output.getScreen().generateText("Make sure you have the item!\n");
+                return;
+            }
             inventory.removeItem(Integer.parseInt(inputArray[1]));
             awaitingInput = false;
-            Output.getScreen().generateText("The item is successfully removed!");
+            Output.getScreen().generateText("The item is successfully removed!\n");
             return;
         }
 
-        Output.getScreen().generateText("Please enter a valid command! e.g. 'quit', 'remove 0'");
+        Output.getScreen().generateText("Please enter a valid command! e.g. 'return', 'remove 0'\n");
     }
 
     /**

@@ -5,6 +5,7 @@ import database.factories.EventDataFactory;
 import database.objects.ArbitraryEventData;
 import database.objects.EncounterEventData;
 import database.objects.ItemPickUpEventData;
+import database.objects.QuestGiverEventData;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -47,6 +48,19 @@ public class EventDataManager extends DatabaseManager {
         assert eventData != null;
         assert (eventData.get("type")).equals("Encounter");
         return this.dataFactory.createEncounterEventData(eventData);
+    }
+
+    /**
+     * @param key of an arbitrary event
+     * @param value of the arbitrary event
+     * @return QuestGiverEventData with all json objects converted to String/long variables
+     */
+    public QuestGiverEventData fetchQuestGiverEvent(String key, Object value) {
+        JSONArray eventsData = (JSONArray) super.fullDatabase.get("events");
+        JSONObject eventData = databaseHelper.searchJSONArray(eventsData, key, value);
+        assert eventData != null;
+        assert (eventData.get("type")).equals("Quest Giver");
+        return this.dataFactory.createQuestGiverEventData(eventData);
     }
 
     /**

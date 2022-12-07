@@ -1,0 +1,55 @@
+{
+  "quests": [
+    {
+      "name":"regeneration",
+      "description": "",
+      "bystander": "",
+      "reward": {
+        "type": "statistical",
+        "statistic": "health",
+        "value": 25
+      },
+      "tasks": [
+        {
+          "type": "statistical",
+          "statistic": "health",
+          "value": 70
+        }
+      ]
+    },
+    {
+      "name":"becoming rich",
+      "description": "",
+      "bystander": "",
+      "reward": {
+        "type": "statistical",
+        "statistic": "money",
+        "value": 1000
+      },
+      "tasks": [{
+        "type": "statistical",
+        "statistic": "level",
+        "value": 5
+      }, {
+        "type": "statistical",
+        "statistic": "money",
+        "value": 300
+      }]
+    },
+    {
+      "name":"maturing",
+      "description": "",
+      "bystander": "",
+      "reward": {
+        "type": "statistical",
+        "statistic": "experience",
+        "value": 25
+      },
+      "tasks": [{
+        "type": "statistical",
+        "statistic": "experience",
+        "value": 10
+      }]
+    }
+  ]
+}
