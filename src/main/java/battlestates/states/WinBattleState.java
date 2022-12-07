@@ -41,14 +41,13 @@ public class WinBattleState implements State {
         // Something that adds loot into the user's inventory, so far no loot table.
         // user.changeReputation(repChange); // Currently no implementation
 
-        // Displaying victory text!
         String winText = foe.getName() + " has been defeated! You earned " + expGain
                 + " experience points, unless you cheated ;)";
         output.generateText(winText);
         user.changeSpeed(100 - user.getSpeed()); // Resets speed to 100
 
         this.done = true;
-        SwitchEventMediatorProxy.getInstance().store(SwitchEventType.ENCOUNTER); // Moves to a new event
+        SwitchEventMediatorProxy.getInstance().store(SwitchEventType.BATTLE_END); // Moves to a new event
     }
 
     @Override

@@ -1,7 +1,9 @@
 package game;
 
+import battlestates.BattleStateManager;
 import game_world.managers.AreaManager;
 import game_world.managers.EventManager;
+import game_world.objects.events.EncounterEvent;
 import main_menu.MainMenuManager;
 import menus.MenuStateFactory;
 import menus.PauseMenuManager;
@@ -12,9 +14,10 @@ import playercreation.PlayerCreatorManager;
 import switch_managers.ManagerController;
 import switch_managers.ManagerControllerImpl;
 import switch_managers.SwitchEventManager;
+import switch_managers.handlers.EncounterEventHandler;
 import switch_managers.handlers.MainMenuEventHandler;
 import switch_managers.handlers.PauseResumeEventHandler;
-import switch_managers.handlers.StartGameEventHandler;
+import switch_managers.handlers.ReturnToMapEventHandler;
 
 /**
  * Used to create the manager controller for the game.
@@ -41,8 +44,9 @@ public class ManagerControllerFactory {
     ManagerController createManagerController() {
 
         createPauseResumeEventHandler();
-        createStartGameEventHandler();
+        createReturnToMapEventHandler();
         createMainMenuEventHandler();
+        createEncounterEventHandler();
 
         return managerController;
     }
@@ -64,12 +68,12 @@ public class ManagerControllerFactory {
     /**
      * Creates the start game event handler.
      */
-    void createStartGameEventHandler() {
+    void createReturnToMapEventHandler() {
         EventManager eventManager = new EventManager();
         AreaManager areaManager = new AreaManager(eventManager, gameEntities.getLocation());
         managerController.addManager(areaManager);
 
-        StartGameEventHandler startGameEventHandler = new StartGameEventHandler(areaManager);
+        ReturnToMapEventHandler startGameEventHandler = new ReturnToMapEventHandler(areaManager);
         switchEventManager.addSwitchEventHandler(startGameEventHandler);
     }
 
@@ -86,5 +90,13 @@ public class ManagerControllerFactory {
 
         PauseResumeEventHandler pauseResumeEventHandler = new PauseResumeEventHandler(pauseMenuManager);
         switchEventManager.addSwitchEventHandler(pauseResumeEventHandler);
+    }
+    void createEncounterEventHandler() {
+        BattleStateManager battleStateManager = new BattleStateManager(gameEntities.getPlayer(), gameEntities.getLocation());
+        managerController.addManager(battleStateManager);
+
+        EncounterEventHandler encounterEventHandler = new EncounterEventHandler(battleStateManager);
+
+        switchEventManager.addSwitchEventHandler(encounterEventHandler);
     }
 }

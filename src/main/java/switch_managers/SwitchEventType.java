@@ -7,5 +7,7 @@ public enum SwitchEventType {
     NEW_GAME,
     LOAD_GAME,
     MAIN_MENU,
-    END_GAME, ENCOUNTER,
+    END_GAME,
+    ENCOUNTER,
+    BATTLE_END
 }

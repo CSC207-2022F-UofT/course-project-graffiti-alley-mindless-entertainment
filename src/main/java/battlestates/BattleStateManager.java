@@ -5,6 +5,9 @@ import battlestates.states.LoseBattleState;
 import battlestates.states.UserTurnState;
 import battlestates.states.WinBattleState;
 import core.StateManager;
+import game_world.objects.Location;
+import game_world.objects.events.EncounterEvent;
+import game_world.objects.events.Event;
 import interfaces.State;
 import io.Output;
 import io.OutputHandler;
@@ -23,7 +26,6 @@ public class BattleStateManager extends StateManager {
      */
     private Player user;
     private EnemyFighter foe;
-    private boolean awaitingInput = false;
     private final OutputHandler output = Output.getScreen();
     private Location location;
 
@@ -37,24 +39,21 @@ public class BattleStateManager extends StateManager {
      * Returns the next state based on the current state. If either EnemyFacade or user are dead, ends battle and
      * provides win or lose state accordingly.
      * @param input string input to dictate the next state, currently unused
-     * @return the state that comes next in the battle. someitmes when the user enters the wrong number this class would be used to fix the difference between the se
+     * @return the state that comes next in the battle. sometimes when the user enters the wrong number this class would be used to fix the difference between the se
      */
     @Override
     protected State nextState(String input) {
         boolean userNext = user.getSpeed() >= foe.getSpeed();
         State chosenState;
 
-        // Win condition
         if (!foe.checkAlive()) {
             chosenState = new WinBattleState(user, foe);
             this.isDone = true;
         }
-        // Lose condition
         else if (user.getCurrHealth() <= 0) {
             chosenState = new LoseBattleState(user, foe);
             this.isDone = true;
         }
-        // Normal battle turn ordering, characters can get multiple turns in a row if high enough speed.
         else {
             if (userNext) {
                 output.generateText("You outsped the enemy. What would you like to do?");
@@ -62,49 +61,26 @@ public class BattleStateManager extends StateManager {
             } else {
                 chosenState = new EnemyTurnState(user, foe, input);
             }
-            awaitingInput = chosenState.awaitInput();
         }
         return chosenState;
     }
     @Override
-    public void preInput() {
-        currState.preInput();
-        awaitingInput = currState.awaitInput(); // Making sure await is updated
-        boolean currPreInput = currState.isDone();
-        if (currPreInput) {
-            this.currState = this.nextState("");
-            if (this.currState == null || this.currState instanceof WinBattleState) {
-                this.isDone = true;
-            }
-        }
-    }
-    @Override
-    public void postInput(String input) {
-        currState.postInput(input);
-        awaitingInput = currState.awaitInput(); // Making sure await is updated
-        boolean currPostInput = currState.isDone();
-        if (currPostInput) {
-            this.currState = this.nextState(input);
-            if (this.currState == null || this.currState instanceof WinBattleState) {
-                this.isDone = true;
-            }
-        }
-    }
-
-    @Override
-    public boolean awaitInput() {
-        return awaitingInput;
-    }
-    @Override
     public void initialize() {
         EnemyFactory enemyFactory = new EnemyFactory();
-        String chosenEnemy = location.getCurrentArea().getCurrEvent().getNPC();
-        this.foe = enemyFactory.createEnemy(chosenEnemy); // TEMP, later decide which enemy
+        Event currEvent = location.getCurrentArea().getCurrEvent();
+        String chosenEnemy = "goblin";
+        EncounterEvent encounterEvent;
 
-        user.addSkill(new Skill("fireball", 20, 10, SkillType.FIRE));
-        user.addSkill(new Skill("waterball", 20, 10, SkillType.WATER));
-        user.addSkill(new Skill("earthball", 20, 10, SkillType.EARTH));
-        user.addSkill(new Skill("cheat move", 40, -10, SkillType.WATER));
+        if (currEvent.type.equals(("Encounter"))) {
+            encounterEvent = (EncounterEvent) currEvent;
+            chosenEnemy = encounterEvent.getNPC();
+        }
+        this.foe = enemyFactory.createEnemy(chosenEnemy);
+//
+//        user.addSkill(new Skill("fireball", 20, 10, SkillType.FIRE));
+//        user.addSkill(new Skill("waterball", 20, 10, SkillType.WATER));
+//        user.addSkill(new Skill("earthball", 20, 10, SkillType.EARTH));
+//        user.addSkill(new Skill("cheat move", 40, -10, SkillType.WATER));
         // Initialize is called at the beginning of the game, make sure it is able to do it without proper area
         currState = nextState("");
     }
