@@ -11,6 +11,42 @@
       "type": "earth",
       "lag": "10",
       "damage": "25"
+    },
+    {
+      "name": "waterfall",
+      "type": "water",
+      "lag": "10",
+      "damage": "20"
+    },
+    {
+      "name": "air cutter",
+      "type": "air",
+      "lag": "10",
+      "damage": "20"
+    },
+    {
+      "name": "energy ball",
+      "type": "earth",
+      "lag": "10",
+      "damage": "20"
+    },
+    {
+      "name": "water punch",
+      "type": "water",
+      "lag": "10",
+      "damage": "25"
+    },
+    {
+      "name": "air punch",
+      "type": "water",
+      "lag": "10",
+      "damage": "25"
+    },
+    {
+      "name": "fire punch",
+      "type": "fire",
+      "lag": "10",
+      "damage": "25"
     }
   ]
 }
