@@ -2,6 +2,7 @@ package objects.inventory;
 
 import objects.item.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A class for Inventory. Includes getter and setter for inventory, and functions like viewInventory,
@@ -103,5 +104,46 @@ public class Inventory {
             return ability;
         }
         return null;
+    }
+
+    /**
+     * Uses the item in the inventory with the given name if found
+     * @param name of the item wanted
+     * @return true if the item is found, false if the item is not found
+     */
+    public String useItem(String name) {
+        int index = findItem(name);
+        if (index >= 0) {
+            return useItem(index);
+        }
+        return null;
+    }
+
+    /**
+     * Finds the index of the item given a name
+     * @param name of the item wanted
+     * @return -1 if not found, index of the item if found.
+     */
+    public int findItem(String name) {
+        int index = -1;
+        for (int i = 0; i < inventory.size(); i++) {
+            index++;
+            if (inventory.get(i).getName().equals(name)) {
+                return index;
+            }
+        }
+        return index;
+    }
+
+    /**
+     * Returns the inventory as a list of the names of the items inside
+     * @return the inventory as a list of strings
+     */
+    public List<String> toStringList() {
+        List<String> stringInv = new ArrayList<>();
+        for (Item item : inventory) {
+            stringInv.add(item.getName());
+        }
+        return stringInv;
     }
 }

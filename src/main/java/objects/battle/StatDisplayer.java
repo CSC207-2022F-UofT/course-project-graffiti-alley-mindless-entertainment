@@ -4,6 +4,7 @@ import io.Output;
 import io.OutputHandler;
 import objects.character.EnemyFighter;
 import objects.character.Player;
+import objects.inventory.Inventory;
 
 import java.util.List;
 
@@ -66,6 +67,12 @@ public class StatDisplayer {
             output.generateText(stats + "\n");
             num++;
         }
+        displayPostBar();
+    }
+    public void displayStats(Inventory inv) {
+        String invString = inv.viewInventory();
+        displayPreBar();
+        output.generateText(invString);
         displayPostBar();
     }
 

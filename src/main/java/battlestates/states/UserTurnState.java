@@ -106,7 +106,7 @@ public class UserTurnState implements State {
                     statDisplayer.displayStats(user.getSkillList());
                 }
                 break;
-            case 1:
+            case 1: // Skill being used
                 if (cleanInput.equals("back")) {
                     questionNum = 0; // Escape back to battle options
                     break;
@@ -129,7 +129,7 @@ public class UserTurnState implements State {
 
                 this.done = true;
                 break;
-            case 2:
+            case 2: // Item being used
                 if (cleanInput.equals("back")) {
                     questionNum = 0; // Escape back to battle options
                     break;
@@ -139,8 +139,9 @@ public class UserTurnState implements State {
                 String chosenItem = cleanInput;
 
                 // Outputs and uses the chosen item
+                user.getInventory().useItem(chosenItem);
                 statDisplayer.displayPreBar();
-                output.generateText(chosenItem);
+                statDisplayer.displayStats(user.getInventory());
                 statDisplayer.displayPostBar();
 
                 // Using items take only 10 speed
