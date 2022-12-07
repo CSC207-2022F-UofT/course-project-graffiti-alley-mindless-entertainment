@@ -41,51 +41,6 @@ public class QuestManager {
         return this.questFactory.createQuest(data);
     }
 
-    /**
-     * Adds the quest retrieved to the quest started by the player.
-     * @param name of the quest
-     */
-    public void addNewQuest(String name) {
-        this.quests.add(createQuest(name));
-    }
-
-    /**
-     * Completes all the whenever possible.
-     * @param player that attempts to complete the quest.
-     */
-    public void completeQuests(Player player) {
-        for (Quest quest: this.quests) {
-            // in case the quest is not yet completed.
-            if (!quest.isCompleted()) {
-                this.completeQuest(quest, player);
-            }
-            // case where quest is completed and reward not distributed.
-            if (quest.isCompleted() && !quest.isRewardDistributed()) {
-                quest.getReward().distribute(player);
-            }
-        }
-    }
-
-    /**
-     * @param quest to be completed.
-     * @param player that completes the quest.
-     */
-    public void completeQuest(Quest quest, Player player) {
-        if (!quest.isCompleted()) {
-            //attempts to complete the tasks.
-            completeTasks(quest, player);
-        }
-    }
-
-    /**
-     * @param quest for which the tasks need to be completed.
-     * @param player that attempts to complete the tasks from the quest.
-     */
-    public void completeTasks(Quest quest, Player player) {
-        for (Task task: quest.getTasks()) {
-            task.isCompleted(player);
-        }
-    }
 
 
 
