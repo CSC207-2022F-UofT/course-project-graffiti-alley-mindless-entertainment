@@ -11,8 +11,8 @@ public class Armor extends Item {
      */
     public Armor(int level) {
         super(level);
-        this.setName("LEVEL " + this.getLevel() + " ARMOR");
-        this.setAbility("Gain " + this.getLevel() + " Armor");
+        this.setName("LEVEL " + (this.getLevel() + 1) + " ARMOR");
+        this.setAbility("Gain " + (this.getLevel() + 1) + " Armor");
         this.setPrice(this.getLevel() + 3);
     }
 }

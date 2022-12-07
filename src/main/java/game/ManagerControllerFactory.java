@@ -78,7 +78,7 @@ public class ManagerControllerFactory {
      * Creates the pause resume event handler.
      */
     void createPauseResumeEventHandler() {
-        Inventory inventory = new Inventory(); //TODO: get this from a different place
+        Inventory inventory = Player.getInventory();
         ChangeOptionsStateFactory changeOptionsStateFactory = new ChangeOptionsStateFactory();
         InventoryStateFactory inventoryStateFactory = new InventoryStateFactory(inventory);
         MenuStateFactory menuStateFactory = new MenuStateFactory(changeOptionsStateFactory, inventoryStateFactory);
