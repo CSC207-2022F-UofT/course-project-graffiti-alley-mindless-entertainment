@@ -4,13 +4,25 @@ import database.objects.ArbitraryEventData;
 import database.objects.EncounterEventData;
 import database.objects.ItemPickUpEventData;
 import database.objects.QuestGiverEventData;
+import game_world.managers.EventManager;
 import game_world.objects.events.ArbitraryEvent;
 import game_world.objects.events.EncounterEvent;
 import game_world.objects.events.ItemPickUpEvent;
 import game_world.objects.events.QuestGiverEvent;
+import game_world.factories.ItemPickUpEventFactory;
+import objects.inventory.Inventory;
 import quests.Quest;
 
 public class EventFactory {
+    public ItemPickUpEventFactory itemPickUpEventFactory;
+
+    /**
+     * Constructs EventFactory
+     * @param itemPickUpEventFactory itemPickUpEventFactory created to avoid introducing the Inventory dependency
+     */
+    public EventFactory(ItemPickUpEventFactory itemPickUpEventFactory){
+        this.itemPickUpEventFactory = itemPickUpEventFactory;
+    }
 
     /**
      * @return the new arbitrary event
@@ -51,10 +63,6 @@ public class EventFactory {
      * @param data data from current ItemPickUpEventData
      */
     public ItemPickUpEvent createItemPickUpEvent(ItemPickUpEventData data) {
-        return new ItemPickUpEvent(
-                data.name,
-                data.item,
-                data.text
-        );
+        return itemPickUpEventFactory.createItem(data);
     }
 }

@@ -7,9 +7,11 @@ import database.objects.EncounterEventData;
 import database.objects.ItemPickUpEventData;
 import database.objects.QuestGiverEventData;
 import game_world.factories.EventFactory;
+import game_world.factories.ItemPickUpEventFactory;
 import game_world.objects.Area;
 import game_world.objects.events.Event;
 import interfaces.State;
+import objects.inventory.Inventory;
 
 import java.util.ArrayList;
 
@@ -24,11 +26,15 @@ public class EventManager {
     private final EventDataManager database;
     private final EventFactory eventFactory;
 
-    public EventManager() {
+    /**
+     * Constructs EventManager
+     * @param itemPickUpEventFactory itemPickUpEventFactory created to avoid introducing the Inventory dependency
+     */
+    public EventManager(ItemPickUpEventFactory itemPickUpEventFactory) {
         this.database = new EventDataManager();
         this.eventQueue = new ArrayList<>();
         this.completedEvents = new ArrayList<>();
-        this.eventFactory = new EventFactory();
+        this.eventFactory = new EventFactory(itemPickUpEventFactory);
     }
 
     /**

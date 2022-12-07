@@ -28,14 +28,14 @@ public class ItemPickUpEvent extends Event {
     public String text;
     public ItemFactory itemFactory;
 
-    public ItemPickUpEvent(String name, String item, String text) {
+    public ItemPickUpEvent(String name, String item, String text, Inventory inventory) {
         this.name = name;
         this.type = "Item Pick-Up";
         this.item = item;
         this.inputValidator = new WorldInputValidator(inputs);
         this.awaitInput = false;
         this.isDone = false;
-        this.inventory = Player.getInventory();
+        this.inventory = inventory;
         this.text = text;
         this.itemFactory = new ItemFactory();
     }
