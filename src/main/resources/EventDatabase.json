@@ -29,6 +29,12 @@
       "npc": "goblin"
     },
     {
+      "name": "George...?",
+      "type": "Encounter",
+      "encounter-type": "Hostile",
+      "npc": "goblin warrior"
+    },
+    {
       "name": "test quest",
       "type": "Quest Giver",
       "quest": "becoming rich",
