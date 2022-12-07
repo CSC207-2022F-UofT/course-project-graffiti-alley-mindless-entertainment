@@ -9,7 +9,7 @@ import objects.inventory.Inventory;
  */
 public class ItemPickUpEventFactory {
 
-    public Inventory inventory;
+    public final Inventory inventory;
 
     public ItemPickUpEventFactory(Inventory inventory){
         this.inventory = inventory;

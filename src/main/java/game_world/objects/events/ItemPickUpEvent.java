@@ -4,7 +4,6 @@ import game_world.WorldInputValidator;
 import game_world.factories.ItemFactory;
 import io.InputValidator;
 import io.Output;
-import objects.character.Player;
 import objects.inventory.Inventory;
 
 import java.util.ArrayList;
@@ -21,12 +20,12 @@ public class ItemPickUpEvent extends Event {
     private boolean isDone;
     private boolean awaitInput;
 
-    private final ArrayList<String> inputs = new ArrayList<String>(Arrays.asList(
+    private final ArrayList<String> inputs = new ArrayList<>(Arrays.asList(
             "yes", "no"
     ));
-    public Inventory inventory;
-    public String text;
-    public ItemFactory itemFactory;
+    public final Inventory inventory;
+    public final String text;
+    public final ItemFactory itemFactory;
 
     public ItemPickUpEvent(String name, String item, String text, Inventory inventory) {
         this.name = name;

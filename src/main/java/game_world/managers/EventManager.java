@@ -11,7 +11,6 @@ import game_world.factories.ItemPickUpEventFactory;
 import game_world.objects.Area;
 import game_world.objects.events.Event;
 import interfaces.State;
-import objects.inventory.Inventory;
 
 import java.util.ArrayList;
 
@@ -47,21 +46,27 @@ public class EventManager {
         String type = this.database.fetchEventType(name);
         Event newEvent;
 
-        if (type.equals("Encounter")) {
-            EncounterEventData data = this.database.fetchEncounterEvent("name", name);
-            newEvent = eventFactory.createEncounterEvent(data);
-        }
-        else if (type.equals("Item Pick-Up")) {
-            ItemPickUpEventData data = this.database.fetchItemPickUpEvent("name", name);
-            newEvent = eventFactory.createItemPickUpEvent(data);
-        }
-        else if (type.equals("Quest Giver")) {
-            QuestGiverEventData data = this.database.fetchQuestGiverEvent("name", name);
-            newEvent = eventFactory.createQuestGiverEvent(data);
-        }
-        else {
-            ArbitraryEventData data = this.database.fetchArbitraryEvent("name", name);
-            newEvent = eventFactory.createArbitraryEvent(data);
+        switch (type) {
+            case "Encounter": {
+                EncounterEventData data = this.database.fetchEncounterEvent("name", name);
+                newEvent = eventFactory.createEncounterEvent(data);
+                break;
+            }
+            case "Item Pick-Up": {
+                ItemPickUpEventData data = this.database.fetchItemPickUpEvent("name", name);
+                newEvent = eventFactory.createItemPickUpEvent(data);
+                break;
+            }
+            case "Quest Giver": {
+                QuestGiverEventData data = this.database.fetchQuestGiverEvent("name", name);
+                newEvent = eventFactory.createQuestGiverEvent(data);
+                break;
+            }
+            default: {
+                ArbitraryEventData data = this.database.fetchArbitraryEvent("name", name);
+                newEvent = eventFactory.createArbitraryEvent(data);
+                break;
+            }
         }
 
         if (exec)
