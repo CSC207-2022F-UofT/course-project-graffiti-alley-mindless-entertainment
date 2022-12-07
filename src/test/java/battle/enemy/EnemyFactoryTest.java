@@ -9,9 +9,6 @@ import objects.battle.enemy.ai.DefaultAI;
 import objects.battle.enemy.ai.SmartAI;
 import objects.battle.enemy.gimmick.StatGimmickEntity;
 import objects.battle.enemy.gimmick.GimmickType;
-import objects.battle.enemy.gimmick.StatGimmickStrategy;
-import objects.character.BossFacade;
-import objects.character.EnemyFacade;
 
 import objects.character.EnemyFighter;
 import org.junit.jupiter.api.Assertions;
@@ -90,7 +87,7 @@ public class EnemyFactoryTest {
         Assertions.assertEquals(enemy.getSkill(0).getType(), SkillType.EARTH);
         Assertions.assertEquals(enemy.getSkill(0).getLag(), 10);
         Assertions.assertEquals(enemy.getSkill(0).getName(),
-                "waterfall");
+                "energy ball");
         Assertions.assertEquals(enemy.getReputation(), 5);
         Assertions.assertEquals(enemy.getSpeed(), 90);
         Assertions.assertEquals(enemy.getType(), SkillType.EARTH);

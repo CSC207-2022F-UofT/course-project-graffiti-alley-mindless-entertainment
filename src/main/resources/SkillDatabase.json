@@ -38,7 +38,7 @@
     },
     {
       "name": "air punch",
-      "type": "water",
+      "type": "air",
       "lag": "10",
       "damage": "25"
     },
