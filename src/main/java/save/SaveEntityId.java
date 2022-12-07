@@ -3,5 +3,6 @@ package save;
 public enum SaveEntityId {
     LOCATION,
     OPTIONS,
-    INVENTORY
+    INVENTORY,
+    PLAYER
 }
