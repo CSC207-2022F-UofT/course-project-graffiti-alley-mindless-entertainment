@@ -11,7 +11,7 @@ public class SkillHandler {
      * @param type : type of the character that is attacked
      * @return the damage to a character with type in int
      */
-    protected int calculateDamage(Skill skill, SkillType type) {
+    public int calculateDamage(Skill skill, SkillType type) {
         if (hasTypeAdv(skill.getType(), type)) {
             return ((int)Math.ceil(1.2 * skill.getDamage()));
         } else if (hasTypeAdv(type, skill.getType())) {
@@ -28,7 +28,7 @@ public class SkillHandler {
      * @return boolean, and returns true if there is type advantage, and returns false otherwise
      *
      */
-    protected boolean hasTypeAdv(SkillType base, SkillType comparedTo) {
+    public boolean hasTypeAdv(SkillType base, SkillType comparedTo) {
         switch (base) {
             case AIR:
                 return comparedTo == SkillType.WATER;

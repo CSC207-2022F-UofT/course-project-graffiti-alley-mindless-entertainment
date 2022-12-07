@@ -3,6 +3,7 @@ package objects.character;
 import objects.battle.Skill;
 import objects.battle.SkillType;
 import org.junit.jupiter.api.Test;
+import save.SaveEntityId;
 
 import java.util.Objects;
 
@@ -272,5 +273,24 @@ class PlayerTest {
         player.addSkill(a);
         player.removeSkill(a);
         assert(player.getSkillList().isEmpty());
+    }
+
+    @Test
+    void savePlayerCases() {
+        Player player = new Player("A", SkillType.AIR);
+        Player.SavePlayer saved = player.new SavePlayer();
+        player.changeDescription("this description");
+        String savedString = saved.toSavableString();
+        assert(savedString.equals("A|this description|AIR|100|100|0|0|0|100|20"));
+        player.changeName("B");
+        player.changeDescription("new description");
+        player.changeSkillType(SkillType.EARTH);
+        player.changeArmor(2);
+        saved.fromSavableString(savedString);
+        assert(player.getName().equals("A"));
+        assert(player.getDescription().equals("this description"));
+        assert(player.getSkillType() == SkillType.AIR);
+        assert(player.getArmor() == 0);
+        assert(saved.getId() == SaveEntityId.PLAYER);
     }
 }
