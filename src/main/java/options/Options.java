@@ -7,7 +7,7 @@ import save.SaveEntityId;
 /*
 The options of the game. A data storage class.
 */
-public class Options implements SavableEntity {
+public class Options {
     private int textSpeed = 1;
     private boolean enableAutoSave = true;
 
@@ -38,30 +38,33 @@ public class Options implements SavableEntity {
         this.enableAutoSave = enableAutoSave;
     }
 
-    /**
-     * @return a string representation of the object to be saved
-     */
-    @Override
-    public String toSavableString() {
-        return enableAutoSave + " " + textSpeed;
-    }
+    public class SaveOptions implements SavableEntity {
 
-    /**
-     * @param str a string representation
-     *            map the string representation to the corresponding object
-     */
-    @Override
-    public void fromSavableString(String str) {
-        String[] splitString = str.split(" ");
-        enableAutoSave = Boolean.parseBoolean(splitString[0]);
-        textSpeed = Integer.parseInt(splitString[1]);
-    }
+        /**
+         * @return a string representation of the object to be saved
+         */
+        @Override
+        public String toSavableString() {
+            return enableAutoSave + " " + textSpeed;
+        }
 
-    /**
-     * @return the id of this entity in the saved entities list
-     */
-    @Override
-    public SaveEntityId getId() {
-        return SaveEntityId.Options;
+        /**
+         * @param str a string representation
+         *            map the string representation to the corresponding object
+         */
+        @Override
+        public void fromSavableString(String str) {
+            String[] splitString = str.split(" ");
+            enableAutoSave = Boolean.parseBoolean(splitString[0]);
+            textSpeed = Integer.parseInt(splitString[1]);
+        }
+
+        /**
+         * @return the id of this entity in the saved entities list
+         */
+        @Override
+        public SaveEntityId getId() {
+            return SaveEntityId.Options;
+        }
     }
 }
