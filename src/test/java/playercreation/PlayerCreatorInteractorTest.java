@@ -1,13 +1,15 @@
 package playercreation;
 
 import objects.battle.SkillType;
+import objects.character.Player;
 import org.junit.jupiter.api.Test;
 
 class PlayerCreatorInteractorTest {
 
     @Test
     void addNameCases() {
-        PlayerCreatorInteractor a = new PlayerCreatorInteractor();
+        Player player = new Player("", null);
+        PlayerCreatorInteractor a = new PlayerCreatorInteractor(player);
         a.addName("");
         assert(a.getNewPlayer().getName().isEmpty());
         a.addName("MyName");
@@ -16,7 +18,8 @@ class PlayerCreatorInteractorTest {
 
     @Test
     void addDescriptionCases() {
-        PlayerCreatorInteractor a = new PlayerCreatorInteractor();
+        Player player = new Player("", null);
+        PlayerCreatorInteractor a = new PlayerCreatorInteractor(player);
         a.addDescription("");
         assert(a.getNewPlayer().getDescription().isEmpty());
         a.addDescription("MyDescription");
@@ -25,7 +28,8 @@ class PlayerCreatorInteractorTest {
 
     @Test
     void addSkillTypeCases() {
-        PlayerCreatorInteractor a = new PlayerCreatorInteractor();
+        Player player = new Player("", null);
+        PlayerCreatorInteractor a = new PlayerCreatorInteractor(player);
         a.addSkillType(SkillType.FIRE);
         assert(a.getNewPlayer().getSkillType() == SkillType.FIRE);
         a.addSkillType(SkillType.AIR);

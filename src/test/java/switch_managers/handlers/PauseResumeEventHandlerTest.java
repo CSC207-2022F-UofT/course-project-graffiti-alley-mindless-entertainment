@@ -4,6 +4,7 @@ import core.StateManager;
 import menus.MenuStateFactory;
 import menus.PauseMenuManager;
 import menus.options.ChangeOptionsStateFactory;
+import objects.character.Player;
 import objects.inventory.Inventory;
 import objects.inventory.InventoryStateFactory;
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,8 @@ class PauseResumeEventHandlerTest {
 
         PauseResumeEventHandler pauseResumeEventHandler = new PauseResumeEventHandler(pauseMenuManager);
 
-        PlayerCreatorManager creatorManager = new PlayerCreatorManager();
+        Player player = new Player("", null);
+        PlayerCreatorManager creatorManager = new PlayerCreatorManager(player);
 
         StateManager pauseSwitch = pauseResumeEventHandler.handleSwitchEvent(SwitchEventType.PAUSE, creatorManager);
 

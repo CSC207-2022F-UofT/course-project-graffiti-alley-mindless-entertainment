@@ -8,13 +8,13 @@ import io.OutputHandler;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class EncounterEvent extends Event {
+public class QuestGiverEvent extends Event {
 
     /**
-     * Event executes when there is an encounter between entities (to be implemented)
+     * Event executes when there is a quest to be given
      */
 
-    private final String encounterType;
+    private final String quest;
     private final String npc;
     private final WorldInputValidator inputValidator;
     private boolean isDone;
@@ -29,10 +29,10 @@ public class EncounterEvent extends Event {
         return this.npc;
     }
 
-    public EncounterEvent(String name, String encounterType, String npc) {
+    public QuestGiverEvent(String name, String quest, String npc) {
         this.name = name;
-        this.type = "Encounter";
-        this.encounterType = encounterType;
+        this.type = "Quest Giver";
+        this.quest = quest;
         this.npc = npc;
         this.inputValidator = new WorldInputValidator(inputs);
         this.awaitInput = false;
@@ -44,7 +44,7 @@ public class EncounterEvent extends Event {
         this.awaitInput = true;
         OutputHandler output = Output.getScreen();
         // change text below
-        StringBuilder newMessage = new StringBuilder("[ENCOUNTER EVENT] What would you like to do?");
+        StringBuilder newMessage = new StringBuilder("[QUEST EVENT] What would you like to do?");
         for (String input : inputs) {
             newMessage.append("\n\t◈ ").append(input);
         }
@@ -57,9 +57,9 @@ public class EncounterEvent extends Event {
         this.isDone = true;
         OutputHandler output = Output.getScreen();
         output.generateText("You decided to " + input + ".");
-        // switch manager here
-        /// SwitchEventMediator s = SwitchEventMediatorProxy.getInstance();
-        /// s.store(SwitchEventType.--name of your switchevent--);
+        if (input.equals("yes")) {
+            // quest accepted, do what u need to here
+        }
     }
 
     @Override
