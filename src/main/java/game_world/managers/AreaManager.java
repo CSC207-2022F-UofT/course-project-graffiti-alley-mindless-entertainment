@@ -1,7 +1,6 @@
 package game_world.managers;
 
 import core.StateManager;
-import game.Game;
 import game_world.factories.DialogueStateFactory;
 import game_world.factories.SelectionStateFactory;
 import game_world.objects.Area;
@@ -9,6 +8,9 @@ import game_world.objects.Location;
 import interfaces.State;
 import io.Output;
 import io.OutputHandler;
+import options.Options;
+
+import java.util.ArrayList;
 
 public class AreaManager extends StateManager {
 
@@ -21,7 +23,7 @@ public class AreaManager extends StateManager {
     private final AreaDatabaseInteractor databaseController;
     private final EventManager eventManager;
     private Area currentArea;
-    private Location location;
+    private final Location location;
 
     public AreaManager(EventManager eventManager, Location location) {
         this.eventManager = eventManager;
@@ -79,10 +81,18 @@ public class AreaManager extends StateManager {
         }
         else {
             // Next text in sequence to be played
-            this.currState = dialogueStateFactory.createDialogueState(
-                    this.currentArea.getTexts().get(this.currentArea.getCurrTextIndex())
-            );
+            int textSpeed = Options.getOptions().getTextSpeed();
+            int textIndex = 1;
+            ArrayList<String> allTexts = this.currentArea.getTexts();
+            StringBuilder nextText = new StringBuilder(allTexts.get(this.currentArea.getCurrTextIndex()));
             this.currentArea.setCurrTextIndex(this.currentArea.getCurrTextIndex() + 1);
+            while (this.currentArea.getCurrTextIndex() < allTexts.size() && textIndex < textSpeed) {
+                nextText.append("\n");
+                nextText.append(this.currentArea.getTexts().get(this.currentArea.getCurrTextIndex()));
+                this.currentArea.setCurrTextIndex(this.currentArea.getCurrTextIndex() + 1);
+                textIndex += 1;
+            }
+            this.currState = dialogueStateFactory.createDialogueState(nextText.toString());
         }
         return this.currState;
     }

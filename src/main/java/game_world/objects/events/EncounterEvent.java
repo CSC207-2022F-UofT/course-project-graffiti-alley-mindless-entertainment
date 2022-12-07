@@ -56,7 +56,12 @@ public class EncounterEvent extends Event {
         this.awaitInput = false;
         this.isDone = true;
         OutputHandler output = Output.getScreen();
-        output.generateText("You decided to " + input + ".");
+        if (input.equals("yes")) {
+            // quest accepted, do what u need to here
+            output.generateText("You decided to fight!");
+        }
+        else
+            output.generateText("You decided to avoid the encounter.");
         // switch manager here
         /// SwitchEventMediator s = SwitchEventMediatorProxy.getInstance();
         /// s.store(SwitchEventType.--name of your switchevent--);
