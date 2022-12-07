@@ -30,23 +30,21 @@ public class EventDatabaseInteractor {
         String type = this.database.fetchEventType(name);
         Event newEvent;
 
-        switch (type) {
-            case "Encounter" -> {
-                EncounterEventData data = this.database.fetchEncounterEvent("name", name);
-                newEvent = eventFactory.createEncounterEvent(data);
-            }
-            case "Item Pick-Up" -> {
-                ItemPickUpEventData data = this.database.fetchItemPickUpEvent("name", name);
-                newEvent = eventFactory.createItemPickUpEvent(data);
-            }
-            case "Quest Giver" -> {
-                QuestGiverEventData data = this.database.fetchQuestGiverEvent("name", name);
-                newEvent = eventFactory.createQuestGiverEvent(data);
-            }
-            default -> {
-                ArbitraryEventData data = this.database.fetchArbitraryEvent("name", name);
-                newEvent = eventFactory.createArbitraryEvent(data);
-            }
+        if (type.equals("Encounter")) {
+            EncounterEventData data = this.database.fetchEncounterEvent("name", name);
+            newEvent = eventFactory.createEncounterEvent(data);
+        }
+        else if (type.equals("Item Pick-Up")) {
+            ItemPickUpEventData data = this.database.fetchItemPickUpEvent("name", name);
+            newEvent = eventFactory.createItemPickUpEvent(data);
+        }
+        else if (type.equals("Quest Giver")) {
+            QuestGiverEventData data = this.database.fetchQuestGiverEvent("name", name);
+            newEvent = eventFactory.createQuestGiverEvent(data);
+        }
+        else {
+            ArbitraryEventData data = this.database.fetchArbitraryEvent("name", name);
+            newEvent = eventFactory.createArbitraryEvent(data);
         }
 
         if (exec)
