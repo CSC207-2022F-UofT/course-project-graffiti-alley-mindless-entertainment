@@ -12,7 +12,7 @@ class PauseMenuManagerTest {
     void changeOptionsAndQuit() {
         Options options = Options.getOptions();
         Inventory inventory = new Inventory();
-        ChangeOptionsStateFactory changeOptionsStateFactory = new ChangeOptionsStateFactory();
+        ChangeOptionsStateFactory changeOptionsStateFactory = new ChangeOptionsStateFactory(options);
         InventoryStateFactory inventoryStateFactory = new InventoryStateFactory(inventory);
         MenuStateFactory menuStateFactory = new MenuStateFactory(changeOptionsStateFactory, inventoryStateFactory);
         PauseMenuManager pauseMenuManager = new PauseMenuManager(menuStateFactory);
