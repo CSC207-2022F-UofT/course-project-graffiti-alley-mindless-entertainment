@@ -10,15 +10,14 @@ public class StatisticalTask extends Task {
      * Attributes in addition to its parent class' attributes (name & isCompleted).
      */
     // Stores the player's numerical statistic that will be affected by this reward.
-    private final PlayersStatistics statistic;
+    private PlayersStatistics statistic;
     // Stores the amount of the statistic that the task's assignee needs to reach.
-    private final int value;
+    private int value;
 
     /**
      * Constructor.
      */
-    public StatisticalTask(String name, PlayersStatistics statistic, int value) {
-        super(name);
+    public StatisticalTask(PlayersStatistics statistic, int value) {
         this.statistic = statistic;
         this.value = value;
     }
@@ -55,5 +54,26 @@ public class StatisticalTask extends Task {
             default:
                 return 0;
         }
+    }
+
+    /**
+     * @return a string with the information for the task.
+     */
+    @Override
+    public String toString() {
+        return "statistic," + this.statistic.name() + "," + this.value + "," + this.isCompleted;
+    }
+
+    /**
+     * Changes the attributes of this object using the parameter.
+     * @param str: string containing all the information for this object's attributes.
+     */
+    @Override
+    public void changesFromString(String str) {
+        String[] rewardAttributes = str.split(",");
+
+        this.statistic = PlayersStatistics.valueOf(rewardAttributes[1]);
+        this.value = Integer.parseInt(rewardAttributes[2]);
+        this.isCompleted = Boolean.parseBoolean(rewardAttributes[3]);
     }
 }
