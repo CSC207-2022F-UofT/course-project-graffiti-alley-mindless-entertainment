@@ -1,6 +1,8 @@
 package game;
 
 import battlestates.BattleStateManager;
+import game_world.factories.EventFactory;
+import game_world.factories.ItemPickUpEventFactory;
 import game_world.managers.AreaManager;
 import game_world.managers.EventManager;
 import game_world.objects.events.EncounterEvent;
@@ -70,6 +72,10 @@ public class ManagerControllerFactory {
      */
     void createReturnToMapEventHandler() {
         EventManager eventManager = new EventManager();
+        Inventory inventory = gameEntities.getInventory();
+        ItemPickUpEventFactory itemPickUpEventFactory = new ItemPickUpEventFactory(inventory);
+        EventFactory eventFactory = new EventFactory(itemPickUpEventFactory);
+        EventManager eventManager = new EventManager(eventFactory);
         AreaManager areaManager = new AreaManager(eventManager, gameEntities.getLocation());
         managerController.addManager(areaManager);
 

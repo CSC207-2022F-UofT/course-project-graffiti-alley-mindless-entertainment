@@ -22,6 +22,75 @@
       "ai": "smart",
       "gimmick": "health",
       "potion": "20"
+    },
+    {
+      "name": "slime",
+      "type": "water",
+      "skills": [
+        "waterfall"
+      ],
+      "reputation": "5",
+      "speed": "90",
+      "ai": "default",
+      "potion": "10"
+    },
+    {
+      "name": "skeleton",
+      "type": "air",
+      "skills": [
+        "air cutter"
+      ],
+      "reputation": "5",
+      "speed": "90",
+      "ai": "default",
+      "potion": "10"
+    },
+    {
+      "name": "grass hopper",
+      "type": "earth",
+      "skills": [
+        "energy ball"
+      ],
+      "reputation": "5",
+      "speed": "90",
+      "ai": "default",
+      "potion": "10"
+    },
+    {
+      "name": "slime king",
+      "type": "water",
+      "skills": [
+        "water punch"
+      ],
+      "reputation": "20",
+      "speed": "110",
+      "ai": "smart",
+      "gimmick": "attack",
+      "potion": "20"
+    },
+    {
+      "name": "skeleton king",
+      "type": "air",
+      "skills": [
+        "air punch"
+      ],
+      "reputation": "20",
+      "speed": "110",
+      "ai": "smart",
+      "gimmick": "type",
+      "potion": "20"
+    },
+    {
+      "name": "king wizard",
+      "type": "fire",
+      "skills": [
+        "fire punch"
+      ],
+      "reputation": "20",
+      "speed": "110",
+      "ai": "smart",
+      "gimmick": "speed",
+      "potion": "20"
     }
   ]
 }
