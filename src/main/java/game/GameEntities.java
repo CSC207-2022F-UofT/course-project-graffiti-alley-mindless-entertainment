@@ -19,7 +19,7 @@ public class GameEntities {
 
     public GameEntities() {
         player = new Player("", null);
-        inventory = Player.getInventory();
+        inventory = new Inventory();
         options = Options.getOptions();
         location = new Location();
     }

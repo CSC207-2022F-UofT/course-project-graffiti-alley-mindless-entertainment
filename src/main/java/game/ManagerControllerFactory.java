@@ -1,5 +1,7 @@
 package game;
 
+import game_world.factories.EventFactory;
+import game_world.factories.ItemPickUpEventFactory;
 import game_world.managers.AreaManager;
 import game_world.managers.EventManager;
 import main_menu.MainMenuManager;
@@ -15,7 +17,6 @@ import switch_managers.SwitchEventManager;
 import switch_managers.handlers.MainMenuEventHandler;
 import switch_managers.handlers.PauseResumeEventHandler;
 import switch_managers.handlers.StartGameEventHandler;
-
 /**
  * Used to create the manager controller for the game.
  */
@@ -65,7 +66,10 @@ public class ManagerControllerFactory {
      * Creates the start game event handler.
      */
     void createStartGameEventHandler() {
-        EventManager eventManager = new EventManager();
+        Inventory inventory = gameEntities.getInventory();
+        ItemPickUpEventFactory itemPickUpEventFactory = new ItemPickUpEventFactory(inventory);
+        EventFactory eventFactory = new EventFactory(itemPickUpEventFactory);
+        EventManager eventManager = new EventManager(eventFactory);
         AreaManager areaManager = new AreaManager(eventManager, gameEntities.getLocation());
         managerController.addManager(areaManager);
 

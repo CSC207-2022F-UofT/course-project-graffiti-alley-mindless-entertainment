@@ -19,16 +19,20 @@ public class EventManager {
      * Manages all matters regarding Events
      */
 
-    private ArrayList<Event> eventQueue;
-    private ArrayList<String> completedEvents;
+    private final ArrayList<Event> eventQueue;
+    private final ArrayList<String> completedEvents;
     private final EventDataManager database;
     private final EventFactory eventFactory;
 
-    public EventManager() {
+    /**
+     * Constructs EventManager
+     * @param eventFactory injected dependency
+     */
+    public EventManager(EventFactory eventFactory) {
         this.database = new EventDataManager();
         this.eventQueue = new ArrayList<>();
         this.completedEvents = new ArrayList<>();
-        this.eventFactory = new EventFactory();
+        this.eventFactory = eventFactory;
     }
 
     /**
@@ -41,21 +45,27 @@ public class EventManager {
         String type = this.database.fetchEventType(name);
         Event newEvent;
 
-        if (type.equals("Encounter")) {
-            EncounterEventData data = this.database.fetchEncounterEvent("name", name);
-            newEvent = eventFactory.createEncounterEvent(data);
-        }
-        else if (type.equals("Item Pick-Up")) {
-            ItemPickUpEventData data = this.database.fetchItemPickUpEvent("name", name);
-            newEvent = eventFactory.createItemPickUpEvent(data);
-        }
-        else if (type.equals("Quest Giver")) {
-            QuestGiverEventData data = this.database.fetchQuestGiverEvent("name", name);
-            newEvent = eventFactory.createQuestGiverEvent(data);
-        }
-        else {
-            ArbitraryEventData data = this.database.fetchArbitraryEvent("name", name);
-            newEvent = eventFactory.createArbitraryEvent(data);
+        switch (type) {
+            case "Encounter": {
+                EncounterEventData data = this.database.fetchEncounterEvent("name", name);
+                newEvent = eventFactory.createEncounterEvent(data);
+                break;
+            }
+            case "Item Pick-Up": {
+                ItemPickUpEventData data = this.database.fetchItemPickUpEvent("name", name);
+                newEvent = eventFactory.createItemPickUpEvent(data);
+                break;
+            }
+            case "Quest Giver": {
+                QuestGiverEventData data = this.database.fetchQuestGiverEvent("name", name);
+                newEvent = eventFactory.createQuestGiverEvent(data);
+                break;
+            }
+            default: {
+                ArbitraryEventData data = this.database.fetchArbitraryEvent("name", name);
+                newEvent = eventFactory.createArbitraryEvent(data);
+                break;
+            }
         }
 
         if (exec)
