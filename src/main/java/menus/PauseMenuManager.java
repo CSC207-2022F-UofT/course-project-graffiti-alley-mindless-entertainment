@@ -2,7 +2,6 @@ package menus;
 
 import interfaces.State;
 import core.StateManager;
-import menus.options.ChangeOptionsStateFactory;
 import switch_managers.SwitchEventMediatorProxy;
 import switch_managers.SwitchEventType;
 
@@ -26,23 +25,23 @@ public class PauseMenuManager extends StateManager {
     private final String saveCommand;
     private final String exitCommand;
 
-    private final PauseMenuChoiceStateFactory pauseMenuChoiceStateFactory;
-    private final ChangeOptionsStateFactory changeOptionsStateFactory;
+    private final String inventoryCommand;
+    private final String questCommand;
+    private final MenuStateFactory menuStateFactory;
 
     private MenuType currMenuType;
 
     /**
-     * @param pauseMenuChoiceStateFactory injected dependency
-     * @param changeOptionsStateFactory injected dependency
+     * @param menuStateFactory injected dependency
      */
-    public PauseMenuManager(PauseMenuChoiceStateFactory pauseMenuChoiceStateFactory,
-                            ChangeOptionsStateFactory changeOptionsStateFactory) {
-        this.pauseMenuChoiceStateFactory = pauseMenuChoiceStateFactory;
-        this.changeOptionsStateFactory = changeOptionsStateFactory;
+    public PauseMenuManager(MenuStateFactory menuStateFactory) {
+        this.menuStateFactory = menuStateFactory;
         this.optionsCommand = "options";
+        this.inventoryCommand = "inventory";
+        this.questCommand = "quest";
         this.saveCommand = "save";
         this.exitCommand = "return";
-        this.pauseMenuOptions = Arrays.asList(optionsCommand, saveCommand, exitCommand);
+        this.pauseMenuOptions = Arrays.asList(optionsCommand, inventoryCommand, saveCommand, exitCommand);
 
         initialize();
     }
@@ -58,19 +57,27 @@ public class PauseMenuManager extends StateManager {
         if (currMenuType == MenuType.PAUSE) {
             if (Objects.equals(input, optionsCommand)) {
                 currMenuType = MenuType.OPTIONS;
-                return changeOptionsStateFactory.createChangeOptionsState();
+                return menuStateFactory.createChangeOptionsState();
             } else if (Objects.equals(input, saveCommand)) {
                 currMenuType = MenuType.SAVE;
                 //to be implemented later
                 return null;
+            } else if (Objects.equals(input, questCommand)) {
+                currMenuType = MenuType.QUEST;
+                //to be implemented later
+                return null;
+            } else if (Objects.equals(input, inventoryCommand)) {
+                currMenuType = MenuType.INVENTORY;
+                return menuStateFactory.createInventoryMenuState();
             } else {
                 SwitchEventMediatorProxy.getInstance().store(SwitchEventType.RESUME);
+
                 return null;
             }
         } else {
             if (Objects.equals(input, exitCommand)) {
                 currMenuType = MenuType.PAUSE;
-                return pauseMenuChoiceStateFactory.createPauseMenuChoiceState(pauseMenuOptions);
+                return menuStateFactory.createPauseMenuChoiceState(pauseMenuOptions);
             }
         }
 
@@ -83,6 +90,6 @@ public class PauseMenuManager extends StateManager {
     @Override
     public void initialize() {
         currMenuType = MenuType.PAUSE;
-        currState = pauseMenuChoiceStateFactory.createPauseMenuChoiceState(pauseMenuOptions);
+        currState = menuStateFactory.createPauseMenuChoiceState(pauseMenuOptions);
     }
 }

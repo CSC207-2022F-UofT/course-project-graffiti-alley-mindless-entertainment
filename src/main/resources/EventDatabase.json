@@ -27,6 +27,12 @@
       "type": "Encounter",
       "encounter-type": "Hostile",
       "npc": "goblin"
+    },
+    {
+      "name": "test quest",
+      "type": "Quest Giver",
+      "quest": "becoming rich",
+      "npc": "Charlotte"
     }
   ]
 }

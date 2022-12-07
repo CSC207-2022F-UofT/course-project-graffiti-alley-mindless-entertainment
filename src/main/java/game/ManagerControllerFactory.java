@@ -3,9 +3,11 @@ package game;
 import game_world.managers.AreaManager;
 import game_world.managers.EventManager;
 import main_menu.MainMenuManager;
-import menus.PauseMenuChoiceStateFactory;
+import menus.MenuStateFactory;
 import menus.PauseMenuManager;
 import menus.options.ChangeOptionsStateFactory;
+import objects.inventory.Inventory;
+import objects.inventory.InventoryStateFactory;
 import playercreation.PlayerCreatorManager;
 import switch_managers.ManagerController;
 import switch_managers.ManagerControllerImpl;
@@ -21,9 +23,13 @@ public class ManagerControllerFactory {
 
     private final ManagerController managerController;
     private final SwitchEventManager switchEventManager;
-    public ManagerControllerFactory() {
+
+    private final GameEntities gameEntities;
+
+    public ManagerControllerFactory(GameEntities gameEntities) {
         switchEventManager = new SwitchEventManager();
         managerController = new ManagerControllerImpl(switchEventManager);
+        this.gameEntities = gameEntities;
 
     }
 
@@ -48,7 +54,7 @@ public class ManagerControllerFactory {
         MainMenuManager mainMenuManager = new MainMenuManager();
         managerController.addManager(mainMenuManager);
 
-        PlayerCreatorManager playerCreatorManager = new PlayerCreatorManager();
+        PlayerCreatorManager playerCreatorManager = new PlayerCreatorManager(gameEntities.getPlayer());
         managerController.addManager(playerCreatorManager);
 
         MainMenuEventHandler mainMenuEventHandler = new MainMenuEventHandler(mainMenuManager, playerCreatorManager);
@@ -60,7 +66,7 @@ public class ManagerControllerFactory {
      */
     void createStartGameEventHandler() {
         EventManager eventManager = new EventManager();
-        AreaManager areaManager = new AreaManager(eventManager);
+        AreaManager areaManager = new AreaManager(eventManager, gameEntities.getLocation());
         managerController.addManager(areaManager);
 
         StartGameEventHandler startGameEventHandler = new StartGameEventHandler(areaManager);
@@ -71,9 +77,11 @@ public class ManagerControllerFactory {
      * Creates the pause resume event handler.
      */
     void createPauseResumeEventHandler() {
-        PauseMenuChoiceStateFactory pauseMenuChoiceStateFactory = new PauseMenuChoiceStateFactory();
+        Inventory inventory = gameEntities.getInventory();
         ChangeOptionsStateFactory changeOptionsStateFactory = new ChangeOptionsStateFactory();
-        PauseMenuManager pauseMenuManager = new PauseMenuManager(pauseMenuChoiceStateFactory, changeOptionsStateFactory);
+        InventoryStateFactory inventoryStateFactory = new InventoryStateFactory(inventory);
+        MenuStateFactory menuStateFactory = new MenuStateFactory(changeOptionsStateFactory, inventoryStateFactory);
+        PauseMenuManager pauseMenuManager = new PauseMenuManager(menuStateFactory);
         managerController.addManager(pauseMenuManager);
 
         PauseResumeEventHandler pauseResumeEventHandler = new PauseResumeEventHandler(pauseMenuManager);

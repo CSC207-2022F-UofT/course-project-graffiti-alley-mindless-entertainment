@@ -1,6 +1,7 @@
 package playercreation;
 
 import interfaces.State;
+import objects.character.Player;
 import org.junit.jupiter.api.Test;
 import playercreation.states.*;
 
@@ -8,14 +9,16 @@ class PlayerCreatorManagerTest {
 
     @Test
     void initialize() {
-        PlayerCreatorManager a = new PlayerCreatorManager();
+        Player b = new Player("", null);
+        PlayerCreatorManager a = new PlayerCreatorManager(b);
         assert(a.getCurrPlayerQuestion() == PlayerQuestion.NAME);
         assert(a.getCurrState() instanceof PlayerNameState);
     }
 
     @Test
     void nextStateConfirmAfterName() {
-        PlayerCreatorManager a = new PlayerCreatorManager();
+        Player b = new Player("", null);
+        PlayerCreatorManager a = new PlayerCreatorManager(b);
         State returnedState = a.nextState("MyName");
         assert(a.getCurrPlayerQuestion() == PlayerQuestion.CONFIRM);
         assert(returnedState instanceof PlayerConfirmState);
@@ -24,7 +27,8 @@ class PlayerCreatorManagerTest {
 
     @Test
     void nextStateDescriptionAfterConfirmedName() {
-        PlayerCreatorManager a = new PlayerCreatorManager();
+        Player b = new Player("", null);
+        PlayerCreatorManager a = new PlayerCreatorManager(b);
         a.nextState("MyName");
         State returnedState = a.nextState("confirm");
         assert(a.getCurrPlayerQuestion() == PlayerQuestion.DESCRIPTION);
@@ -33,7 +37,8 @@ class PlayerCreatorManagerTest {
 
     @Test
     void nextStateNameAfterReturnedConfirm() {
-        PlayerCreatorManager a = new PlayerCreatorManager();
+        Player b = new Player("", null);
+        PlayerCreatorManager a = new PlayerCreatorManager(b);
         a.nextState("MyName");
         State returnedState = a.nextState("return");
         assert(a.getCurrPlayerQuestion() == PlayerQuestion.NAME);
@@ -43,7 +48,8 @@ class PlayerCreatorManagerTest {
 
     @Test
     void nextStateSkillAfterConfirmedDescription() {
-        PlayerCreatorManager a = new PlayerCreatorManager();
+        Player b = new Player("", null);
+        PlayerCreatorManager a = new PlayerCreatorManager(b);
         a.nextState("MyName");
         a.nextState("confirm");
         a.nextState("MyDescription");
@@ -55,7 +61,8 @@ class PlayerCreatorManagerTest {
 
     @Test
     void nextStateSkillAfterReturnedConfirm() {
-        PlayerCreatorManager a = new PlayerCreatorManager();
+        Player b = new Player("", null);
+        PlayerCreatorManager a = new PlayerCreatorManager(b);
         a.nextState("MyName");
         a.nextState("confirm");
         a.nextState("MyDescription");

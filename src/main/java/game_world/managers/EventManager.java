@@ -5,6 +5,7 @@ import database.managers.EventDataManager;
 import database.objects.ArbitraryEventData;
 import database.objects.EncounterEventData;
 import database.objects.ItemPickUpEventData;
+import database.objects.QuestGiverEventData;
 import game_world.factories.EventFactory;
 import game_world.objects.Area;
 import game_world.objects.events.Event;
@@ -19,12 +20,14 @@ public class EventManager {
      */
 
     private ArrayList<Event> eventQueue;
+    private ArrayList<String> completedEvents;
     private final EventDataManager database;
     private final EventFactory eventFactory;
 
     public EventManager() {
         this.database = new EventDataManager();
         this.eventQueue = new ArrayList<>();
+        this.completedEvents = new ArrayList<>();
         this.eventFactory = new EventFactory();
     }
 
@@ -45,6 +48,10 @@ public class EventManager {
         else if (type.equals("Item Pick-Up")) {
             ItemPickUpEventData data = this.database.fetchItemPickUpEvent("name", name);
             newEvent = eventFactory.createItemPickUpEvent(data);
+        }
+        else if (type.equals("Quest Giver")) {
+            QuestGiverEventData data = this.database.fetchQuestGiverEvent("name", name);
+            newEvent = eventFactory.createQuestGiverEvent(data);
         }
         else {
             ArbitraryEventData data = this.database.fetchArbitraryEvent("name", name);
@@ -81,9 +88,16 @@ public class EventManager {
      * @return next State to be returned in nextState
      */
     public State getNextStateInQueue() {
-        State nextState = this.eventQueue.get(0);
-        this.eventQueue.remove(nextState);
-        return nextState;
+        Event currEvent = this.eventQueue.get(0);
+        while (this.completedEvents.contains(currEvent.name)) {
+            this.eventQueue.remove(currEvent);
+            if (this.eventQueue.size() == 0)
+                return null;
+            currEvent = this.eventQueue.get(0);
+        }
+        this.completedEvents.add(currEvent.name);
+        this.eventQueue.remove(currEvent);
+        return currEvent;
     }
 
     /**
