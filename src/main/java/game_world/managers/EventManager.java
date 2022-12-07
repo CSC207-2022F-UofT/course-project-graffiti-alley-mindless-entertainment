@@ -5,6 +5,7 @@ import database.managers.EventDataManager;
 import database.objects.ArbitraryEventData;
 import database.objects.EncounterEventData;
 import database.objects.ItemPickUpEventData;
+import database.objects.QuestGiverEventData;
 import game_world.factories.EventFactory;
 import game_world.objects.Area;
 import game_world.objects.events.Event;
@@ -47,6 +48,10 @@ public class EventManager {
         else if (type.equals("Item Pick-Up")) {
             ItemPickUpEventData data = this.database.fetchItemPickUpEvent("name", name);
             newEvent = eventFactory.createItemPickUpEvent(data);
+        }
+        else if (type.equals("Quest Giver")) {
+            QuestGiverEventData data = this.database.fetchQuestGiverEvent("name", name);
+            newEvent = eventFactory.createQuestGiverEvent(data);
         }
         else {
             ArbitraryEventData data = this.database.fetchArbitraryEvent("name", name);
