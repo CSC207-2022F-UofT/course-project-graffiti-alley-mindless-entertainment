@@ -17,7 +17,7 @@ public class QuestEntityTest {
      */
     @Test
     void taskNotCompletedTest() {
-        Task task = new StatisticalTask("", PlayersStatistics.MONEY, 100);
+        Task task = new StatisticalTask(PlayersStatistics.MONEY, 100);
         Player player = new Player("", null);
 
         assert (!task.isCompleted(player));
@@ -25,7 +25,7 @@ public class QuestEntityTest {
 
     @Test
     void taskCompletedTest() {
-        Task task = new StatisticalTask("", PlayersStatistics.MONEY, 100);
+        Task task = new StatisticalTask(PlayersStatistics.MONEY, 100);
         Player player = new Player("", null);
         player.changeMoney(100);
 
@@ -58,8 +58,8 @@ public class QuestEntityTest {
         Bystander bystander = new Bystander("", false);
         Reward reward = new StatisticalReward(PlayersStatistics.EXPERIENCE, 1000);
         List<Task> tasks = new ArrayList<>();
-        tasks.add(new StatisticalTask("", PlayersStatistics.HEALTH, 50));
-        tasks.add(new StatisticalTask("", PlayersStatistics.MONEY, 100));
+        tasks.add(new StatisticalTask(PlayersStatistics.HEALTH, 50));
+        tasks.add(new StatisticalTask(PlayersStatistics.MONEY, 100));
 
         return new Quest("", "", bystander, reward, tasks);
     }

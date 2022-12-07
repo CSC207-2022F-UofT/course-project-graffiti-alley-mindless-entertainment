@@ -2,7 +2,11 @@ package quests;
 
 import objects.character.*;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import save.SavableEntity;
+import save.SaveEntityId;
 
 /**
  * This class contains a quest object that can be completed by
@@ -13,17 +17,17 @@ public class Quest {
      * Attributes.
      */
     // Stores the name of the quest.
-    private final String name;
+    private String name;
     // Stores the description of the quest.
-    private final String description;
+    private String description;
     // Stores the status of the quest. If true: quest is completed. Otherwise, false: ongoing quest.
     private boolean isCompleted;
     // Stores the overseer (NPC) of the quest.
     private Bystander overseer;
     // Stores the list of tasks that need to be completed.
-    private final List<Task> tasks;
+    private List<Task> tasks;
     // Stores the reward that can be assigned by Quest Manager to the player, when quest is completed.
-    private final Reward reward;
+    private Reward reward;
     // Stores whether the Reward has been received by the player.
     private boolean isRewardDistributed;
 
@@ -137,5 +141,108 @@ public class Quest {
             str += "on going.";
         }
         return str;
+    }
+
+
+    /**
+     * Innerclass for saving functionality of a Quest.
+     */
+    public class SaveQuest implements SavableEntity {
+
+        /**
+         * @return a string representation of the quest to be saved
+         */
+        @Override
+        public String toSavableString() {
+            Quest quest = Quest.this;
+
+            return quest.name + "|" + quest.description + "|" + quest.isCompleted + "" + quest.overseer.getName() +
+                    "|" + quest.overseer.hasQuest() + "|" + tasksToString() + "|" + rewardToString() +
+                    "|" + quest.isRewardDistributed;
+        }
+
+        /**
+         * @return string with all the tasks.
+         */
+        public String tasksToString() {
+            String str = "";
+
+            for (Task task: Quest.this.getTasks()) {
+                if (str.equals("")) {
+                    str += task.toString();
+                } else {
+                    str += "#" + task.toString();
+                }
+            }
+
+            return str;
+        }
+
+        /**
+         * @return string with the reward.
+         */
+        public String rewardToString() {
+            return Quest.this.reward.toString();
+        }
+
+
+        /**
+         * @param str a string representation
+         *            map the string representation to the corresponding object
+         */
+        @Override
+        public void fromSavableString(String str) {
+            String[] questAttributes = str.split("\\|");
+
+            Quest quest = Quest.this;
+
+            quest.name = questAttributes[0];
+            quest.description = questAttributes[1];
+            quest.isCompleted = Boolean.parseBoolean(questAttributes[2]);
+            quest.overseer = new Bystander(questAttributes[3], Boolean.parseBoolean(questAttributes[4]));
+            quest.tasks = tasksFromString(questAttributes[5]);
+            quest.reward.changesFromString(questAttributes[6]);
+            quest.isRewardDistributed = Boolean.parseBoolean(questAttributes[7]);
+        }
+
+        /**
+         * @param str: contains the information for all the quests.
+         * @return a list contains the tasks.
+         */
+        public List<Task> tasksFromString(String str) {
+            String[] tasksInformation = str.split("#");
+
+            List<Task> tasks = new ArrayList<>();
+
+            for (int i = 0; i < tasksInformation.length; i++) {
+                String task = tasksInformation[i];
+                tasks.add(taskFromString(task));
+            }
+
+            return tasks;
+        }
+
+        /**
+         * @param str: contains the information for a task.
+         * @return a task object created through entered string.
+         */
+        public Task taskFromString(String str) {
+            switch (str.split(",")[0]) {
+                case "statistical":
+                    Task task = new StatisticalTask(null, 0);
+                    task.changesFromString(str);
+                    return task;
+                default:
+                    return null;
+            }
+        }
+
+        /**
+         * @return the id of this entity in the saved entities list
+         */
+        @Override
+        public SaveEntityId getId() {
+            return SaveEntityId.QUEST;
+        }
     }
 }

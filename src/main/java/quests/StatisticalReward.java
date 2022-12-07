@@ -10,9 +10,9 @@ public class StatisticalReward extends Reward {
      * Attributes.
      */
     // Stores the player's numerical statistic that will be affected by this reward.
-    private final PlayersStatistics statistic;
+    private PlayersStatistics statistic;
     // Stores the amount by which the reward's receiver's chosen statistic is affected.
-    private final int value;
+    private int value;
 
     /**
      * Constructor.
@@ -47,5 +47,25 @@ public class StatisticalReward extends Reward {
             default:
                 break;
         }
+    }
+
+    /**
+     * @return a string with the information for the reward.
+     */
+    @Override
+    public String toString() {
+        return "statistical," + this.statistic.name() + "," + this.value;
+    }
+
+    /**
+     * Changes the attributes of this object using the parameter.
+     * @param str: string containing all the information for this object's attributes.
+     */
+    @Override
+    public void changesFromString(String str) {
+        String[] rewardAttributes = str.split(",");
+
+        this.statistic = PlayersStatistics.valueOf(rewardAttributes[1]);
+        this.value = Integer.parseInt(rewardAttributes[2]);
     }
 }
