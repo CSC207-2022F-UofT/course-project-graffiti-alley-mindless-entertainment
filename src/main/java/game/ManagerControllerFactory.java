@@ -2,12 +2,10 @@ package game;
 
 import game_world.managers.AreaManager;
 import game_world.managers.EventManager;
-import game_world.objects.Location;
 import main_menu.MainMenuManager;
 import menus.MenuStateFactory;
 import menus.PauseMenuManager;
 import menus.options.ChangeOptionsStateFactory;
-import objects.character.Player;
 import objects.inventory.Inventory;
 import objects.inventory.InventoryStateFactory;
 import playercreation.PlayerCreatorManager;
@@ -23,7 +21,6 @@ import switch_managers.handlers.StartGameEventHandler;
  */
 public class ManagerControllerFactory {
 
-    private Location location;
     private final ManagerController managerController;
     private final SwitchEventManager switchEventManager;
 
@@ -43,7 +40,6 @@ public class ManagerControllerFactory {
      */
     ManagerController createManagerController() {
 
-        location = new Location();
         createPauseResumeEventHandler();
         createStartGameEventHandler();
         createMainMenuEventHandler();
@@ -58,8 +54,7 @@ public class ManagerControllerFactory {
         MainMenuManager mainMenuManager = new MainMenuManager();
         managerController.addManager(mainMenuManager);
 
-        Player player = new Player("", null);
-        PlayerCreatorManager playerCreatorManager = new PlayerCreatorManager(player);
+        PlayerCreatorManager playerCreatorManager = new PlayerCreatorManager(gameEntities.getPlayer());
         managerController.addManager(playerCreatorManager);
 
         MainMenuEventHandler mainMenuEventHandler = new MainMenuEventHandler(mainMenuManager, playerCreatorManager);
@@ -71,7 +66,7 @@ public class ManagerControllerFactory {
      */
     void createStartGameEventHandler() {
         EventManager eventManager = new EventManager();
-        AreaManager areaManager = new AreaManager(eventManager, location);
+        AreaManager areaManager = new AreaManager(eventManager, gameEntities.getLocation());
         managerController.addManager(areaManager);
 
         StartGameEventHandler startGameEventHandler = new StartGameEventHandler(areaManager);
@@ -82,7 +77,7 @@ public class ManagerControllerFactory {
      * Creates the pause resume event handler.
      */
     void createPauseResumeEventHandler() {
-        Inventory inventory = Player.getInventory();
+        Inventory inventory = gameEntities.getInventory();
         ChangeOptionsStateFactory changeOptionsStateFactory = new ChangeOptionsStateFactory();
         InventoryStateFactory inventoryStateFactory = new InventoryStateFactory(inventory);
         MenuStateFactory menuStateFactory = new MenuStateFactory(changeOptionsStateFactory, inventoryStateFactory);
