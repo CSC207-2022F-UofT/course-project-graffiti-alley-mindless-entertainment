@@ -7,7 +7,6 @@ import database.objects.EncounterEventData;
 import database.objects.ItemPickUpEventData;
 import database.objects.QuestGiverEventData;
 import game_world.factories.EventFactory;
-import game_world.factories.ItemPickUpEventFactory;
 import game_world.objects.Area;
 import game_world.objects.events.Event;
 import interfaces.State;
@@ -20,20 +19,20 @@ public class EventManager {
      * Manages all matters regarding Events
      */
 
-    private ArrayList<Event> eventQueue;
-    private ArrayList<String> completedEvents;
+    private final ArrayList<Event> eventQueue;
+    private final ArrayList<String> completedEvents;
     private final EventDataManager database;
     private final EventFactory eventFactory;
 
     /**
      * Constructs EventManager
-     * @param itemPickUpEventFactory itemPickUpEventFactory created to avoid introducing the Inventory dependency
+     * @param eventFactory injected dependency
      */
-    public EventManager(ItemPickUpEventFactory itemPickUpEventFactory) {
+    public EventManager(EventFactory eventFactory) {
         this.database = new EventDataManager();
         this.eventQueue = new ArrayList<>();
         this.completedEvents = new ArrayList<>();
-        this.eventFactory = new EventFactory(itemPickUpEventFactory);
+        this.eventFactory = eventFactory;
     }
 
     /**
