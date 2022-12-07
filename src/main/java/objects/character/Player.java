@@ -11,9 +11,9 @@ import java.util.ArrayList;
 /**
  * A class for the Player character. Includes getters and setters for all applicable attributes.
  */
-public class Player extends Character implements SavableEntity {
+public class Player extends Character {
     /**
-     * name: The name of the Player.
+     * name: The name of the Player. Inherited from Character.
      * description: A description of the Player. Filled by the user at the start of the game.
      * currHealth: The current amount of health of the Player. Decreases and increases during a battle. Never exceeds
      *             maxHealth.
@@ -28,7 +28,6 @@ public class Player extends Character implements SavableEntity {
      * skillList: A List of Skills of the Player.
      * inventory: An Inventory of the player.
      */
-    private String name;
     private String description;
     private int currHealth;
     private int maxHealth;
@@ -55,6 +54,7 @@ public class Player extends Character implements SavableEntity {
         this.maxHealth = 100;
         this.armor = 0;
         this.experience = 0;
+        level = 0;
         this.speed = 100;
         this.money = 20;
         this.skillList = new ArrayList<>();
@@ -92,12 +92,7 @@ public class Player extends Character implements SavableEntity {
         if (newHealth < 0) {
             this.currHealth = 0;
         }
-        else if (newHealth > this.maxHealth) {
-            this.currHealth = this.maxHealth;
-        }
-        else {
-            this.currHealth = newHealth;
-        }
+        else this.currHealth = Math.min(newHealth, this.maxHealth);
     }
 
     /**
@@ -176,7 +171,7 @@ public class Player extends Character implements SavableEntity {
     /**
      * Change the Player's level by changeBy. Level cannot be negative, so decreasing level to make it negative sets
      * level to 0.
-     * @param changeBy
+     * @param changeBy the int amount to change level by
      */
     public void changeLevel(int changeBy) {
         int newLevel = level + changeBy;
@@ -255,27 +250,48 @@ public class Player extends Character implements SavableEntity {
     }
 
     /**
-     * @return a string representation of the object to be saved
+     * An inner class for saving functionality of Player.
      */
-    @Override
-    public String toSavableString() {
-        return null;
-    }
+    public class SavePlayer implements SavableEntity {
 
-    /**
-     * @param str a string representation
-     *            map the string representation to the corresponding object
-     */
-    @Override
-    public void fromSavableString(String str) {
+        /**
+         * @return a string representation of the object to be saved
+         */
+        @Override
+        public String toSavableString() {
+            Player player = Player.this;
+            String skillType = player.getSkillType().toString();
+            return player.getName() + "|" + player.getDescription() + "|" + skillType + "|" + player.getCurrHealth() +
+                    "|" + player.getMaxHealth() + "|" + player.getArmor() + "|" + player.getExperience() + "|" +
+                    Player.getLevel() + "|" + player.getSpeed() + "|" + player.getMoney();
+        }
 
-    }
+        /**
+         * @param str a string representation
+         *            map the string representation to the corresponding object
+         */
+        @Override
+        public void fromSavableString(String str) {
+            String[] playerAttributes = str.split("\\|");
+            Player player = Player.this;
+            player.changeName(playerAttributes[0]);
+            player.description = playerAttributes[1];
+            player.skillType = SkillType.valueOf(playerAttributes[2]);
+            player.currHealth = Integer.parseInt(playerAttributes[3]);
+            player.maxHealth = Integer.parseInt(playerAttributes[4]);
+            player.armor = Integer.parseInt(playerAttributes[5]);
+            player.experience = Integer.parseInt(playerAttributes[6]);
+            level = Integer.parseInt(playerAttributes[7]);
+            player.speed = Integer.parseInt(playerAttributes[8]);
+            player.money = Integer.parseInt(playerAttributes[9]);
+        }
 
-    /**
-     * @return the id of this entity in the saved entities list
-     */
-    @Override
-    public SaveEntityId getId() {
-        return null;
+        /**
+         * @return the id of this entity in the saved entities list
+         */
+        @Override
+        public SaveEntityId getId() {
+            return SaveEntityId.PLAYER;
+        }
     }
 }

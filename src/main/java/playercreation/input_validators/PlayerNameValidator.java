@@ -19,7 +19,7 @@ public class PlayerNameValidator implements InputValidator {
      */
     @Override
     public String parseAndValidate(String input) {
-        if (input.length() <= 20 && !(input.isBlank()) && !(input.isEmpty())) {
+        if (input.length() <= 20 && !(input.isBlank()) && !(input.isEmpty()) && !(input.contains("|"))) {
             return input.toLowerCase();
         }
         return null;
@@ -37,6 +37,9 @@ public class PlayerNameValidator implements InputValidator {
         }
         else if (input.isEmpty() || input.isBlank()) {
             return "Please type a valid name.";
+        }
+        else if (input.contains("|")) {
+            return "| is not a supported character. Please try again.";
         }
         return null;
     }
