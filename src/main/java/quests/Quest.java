@@ -37,7 +37,6 @@ public class Quest {
     // Constructor requesting all the attributes to define a quest.
     public Quest(String name, String description, Bystander overseer, Reward reward, List<Task> tasks) {
         this.name = name;
-        // Stores the description of the quest.
         this.description = description;
         this.isCompleted = false;
         this.setOverseer(overseer);
@@ -154,11 +153,9 @@ public class Quest {
          */
         @Override
         public String toSavableString() {
-            Quest quest = Quest.this;
-
-            return quest.name + "|" + quest.description + "|" + quest.isCompleted + "" + quest.overseer.getName() +
-                    "|" + quest.overseer.hasQuest() + "|" + tasksToString() + "|" + rewardToString() +
-                    "|" + quest.isRewardDistributed;
+            return name + "|" + description + "|" + isCompleted + "|" + overseer.getName() +
+                    "|" + overseer.hasQuest() + "|" + tasksToString() + "|" + rewardToString() +
+                    "|" + isRewardDistributed;
         }
 
         /**
@@ -167,7 +164,7 @@ public class Quest {
         public String tasksToString() {
             String str = "";
 
-            for (Task task: Quest.this.getTasks()) {
+            for (Task task: getTasks()) {
                 if (str.equals("")) {
                     str += task.toString();
                 } else {
@@ -182,7 +179,7 @@ public class Quest {
          * @return string with the reward.
          */
         public String rewardToString() {
-            return Quest.this.reward.toString();
+            return reward.toString();
         }
 
 
@@ -194,15 +191,13 @@ public class Quest {
         public void fromSavableString(String str) {
             String[] questAttributes = str.split("\\|");
 
-            Quest quest = Quest.this;
-
-            quest.name = questAttributes[0];
-            quest.description = questAttributes[1];
-            quest.isCompleted = Boolean.parseBoolean(questAttributes[2]);
-            quest.overseer = new Bystander(questAttributes[3], Boolean.parseBoolean(questAttributes[4]));
-            quest.tasks = tasksFromString(questAttributes[5]);
-            quest.reward.changesFromString(questAttributes[6]);
-            quest.isRewardDistributed = Boolean.parseBoolean(questAttributes[7]);
+            name = questAttributes[0];
+            description = questAttributes[1];
+            isCompleted = Boolean.parseBoolean(questAttributes[2]);
+            overseer = new Bystander(questAttributes[3], Boolean.parseBoolean(questAttributes[4]));
+            tasks = tasksFromString(questAttributes[5]);
+            reward = rewardFromString(questAttributes[6]);
+            isRewardDistributed = Boolean.parseBoolean(questAttributes[7]);
         }
 
         /**
@@ -232,6 +227,22 @@ public class Quest {
                     Task task = new StatisticalTask(null, 0);
                     task.changesFromString(str);
                     return task;
+                default:
+                    return null;
+            }
+        }
+
+        /**
+         *
+         * @param str: contains the information for a reward.
+         * @return a reward object created through the entered string.
+         */
+        public Reward rewardFromString(String str) {
+            switch (str.split(",")[0]) {
+                case "statistical":
+                    Reward newReward = new StatisticalReward(null, 0);
+                    newReward.changesFromString(str);
+                    return newReward;
                 default:
                     return null;
             }

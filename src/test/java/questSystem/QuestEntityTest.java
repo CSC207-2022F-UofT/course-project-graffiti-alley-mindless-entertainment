@@ -61,7 +61,7 @@ public class QuestEntityTest {
         tasks.add(new StatisticalTask(PlayersStatistics.HEALTH, 50));
         tasks.add(new StatisticalTask(PlayersStatistics.MONEY, 100));
 
-        return new Quest("", "", bystander, reward, tasks);
+        return new Quest("Challenge", "Here is the challenge", bystander, reward, tasks);
     }
 
     // helper method to complete the tasks.
@@ -86,5 +86,33 @@ public class QuestEntityTest {
         this.completeTasksOfQuest(quest.getTasks(), player);
 
         assert (quest.isCompleted());
+    }
+
+    /**
+     * Testing that the savable functionality works.
+     */
+    @Test
+    void saveAbleQuest() {
+        String questInformation = (this.getQuest().new SaveQuest()).toSavableString();
+        String[] questAttributes = questInformation.split("\\|");
+
+        assert questAttributes.length == 8;
+
+        assert questAttributes[0].equals("Challenge");
+        assert this.getQuest().getReward().toString().equals(questAttributes[6]);
+    }
+
+    /**
+     * Testing
+     */
+    @Test
+    void fromStringQuest() {
+        String information = (this.getQuest().new SaveQuest()).toSavableString();
+
+        Quest newQuest = new Quest("", "", new Bystander("", false), null, new ArrayList<>());
+        (newQuest.new SaveQuest()).fromSavableString(information);
+
+        assert newQuest.isRewardDistributed() == this.getQuest().isRewardDistributed();
+        assert newQuest.getReward().toString().equals(this.getQuest().getReward().toString());
     }
 }
