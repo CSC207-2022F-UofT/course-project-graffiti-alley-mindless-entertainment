@@ -17,8 +17,8 @@ public class StatisticalTask extends Task {
     /**
      * Constructor.
      */
-    public StatisticalTask(String name, PlayersStatistics statistic, int value) {
-        super(name);
+    public StatisticalTask(PlayersStatistics statistic, int value) {
+        super();
         this.statistic = statistic;
         this.value = value;
     }

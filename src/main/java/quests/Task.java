@@ -7,18 +7,15 @@ import objects.character.Player;
  */
 public abstract class Task {
     /**
-     * Attributes.
+     * Attribute.
      */
-    // Stores the name of the task.
-    protected String name;
     // Stores whether the task has been completed.
     protected boolean isCompleted;
 
     /**
      * Constructor.
      */
-    public Task(String name) {
-        this.name = name;
+    public Task() {
         this.isCompleted = false;
     }
 
