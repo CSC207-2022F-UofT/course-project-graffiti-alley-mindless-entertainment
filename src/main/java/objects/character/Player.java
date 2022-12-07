@@ -231,13 +231,13 @@ public class Player extends Character {
     public boolean addSkill(Skill newSkill) {
         // Append a new Skill to the end of skillList iff newSkill is not already in skillList. Returns true if
         // successful.
-        if (!this.skillList.contains(newSkill)) {
-            this.skillList.add(newSkill);
-            return true;
+        for (Skill skill : this.skillList) {
+            if (skill.getName().equals(newSkill.getName())) {
+                this.skillList.add(newSkill);
+                return true;
+            }
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
     public void removeSkill(Skill toRemove) {
