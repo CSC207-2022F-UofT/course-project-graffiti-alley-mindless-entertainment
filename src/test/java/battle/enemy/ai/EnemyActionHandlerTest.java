@@ -10,8 +10,6 @@ import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 
-import java.util.Objects;
-
 
 public class EnemyActionHandlerTest {
 
@@ -26,6 +24,8 @@ public class EnemyActionHandlerTest {
         EnemyActionHandler action = enemyFacade.enemyAction("use skill");
         action.useAction(enemyFacade, player);
         Assertions.assertEquals(20, enemyFacade.getHealth());
+        potion.useAction(enemyFacade, player);
+        Assertions.assertEquals(30, enemyFacade.getHealth());
     }
 
     @Test
@@ -34,10 +34,16 @@ public class EnemyActionHandlerTest {
         Player player = new Player("Yasu", SkillType.EARTH);
         EnemyFactory enemyFactory = new EnemyFactory();
         EnemyFighter bossFacade = enemyFactory.createEnemy("goblin warrior");
-        EnemyPotionHandler potion = new EnemyPotionHandler(bossFacade.getPotion());
+        EnemyPotionHandler skill = new EnemyPotionHandler(bossFacade.getPotion());
         bossFacade.changeHealth(-90);
         EnemyActionHandler action = bossFacade.enemyAction("use skill");
         action.useAction(bossFacade, player);
         boolean check = player.getCurrHealth() == 75 || bossFacade.getHealth() == 30;
-        Assertions.assertTrue(check);}
+        Assertions.assertTrue(check);
+        Player player2 = new Player("Yasu", SkillType.EARTH);
+        EnemyFighter bossFacade2 = enemyFactory.createEnemy("goblin warrior");
+        skill.useAction(bossFacade2, player2);
+        boolean check2 = player.getCurrHealth() == 75 || bossFacade.getHealth() == 30;
+        Assertions.assertTrue(check2);
+    }
 }

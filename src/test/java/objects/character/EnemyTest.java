@@ -1,146 +1,167 @@
-package battle.enemy;
+package objects.character;
 
 import objects.battle.Skill;
 import objects.battle.SkillType;
 import objects.battle.enemy.EnemyInfo;
 import objects.battle.enemy.ai.DefaultAI;
 import objects.battle.enemy.ai.EnemyPotion;
-import objects.character.EnemyFacade;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-public class EnemyInfoTest {
+public class EnemyTest {
 
     @DisplayName("Test for getHealth method")
-    @Test
+    @org.junit.jupiter.api.Test
     public void getHealthTest(){
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
-        Assertions.assertEquals(enemyInfo.getHealth(), 100);
+        EnemyFacade enemy = new EnemyFacade("goblin", enemyInfo, new DefaultAI(enemyInfo, 30));
+        Assertions.assertEquals(enemy.getHealth(), 100);
     }
 
     @DisplayName("Test for changeHealth method")
-    @Test
+    @org.junit.jupiter.api.Test
     public void changeHealthTest(){
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
-        enemyInfo.changeHealth(-10);
+        EnemyFacade enemy = new EnemyFacade("goblin", enemyInfo, new DefaultAI(enemyInfo, 30));
+        enemy.changeHealth(-10);
         Assertions.assertEquals(enemyInfo.getHealth(), 90);
-        enemyInfo.changeHealth(200);
-        Assertions.assertEquals(enemyInfo.getHealth(), 100);
     }
 
     @DisplayName("Test for getSpeed method")
-    @Test
+    @org.junit.jupiter.api.Test
     public void getSpeedTest(){
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
-        Assertions.assertEquals(enemyInfo.getSpeed(), 90);
+        EnemyFacade enemy = new EnemyFacade("goblin", enemyInfo, new DefaultAI(enemyInfo, 30));
+        Assertions.assertEquals(enemy.getSpeed(), 90);
     }
 
     @DisplayName("Test for changeSpeed method")
-    @Test
+    @org.junit.jupiter.api.Test
     public void changeSpeedTest(){
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
-        enemyInfo.changeSpeed(10);
-        Assertions.assertEquals(enemyInfo.getSpeed(), 100);
+        EnemyFacade enemy = new EnemyFacade("goblin", enemyInfo, new DefaultAI(enemyInfo, 30));
+        enemy.changeSpeed(10);
+        Assertions.assertEquals(enemy.getSpeed(), 100);
     }
 
     @DisplayName("Test for checkAlive method")
-    @Test
+    @org.junit.jupiter.api.Test
+    public void checkDeadTest(){
+        Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
+        ArrayList<Skill> skills = new ArrayList<Skill>();
+        skills.add(skill);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
+        EnemyFacade enemy = new EnemyFacade("goblin", enemyInfo, new DefaultAI(enemyInfo, 30));
+        enemy.setHealth(0);
+        Assertions.assertFalse(enemy.checkAlive());
+    }
+
+    @DisplayName("Test for checkAlive method when its alive")
+    @org.junit.jupiter.api.Test
     public void checkAliveTest(){
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
-        enemyInfo.setHealth(0);
-        Assertions.assertEquals(enemyInfo.checkAlive(), false);
+        EnemyFacade enemy = new EnemyFacade("goblin", enemyInfo, new DefaultAI(enemyInfo, 30));
+        enemy.setHealth(10);
+        Assertions.assertTrue(enemy.checkAlive());
     }
 
+
     @DisplayName("Test for setHealth method")
-    @Test
+    @org.junit.jupiter.api.Test
     public void setHealthTest(){
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
-        enemyInfo.setHealth(50);
-        Assertions.assertEquals(enemyInfo.getHealth(), 50);
+        EnemyFacade enemy = new EnemyFacade("goblin", enemyInfo, new DefaultAI(enemyInfo, 30));
+        enemy.setHealth(50);
+        Assertions.assertEquals(enemy.getHealth(), 50);
     }
 
     @DisplayName("Test for setSpeed method")
-    @Test
+    @org.junit.jupiter.api.Test
     public void setSpeedTest(){
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
-        enemyInfo.setSpeed(80);
-        Assertions.assertEquals(enemyInfo.getSpeed(), 80);
+        EnemyFacade enemy = new EnemyFacade("goblin", enemyInfo, new DefaultAI(enemyInfo, 30));
+        enemy.setSpeed(80);
+        Assertions.assertEquals(enemy.getSpeed(), 80);
     }
 
     @DisplayName("Test for getReputation method")
-    @Test
+    @org.junit.jupiter.api.Test
     public void getReputationTest(){
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
-        Assertions.assertEquals(enemyInfo.getReputation(), 10);
+        EnemyFacade enemy = new EnemyFacade("goblin", enemyInfo, new DefaultAI(enemyInfo, 30));
+        Assertions.assertEquals(enemy.getReputation(), 10);
     }
 
     @DisplayName("Test for getSkill method")
-    @Test
+    @org.junit.jupiter.api.Test
     public void getSkillTest(){
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
-        Assertions.assertEquals(enemyInfo.getSkill(0), skill);
+        EnemyFacade enemy = new EnemyFacade("goblin", enemyInfo, new DefaultAI(enemyInfo, 30));
+        Assertions.assertEquals(enemy.getSkill(0), skill);
     }
 
     @DisplayName("Test for getSkills method")
-    @Test
+    @org.junit.jupiter.api.Test
     public void getSkillsTest(){
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
-        Assertions.assertEquals(enemyInfo.getSkills(), skills);
+        EnemyFacade enemy = new EnemyFacade("goblin", enemyInfo, new DefaultAI(enemyInfo, 30));
+        Assertions.assertEquals(enemy.getSkills(), skills);
     }
 
     @DisplayName("Test for getType method")
-    @Test
+    @org.junit.jupiter.api.Test
     public void getTypeTest(){
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
-        Assertions.assertEquals(enemyInfo.getType(), SkillType.WATER);
+        EnemyFacade enemy = new EnemyFacade("goblin", enemyInfo, new DefaultAI(enemyInfo, 30));
+        Assertions.assertEquals(enemy.getType(), SkillType.WATER);
     }
 
     @DisplayName("Test for setType method")
-    @Test
+    @org.junit.jupiter.api.Test
     public void setTypeTest(){
         Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
-        enemyInfo.setType(SkillType.FIRE);
-        Assertions.assertEquals(enemyInfo.getType(), SkillType.FIRE);
+        EnemyFacade enemy = new EnemyFacade("goblin", enemyInfo, new DefaultAI(enemyInfo, 30));
+        enemy.setType(SkillType.FIRE);
+        Assertions.assertEquals(enemy.getType(), SkillType.FIRE);
     }
 
     @DisplayName("Test for getPotion method")
@@ -151,16 +172,7 @@ public class EnemyInfoTest {
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
         EnemyFacade enemy = new EnemyFacade("goblin", enemyInfo, new DefaultAI(enemyInfo, 30));
-        Assertions.assertEquals(10, enemy.getPotion().getHp());
-    }
-
-    @DisplayName("Test for getMaxHealth method")
-    @Test
-    public void getMaxHealthTest(){
-        Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
-        ArrayList<Skill> skills = new ArrayList<Skill>();
-        skills.add(skill);
-        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
-        Assertions.assertEquals(100, enemyInfo.getMaxHealth());
+        enemy.setType(SkillType.FIRE);
+        Assertions.assertEquals(10, enemyInfo.getPotion().getHp());
     }
 }
