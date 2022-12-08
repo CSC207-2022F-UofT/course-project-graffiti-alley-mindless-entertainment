@@ -66,10 +66,10 @@ public class UserTurnState implements State {
                 output.generateTextWithOptions("Pick a skill:", skillList);
                 validator = new ChoiceInputValidator(skillList);
                 break;
-            case 2:
-                output.generateTextWithOptions("Pick an item:", invList);
-                validator = new ChoiceInputValidator(invList);
-                break;
+//            case 2:
+//                output.generateTextWithOptions("Pick an item:", invList);
+//                validator = new ChoiceInputValidator(invList);
+//                break;
             default:
                 output.generateText("Not implemented yet, sorry try again.");
                 break;

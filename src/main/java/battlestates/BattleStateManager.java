@@ -47,11 +47,12 @@ public class BattleStateManager extends StateManager {
         State chosenState;
 
         if (!foe.checkAlive()) {
-            output.generateText("AISDAOISJDOAIJSDOAISJDOAISJDOIAJSD");
             chosenState = new WinBattleState(user, foe);
+            this.isDone = true;
         }
         else if (user.getCurrHealth() <= 0) {
             chosenState = new LoseBattleState(user, foe);
+            this.isDone = true;
         }
         else {
             if (userNext) {
