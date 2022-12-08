@@ -61,8 +61,7 @@ public class PauseMenuManager extends StateManager {
                 return menuStateFactory.createChangeOptionsState();
             } else if (Objects.equals(input, saveCommand)) {
                 currMenuType = MenuType.SAVE;
-                //to be implemented later
-                return null;
+                return menuStateFactory.createSaveMenuState();
             } else if (Objects.equals(input, questCommand)) {
                 currMenuType = MenuType.QUEST;
                 //to be implemented later
