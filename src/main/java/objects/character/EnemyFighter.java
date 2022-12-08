@@ -1,5 +1,6 @@
 package objects.character;
 
+import battlestates.BattleChoiceType;
 import objects.battle.Skill;
 import objects.battle.SkillType;
 import objects.battle.enemy.ai.EnemyAI;
@@ -111,7 +112,7 @@ public interface EnemyFighter {
      * @param input: input by the user
      * @return enemy's action in string (use skill or use potion)
      */
-    EnemyActionHandler enemyAction(String input);
+    EnemyActionHandler enemyAction(BattleChoiceType input);
 
     /**
      * This method returns the AI that the enemy has

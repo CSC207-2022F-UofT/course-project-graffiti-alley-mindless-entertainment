@@ -1,5 +1,7 @@
 package objects.battle.enemy.ai;
 
+import battlestates.BattleChoiceType;
+import battlestates.states.BattleSkillChoiceState;
 import objects.battle.enemy.EnemyInfo;
 
 import java.util.Objects;
@@ -43,9 +45,9 @@ public class DefaultAI implements EnemyAI {
      * @return string that represents the enemy's action
      */
     @Override
-    public EnemyActionHandler respond(String input) {
+    public EnemyActionHandler respond(BattleChoiceType input) {
         Random rand = new Random();
-        if (Objects.equals(input, "use skill")) {
+        if (input == BattleChoiceType.SKILLS) {
             int upperbound = 100;
             int int_random = rand.nextInt(upperbound);
             if(int_random < this.attackChance){

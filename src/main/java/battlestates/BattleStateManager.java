@@ -67,12 +67,7 @@ public class BattleStateManager extends StateManager {
                         break;
                 }
             } else {
-                String command = "use potion";
-                if (currChoice == BattleChoiceType.SKILLS) {
-                    command = "use skill";
-                }
-
-                chosenState = battleStateFactory.createEnemyTurnState(command);
+                chosenState = battleStateFactory.createEnemyTurnState(currChoice);
                 currChoice = BattleChoiceType.MENU;
             }
         }

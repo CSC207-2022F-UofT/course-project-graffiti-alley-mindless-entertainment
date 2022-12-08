@@ -1,5 +1,6 @@
 package battle.enemy.ai;
 
+import battlestates.BattleChoiceType;
 import objects.battle.SkillType;
 import objects.battle.enemy.ai.EnemyActionHandler;
 import objects.battle.enemy.ai.EnemyPotionHandler;
@@ -21,7 +22,7 @@ public class EnemyActionHandlerTest {
         EnemyFighter enemyFacade = enemyFactory.createEnemy("goblin");
         EnemyPotionHandler potion = new EnemyPotionHandler(enemyFacade.getPotion());
         enemyFacade.changeHealth(-90);
-        EnemyActionHandler action = enemyFacade.enemyAction("use skill");
+        EnemyActionHandler action = enemyFacade.enemyAction(BattleChoiceType.SKILLS);
         action.useAction(enemyFacade, player);
         Assertions.assertEquals(20, enemyFacade.getHealth());
         potion.useAction(enemyFacade, player);
@@ -36,7 +37,7 @@ public class EnemyActionHandlerTest {
         EnemyFighter bossFacade = enemyFactory.createEnemy("goblin warrior");
         EnemyPotionHandler skill = new EnemyPotionHandler(bossFacade.getPotion());
         bossFacade.changeHealth(-90);
-        EnemyActionHandler action = bossFacade.enemyAction("use skill");
+        EnemyActionHandler action = bossFacade.enemyAction(BattleChoiceType.SKILLS);
         action.useAction(bossFacade, player);
         boolean check = player.getCurrHealth() == 75 || bossFacade.getHealth() == 30;
         Assertions.assertTrue(check);
