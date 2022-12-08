@@ -39,7 +39,7 @@ public class BattleStateManager extends StateManager {
     protected State nextState(String input) {
         BattleStateFactory battleStateFactory = new BattleStateFactory(battleEntityInteractor);
         boolean userNext = battleEntityInteractor.userOutspeeds();
-        State chosenState;
+        State chosenState = null;
 
         if (battleEntityInteractor.isFoeDead()) {
             chosenState = battleStateFactory.createWinBattleState();
@@ -51,7 +51,6 @@ public class BattleStateManager extends StateManager {
         }
         else {
             if (userNext) {
-                chosenState = battleStateFactory.createUserTurnState();
                 switch (currChoice) {
                     case MENU:
                         chosenState = battleStateFactory.createBattleMenuState(currChoice);
