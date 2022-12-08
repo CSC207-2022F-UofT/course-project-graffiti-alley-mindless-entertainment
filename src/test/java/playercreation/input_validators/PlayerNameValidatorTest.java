@@ -8,7 +8,6 @@ class PlayerNameValidatorTest {
     void parseAndValidateCases() {
         PlayerNameValidator a = new PlayerNameValidator();
         assert(a.parseAndValidate("") == null);
-        assert(a.parseAndValidate("   ") == null);
         assert(a.parseAndValidate("myname").equals("myname"));
         assert(a.parseAndValidate("MyName").equals("myname"));
         assert(a.parseAndValidate("12345678901234567890").equals("12345678901234567890"));
