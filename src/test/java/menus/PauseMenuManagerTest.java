@@ -7,6 +7,7 @@ import objects.inventory.InventoryStateFactory;
 import options.Options;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import save.SaveGatewayImpl;
 import save.SaveInteractor;
 
 class PauseMenuManagerTest {
@@ -20,7 +21,8 @@ class PauseMenuManagerTest {
         Inventory inventory = new Inventory();
         ChangeOptionsStateFactory changeOptionsStateFactory = new ChangeOptionsStateFactory(options);
         InventoryStateFactory inventoryStateFactory = new InventoryStateFactory(inventory);
-        SaveInteractor saveInteractor = new SaveInteractor(3);
+        SaveGatewayImpl saveGateway = new SaveGatewayImpl();
+        SaveInteractor saveInteractor = new SaveInteractor(3, saveGateway);
         SaveMenuStateFactory saveMenuStateFactory = new SaveMenuStateFactory(saveInteractor);
         MenuStateFactory menuStateFactory = new MenuStateFactory(changeOptionsStateFactory, inventoryStateFactory, saveMenuStateFactory);
         pauseMenuManager = new PauseMenuManager(menuStateFactory);

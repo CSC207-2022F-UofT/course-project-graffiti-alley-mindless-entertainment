@@ -13,6 +13,7 @@ import menus.save.SaveMenuStateFactory;
 import objects.inventory.Inventory;
 import objects.inventory.InventoryStateFactory;
 import playercreation.PlayerCreatorManager;
+import save.SaveGatewayImpl;
 import save.SaveInteractor;
 import switch_managers.ManagerController;
 import switch_managers.ManagerControllerImpl;
@@ -104,7 +105,8 @@ public class ManagerControllerFactory {
      * @return the SaveInteractor.
      */
     SaveInteractor createSaveInteractor() {
-        SaveInteractor saveInteractor = new SaveInteractor(3);
+        SaveGatewayImpl saveGateway = new SaveGatewayImpl();
+        SaveInteractor saveInteractor = new SaveInteractor(3, saveGateway);
         saveInteractor.addSavableEntity(gameEntities.getLocation());
         saveInteractor.addSavableEntity(gameEntities.getInventory().new SaveInventory());
         saveInteractor.addSavableEntity(gameEntities.getOptions().new SaveOptions());
