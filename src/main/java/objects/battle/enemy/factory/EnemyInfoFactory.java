@@ -10,8 +10,15 @@ import objects.battle.enemy.ai.EnemyPotion;
 
 import java.util.ArrayList;
 
+/**
+ * This class creates the EnemyInfo of the enemy with the given name
+ * using the information in the database
+ */
 public class EnemyInfoFactory {
 
+    /**
+     * skillDataManager: Manager used to get the information about the skill from the database
+     */
     private final SkillDataManager skillDataManager;
 
     public EnemyInfoFactory(SkillDataManager skillDataManager){

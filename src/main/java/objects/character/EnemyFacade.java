@@ -15,6 +15,11 @@ import java.util.ArrayList;
 public class EnemyFacade extends Character implements EnemyFighter{
 
 
+    /**
+     * enemyInfo: information about the enemy
+     * enemyAI: AI that the enemy has, and since it has a use case, this class works as a facade, so outer classes
+     * can use enemyAI without knowing the complexity of the system
+     */
     private final EnemyInfo enemyInfo;
     private final EnemyAI enemyAI;
 

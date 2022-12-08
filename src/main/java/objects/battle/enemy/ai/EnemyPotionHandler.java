@@ -5,10 +5,13 @@ import io.OutputHandler;
 import objects.character.EnemyFighter;
 import objects.character.Player;
 
+/**
+ * This class is EnemyPotionHandler which handles the EnemyPotion. This is
+ * a use case of EnemyPotion. It has useAction which uses the potion for the given enemy
+ */
 public class EnemyPotionHandler implements EnemyActionHandler{
     /**
-     * This class is EnemyPotionHandler which handles the EnemyPotion. This is
-     * a use case of EnemyPotion. It has useAction which uses the potion for the given enemy
+     * enemyPotion: EnemyPotion object that the enemy has with the hp value that the potion can increase
      */
     private final EnemyPotion enemyPotion;
 

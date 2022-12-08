@@ -4,6 +4,9 @@ package objects.battle.enemy.ai;
 import objects.character.EnemyFighter;
 import objects.character.Player;
 
+/**
+ * This class is a use case that deals with action made by an enemy
+ */
 public interface EnemyActionHandler {
 
     /**
