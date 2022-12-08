@@ -124,5 +124,6 @@ public class BattleStateManager extends StateManager {
             chosenEnemy = encounterEvent.getNPC();
         }
         battleEntityInteractor.setFoe(enemyFactory.createEnemy(chosenEnemy));
+        currState = nextState("");
     }
 }
