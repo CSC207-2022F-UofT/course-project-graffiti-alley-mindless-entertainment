@@ -1,5 +1,6 @@
 package game_world.factories;
 
+import game_world.objects.Area;
 import game_world.objects.states.DialogueState;
 
 public class DialogueStateFactory {
@@ -8,8 +9,8 @@ public class DialogueStateFactory {
      * A factory class for creating new DialogueState. Used to avoid dependencies in AreaManager.
      */
 
-    public DialogueState createDialogueState(String dialogue) {
+    public DialogueState createDialogueState(Area currentArea) {
         // Returns a new DialogueState.
-        return new DialogueState(dialogue);
+        return new DialogueState(currentArea);
     }
 }
