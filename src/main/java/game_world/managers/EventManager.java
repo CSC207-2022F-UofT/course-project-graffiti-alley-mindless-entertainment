@@ -1,12 +1,6 @@
 package game_world.managers;
 
-import database.managers.EventDataManager;
-
-import database.objects.ArbitraryEventData;
-import database.objects.EncounterEventData;
-import database.objects.ItemPickUpEventData;
-import database.objects.QuestGiverEventData;
-import game_world.factories.EventFactory;
+import game_world.factories.ItemPickUpEventFactory;
 import game_world.objects.Area;
 import game_world.objects.events.Event;
 import interfaces.State;
@@ -21,56 +15,15 @@ public class EventManager {
 
     private final ArrayList<Event> eventQueue;
     private final ArrayList<String> completedEvents;
-    private final EventDataManager database;
-    private final EventFactory eventFactory;
+    private final EventDatabaseInteractor databaseController;
 
     /**
      * Constructs EventManager
-     * @param eventFactory injected dependency
      */
-    public EventManager(EventFactory eventFactory) {
-        this.database = new EventDataManager();
+    public EventManager(EventDatabaseInteractor eventDatabaseInteractor) {
         this.eventQueue = new ArrayList<>();
+        this.databaseController = eventDatabaseInteractor;
         this.completedEvents = new ArrayList<>();
-        this.eventFactory = eventFactory;
-    }
-
-    /**
-     * Generates new event object
-     * @return the new event generated
-     * @param name name of Event to be searched
-     * @param exec adds Event to eventQueue to be executed if set to true
-     */
-    public Event createEvent(String name, boolean exec) {
-        String type = this.database.fetchEventType(name);
-        Event newEvent;
-
-        switch (type) {
-            case "Encounter": {
-                EncounterEventData data = this.database.fetchEncounterEvent("name", name);
-                newEvent = eventFactory.createEncounterEvent(data);
-                break;
-            }
-            case "Item Pick-Up": {
-                ItemPickUpEventData data = this.database.fetchItemPickUpEvent("name", name);
-                newEvent = eventFactory.createItemPickUpEvent(data);
-                break;
-            }
-            case "Quest Giver": {
-                QuestGiverEventData data = this.database.fetchQuestGiverEvent("name", name);
-                newEvent = eventFactory.createQuestGiverEvent(data);
-                break;
-            }
-            default: {
-                ArbitraryEventData data = this.database.fetchArbitraryEvent("name", name);
-                newEvent = eventFactory.createArbitraryEvent(data);
-                break;
-            }
-        }
-
-        if (exec)
-            this.eventQueue.add(newEvent);
-        return newEvent;
     }
 
     /**
@@ -80,7 +33,7 @@ public class EventManager {
     public ArrayList<Event> getEventsFromArea(ArrayList<String> names) {
         ArrayList<Event> events = new ArrayList<>();
         for (String name : names) {
-            events.add(this.createEvent(name, false));
+            events.add(databaseController.createEvent(name));
         }
         return events;
     }

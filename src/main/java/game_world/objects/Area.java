@@ -78,10 +78,6 @@ public class Area {
         return this.next_options;
     }
 
-    public ArrayList<String> getNextAreas() {
-        return this.next_ids;
-    }
-
     public String getAreaFromInput(String input) {
         for (int i = 0; i < this.next_options.size(); i++) {
             if (this.next_options.get(i).equals(input)) {

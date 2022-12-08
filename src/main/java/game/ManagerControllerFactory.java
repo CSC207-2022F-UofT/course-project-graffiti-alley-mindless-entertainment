@@ -4,6 +4,7 @@ import battlestates.BattleStateManager;
 import game_world.factories.EventFactory;
 import game_world.factories.ItemPickUpEventFactory;
 import game_world.managers.AreaManager;
+import game_world.managers.EventDatabaseInteractor;
 import game_world.managers.EventManager;
 import main_menu.MainMenuManager;
 import menus.MenuStateFactory;
@@ -74,8 +75,10 @@ public class ManagerControllerFactory {
     void createReturnToMapEventHandler() {
         Inventory inventory = gameEntities.getInventory();
         ItemPickUpEventFactory itemPickUpEventFactory = new ItemPickUpEventFactory(inventory);
+
         EventFactory eventFactory = new EventFactory(itemPickUpEventFactory);
-        EventManager eventManager = new EventManager(eventFactory);
+        EventDatabaseInteractor eventDatabaseInteractor = new EventDatabaseInteractor(eventFactory);
+        EventManager eventManager = new EventManager(eventDatabaseInteractor);
         AreaManager areaManager = new AreaManager(eventManager, gameEntities.getLocation());
         managerController.addManager(areaManager);
 
@@ -106,15 +109,15 @@ public class ManagerControllerFactory {
      */
     SaveInteractor createSaveInteractor() {
         SaveInteractor saveInteractor = new SaveInteractor(3);
-        saveInteractor.addSavableEntity(gameEntities.getLocation());
+        saveInteractor.addSavableEntity(gameEntities.getLocation().new SaveLocation());
         saveInteractor.addSavableEntity(gameEntities.getInventory().new SaveInventory());
         saveInteractor.addSavableEntity(gameEntities.getOptions().new SaveOptions());
         saveInteractor.addSavableEntity(gameEntities.getPlayer().new SavePlayer());
         return saveInteractor;
     }
-    
+
     /**
-    * Creates the encounter event handler. 
+    * Creates the encounter event handler.
     */
     void createEncounterEventHandler() {
         BattleStateManager battleStateManager = new BattleStateManager(gameEntities.getPlayer(), gameEntities.getLocation());

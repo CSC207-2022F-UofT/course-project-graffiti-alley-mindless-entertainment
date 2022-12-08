@@ -96,7 +96,7 @@ public class BattleStateManager extends StateManager {
     @Override
     public void initialize() {
         EnemyFactory enemyFactory = new EnemyFactory();
-        Event currEvent = location.getCurrentArea().getCurrEvent();
+        Event currEvent = location.getCurrEvent();
         String chosenEnemy = "goblin warrior";
         EncounterEvent encounterEvent;
 
