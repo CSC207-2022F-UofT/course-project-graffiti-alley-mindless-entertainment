@@ -109,7 +109,7 @@ public class ManagerControllerFactory {
      */
     SaveInteractor createSaveInteractor() {
         SaveInteractor saveInteractor = new SaveInteractor(3);
-        saveInteractor.addSavableEntity(gameEntities.getLocation());
+        saveInteractor.addSavableEntity(gameEntities.getLocation().new SaveLocation());
         saveInteractor.addSavableEntity(gameEntities.getInventory().new SaveInventory());
         saveInteractor.addSavableEntity(gameEntities.getOptions().new SaveOptions());
         saveInteractor.addSavableEntity(gameEntities.getPlayer().new SavePlayer());
