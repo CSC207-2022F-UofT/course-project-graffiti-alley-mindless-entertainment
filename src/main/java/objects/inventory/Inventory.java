@@ -5,6 +5,7 @@ import save.SavableEntity;
 import save.SaveEntityId;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A class for Inventory. Includes getter and setter for inventory, and functions like viewInventory,
@@ -67,6 +68,17 @@ public class Inventory {
     }
 
     /**
+     * @return pure list of item names
+     */
+    public List<String> toStringList(){
+        List<String> itemList = new ArrayList<>();
+        for (Item item : inventory) {
+            itemList.add(item.getName());
+        }
+        return itemList;
+    }
+
+    /**
      * @param item to be added to inventory
      * @return whether item is added.
      */
@@ -75,7 +87,7 @@ public class Inventory {
         if (inventory.size() >= maxSize){
             return false;
         }
-        else{
+        else {
             inventory.add(item);
             return true;
         }
@@ -108,6 +120,22 @@ public class Inventory {
         return null;
     }
 
+    /**
+     * @param name of the item that wants to be used, uss the first one of the name.
+     * @return the item that has been used, or null if nothing is used.
+     */
+    public Item useItem(String name) {
+        int index = 0;
+        for (Item item : inventory) {
+            if (name.toUpperCase().equals(item.getName())) {
+                Item returnItem = item;
+                useItem(index);
+                return returnItem;
+            }
+            index++;
+        }
+        return null;
+    }
 
     public class SaveInventory implements SavableEntity {
 

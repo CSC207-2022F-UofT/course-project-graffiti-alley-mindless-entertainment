@@ -6,11 +6,11 @@ import save.SavableEntity;
 import save.SaveEntityId;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Location {
 
     private Area currentArea;
-    private AreaDatabaseInteractor databaseController;
 
     public Area getCurrentArea() {
         return currentArea;
@@ -20,17 +20,20 @@ public class Location {
         this.currentArea = currentArea;
     }
 
-    public void setDatabaseController(AreaDatabaseInteractor databaseController) {
-        this.databaseController = databaseController;
-    }
-
     public Event getCurrEvent() {
         if (currentArea == null) {return null; }
         else {return currentArea.getCurrEvent();}
     }
     public class SaveLocation implements SavableEntity {
+
+        public void setDatabaseController(AreaDatabaseInteractor databaseController) {
+            this.databaseController = databaseController;
+        }
+
+        private AreaDatabaseInteractor databaseController;
         @Override
         public String toSavableString () {
+            if (currentArea == null) {return "";}
             if (currentArea.getCurrEvent() == null)
                 return currentArea.getId() + "/NA";
             return currentArea.getId() + "/" + currentArea.getCurrEvent().name;
@@ -38,6 +41,7 @@ public class Location {
 
         @Override
         public void fromSavableString (String str){
+            if (Objects.equals(str, "")) {currentArea = null; return;}
             String[] ids = str.split("/");
             currentArea = databaseController.loadArea(ids[0]);
             if (!ids[1].equals("NA")) {
