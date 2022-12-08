@@ -9,6 +9,11 @@ import objects.battle.enemy.ai.*;
  */
 public class BossFacade extends EnemyFacade implements EnemyFighter{
 
+    /**
+     * gimmick: gimmick use case with the gimmick entity that enemy can use. This allows the class to
+     * work as a facade, so the EnemyTurnState can use gimmick by a single method without knowing the
+     * complexities of the system
+     */
     private final GimmickStrategy gimmick;
 
     /**
