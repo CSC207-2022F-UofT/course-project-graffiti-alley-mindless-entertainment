@@ -37,6 +37,13 @@ public class PlayerQuests implements SavableEntity {
     }
 
     /**
+     * @return list of quests.
+     */
+    public List<Quest> getQuests() {
+        return this.quests;
+    }
+
+    /**
      * @return a string representation of the object to be saved
      */
     @Override

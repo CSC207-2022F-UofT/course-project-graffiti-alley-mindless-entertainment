@@ -1,5 +1,6 @@
 package game_world.factories;
 
+import database.managers.QuestDataManager;
 import objects.character.Bystander;
 import quests.*;
 import database.objects.QuestData;
@@ -11,12 +12,25 @@ import java.util.List;
  * This class contains all the methods to create a Quest using the information given by a QuestData object.
  */
 public class QuestFactory {
+    /**
+     * Attribute.
+     */
+    private final QuestDataManager database = new QuestDataManager();
+
+    /**
+     * @param name of the quest.
+     * @return quest in the database, corresponding ot hte name entered.
+     */
+    public Quest createQuest(String name) {
+        QuestData data = this.database.fetchQuestData(name);
+        return createQuest(data);
+    }
 
     /**
      * @param data: contains all the information needed to create the quest.
      * @return the created quest using the information from data.
      */
-    public Quest createQuest(QuestData data) {
+    private Quest createQuest(QuestData data) {
         Bystander bystander = createBystander(data.bystander);      //!!! might be changed later on.
         Reward reward = createReward(data.rewardType, data.rewardStatistic, (int) data.rewardValue);
         List<Task> tasks = createTasks(data.tasksTypes, data.tasksStatistics, data.tasksValues);
@@ -28,7 +42,7 @@ public class QuestFactory {
      * @param name: name of the Bystander involved in the quest.
      * @return the Bystander object.
      */
-    public Bystander createBystander(String name) {
+    private Bystander createBystander(String name) {
         return new Bystander(name, false);          //!!! might need to be changed later
     }
 
@@ -39,12 +53,10 @@ public class QuestFactory {
      * @return the created reward.
      */
     private Reward createReward(String type, String statistic, int value) {
-        switch (type) {
-            case "statistical":
-                return createStatisticalReward(statistic, value);
-            default:
-                return null;
+        if ("statistical".equals(type)) {
+            return createStatisticalReward(statistic, value);
         }
+        return null;
     }
 
     /**
@@ -79,12 +91,10 @@ public class QuestFactory {
      * @return the created tasks using information given.
      */
     private Task createTask(String type, String statistic, long value) {
-        switch (type) {
-            case "statistical":
-                return createStatisticalTask(statistic, (int) value);
-            default:
-                return null;
+        if ("statistical".equals(type)) {
+            return createStatisticalTask(statistic, (int) value);
         }
+        return null;
     }
 
     /**
