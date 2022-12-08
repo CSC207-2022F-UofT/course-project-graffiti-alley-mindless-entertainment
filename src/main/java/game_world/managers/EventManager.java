@@ -15,7 +15,6 @@ public class EventManager {
 
     private final ArrayList<Event> eventQueue;
     private final ArrayList<String> completedEvents;
-
     private final EventDatabaseInteractor databaseController;
 
     /**

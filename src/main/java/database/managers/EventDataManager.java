@@ -6,6 +6,7 @@ import database.objects.ArbitraryEventData;
 import database.objects.EncounterEventData;
 import database.objects.ItemPickUpEventData;
 import database.objects.QuestGiverEventData;
+import game_world.objects.events.EventType;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -18,10 +19,15 @@ public class EventDataManager extends DatabaseManager {
      * @param name of event
      * @return type of event
      */
-    public String fetchEventType(String name) {
+    public EventType fetchEventType(String name) {
         JSONArray eventsData = (JSONArray) super.fullDatabase.get("events");
         JSONObject eventData = databaseHelper.searchJSONArray(eventsData, "name", name);
-        return (String) eventData.get("type");
+        return switch ((String) eventData.get("type")) {
+            case "Encounter" -> EventType.ENCOUNTER;
+            case "Item Pick-Up" -> EventType.ITEM_PICKUP;
+            case "Quest Giver" -> EventType.QUEST_GIVER;
+            default -> EventType.ARBITRARY;
+        };
     }
 
     /**

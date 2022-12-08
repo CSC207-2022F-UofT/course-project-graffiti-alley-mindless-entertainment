@@ -8,6 +8,7 @@ import database.objects.QuestGiverEventData;
 import game_world.factories.EventFactory;
 import game_world.factories.ItemPickUpEventFactory;
 import game_world.objects.events.Event;
+import game_world.objects.events.EventType;
 
 public class EventDatabaseInteractor {
 
@@ -25,18 +26,18 @@ public class EventDatabaseInteractor {
      * @param name name of Event to be searched
      */
     public Event createEvent(String name) {
-        String type = this.database.fetchEventType(name);
+        EventType type = this.database.fetchEventType(name);
         Event newEvent;
 
-        if (type.equals("Encounter")) {
+        if (type == EventType.ENCOUNTER) {
             EncounterEventData data = this.database.fetchEncounterEvent("name", name);
             newEvent = eventFactory.createEncounterEvent(data);
         }
-        else if (type.equals("Item Pick-Up")) {
+        else if (type == EventType.ITEM_PICKUP) {
             ItemPickUpEventData data = this.database.fetchItemPickUpEvent("name", name);
             newEvent = eventFactory.createItemPickUpEvent(data);
         }
-        else if (type.equals("Quest Giver")) {
+        else if (type == EventType.QUEST_GIVER) {
             QuestGiverEventData data = this.database.fetchQuestGiverEvent("name", name);
             newEvent = eventFactory.createQuestGiverEvent(data);
         }
