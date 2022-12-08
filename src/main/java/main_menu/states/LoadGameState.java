@@ -6,6 +6,9 @@ import io.Output;
 import io.OutputHandler;
 import main_menu.input_validators.LoadGameInputValidator;
 import save.SaveInteractor;
+import switch_managers.SwitchEventMediator;
+import switch_managers.SwitchEventMediatorProxy;
+import switch_managers.SwitchEventType;
 
 /**
  * The State for loading a previous game.
@@ -56,7 +59,14 @@ public class LoadGameState implements State {
     public void postInput(String input) {
         if (!(input.equalsIgnoreCase("return"))) {
             int slot = Integer.parseInt(input);
-
+            if (this.saveInteractor.loadFromSlot(slot)) {
+                this.saveInteractor.loadFromSlot(slot);
+            }
+            else {
+                // Switches to the PlayerCreatorManager to start a new game.
+                SwitchEventMediator mediator = SwitchEventMediatorProxy.getInstance();
+                mediator.store(SwitchEventType.NEW_GAME);
+            }
         }
         this.awaitInput = false;
         this.isDone = true;
