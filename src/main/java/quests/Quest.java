@@ -165,11 +165,10 @@ public class Quest {
             String str = "";
 
             for (Task task: getTasks()) {
-                if (str.equals("")) {
-                    str += task.toString();
-                } else {
-                    str += "#" + task.toString();
+                if (!str.equals("")) {
+                    str += "#";
                 }
+                str += task.toString();
             }
 
             return str;

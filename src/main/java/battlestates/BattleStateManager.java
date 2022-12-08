@@ -5,13 +5,15 @@ import battlestates.states.LoseBattleState;
 import battlestates.states.UserTurnState;
 import battlestates.states.WinBattleState;
 import core.StateManager;
+import game_world.objects.Location;
+import game_world.objects.events.EncounterEvent;
+import game_world.objects.events.Event;
 import interfaces.State;
 import io.Output;
 import io.OutputHandler;
 import objects.battle.Skill;
 import objects.battle.SkillType;
 import objects.battle.enemy.factory.EnemyFactory;
-import objects.character.EnemyFacade;
 import objects.character.EnemyFighter;
 import objects.character.Player;
 
@@ -24,11 +26,11 @@ public class BattleStateManager extends StateManager {
      */
     private Player user;
     private EnemyFighter foe;
-    private boolean awaitingInput = false;
-    private final OutputHandler output = Output.getScreen();
+    private Location location;
 
-    public BattleStateManager(Player user) {
+    public BattleStateManager(Player user, Location location) {
         this.user = user;
+        this.location = location;
         initialize();
     }
 
@@ -36,40 +38,36 @@ public class BattleStateManager extends StateManager {
      * Returns the next state based on the current state. If either EnemyFacade or user are dead, ends battle and
      * provides win or lose state accordingly.
      * @param input string input to dictate the next state, currently unused
-     * @return the state that comes next in the battle. someitmes when the user enters the wrong number this class would be used to fix the difference between the se
+     * @return the state that comes next in the battle. sometimes when the user enters the wrong number this class would be used to fix the difference between the se
      */
     @Override
     protected State nextState(String input) {
         boolean userNext = user.getSpeed() >= foe.getSpeed();
         State chosenState;
 
-        // Win condition
         if (!foe.checkAlive()) {
             chosenState = new WinBattleState(user, foe);
             this.isDone = true;
         }
-        // Lose condition
         else if (user.getCurrHealth() <= 0) {
             chosenState = new LoseBattleState(user, foe);
             this.isDone = true;
         }
-        // Normal battle turn ordering, characters can get multiple turns in a row if high enough speed.
         else {
             if (userNext) {
-                output.generateText("You outsped the enemy. What would you like to do?");
                 chosenState = new UserTurnState(user, foe);
             } else {
-                output.generateText(foe.getName() + " outsped you!");
                 chosenState = new EnemyTurnState(user, foe, input);
             }
-            awaitingInput = chosenState.awaitInput();
         }
         return chosenState;
     }
+    /**
+     * @return whether the state is done and ready to move to the next state
+     */
     @Override
     public void preInput() {
         currState.preInput();
-        awaitingInput = currState.awaitInput(); // Making sure await is updated
         boolean currPreInput = currState.isDone();
         if (currPreInput) {
             this.currState = this.nextState("");
@@ -78,10 +76,14 @@ public class BattleStateManager extends StateManager {
             }
         }
     }
+
+    /**
+     * @param input from the user
+     * @return whether the state is done and ready to move to the next state
+     */
     @Override
     public void postInput(String input) {
         currState.postInput(input);
-        awaitingInput = currState.awaitInput(); // Making sure await is updated
         boolean currPostInput = currState.isDone();
         if (currPostInput) {
             this.currState = this.nextState(input);
@@ -92,16 +94,24 @@ public class BattleStateManager extends StateManager {
     }
 
     @Override
-    public boolean awaitInput() {
-        return awaitingInput;
-    }
-    @Override
     public void initialize() {
         EnemyFactory enemyFactory = new EnemyFactory();
-        this.foe = enemyFactory.createEnemy("goblin"); // TEMP, later decide which enemy
+        Event currEvent = location.getCurrentArea().getCurrEvent();
+        String chosenEnemy = "goblin warrior";
+        EncounterEvent encounterEvent;
 
-        user.addSkill(new Skill("fireball", 20, 10, SkillType.FIRE));
-        user.addSkill(new Skill("waterball", 20, 10, SkillType.WATER));
+        if (currEvent != null && currEvent.type.equals(("Encounter"))) {
+            encounterEvent = (EncounterEvent) currEvent;
+            chosenEnemy = encounterEvent.getNPC();
+        }
+        this.foe = enemyFactory.createEnemy(chosenEnemy);
+
+        // TEMP: For demo purposes only! Will remove once Player gets starting skills
+        user.addSkill(new Skill("torch", 20, 10, SkillType.FIRE));
+        user.addSkill(new Skill("spit", 20, 10, SkillType.WATER));
+        user.addSkill(new Skill("pebble throw", 20, 10, SkillType.EARTH));
+        user.addSkill(new Skill("sneeze", 20, 10, SkillType.AIR));
+        user.addSkill(new Skill("tsunami", 90, 40, SkillType.WATER));
 
         currState = nextState("");
     }
