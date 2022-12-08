@@ -24,7 +24,6 @@ public class PauseMenuManager extends StateManager {
     private final String optionsCommand;
 
     private final String saveCommand;
-    private final String exitCommand;
 
     private final String inventoryCommand;
     private final String questCommand;
@@ -41,8 +40,8 @@ public class PauseMenuManager extends StateManager {
         this.inventoryCommand = "inventory";
         this.questCommand = "quest";
         this.saveCommand = "save";
-        this.exitCommand = "return";
-        this.pauseMenuOptions = Arrays.asList(optionsCommand, inventoryCommand, saveCommand, exitCommand);
+        String exitCommand = "return";
+        this.pauseMenuOptions = Arrays.asList(optionsCommand, inventoryCommand, questCommand, saveCommand, exitCommand);
 
         initialize();
     }
@@ -64,8 +63,7 @@ public class PauseMenuManager extends StateManager {
                 return menuStateFactory.createSaveMenuState();
             } else if (Objects.equals(input, questCommand)) {
                 currMenuType = MenuType.QUEST;
-                //to be implemented later
-                return null;
+                return menuStateFactory.createQuestMenuState();
             } else if (Objects.equals(input, inventoryCommand)) {
                 currMenuType = MenuType.INVENTORY;
                 return menuStateFactory.createInventoryMenuState();
@@ -75,13 +73,9 @@ public class PauseMenuManager extends StateManager {
                 return null;
             }
         } else {
-            if (Objects.equals(input, exitCommand)) {
-                currMenuType = MenuType.PAUSE;
-                return menuStateFactory.createPauseMenuChoiceState(pauseMenuOptions);
-            }
+            currMenuType = MenuType.PAUSE;
+            return menuStateFactory.createPauseMenuChoiceState(pauseMenuOptions);
         }
-
-        return null;
     }
 
     /**

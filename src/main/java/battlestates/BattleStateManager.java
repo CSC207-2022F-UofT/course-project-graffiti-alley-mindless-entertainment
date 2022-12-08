@@ -124,14 +124,5 @@ public class BattleStateManager extends StateManager {
             chosenEnemy = encounterEvent.getNPC();
         }
         battleEntityInteractor.setFoe(enemyFactory.createEnemy(chosenEnemy));
-
-        // TEMP: For demo purposes only! Will remove once Player gets starting skills
-        battleEntityInteractor.getUser().addSkill(new Skill("torch", 20, 10, SkillType.FIRE));
-        battleEntityInteractor.getUser().addSkill(new Skill("spit", 20, 10, SkillType.WATER));
-        battleEntityInteractor.getUser().addSkill(new Skill("pebble throw", 20, 10, SkillType.EARTH));
-        battleEntityInteractor.getUser().addSkill(new Skill("sneeze", 20, 10, SkillType.AIR));
-        battleEntityInteractor.getUser().addSkill(new Skill("tsunami", 90, 40, SkillType.WATER));
-
-        currState = nextState("");
     }
 }

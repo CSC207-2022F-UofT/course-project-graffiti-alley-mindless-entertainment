@@ -109,7 +109,8 @@ public class QuestEntityTest {
     void fromStringQuest() {
         String information = (this.getQuest().new SaveQuest()).toSavableString();
 
-        Quest newQuest = new Quest("", "", new Bystander("", false), null, new ArrayList<>());
+        Quest newQuest = new Quest("", "", new Bystander("", false),
+                null, new ArrayList<>());
         (newQuest.new SaveQuest()).fromSavableString(information);
 
         assert newQuest.isRewardDistributed() == this.getQuest().isRewardDistributed();

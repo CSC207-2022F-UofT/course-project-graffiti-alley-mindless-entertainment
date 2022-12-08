@@ -10,11 +10,14 @@ import main_menu.MainMenuManager;
 import menus.MenuStateFactory;
 import menus.PauseMenuManager;
 import menus.options.ChangeOptionsStateFactory;
+import quests.QuestMenuFactory;
 import menus.save.SaveMenuStateFactory;
 import objects.character.Player;
 import objects.inventory.Inventory;
 import objects.inventory.InventoryStateFactory;
 import playercreation.PlayerCreatorManager;
+import quests.QuestInteractor;
+import save.SaveGatewayImpl;
 import save.SaveInteractor;
 import switch_managers.ManagerController;
 import switch_managers.ManagerControllerImpl;
@@ -60,7 +63,7 @@ public class ManagerControllerFactory {
      * Creates the main menu event handler.
      */
     void createMainMenuEventHandler() {
-        MainMenuManager mainMenuManager = new MainMenuManager();
+        MainMenuManager mainMenuManager = new MainMenuManager(this.createSaveInteractor());
         managerController.addManager(mainMenuManager);
 
         PlayerCreatorManager playerCreatorManager = new PlayerCreatorManager(gameEntities.getPlayer());
@@ -97,7 +100,9 @@ public class ManagerControllerFactory {
         InventoryStateFactory inventoryStateFactory = new InventoryStateFactory(inventory);
         SaveInteractor saveInteractor = createSaveInteractor();
         SaveMenuStateFactory saveMenuStateFactory = new SaveMenuStateFactory(saveInteractor);
-        MenuStateFactory menuStateFactory = new MenuStateFactory(changeOptionsStateFactory, inventoryStateFactory, saveMenuStateFactory);
+        QuestInteractor questInteractor = new QuestInteractor(gameEntities.getPlayer());
+        QuestMenuFactory questMenuFactory = new QuestMenuFactory(questInteractor);
+        MenuStateFactory menuStateFactory = new MenuStateFactory(changeOptionsStateFactory, inventoryStateFactory, saveMenuStateFactory, questMenuFactory);
         PauseMenuManager pauseMenuManager = new PauseMenuManager(menuStateFactory);
         managerController.addManager(pauseMenuManager);
 
@@ -110,7 +115,8 @@ public class ManagerControllerFactory {
      * @return the SaveInteractor.
      */
     SaveInteractor createSaveInteractor() {
-        SaveInteractor saveInteractor = new SaveInteractor(3);
+        SaveGatewayImpl saveGateway = new SaveGatewayImpl();
+        SaveInteractor saveInteractor = new SaveInteractor(3, saveGateway);
         saveInteractor.addSavableEntity(gameEntities.getLocation().new SaveLocation());
         saveInteractor.addSavableEntity(gameEntities.getInventory().new SaveInventory());
         saveInteractor.addSavableEntity(gameEntities.getOptions().new SaveOptions());
