@@ -45,7 +45,7 @@ public class LoadGameState implements State {
         this.awaitInput = true;
         OutputHandler output = Output.getScreen();
         output.generateText("You are currently attempting to load a save file.");
-        this.saveInteractor.displaySlots();
+        output.generateText(saveInteractor.getSlotsStatus());
         output.generateText("Type the number of the save file to load it.");
         output.generateText("Type 'return' if you would like to return to the main menu.");
     }

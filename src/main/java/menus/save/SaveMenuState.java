@@ -29,7 +29,7 @@ public class SaveMenuState implements State {
     @Override
     public void preInput() {
         awaitingInput = true;
-        interactor.displaySlots();
+        Output.getScreen().generateText(interactor.getSlotsStatus());
         String textToDisplay = "Options: \n" + "To return to the previous menu: return\n" +
                 "To save to files: save + slot #\n";
         Output.getScreen().generateText(textToDisplay);
