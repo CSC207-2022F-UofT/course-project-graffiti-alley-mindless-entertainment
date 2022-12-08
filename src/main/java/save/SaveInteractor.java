@@ -1,6 +1,7 @@
 package save;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * the interactor class to manage loading Saves and saving Saves
@@ -15,8 +16,8 @@ public class SaveInteractor {
      * gateway: the gateway to save file
      * MAX_SLOTS: the maximum space for Saves
      */
-    ArrayList<SavableEntity> entities;
-    ArrayList<Save> saves;
+    List<SavableEntity> entities;
+    List<Save> saves;
     SaveLoader loader;
     SaveFactory creator;
     SaveGateway gateway;
@@ -24,7 +25,7 @@ public class SaveInteractor {
 
     public SaveInteractor(int max_slots, SaveGateway gateway) {
         entities = new ArrayList<>();
-        saves = (ArrayList<Save>) gateway.retrieveSave();
+        saves = gateway.retrieveSave();
         int save_size = saves.size();
         for (int i = 0; i < max_slots - save_size + 1; i++) {
             saves.add(null);
