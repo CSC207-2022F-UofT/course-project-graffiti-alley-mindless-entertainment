@@ -64,7 +64,7 @@ public class Options {
          */
         @Override
         public SaveEntityId getId() {
-            return SaveEntityId.Options;
+            return SaveEntityId.OPTIONS;
         }
     }
 }

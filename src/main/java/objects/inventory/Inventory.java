@@ -40,7 +40,7 @@ public class Inventory implements SavableEntity {
     }
 
     /**
-     * @Return all items' name and their ability in the inventory as a string.
+     * @return all items' name and their ability in the inventory as a string.
      */
     public String viewInventory(){
         StringBuilder itemInfo = new StringBuilder();
@@ -55,7 +55,7 @@ public class Inventory implements SavableEntity {
     }
 
     /**
-     * @Return list of item's name
+     * @return list of item's name
      */
     public String viewItemList(){
         StringBuilder items = new StringBuilder();
@@ -127,7 +127,7 @@ public class Inventory implements SavableEntity {
     @Override
     public void fromSavableString(String str) {
         inventory.clear();
-        String[] items = str.split(System.lineSeparator());
+        String[] items = str.split("\n");
         for (String item : items) {
             if (item.equals("")){
                 return;

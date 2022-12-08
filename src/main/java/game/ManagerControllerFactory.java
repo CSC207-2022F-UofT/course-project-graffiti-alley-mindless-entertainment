@@ -82,7 +82,7 @@ public class ManagerControllerFactory {
      */
     void createPauseResumeEventHandler() {
         Inventory inventory = gameEntities.getInventory();
-        ChangeOptionsStateFactory changeOptionsStateFactory = new ChangeOptionsStateFactory();
+        ChangeOptionsStateFactory changeOptionsStateFactory = new ChangeOptionsStateFactory(gameEntities.getOptions());
         InventoryStateFactory inventoryStateFactory = new InventoryStateFactory(inventory);
         MenuStateFactory menuStateFactory = new MenuStateFactory(changeOptionsStateFactory, inventoryStateFactory);
         PauseMenuManager pauseMenuManager = new PauseMenuManager(menuStateFactory);
