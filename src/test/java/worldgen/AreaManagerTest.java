@@ -2,6 +2,7 @@ package worldgen;
 
 import game_world.factories.ItemPickUpEventFactory;
 import game_world.managers.AreaManager;
+import game_world.managers.AreaUseCase;
 import game_world.managers.EventManager;
 import game_world.objects.Location;
 import objects.inventory.Inventory;
@@ -15,6 +16,9 @@ public class AreaManagerTest {
         ItemPickUpEventFactory itemPickUpEventFactory = new ItemPickUpEventFactory(inventory);
         EventManager eventManager = new EventManager(itemPickUpEventFactory);
         AreaManager areaManager = new AreaManager(eventManager, new Location());
+        assert areaManager.getAreaUseCase().getCurrentArea().getName().equals("[GAME]");
+        areaManager.getAreaUseCase().getToNextArea("1");
+        assert areaManager.getAreaUseCase().getCurrentArea().getName().equals("[GAME]");
     }
 
 }

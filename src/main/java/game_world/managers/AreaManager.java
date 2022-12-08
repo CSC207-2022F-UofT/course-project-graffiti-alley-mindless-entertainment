@@ -66,4 +66,12 @@ public class AreaManager extends StateManager {
         return this.currState;
     }
 
+    /**
+     * Testing purposes
+     * @return current areaUseCase
+     */
+    public AreaUseCase getAreaUseCase() {
+        return areaUseCase;
+    }
+
 }

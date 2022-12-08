@@ -31,7 +31,6 @@ public class AreaUseCase {
      */
     public void getToNextArea(String id) {
         // save events and data here
-        assert this.currentArea.getNextAreas().contains(id);
         this.currentArea = databaseController.loadArea(id);
         this.location.setCurrentArea(this.currentArea);
     }
