@@ -61,9 +61,9 @@ public class EncounterEvent extends Event {
         OutputHandler output = Output.getScreen();
         output.generateText("You decided to " + input + ".");
         if (input.equals("yes")) {
-            // switch manager here
             SwitchEventMediator s = SwitchEventMediatorProxy.getInstance();
             s.store(SwitchEventType.ENCOUNTER);
+            output.generateText("BATTLE HAS BEGUN! Your enemy is: " + npc);
         }
     }
 

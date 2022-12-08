@@ -98,7 +98,7 @@ public class BattleStateManager extends StateManager {
     public void initialize() {
         EnemyFactory enemyFactory = new EnemyFactory();
         Event currEvent = location.getCurrentArea().getCurrEvent();
-        String chosenEnemy = "goblin";
+        String chosenEnemy = "goblin warrior";
         EncounterEvent encounterEvent;
 
         if (currEvent != null && currEvent.type.equals(("Encounter"))) {
@@ -110,7 +110,7 @@ public class BattleStateManager extends StateManager {
         user.addSkill(new Skill("fireball", 20, 10, SkillType.FIRE));
         user.addSkill(new Skill("waterball", 20, 10, SkillType.WATER));
         user.addSkill(new Skill("earthball", 20, 10, SkillType.EARTH));
-        user.addSkill(new Skill("cheat move", 40, -10, SkillType.WATER));
+        user.addSkill(new Skill("tsunami", 90, 40, SkillType.WATER));
         // Initialize is called at the beginning of the game, make sure it is able to do it without proper area
         currState = nextState("");
     }
