@@ -4,10 +4,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -31,7 +28,18 @@ public class SaveGatewayImpl implements SaveGateway{
     @Override
     public void storeSaves(List<Save> saves) {
         String toWrite = helper.saveToJson(saves);
-        String FILE_NAME = "src/main/resources/save/SavedData.json";
+        String FILE_NAME = "src/main/resources/saves/SavedData.json";
+        File f = new File(FILE_NAME);
+        if(!f.exists()) {
+            try {
+                boolean isSuccess = f.createNewFile();
+                if (!isSuccess) {
+                    throw new RuntimeException();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         try (FileWriter writer = new FileWriter(FILE_NAME)) {
             writer.write(toWrite);
         } catch (IOException e) {
@@ -44,7 +52,7 @@ public class SaveGatewayImpl implements SaveGateway{
      */
     @Override
     public List<Save> retrieveSave() {
-        String FILE_NAME = "src/main/resources/save/SavedData.json";
+        String FILE_NAME = "src/main/resources/saves/SavedData.json";
         JSONArray jsonArray = this.initializeData(FILE_NAME);
         return helper.jsonToSave(jsonArray.toJSONString());
     }
