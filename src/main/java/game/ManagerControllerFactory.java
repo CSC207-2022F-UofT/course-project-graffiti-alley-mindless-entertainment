@@ -19,6 +19,7 @@ import objects.inventory.Inventory;
 import objects.inventory.InventoryStateFactory;
 import playercreation.PlayerCreatorManager;
 import quests.QuestInteractor;
+import save.SaveConverterHelper;
 import save.SaveGatewayImpl;
 import save.SaveInteractor;
 import switch_managers.ManagerController;
@@ -39,11 +40,13 @@ public class ManagerControllerFactory {
 
     private AreaDatabaseInteractor areaDatabaseInteractor;
     private final GameEntities gameEntities;
+    private final SaveInteractor saveInteractor;
 
     public ManagerControllerFactory(GameEntities gameEntities) {
         switchEventManager = new SwitchEventManager();
         managerController = new ManagerControllerImpl(switchEventManager);
         this.gameEntities = gameEntities;
+        saveInteractor = createSaveInteractor();
     }
 
     /**
@@ -101,7 +104,6 @@ public class ManagerControllerFactory {
         Inventory inventory = gameEntities.getInventory();
         ChangeOptionsStateFactory changeOptionsStateFactory = new ChangeOptionsStateFactory(gameEntities.getOptions());
         InventoryStateFactory inventoryStateFactory = new InventoryStateFactory(inventory);
-        SaveInteractor saveInteractor = createSaveInteractor();
         SaveMenuStateFactory saveMenuStateFactory = new SaveMenuStateFactory(saveInteractor);
         QuestInteractor questInteractor = new QuestInteractor(gameEntities.getPlayer());
         QuestMenuFactory questMenuFactory = new QuestMenuFactory(questInteractor);
@@ -119,9 +121,9 @@ public class ManagerControllerFactory {
      */
     SaveInteractor createSaveInteractor() {
         SaveGatewayImpl saveGateway = new SaveGatewayImpl();
-        SaveInteractor saveInteractor = new SaveInteractor(3, saveGateway);
         Location.SaveLocation saveLocation = gameEntities.getLocation().new SaveLocation();
         saveLocation.setDatabaseController(areaDatabaseInteractor);
+        SaveInteractor saveInteractor = new SaveInteractor(3, saveGateway);
         saveInteractor.addSavableEntity(saveLocation);
         saveInteractor.addSavableEntity(gameEntities.getInventory().new SaveInventory());
         saveInteractor.addSavableEntity(gameEntities.getOptions().new SaveOptions());
