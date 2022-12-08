@@ -1,5 +1,7 @@
 package game_world.managers;
 
+import database.managers.EventDataManager;
+import game_world.factories.EventFactory;
 import game_world.objects.Area;
 import game_world.objects.events.Event;
 import interfaces.State;
@@ -16,12 +18,17 @@ public class EventManager {
     private ArrayList<String> completedEvents;
 
     private final EventDatabaseInteractor databaseController;
+    private final EventFactory eventFactory;
 
-
-    public EventManager() {
-        this.databaseController = new EventDatabaseInteractor();
+    /**
+     * Constructs EventManager
+     * @param eventFactory injected dependency
+     */
+    public EventManager(EventFactory eventFactory) {
         this.eventQueue = new ArrayList<>();
+        this.databaseController = new EventDatabaseInteractor();
         this.completedEvents = new ArrayList<>();
+        this.eventFactory = eventFactory;
     }
 
     /**
