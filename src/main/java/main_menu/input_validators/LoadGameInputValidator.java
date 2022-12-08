@@ -53,6 +53,14 @@ public class LoadGameInputValidator implements InputValidator {
      */
     @Override
     public String getErrorMessage(String input) {
+        try {
+            Integer.parseInt(input);
+        } catch (NumberFormatException error) {
+            if (!(input.equalsIgnoreCase(MainMenuOptions.RETURN.toString()))) {
+                return "Please choose to open a valid save file or return to the main menu.";
+            }
+            return null;
+        }
         boolean validSlot = false;
         int slots = this.saveInteractor.getMaxSlots();
         for (int i = 0; i <= slots; i++) {
@@ -60,7 +68,7 @@ public class LoadGameInputValidator implements InputValidator {
                 validSlot = true;
             }
         }
-        if (!(input.equalsIgnoreCase(MainMenuOptions.RETURN.toString())) && !(validSlot)) {
+        if (!(validSlot)) {
             return "Please choose to open a valid save file or return to the main menu.";
         }
         else {
