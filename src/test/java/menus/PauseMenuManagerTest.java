@@ -1,12 +1,15 @@
 package menus;
 
 import menus.options.ChangeOptionsStateFactory;
+import quests.QuestMenuFactory;
 import menus.save.SaveMenuStateFactory;
+import objects.character.Player;
 import objects.inventory.Inventory;
 import objects.inventory.InventoryStateFactory;
 import options.Options;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import quests.QuestInteractor;
 import save.SaveGatewayImpl;
 import save.SaveInteractor;
 
@@ -24,7 +27,9 @@ class PauseMenuManagerTest {
         SaveGatewayImpl saveGateway = new SaveGatewayImpl();
         SaveInteractor saveInteractor = new SaveInteractor(3, saveGateway);
         SaveMenuStateFactory saveMenuStateFactory = new SaveMenuStateFactory(saveInteractor);
-        MenuStateFactory menuStateFactory = new MenuStateFactory(changeOptionsStateFactory, inventoryStateFactory, saveMenuStateFactory);
+        QuestInteractor questInteractor = new QuestInteractor(new Player("", null));
+        QuestMenuFactory questMenuFactory = new QuestMenuFactory(questInteractor);
+        MenuStateFactory menuStateFactory = new MenuStateFactory(changeOptionsStateFactory, inventoryStateFactory, saveMenuStateFactory, questMenuFactory);
         pauseMenuManager = new PauseMenuManager(menuStateFactory);
     }
 

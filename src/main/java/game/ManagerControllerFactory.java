@@ -10,10 +10,12 @@ import main_menu.MainMenuManager;
 import menus.MenuStateFactory;
 import menus.PauseMenuManager;
 import menus.options.ChangeOptionsStateFactory;
+import quests.QuestMenuFactory;
 import menus.save.SaveMenuStateFactory;
 import objects.inventory.Inventory;
 import objects.inventory.InventoryStateFactory;
 import playercreation.PlayerCreatorManager;
+import quests.QuestInteractor;
 import save.SaveGatewayImpl;
 import save.SaveInteractor;
 import switch_managers.ManagerController;
@@ -96,7 +98,9 @@ public class ManagerControllerFactory {
         InventoryStateFactory inventoryStateFactory = new InventoryStateFactory(inventory);
         SaveInteractor saveInteractor = createSaveInteractor();
         SaveMenuStateFactory saveMenuStateFactory = new SaveMenuStateFactory(saveInteractor);
-        MenuStateFactory menuStateFactory = new MenuStateFactory(changeOptionsStateFactory, inventoryStateFactory, saveMenuStateFactory);
+        QuestInteractor questInteractor = new QuestInteractor(gameEntities.getPlayer());
+        QuestMenuFactory questMenuFactory = new QuestMenuFactory(questInteractor);
+        MenuStateFactory menuStateFactory = new MenuStateFactory(changeOptionsStateFactory, inventoryStateFactory, saveMenuStateFactory, questMenuFactory);
         PauseMenuManager pauseMenuManager = new PauseMenuManager(menuStateFactory);
         managerController.addManager(pauseMenuManager);
 

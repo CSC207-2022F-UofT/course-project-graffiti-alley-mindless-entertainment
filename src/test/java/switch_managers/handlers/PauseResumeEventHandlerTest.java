@@ -12,7 +12,7 @@ class PauseResumeEventHandlerTest {
 
     @Test
     void handleSwitchEvent() {
-        MenuStateFactory menuStateFactory = new MenuStateFactory(null, null, null);
+        MenuStateFactory menuStateFactory = new MenuStateFactory(null, null, null, null);
         PauseMenuManager pauseMenuManager = new PauseMenuManager(menuStateFactory);
 
         PauseResumeEventHandler pauseResumeEventHandler = new PauseResumeEventHandler(pauseMenuManager);
