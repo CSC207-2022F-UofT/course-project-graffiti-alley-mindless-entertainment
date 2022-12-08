@@ -3,9 +3,9 @@ package save;
 import java.util.ArrayList;
 
 /**
- * the manager class to load and save Saves
+ * the interactor class to manage loading Saves and saving Saves
  */
-public class SaveManager {
+public class SaveInteractor {
 
     /**
      * entities: the list pf savable entities
@@ -20,7 +20,7 @@ public class SaveManager {
     SaveFactory creator;
     private int MAX_SLOTS;
 
-    public SaveManager(int max_slots) {
+    public SaveInteractor(int max_slots) {
         saves = new ArrayList<>(MAX_SLOTS + 1);
         loader = new SaveLoader();
         creator = new SaveFactory();
