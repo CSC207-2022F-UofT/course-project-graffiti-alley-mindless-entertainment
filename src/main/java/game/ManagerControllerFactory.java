@@ -11,6 +11,7 @@ import menus.MenuStateFactory;
 import menus.PauseMenuManager;
 import menus.options.ChangeOptionsStateFactory;
 import menus.save.SaveMenuStateFactory;
+import objects.character.Player;
 import objects.inventory.Inventory;
 import objects.inventory.InventoryStateFactory;
 import playercreation.PlayerCreatorManager;
@@ -74,6 +75,7 @@ public class ManagerControllerFactory {
      */
     void createReturnToMapEventHandler() {
         Inventory inventory = gameEntities.getInventory();
+        Player.inventory = inventory;
         ItemPickUpEventFactory itemPickUpEventFactory = new ItemPickUpEventFactory(inventory);
 
         EventFactory eventFactory = new EventFactory(itemPickUpEventFactory);

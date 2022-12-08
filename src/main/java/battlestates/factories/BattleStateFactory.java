@@ -4,14 +4,16 @@ import battlestates.BattleChoiceType;
 import battlestates.states.*;
 import interfaces.State;
 import objects.battle.BattleEntityInteractor;
+import objects.inventory.Inventory;
 
 public class BattleStateFactory {
     /**
      * Factory to create Battle States to avoid dependencies
      * Attributes:
      * battleEntityInteractor: Interactor that deals with checking stats of user and foe in battle
+     * inventory: Inventory entity that is being used
      */
-    public BattleEntityInteractor battleEntityInteractor;
+    private BattleEntityInteractor battleEntityInteractor;
 
     public BattleStateFactory(BattleEntityInteractor battleEntityInteractor) {
         this.battleEntityInteractor = battleEntityInteractor;
@@ -35,4 +37,7 @@ public class BattleStateFactory {
         return new BattleSkillChoiceState(battleEntityInteractor, currChoice);
     }
 
+    public State createBattleItemChoiceState(BattleChoiceType currChoice) {
+        return new BattleItemChoiceState(battleEntityInteractor, currChoice);
+    }
 }

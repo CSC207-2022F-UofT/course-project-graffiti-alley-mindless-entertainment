@@ -12,6 +12,7 @@ import objects.battle.Skill;
 import objects.battle.SkillType;
 import objects.battle.enemy.factory.EnemyFactory;
 import objects.character.Player;
+import objects.inventory.Inventory;
 
 public class BattleStateManager extends StateManager {
     /** Class that manages the Turn states during a battle encounter. In particular, the order of
@@ -62,9 +63,7 @@ public class BattleStateManager extends StateManager {
                         chosenState = battleStateFactory.createBattleSkillChoiceState(currChoice);
                         break;
                     case INVENTORY:
-                        // chosenState = new InventoryState // Something like this
-                        currChoice = BattleChoiceType.MENU;
-                        chosenState = battleStateFactory.createBattleMenuState(currChoice);
+                        chosenState = battleStateFactory.createBattleItemChoiceState(currChoice);
                         break;
                 }
             } else {
