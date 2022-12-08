@@ -67,9 +67,9 @@ public class SaveInteractor {
     }
 
     /**
-     * displays all slots status
+     * @return all slots status
      */
-    public void displaySlots() {
+    public String getSlotsStatus() {
         StringBuilder msg = new StringBuilder("Saves: \n");
         for (int i = 1; i <= MAX_SLOTS; ++ i) {
             msg.append("Slot #");
@@ -81,7 +81,7 @@ public class SaveInteractor {
             }
             msg.append("\n");
         }
-        Output.getScreen().generateText(msg.toString());
+        return msg.toString();
     }
 
     /**
