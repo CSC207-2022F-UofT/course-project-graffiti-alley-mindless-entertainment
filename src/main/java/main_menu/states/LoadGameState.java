@@ -60,7 +60,7 @@ public class LoadGameState implements State {
         if (!(input.equalsIgnoreCase("return"))) {
             int slot = Integer.parseInt(input);
             if (this.saveInteractor.loadFromSlot(slot)) {
-                this.saveInteractor.loadFromSlot(slot);
+                SwitchEventMediatorProxy.getInstance().store(SwitchEventType.LOAD_GAME);
             }
             else {
                 // Switches to the PlayerCreatorManager to start a new game.
@@ -68,6 +68,7 @@ public class LoadGameState implements State {
                 mediator.store(SwitchEventType.NEW_GAME);
             }
         }
+
         this.awaitInput = false;
         this.isDone = true;
     }

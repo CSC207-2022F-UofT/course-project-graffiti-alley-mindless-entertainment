@@ -19,7 +19,7 @@ public class PlayerDescriptionValidator implements InputValidator {
      */
     @Override
     public String parseAndValidate(String input) {
-        if (input.length() <= 200 && !(input.isBlank()) && !(input.isEmpty()) && !(input.contains("|"))) {
+        if (input.length() <= 200 && !(input.isEmpty()) && !(input.contains("|"))) {
             return input.toLowerCase();
         }
         return null;
@@ -35,7 +35,7 @@ public class PlayerDescriptionValidator implements InputValidator {
         if (input.length() > 200) {
             return "Please make descriptions 200 characters or less.";
         }
-        else if (input.isEmpty() || input.isBlank()) {
+        else if (input.isEmpty()) {
             return "Please type a valid description.";
         }
         else if (input.contains("|")) {

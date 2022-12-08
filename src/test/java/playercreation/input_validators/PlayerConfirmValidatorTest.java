@@ -14,4 +14,15 @@ class PlayerConfirmValidatorTest {
         assert(a.parseAndValidate("") == null);
         assert(a.parseAndValidate("no") == null);
     }
+
+    @Test
+    void getErrorMessage() {
+        PlayerConfirmValidator validator = new PlayerConfirmValidator();
+        assert(validator.getErrorMessage("confirm") == null);
+        assert(validator.getErrorMessage("return") == null);
+        assert(validator.getErrorMessage("").equals
+                ("Please confirm your response or return to the previous question."));
+        assert(validator.getErrorMessage("a").equals
+                ("Please confirm your response or return to the previous question."));
+    }
 }

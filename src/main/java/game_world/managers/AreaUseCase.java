@@ -15,7 +15,6 @@ public class AreaUseCase {
      */
 
     private final AreaDatabaseInteractor databaseController;
-    private Area currentArea;
     private final Location location;
 
     public AreaUseCase(AreaDatabaseInteractor databaseController, Location location) {
@@ -27,7 +26,7 @@ public class AreaUseCase {
      * @return currentArea of Player
      */
     public Area getCurrentArea() {
-        return this.currentArea;
+        return location.getCurrentArea();
     }
 
     /**
@@ -36,8 +35,8 @@ public class AreaUseCase {
      */
     public void getToNextArea(String id) {
         // save events and data here
-        this.currentArea = databaseController.loadArea(id);
-        this.location.setCurrentArea(this.currentArea);
+        Area nextArea = databaseController.loadArea(id);
+        this.location.setCurrentArea(nextArea);
     }
 
     /**
@@ -46,35 +45,35 @@ public class AreaUseCase {
      */
     public void arriveAtNextArea(String input) {
         OutputHandler output = Output.getScreen();
-        getToNextArea(this.currentArea.getAreaFromInput(input.toLowerCase()));
-        output.generateText("You approach " + this.currentArea.getName() + " in " + this.currentArea.getZone() + ".");
+        getToNextArea(location.getCurrentArea().getAreaFromInput(input.toLowerCase()));
+        output.generateText("You approach " + location.getCurrentArea().getName() + " in " + location.getCurrentArea().getZone() + ".");
     }
 
     /**
      * Updates event index of the area
      */
     public void updateEventIndex() {
-        this.currentArea.setCurrEventIndex(this.currentArea.getCurrTextIndex() + 1);
+        location.getCurrentArea().setCurrEventIndex(location.getCurrentArea().getCurrTextIndex() + 1);
     }
 
     /**
      * @return Allowed inputs from current area
      */
     public ArrayList<String> getNextInputs() {
-        return this.currentArea.getNextInputs();
+        return location.getCurrentArea().getNextInputs();
     }
 
     /**
      * @return true if the current input is valid
      */
     public boolean checkForValidInput(String input) {
-        return this.currentArea.getNextInputs().contains(input.toLowerCase());
+        return location.getCurrentArea().getNextInputs().contains(input.toLowerCase());
     }
 
     /**
      * @return true if the user has just arrived at an area
      */
     public boolean checkForAreaEntered() {
-        return this.currentArea.getCurrTextIndex() == 0;
+        return location.getCurrentArea().getCurrTextIndex() == 0;
     }
 }

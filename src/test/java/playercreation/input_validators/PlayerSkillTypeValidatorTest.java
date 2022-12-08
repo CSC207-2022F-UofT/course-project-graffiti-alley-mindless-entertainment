@@ -15,4 +15,15 @@ class PlayerSkillTypeValidatorTest {
         assert(a.parseAndValidate("no") == null);
         assert(a.parseAndValidate("") == null);
     }
+
+    @Test
+    void getErrorMessageCases() {
+        PlayerSkillTypeValidator a = new PlayerSkillTypeValidator();
+        assert(a.getErrorMessage("not a skill type").equals
+                ("Please type a valid skill type: Air, Earth, Fire, or Water."));
+        assert(a.getErrorMessage("air") == null);
+        assert(a.getErrorMessage("earth") == null);
+        assert(a.getErrorMessage("fire") == null);
+        assert(a.getErrorMessage("water") == null);
+    }
 }

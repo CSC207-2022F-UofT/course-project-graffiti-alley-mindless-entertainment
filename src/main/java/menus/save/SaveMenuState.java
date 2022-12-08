@@ -31,7 +31,7 @@ public class SaveMenuState implements State {
         awaitingInput = true;
         Output.getScreen().generateText(interactor.getSlotsStatus());
         String textToDisplay = "Options: \n" + "To return to the previous menu: return\n" +
-                "To save to files: save + slot #\n";
+                "To save to files: save + slot #";
         Output.getScreen().generateText(textToDisplay);
     }
 
@@ -48,7 +48,7 @@ public class SaveMenuState implements State {
             return;
         }
         if (command.equalsIgnoreCase("save")) {
-            if (inputArr.length != 3) {
+            if (inputArr.length != 2) {
                 Output.getScreen().generateText("Please enter an argument for Save command:" +
                         " the slot to be saved to");
                 return;

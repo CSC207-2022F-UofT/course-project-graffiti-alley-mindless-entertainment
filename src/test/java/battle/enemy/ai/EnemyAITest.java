@@ -1,6 +1,7 @@
 package battle.enemy.ai;
 
 
+import battlestates.BattleChoiceType;
 import objects.battle.Skill;
 import objects.battle.SkillType;
 import objects.battle.enemy.EnemyInfo;
@@ -22,7 +23,7 @@ public class EnemyAITest {
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
         DefaultAI defaultAI = new DefaultAI(enemyInfo, 100);
-        EnemyActionHandler enemyAction = defaultAI.respond("use skill");
+        EnemyActionHandler enemyAction = defaultAI.respond(BattleChoiceType.SKILLS);
         Assertions.assertTrue(enemyAction instanceof EnemySkillHandler);
 
     }
@@ -34,7 +35,7 @@ public class EnemyAITest {
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
         DefaultAI defaultAI = new DefaultAI(enemyInfo, 0);
-        Assertions.assertTrue(defaultAI.respond("use skill") instanceof EnemyPotionHandler);
+        Assertions.assertTrue(defaultAI.respond(BattleChoiceType.SKILLS) instanceof EnemyPotionHandler);
     }
 
     @DisplayName("Test of Default AI with 50% attack chance")
@@ -45,7 +46,7 @@ public class EnemyAITest {
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 0, SkillType.WATER, new EnemyPotion(10));
         DefaultAI defaultAI = new DefaultAI(enemyInfo, 50);
-        EnemyActionHandler respond = defaultAI.respond("use skill");
+        EnemyActionHandler respond = defaultAI.respond(BattleChoiceType.SKILLS);
         Boolean check = respond instanceof EnemySkillHandler;
         Boolean check2 = respond instanceof EnemyPotionHandler;
         Assertions.assertTrue(check||check2);
@@ -59,7 +60,7 @@ public class EnemyAITest {
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 0, SkillType.WATER, new EnemyPotion(10));
         SmartAI smartAI = new SmartAI(enemyInfo, 50);
-        EnemyActionHandler respond = smartAI.respond("use skill");
+        EnemyActionHandler respond = smartAI.respond(BattleChoiceType.SKILLS);
         Boolean check = respond instanceof EnemySkillHandler;
         Boolean check2 = respond instanceof EnemyPotionHandler;
         Assertions.assertTrue(check||check2);
