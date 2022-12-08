@@ -1,6 +1,8 @@
 package game;
 
 import game_world.objects.Location;
+import objects.battle.Skill;
+import objects.battle.SkillType;
 import objects.character.Player;
 import objects.inventory.Inventory;
 import options.Options;
@@ -19,6 +21,11 @@ public class GameEntities {
 
     public GameEntities() {
         player = new Player("", null);
+        player.addSkill(new Skill("torch", 5, 10, SkillType.FIRE));
+        player.addSkill(new Skill("spit", 20, 10, SkillType.WATER));
+        player.addSkill(new Skill("pebble throw", 71, 10, SkillType.EARTH));
+        player.addSkill(new Skill("sneeze", 20, 10, SkillType.AIR));
+        player.addSkill(new Skill("tsunami", 90, 40, SkillType.WATER));
         inventory = new Inventory();
         options = Options.getOptions();
         location = new Location();

@@ -7,6 +7,7 @@ import game_world.managers.AreaDatabaseInteractor;
 import game_world.managers.AreaManager;
 import game_world.managers.EventDatabaseInteractor;
 import game_world.managers.EventManager;
+import game_world.objects.Location;
 import main_menu.MainMenuManager;
 import menus.MenuStateFactory;
 import menus.PauseMenuManager;
@@ -42,7 +43,6 @@ public class ManagerControllerFactory {
         switchEventManager = new SwitchEventManager();
         managerController = new ManagerControllerImpl(switchEventManager);
         this.gameEntities = gameEntities;
-
     }
 
     /**
@@ -64,7 +64,7 @@ public class ManagerControllerFactory {
      * Creates the main menu event handler.
      */
     void createMainMenuEventHandler() {
-        MainMenuManager mainMenuManager = new MainMenuManager();
+        MainMenuManager mainMenuManager = new MainMenuManager(this.createSaveInteractor());
         managerController.addManager(mainMenuManager);
 
         PlayerCreatorManager playerCreatorManager = new PlayerCreatorManager(gameEntities.getPlayer());
@@ -118,7 +118,8 @@ public class ManagerControllerFactory {
     SaveInteractor createSaveInteractor() {
         SaveGatewayImpl saveGateway = new SaveGatewayImpl();
         SaveInteractor saveInteractor = new SaveInteractor(3, saveGateway);
-        saveInteractor.addSavableEntity(gameEntities.getLocation().new SaveLocation());
+        Location.SaveLocation saveLocation = gameEntities.getLocation().new SaveLocation();
+        saveInteractor.addSavableEntity(saveLocation);
         saveInteractor.addSavableEntity(gameEntities.getInventory().new SaveInventory());
         saveInteractor.addSavableEntity(gameEntities.getOptions().new SaveOptions());
         saveInteractor.addSavableEntity(gameEntities.getPlayer().new SavePlayer());

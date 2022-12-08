@@ -5,7 +5,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileReader;
 import java.util.*;
 
 /**
@@ -24,6 +23,10 @@ public class SaveConverterHelper {
         JSONArray jsonArray = new JSONArray();
         for (Save save : saves) {
             JSONObject jsonObject = new JSONObject();
+            if (save == null) {
+                jsonArray.add(jsonObject);
+                continue;
+            }
             Map<SaveEntityId, String> s = save.getSavedData();
             Set<SaveEntityId> keys = s.keySet();
             for (SaveEntityId key : keys) {
@@ -46,11 +49,15 @@ public class SaveConverterHelper {
         try
         {
             JSONArray jsonArray = (JSONArray) jsonParser.parse(str);
-            List<Save> saves = new ArrayList<Save>();
+            List<Save> saves = new ArrayList<>();
             for (Object o : jsonArray) {
                 JSONObject jsonObject = (JSONObject) o;
                 Set<String> keys = jsonObject.keySet();
-                Map<SaveEntityId, String> s = new HashMap<SaveEntityId, String>();
+                Map<SaveEntityId, String> s = new HashMap<>();
+                if (keys.size() == 0) {
+                    saves.add(null);
+                    continue;
+                }
                 for (String key : keys) {
                     s.put(SaveEntityId.valueOf(key), (String) jsonObject.get(key));
                 }

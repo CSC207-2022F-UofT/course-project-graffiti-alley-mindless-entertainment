@@ -21,6 +21,7 @@ public class PlayerCreatorManager extends StateManager {
      *                       for creating new PlayerNameStates, PlayerDescriptionStates, and PlayerSkillTypeStates.
      * confirmStateFactory: A PlayerConfirmStateFactory used to create new PlayerConfirmStates.
      * creatorInteractor: A PlayerCreatorInteractor to store the Player entity being created.
+     * saveInteractor: A SaveInteractor used to save the Player after creation.
      */
     private PlayerQuestion currPlayerQuestion;
     private int completedQuestions;

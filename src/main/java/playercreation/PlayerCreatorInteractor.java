@@ -10,6 +10,7 @@ import objects.battle.SkillType;
 public class PlayerCreatorInteractor {
     /**
      * newPlayer: The Player being created.
+     *
      */
 
     private final Player newPlayer;
@@ -50,14 +51,6 @@ public class PlayerCreatorInteractor {
      */
     public void addSkillType(SkillType skillType) {
         this.newPlayer.changeSkillType(skillType);
-    }
-
-    /**
-     * Saves the completed Player character to the database. Awaiting saving functionality
-     * @return True if newPlayer is saved successfully, false otherwise.
-     */
-    public boolean savePlayer() {
-        return true;
     }
 
 }
