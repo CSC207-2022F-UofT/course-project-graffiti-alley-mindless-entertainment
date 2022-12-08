@@ -11,8 +11,8 @@ public class Potion extends Item {
      */
     public Potion(int level) {
         super(level);
-        this.setName("LEVEL " + this.getLevel() + " POTION");
-        this.setAbility("Heal " + this.getLevel() + " HP");
+        this.setName("LEVEL " + (this.getLevel() + 1) + " POTION");
+        this.setAbility("Heal " + (this.getLevel() + 1) + " HP");
         this.setPrice(this.getLevel());
     }
 }

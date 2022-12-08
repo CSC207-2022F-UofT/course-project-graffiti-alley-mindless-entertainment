@@ -12,5 +12,6 @@ class PlayerDescriptionValidatorTest {
         assert(a.parseAndValidate("mydescription").equals("mydescription"));
         assert(a.parseAndValidate("MyDescription").equals("mydescription"));
         assert(a.parseAndValidate("123456789").equals("123456789"));
+        assert(a.parseAndValidate("|") == null);
     }
 }

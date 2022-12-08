@@ -1,9 +1,9 @@
 package switch_managers.handlers;
 
 import core.StateManager;
-import menus.PauseMenuChoiceStateFactory;
+import menus.MenuStateFactory;
 import menus.PauseMenuManager;
-import menus.options.ChangeOptionsStateFactory;
+import objects.character.Player;
 import org.junit.jupiter.api.Test;
 import playercreation.PlayerCreatorManager;
 import switch_managers.SwitchEventType;
@@ -12,13 +12,13 @@ class PauseResumeEventHandlerTest {
 
     @Test
     void handleSwitchEvent() {
-        PauseMenuChoiceStateFactory pauseMenuChoiceStateFactory = new PauseMenuChoiceStateFactory();
-        ChangeOptionsStateFactory changeOptionsStateFactory = new ChangeOptionsStateFactory();
-        PauseMenuManager pauseMenuManager = new PauseMenuManager(pauseMenuChoiceStateFactory, changeOptionsStateFactory);
+        MenuStateFactory menuStateFactory = new MenuStateFactory(null, null);
+        PauseMenuManager pauseMenuManager = new PauseMenuManager(menuStateFactory);
 
         PauseResumeEventHandler pauseResumeEventHandler = new PauseResumeEventHandler(pauseMenuManager);
 
-        PlayerCreatorManager creatorManager = new PlayerCreatorManager();
+        Player player = new Player("", null);
+        PlayerCreatorManager creatorManager = new PlayerCreatorManager(player);
 
         StateManager pauseSwitch = pauseResumeEventHandler.handleSwitchEvent(SwitchEventType.PAUSE, creatorManager);
 

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public interface EnemyFighter {
 
-    public String getName();
+    String getName();
     /**
      * This method returns the enemy's health
      *

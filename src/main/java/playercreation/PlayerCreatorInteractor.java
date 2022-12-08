@@ -15,10 +15,10 @@ public class PlayerCreatorInteractor {
     private final Player newPlayer;
 
     /**
-     * Initializes a new PlayerCreatorInteractor with Player having an empty string for name and null for SkillType.
+     * Initializes a new PlayerCreatorInteractor with player.
      */
-    public PlayerCreatorInteractor() {
-        this.newPlayer = new Player("", null);
+    public PlayerCreatorInteractor(Player player) {
+        this.newPlayer = player;
     }
 
     /**

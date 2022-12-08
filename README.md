@@ -17,3 +17,5 @@ This is a text-based adventure RPG designed for single player enjoyment. The gam
 The plot of the game is based around the legendary hero (you, the player) destined to save the lowly inhabitants of Tartarus, the game world. To do this, you must defeat the dangerous tyrant, The Demon King! In order to train and fight him, you must travel through the four elemental zones of the world, collecting magical crystals to open the gates to his castle. There is quite the plot twist, however... 
 
 Your choices greatly affect the outcome of the game, so make your choices carefully! Don't lose track of who the enemy really is.
+
+# Test Coverage 

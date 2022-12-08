@@ -3,7 +3,9 @@ package battle.enemy;
 import objects.battle.Skill;
 import objects.battle.SkillType;
 import objects.battle.enemy.EnemyInfo;
+import objects.battle.enemy.ai.DefaultAI;
 import objects.battle.enemy.ai.EnemyPotion;
+import objects.character.EnemyFacade;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -32,6 +34,8 @@ public class EnemyInfoTest {
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
         enemyInfo.changeHealth(-10);
         Assertions.assertEquals(enemyInfo.getHealth(), 90);
+        enemyInfo.changeHealth(200);
+        Assertions.assertEquals(enemyInfo.getHealth(), 100);
     }
 
     @DisplayName("Test for getSpeed method")
@@ -146,7 +150,17 @@ public class EnemyInfoTest {
         ArrayList<Skill> skills = new ArrayList<Skill>();
         skills.add(skill);
         EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
-        enemyInfo.setType(SkillType.FIRE);
-        Assertions.assertEquals(10, enemyInfo.getPotion().getHp());
+        EnemyFacade enemy = new EnemyFacade("goblin", enemyInfo, new DefaultAI(enemyInfo, 30));
+        Assertions.assertEquals(10, enemy.getPotion().getHp());
+    }
+
+    @DisplayName("Test for getMaxHealth method")
+    @Test
+    public void getMaxHealthTest(){
+        Skill skill = new Skill("fire ball", 20, 5, SkillType.WATER);
+        ArrayList<Skill> skills = new ArrayList<Skill>();
+        skills.add(skill);
+        EnemyInfo enemyInfo = new EnemyInfo(skills, 90, 10, SkillType.WATER, new EnemyPotion(10));
+        Assertions.assertEquals(100, enemyInfo.getMaxHealth());
     }
 }
