@@ -1,6 +1,7 @@
 package battlestates.states;
 
 import core.ChoiceInputValidator;
+import game.GameEntities;
 import interfaces.State;
 import io.InputValidator;
 import io.Output;
@@ -9,7 +10,6 @@ import objects.battle.Skill;
 import objects.battle.PlayerSkillHandler;
 import objects.battle.StatDisplayer;
 import objects.battle.enemy.SkillHelper;
-import objects.character.EnemyFacade;
 import objects.character.EnemyFighter;
 import objects.character.Player;
 import objects.inventory.Inventory;
@@ -31,6 +31,7 @@ public class UserTurnState implements State {
     private EnemyFighter foe;
     private boolean done = false;
     private List<String> skillList;
+    private Inventory inv;
     private List<String> invList;
     ;
     private boolean awaitingInp = false;
@@ -46,8 +47,8 @@ public class UserTurnState implements State {
         this.skillList.add("Back");
         this.user = user;
         this.foe = foe;
-        this.invList = this.user.getInventory().toStringList();
-        this.invList.add("Back");
+//        this.invList = inv.toStringList();
+//        this.invList.add("Back");
     }
 
     /**
@@ -112,43 +113,40 @@ public class UserTurnState implements State {
                     break;
                 }
 
-                // Setup
                 SkillHelper skillHelper = new SkillHelper();
                 Skill chosenSkill = skillHelper.findSkill(cleanInput, user.getSkillList());
                 PlayerSkillHandler skillHandler = new PlayerSkillHandler();
                 int damage = skillHandler.useSkill(chosenSkill, foe, user);
 
-                // Outputs and uses the chosen skill.
                 statDisplayer.displayPreBar();
                 output.generateText(chosenSkill.getName() + " did " + damage + " damage!");
                 statDisplayer.displayPostBar();
                 statDisplayer.displayStats(user, foe);
 
-                // Each turn takes 20 speed, preventing too many turns.
                 user.changeSpeed(-20);
 
                 this.done = true;
                 break;
-            case 2: // Item being used
-                if (cleanInput.equals("back")) {
-                    questionNum = 0; // Escape back to battle options
-                    break;
-                }
-
-                // Setup
-                String chosenItem = cleanInput;
-
-                // Outputs and uses the chosen item
-                user.getInventory().useItem(chosenItem);
-                statDisplayer.displayPreBar();
-                statDisplayer.displayStats(user.getInventory());
-                statDisplayer.displayPostBar();
-
-                // Using items take only 10 speed
-                user.changeSpeed(-10);
-
-                this.done = true;
-                break;
+//            case 2: // Item being used
+//                if (cleanInput.equals("back")) {
+//                    questionNum = 0; // Escape back to battle options
+//                    break;
+//                }
+//
+//                // Setup
+//                String chosenItem = cleanInput;
+//
+//                // Outputs and uses the chosen item
+//                user.getInventory().useItem(chosenItem);
+//                statDisplayer.displayPreBar();
+//                statDisplayer.displayStats(inv);
+//                statDisplayer.displayPostBar();
+//
+//                // Using items take only 10 speed
+//                user.changeSpeed(-10);
+//
+//                this.done = true;
+//                break;
             default:
                 questionNum = 0; // Redirects to Skill Inv question
         }

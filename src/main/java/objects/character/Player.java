@@ -233,11 +233,11 @@ public class Player extends Character {
         // successful.
         for (Skill skill : this.skillList) {
             if (skill.getName().equals(newSkill.getName())) {
-                this.skillList.add(newSkill);
-                return true;
+                return false;
             }
         }
-        return false;
+        this.skillList.add(newSkill);
+        return true;
     }
 
     public void removeSkill(Skill toRemove) {

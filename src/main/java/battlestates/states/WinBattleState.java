@@ -21,6 +21,7 @@ public class WinBattleState implements State {
     private Player user;
     private EnemyFighter foe;
     private boolean done = false;
+    private boolean awaitingInput = false;
 
     public WinBattleState(Player user, EnemyFighter foe) {
         this.user = user;
@@ -56,7 +57,7 @@ public class WinBattleState implements State {
     }
     @Override
     public boolean awaitInput() {
-        return true;
+        return this.awaitingInput;
     }
 
     @Override
