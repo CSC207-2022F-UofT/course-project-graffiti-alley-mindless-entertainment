@@ -9,7 +9,7 @@ public class QuestMenuState implements State {
     /**
      * Attributes.
      */
-    private QuestInteractor questInteractor;
+    private final QuestInteractor questInteractor;
     private boolean isDone;
     private boolean isAwaitingInput;
 
@@ -28,9 +28,15 @@ public class QuestMenuState implements State {
      */
     @Override
     public void preInput() {
-        this.isAwaitingInput = true;
-        // completes all the quests.
+        // completes all the quests (update the quests that can be completed).
         questInteractor.completeQuests();
+
+        // displays the quests.
+        OutputHandler output = Output.getScreen();
+        output.generateText("Here are your quests:");
+        output.generateText(getQuestsStatuses());
+
+        this.isAwaitingInput = true;
     }
 
     /**
@@ -41,10 +47,6 @@ public class QuestMenuState implements State {
     public void postInput(String input) {
         this.isAwaitingInput = false;
         this.isDone = true;
-
-        OutputHandler output = Output.getScreen();
-        output.generateText("Here are your quests.");
-        output.generateText(getQuestsStatuses());
     }
 
     /**

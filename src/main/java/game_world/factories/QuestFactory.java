@@ -65,7 +65,7 @@ public class QuestFactory {
      * @return the created statistical reward.
      */
     private StatisticalReward createStatisticalReward(String statistic, int value) {
-        return new StatisticalReward(PlayersStatistics.valueOf(statistic), value);
+        return new StatisticalReward(PlayersStatistics.valueOf(statistic.toUpperCase()), value);
     }
 
     /**
@@ -103,6 +103,6 @@ public class QuestFactory {
      * @return the created statistical Task.
      */
     private StatisticalTask createStatisticalTask(String statistic, long value) {
-        return new StatisticalTask(PlayersStatistics.valueOf(statistic), (int) value);
+        return new StatisticalTask(PlayersStatistics.valueOf(statistic.toUpperCase()), (int) value);
     }
 }
