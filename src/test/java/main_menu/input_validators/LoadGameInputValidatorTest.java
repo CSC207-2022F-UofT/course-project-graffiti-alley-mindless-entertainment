@@ -16,6 +16,8 @@ class LoadGameInputValidatorTest {
         assert(validator.parseAndValidate("new") == null);
         assert(validator.parseAndValidate("return").equals("return"));
         assert(validator.parseAndValidate("RETURN").equals("return"));
+        assert(validator.parseAndValidate("1").equals("1"));
+        assert(validator.parseAndValidate("4") == null);
     }
 
     @Test

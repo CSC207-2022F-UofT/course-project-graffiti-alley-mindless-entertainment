@@ -13,4 +13,12 @@ class PlayerDescriptionValidatorTest {
         assert(a.parseAndValidate("123456789").equals("123456789"));
         assert(a.parseAndValidate("|") == null);
     }
+
+    @Test
+    void getErrorMessageCases() {
+        PlayerDescriptionValidator a = new PlayerDescriptionValidator();
+        assert(a.getErrorMessage("").equals("Please type a valid description."));
+        assert(a.getErrorMessage("nice description") == null);
+        assert(a.getErrorMessage("|").equals("| is not a supported character. Please try again."));
+    }
 }
