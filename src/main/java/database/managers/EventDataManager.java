@@ -22,12 +22,14 @@ public class EventDataManager extends DatabaseManager {
     public EventType fetchEventType(String name) {
         JSONArray eventsData = (JSONArray) super.fullDatabase.get("events");
         JSONObject eventData = databaseHelper.searchJSONArray(eventsData, "name", name);
-        return switch ((String) eventData.get("type")) {
-            case "Encounter" -> EventType.ENCOUNTER;
-            case "Item Pick-Up" -> EventType.ITEM_PICKUP;
-            case "Quest Giver" -> EventType.QUEST_GIVER;
-            default -> EventType.ARBITRARY;
-        };
+        String eventType = (String) eventData.get("type");
+        if (eventType.equals("Encounter"))
+            return EventType.ENCOUNTER;
+        else if (eventType.equals("Item Pick-Up"))
+            return EventType.ITEM_PICKUP;
+        else if (eventType.equals("Quest Giver"))
+            return EventType.QUEST_GIVER;
+        return EventType.ARBITRARY;
     }
 
     /**
