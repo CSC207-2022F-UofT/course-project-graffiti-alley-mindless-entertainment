@@ -24,8 +24,8 @@ public class BattleStateFactory {
     public State createLoseBattleState() {
         return new LoseBattleState(battleEntityInteractor.getUser(), battleEntityInteractor.getFoe());
     }
-    public State createEnemyTurnState(String input) {
-        return new EnemyTurnState(battleEntityInteractor.getUser(), battleEntityInteractor.getFoe(), input);
+    public State createEnemyTurnState(BattleChoiceType currChoice) {
+        return new EnemyTurnState(battleEntityInteractor.getUser(), battleEntityInteractor.getFoe(), currChoice);
     }
     public State createUserTurnState() {
         return new UserTurnState(battleEntityInteractor.getUser(), battleEntityInteractor.getFoe());

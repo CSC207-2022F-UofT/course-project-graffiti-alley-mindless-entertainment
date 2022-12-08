@@ -1,4 +1,5 @@
 package objects.battle.enemy.ai;
+import battlestates.BattleChoiceType;
 import objects.battle.enemy.EnemyInfo;
 
 import java.util.Objects;
@@ -37,7 +38,7 @@ public class SmartAI implements EnemyAI {
      * @return string that represents the enemy's action
      */
     @Override
-    public EnemyActionHandler respond(String input) {
+    public EnemyActionHandler respond(BattleChoiceType input) {
         Random rand = new Random();
         if (this.enemyInfo.getHealth() < 30) {
             int upper = 100;
@@ -48,7 +49,7 @@ public class SmartAI implements EnemyAI {
                 return new EnemySkillHandler(enemyInfo.getSkill(rand.nextInt(enemyInfo.getSkills().size())));
             }
         } else {
-            if(Objects.equals(input, "use potion")) {
+            if(input == BattleChoiceType.INVENTORY) {
                 return new EnemySkillHandler(enemyInfo.getSkill(rand.nextInt(enemyInfo.getSkills().size())));
             } else{
                 Random r = new Random();

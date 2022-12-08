@@ -1,4 +1,5 @@
 package objects.character;
+import battlestates.BattleChoiceType;
 import objects.battle.Skill;
 import objects.battle.SkillType;
 import objects.battle.enemy.EnemyInfo;
@@ -161,7 +162,7 @@ public class EnemyFacade extends Character implements EnemyFighter{
      * @param input: input by the user
      * @return enemy's action in string (use skill or use potion)
      */
-    public EnemyActionHandler enemyAction(String input){
+    public EnemyActionHandler enemyAction(BattleChoiceType input){
         return this.enemyAI.respond(input);
     }
 

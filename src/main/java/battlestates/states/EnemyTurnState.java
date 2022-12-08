@@ -1,5 +1,6 @@
 package battlestates.states;
 
+import battlestates.BattleChoiceType;
 import interfaces.State;
 import io.InputValidator;
 import io.Output;
@@ -15,9 +16,9 @@ public class EnemyTurnState implements State {
     private EnemyFighter foe;
     private boolean done = false;
     private boolean awaitingInput;
-    private String userAction;
+    private BattleChoiceType userAction;
 
-    public EnemyTurnState(Player user, EnemyFighter foe, String userAction) {
+    public EnemyTurnState(Player user, EnemyFighter foe, BattleChoiceType userAction) {
         this.user = user;
         this.foe = foe;
         this.userAction = userAction;

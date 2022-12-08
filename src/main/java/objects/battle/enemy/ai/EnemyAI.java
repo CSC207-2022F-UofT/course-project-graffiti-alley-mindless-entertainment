@@ -1,5 +1,7 @@
 package objects.battle.enemy.ai;
 
+import battlestates.BattleChoiceType;
+
 /**
  * This class is an interface for enemyAI. It has a method called respond that
  * is overridden by the subclasses, and it returns the enemy action that is decided by the
@@ -13,5 +15,5 @@ public interface EnemyAI {
      * @param input: user's action in string
      * @return EnemyActionHandler that represents the enemy's action
      */
-    EnemyActionHandler respond(String input);
+    EnemyActionHandler respond(BattleChoiceType input);
 }
