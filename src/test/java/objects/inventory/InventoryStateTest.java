@@ -45,5 +45,10 @@ class InventoryStateTest {
         assertFalse(i.isDone());
         assertFalse(i.awaitInput());
     }
-
+    @Test
+    void testGetInputValidator(){
+        Inventory inventory = new Inventory();
+        InventoryState i = new InventoryState(inventory);
+        assertNull(i.getInputValidator());
+    }
 }

@@ -2,11 +2,13 @@ package save;
 
 import java.util.List;
 
+/**
+ * the class to load Saves
+ */
 public class SaveLoader {
 
-
     /**
-     * @param s a save to be saved into files
+     * @param s a Save to be saved into files
      * @param entities the list of Savable entities
      * update all Savable entities accordingly
      */

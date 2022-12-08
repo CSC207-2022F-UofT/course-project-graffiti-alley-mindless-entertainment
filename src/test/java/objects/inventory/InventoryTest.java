@@ -4,6 +4,8 @@ import objects.item.*;
 import org.junit.jupiter.api.Test;
 import save.SaveEntityId;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -12,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class InventoryTest {
 
     @Test
-    void testAddItem_whenInventoryNotFull_thenShouldBeAdded(){
+    void testAddItem_whenInventoryNotFull_thenShouldBeAdded() {
         Inventory inventory = new Inventory();
         Item item = new Armor(15);
         item.setLevel(item.getPrice());
@@ -21,7 +23,7 @@ class InventoryTest {
     }
 
     @Test
-    void testAddItem_whenInventoryNotFull_thenShouldReturnTrue(){
+    void testAddItem_whenInventoryNotFull_thenShouldReturnTrue() {
         Inventory inventory = new Inventory();
         Item item = new Armor(15);
         boolean expectedBool = inventory.addItem(item);
@@ -29,8 +31,10 @@ class InventoryTest {
     }
 
     @Test
-    void testAddItem_whenInventoryFull_thenShouldReturnFalse(){
+    void testAddItem_whenInventoryFull_thenShouldReturnFalse() {
         Inventory inventory = new Inventory();
+        ArrayList<Item> a =new ArrayList<>();
+        inventory.setInventory(a);
         Item item = new Armor(15);
         inventory.addItem(item);
         inventory.addItem(item);
@@ -42,7 +46,7 @@ class InventoryTest {
     }
 
     @Test
-    void testViewInventory_whenNotEmpty_thenShouldDisplay(){
+    void testViewInventory_whenNotEmpty_thenShouldDisplay() {
         // given
         Item item1 = new Armor(12);
         Item item2 = new Sword(10);
@@ -56,7 +60,7 @@ class InventoryTest {
     }
 
     @Test
-    void testViewInventory_whenEmpty_thenShouldNotDisplayEmptyString(){
+    void testViewInventory_whenEmpty_thenShouldNotDisplayEmptyString() {
         Inventory inventory = new Inventory();
         String result = inventory.viewInventory();
         String expected = "";
@@ -64,7 +68,7 @@ class InventoryTest {
     }
 
     @Test
-    void testRemoveItem_whenRemove_thenShouldDisappear(){
+    void testRemoveItem_whenRemove_thenShouldDisappear() {
         Item item1 = new Armor(12);
         Item item2 = new Sword(10);
         Inventory inventory = new Inventory();
@@ -77,7 +81,7 @@ class InventoryTest {
     }
 
     @Test
-    void testRemoveItem_whenItemFound_thenShouldReturnTrue(){
+    void testRemoveItem_whenItemFound_thenShouldReturnTrue() {
         Item item1 = new Armor(12);
         Item item2 = new Sword(10);
         Inventory inventory = new Inventory();
@@ -88,7 +92,7 @@ class InventoryTest {
     }
 
     @Test
-    void testRemoveItem_whenItemNotFound_thenShouldReturnFalse(){
+    void testRemoveItem_whenItemNotFound_thenShouldReturnFalse() {
         // given
         Item item1 = new Armor(12);
         Item item2 = new Sword(10);
@@ -100,7 +104,7 @@ class InventoryTest {
     }
 
     @Test
-    void testUseItem_whenUse_thenShouldReturnItemAbility(){
+    void testUseItem_whenUse_thenShouldReturnItemAbility() {
         Item item1 = new Armor(12);
         Item item2 = new Sword(10);
         Inventory inventory = new Inventory();
@@ -112,14 +116,14 @@ class InventoryTest {
     }
 
     @Test
-    void testUseItem_whenIndexOutOfRange_thenShouldReturnNull(){
+    void testUseItem_whenIndexOutOfRange_thenShouldReturnNull() {
         Inventory inventory = new Inventory();
         String result = inventory.useItem(10);
         assertNull(result);
     }
 
     @Test
-    void testViewItemList_whenNotEmpty_thenShouldReturnItemList(){
+    void testViewItemList_whenNotEmpty_thenShouldReturnItemList() {
         Item item1 = new Armor(12);
         Item item2 = new Potion(10);
         Inventory inventory = new Inventory();
@@ -137,22 +141,25 @@ class InventoryTest {
         inventory.addItem(item);
         inventory.addItem(item);
         String expected = "0. LEVEL 16 ARMOR\n1. LEVEL 16 ARMOR\n";
-        String actual = inventory.toSavableString();
+        Inventory.SaveInventory s = inventory.new SaveInventory();
+        String actual = s.toSavableString();
         assertEquals(expected, actual);
     }
 
     @Test
-    void testToSavableString_whenEmptyInventory(){
+    void testToSavableString_whenEmptyInventory() {
         Inventory inventory = new Inventory();
         String expected = "";
-        String actual = inventory.toSavableString();
+        Inventory.SaveInventory s = inventory.new SaveInventory();
+        String actual = s.toSavableString();
         assertEquals(expected, actual);
     }
 
     @Test
     void testFromSaveAbleString(){
         Inventory inventory = new Inventory();
-        inventory.fromSavableString("0. LEVEL 15 ARMOR\n1. LEVEL 15 SWORD\n2. LEVEL 10 POTION");
+        Inventory.SaveInventory s = inventory.new SaveInventory();
+        s.fromSavableString("0. LEVEL 15 ARMOR\n1. LEVEL 15 SWORD\n2. LEVEL 10 POTION");
         String actual = inventory.viewItemList();
         String expected = "0. LEVEL 15 ARMOR\n1. LEVEL 15 SWORD\n2. LEVEL 10 POTION\n";
         assertEquals(expected, actual);
@@ -161,7 +168,8 @@ class InventoryTest {
     @Test
     void testFromSaveAbleString_whenEmptyString_thenShouldBeEmptyInventory(){
         Inventory inventory = new Inventory();
-        inventory.fromSavableString("");
+        Inventory.SaveInventory s = inventory.new SaveInventory();
+        s.fromSavableString("");
         String actual = inventory.viewInventory();
         String expected = "";
         assertEquals(expected, actual);
@@ -170,8 +178,9 @@ class InventoryTest {
     @Test
     void testGetId(){
         Inventory inventory = new Inventory();
+        Inventory.SaveInventory s = inventory.new SaveInventory();
         Enum<SaveEntityId> expected = SaveEntityId.INVENTORY;
-        Enum<SaveEntityId> actual = inventory.getId();
+        Enum<SaveEntityId> actual = s.getId();
         assertEquals(expected, actual);
     }
 }
