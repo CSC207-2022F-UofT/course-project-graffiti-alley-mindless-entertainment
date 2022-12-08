@@ -1,6 +1,5 @@
 package menus.save;
 
-import com.sun.xml.internal.fastinfoset.util.StringArray;
 import interfaces.State;
 import io.InputValidator;
 import io.Output;
