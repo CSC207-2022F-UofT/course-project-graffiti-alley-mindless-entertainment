@@ -1,5 +1,6 @@
 package game;
 
+import battlestates.BattleStateManager;
 import game_world.factories.EventFactory;
 import game_world.factories.ItemPickUpEventFactory;
 import game_world.managers.AreaManager;
@@ -16,9 +17,11 @@ import save.SaveInteractor;
 import switch_managers.ManagerController;
 import switch_managers.ManagerControllerImpl;
 import switch_managers.SwitchEventManager;
+import switch_managers.handlers.EncounterEventHandler;
 import switch_managers.handlers.MainMenuEventHandler;
 import switch_managers.handlers.PauseResumeEventHandler;
-import switch_managers.handlers.StartGameEventHandler;
+import switch_managers.handlers.ReturnToMapEventHandler;
+
 /**
  * Used to create the manager controller for the game.
  */
@@ -44,8 +47,9 @@ public class ManagerControllerFactory {
     ManagerController createManagerController() {
 
         createPauseResumeEventHandler();
-        createStartGameEventHandler();
+        createReturnToMapEventHandler();
         createMainMenuEventHandler();
+        createEncounterEventHandler();
 
         return managerController;
     }
@@ -67,7 +71,7 @@ public class ManagerControllerFactory {
     /**
      * Creates the start game event handler.
      */
-    void createStartGameEventHandler() {
+    void createReturnToMapEventHandler() {
         Inventory inventory = gameEntities.getInventory();
         ItemPickUpEventFactory itemPickUpEventFactory = new ItemPickUpEventFactory(inventory);
         EventFactory eventFactory = new EventFactory(itemPickUpEventFactory);
@@ -75,7 +79,7 @@ public class ManagerControllerFactory {
         AreaManager areaManager = new AreaManager(eventManager, gameEntities.getLocation());
         managerController.addManager(areaManager);
 
-        StartGameEventHandler startGameEventHandler = new StartGameEventHandler(areaManager);
+        ReturnToMapEventHandler startGameEventHandler = new ReturnToMapEventHandler(areaManager);
         switchEventManager.addSwitchEventHandler(startGameEventHandler);
     }
 
@@ -107,5 +111,17 @@ public class ManagerControllerFactory {
         saveInteractor.addSavableEntity(gameEntities.getOptions().new SaveOptions());
         saveInteractor.addSavableEntity(gameEntities.getPlayer().new SavePlayer());
         return saveInteractor;
+    }
+    
+    /**
+    * Creates the encounter event handler. 
+    */
+    void createEncounterEventHandler() {
+        BattleStateManager battleStateManager = new BattleStateManager(gameEntities.getPlayer(), gameEntities.getLocation());
+        managerController.addManager(battleStateManager);
+
+        EncounterEventHandler encounterEventHandler = new EncounterEventHandler(battleStateManager);
+
+        switchEventManager.addSwitchEventHandler(encounterEventHandler);
     }
 }

@@ -1,10 +1,14 @@
 package objects.battle.enemy.ai;
 
+/**
+ * This class is only used by an enemy, and it is one of the enemy's actions.
+ * This potion has instance attribute called hp which is the health that increases
+ * if the enemy uses this potion.
+ */
 public class EnemyPotion {
     /**
-     * This class is only used by an enemy, and it is one of the enemy's actions.
-     * This potion has instance attribute called hp which is the health that increases
-     * if the enemy uses this potion.
+     * hp: health that this potion can increase
+     *
      */
     private final int hp;
 

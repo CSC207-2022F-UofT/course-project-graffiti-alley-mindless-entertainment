@@ -3,6 +3,10 @@ package objects.battle.enemy.ai;
 import objects.battle.Skill;
 import objects.battle.SkillType;
 
+/**
+ * This class is for EnemySkillHandler and PlayerSkillHandler so that they can use the
+ * method in this class (it is inherited by the classes)
+ */
 public class SkillHandler {
 
     /**

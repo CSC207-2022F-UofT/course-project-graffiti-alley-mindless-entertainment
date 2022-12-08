@@ -4,11 +4,16 @@ import objects.battle.enemy.EnemyInfo;
 import java.util.Objects;
 import java.util.Random;
 
+/**
+ * This class is a subclass of enemyAI and overrides the "respond()" function
+ * It is smart Ai that does decide the action depending on the enemy's health
+ * and also the player's input.
+ */
 public class SmartAI implements EnemyAI {
     /**
-     * This class is a subclass of enemyAI and overrides the "respond()" function
-     * It is smart Ai that does decide the action depending on the enemy's health
-     * and also the player's input.
+     * enemyInfo: information about this enemy who is using this AI
+     * attackChance: chance of this enemy attacking the user in percentage
+     *potion: EnemyPotion object that this enemy has
      */
     private final EnemyInfo enemyInfo;
     private final int attackChance;

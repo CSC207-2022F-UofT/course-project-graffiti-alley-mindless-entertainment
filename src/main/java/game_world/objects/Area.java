@@ -57,7 +57,7 @@ public class Area {
     }
 
     public Event getCurrEvent() {
-        if (this.events.size() == 0) return null;
+        if (this.events.size() <= this.currEventIndex) return null;
         return this.events.get(this.currEventIndex);
     }
 

@@ -14,13 +14,26 @@ import objects.character.BossFacade;
 import objects.character.EnemyFacade;
 import objects.character.EnemyFighter;
 
-
+/**
+ * This class creates EnemyFighter object using the given name. It uses EnemyAIFactory and
+ * EnemyInfoFactory to creates the instance of enemyFighter
+ *
+ */
 public class EnemyFactory {
-
+    /**
+     * enemyDatabase: This is used to get information about the enemies from the database
+     * enemyInfoFactory: factory used to create the enemyInfo that this enemy has
+     * enemyAUFactory: factory used to create an AI that this enemy has
+     * gimmickDataManager: Manager used to get the information about the gimmick from the database
+     */
     private final EnemyDataManager enemyDatabase;
     private final EnemyInfoFactory enemyInfoFactory;
     private final EnemyAIFactory enemyAIFactory;
     private final GimmickDataManager gimmickDataManager;
+
+    /**
+     * This is the constructor of EnemyFactory
+     */
     public EnemyFactory() {
         this.enemyDatabase = new EnemyDataManager();
         AIDataManager aiDataManager = new AIDataManager();
