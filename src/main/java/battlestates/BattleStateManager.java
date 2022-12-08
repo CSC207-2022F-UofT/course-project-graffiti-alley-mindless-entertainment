@@ -1,12 +1,15 @@
 package battlestates;
 
 import battlestates.factories.BattleStateFactory;
+import battlestates.states.BattleAskingState;
 import core.StateManager;
 import game_world.objects.Location;
 import game_world.objects.events.EncounterEvent;
 import game_world.objects.events.Event;
 import interfaces.State;
 import objects.battle.BattleEntityInteractor;
+import objects.battle.Skill;
+import objects.battle.SkillType;
 import objects.battle.enemy.factory.EnemyFactory;
 import objects.character.Player;
 
@@ -98,6 +101,9 @@ public class BattleStateManager extends StateManager {
     @Override
     public void postInput(String input) {
         currState.postInput(input);
+        if (currState instanceof BattleAskingState) {
+            currChoice = ((BattleAskingState) currState).getCurrChoice();
+        }
         boolean currPostInput = currState.isDone();
         if (currPostInput) {
             this.currState = this.nextState(input);
@@ -121,11 +127,11 @@ public class BattleStateManager extends StateManager {
         battleEntityInteractor.setFoe(enemyFactory.createEnemy(chosenEnemy));
 
         // TEMP: For demo purposes only! Will remove once Player gets starting skills
-//        user.addSkill(new Skill("torch", 20, 10, SkillType.FIRE));
-//        user.addSkill(new Skill("spit", 20, 10, SkillType.WATER));
-//        user.addSkill(new Skill("pebble throw", 20, 10, SkillType.EARTH));
-//        user.addSkill(new Skill("sneeze", 20, 10, SkillType.AIR));
-//        user.addSkill(new Skill("tsunami", 90, 40, SkillType.WATER));
+        battleEntityInteractor.getUser().addSkill(new Skill("torch", 20, 10, SkillType.FIRE));
+        battleEntityInteractor.getUser().addSkill(new Skill("spit", 20, 10, SkillType.WATER));
+        battleEntityInteractor.getUser().addSkill(new Skill("pebble throw", 20, 10, SkillType.EARTH));
+        battleEntityInteractor.getUser().addSkill(new Skill("sneeze", 20, 10, SkillType.AIR));
+        battleEntityInteractor.getUser().addSkill(new Skill("tsunami", 90, 40, SkillType.WATER));
 
         currState = nextState("");
     }

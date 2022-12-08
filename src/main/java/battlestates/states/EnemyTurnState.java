@@ -37,6 +37,8 @@ public class EnemyTurnState implements State {
 
         foe.changeSpeed(-20); // Speed tax per turn
         statDisplayer.displayStats(user, foe);
+
+        output.generateText("Press Enter to move to the next turn.");
         this.awaitingInput = true;
     }
 

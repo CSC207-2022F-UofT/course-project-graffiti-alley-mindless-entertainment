@@ -8,9 +8,6 @@ import objects.battle.PlayerSkillHandler;
 import objects.battle.Skill;
 import objects.battle.StatDisplayer;
 import objects.battle.enemy.SkillHelper;
-import objects.character.EnemyFighter;
-import objects.character.Player;
-
 import java.awt.*;
 import java.util.List;
 
@@ -40,13 +37,12 @@ public class BattleSkillChoiceState extends BattleAskingState {
                 Skill chosenSkill = skillHelper.findSkill(cleanInput, user.getSkillList());
                 PlayerSkillHandler skillHandler = new PlayerSkillHandler();
                 int damage = skillHandler.useSkill(chosenSkill, foe, user);
+                user.changeSpeed(-20);
 
                 statDisplayer.displayPreBar();
                 output.generateText(chosenSkill.getName() + " did " + damage + " damage!");
                 statDisplayer.displayPostBar();
                 statDisplayer.displayStats(user, foe);
-
-                user.changeSpeed(-20);
             }
             this.awaitingInput = false;
             this.done = true;
