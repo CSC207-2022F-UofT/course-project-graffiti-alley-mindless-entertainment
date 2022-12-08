@@ -36,9 +36,11 @@ public class BattleMenuState extends BattleAskingState{
             switch (cleanInput) {
                 case "skills":
                     currChoice = BattleChoiceType.SKILLS;
+                    this.done = true;
                     break;
                 case "inventory":
                     currChoice = BattleChoiceType.INVENTORY;
+                    this.done = true;
                     break;
                 case "stats":
                     StatDisplayer statDisplayer = new StatDisplayer();
@@ -47,7 +49,6 @@ public class BattleMenuState extends BattleAskingState{
                     break;
             }
             this.awaitingInput = false;
-            this.done = true;
         }
     }
 
