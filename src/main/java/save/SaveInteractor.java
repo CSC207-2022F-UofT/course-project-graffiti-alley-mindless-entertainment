@@ -1,7 +1,5 @@
 package save;
 
-import io.Output;
-
 import java.util.ArrayList;
 
 /**
@@ -22,12 +20,13 @@ public class SaveInteractor {
     SaveLoader loader;
     SaveFactory creator;
     SaveGatewayImpl gateway;
-    private int MAX_SLOTS;
+    private final int MAX_SLOTS;
 
     public SaveInteractor(int max_slots, SaveGatewayImpl gateway) {
         entities = new ArrayList<>();
-        saves = new ArrayList<>(MAX_SLOTS + 1);
-        for (int i = 0; i < max_slots + 1; i++) {
+        saves = (ArrayList<Save>) gateway.retrieveSave();
+        int save_size = saves.size();
+        for (int i = 0; i < max_slots - save_size + 1; i++) {
             saves.add(null);
         }
         loader = new SaveLoader();
@@ -48,7 +47,7 @@ public class SaveInteractor {
         if (slot > MAX_SLOTS) {
             return false;
         }
-        saves = (ArrayList<Save>) gateway.retrieveSave();
+
         Save s = saves.get(slot);
         if (s == null) {
             return false;

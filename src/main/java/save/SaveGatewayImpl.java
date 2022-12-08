@@ -4,6 +4,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -59,6 +60,8 @@ public class SaveGatewayImpl implements SaveGateway{
             //Read JSON file
             Object obj = jsonParser.parse(reader);
             return (JSONArray) obj;
+        } catch (FileNotFoundException e) {
+            return new JSONArray();
         } catch (ParseException | IOException e) {
             e.printStackTrace();
         }

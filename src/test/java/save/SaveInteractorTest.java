@@ -1,11 +1,9 @@
 package save;
 
-import game.Game;
 import game.GameEntities;
+import objects.battle.SkillType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class SaveInteractorTest {
 
@@ -18,6 +16,7 @@ class SaveInteractorTest {
         saveInteractor.addSavableEntity(gameEntities.getInventory().new SaveInventory());
         saveInteractor.addSavableEntity(gameEntities.getOptions().new SaveOptions());
         saveInteractor.addSavableEntity(gameEntities.getPlayer().new SavePlayer());
+        gameEntities.getPlayer().changeSkillType(SkillType.WATER);
         saveInteractor.saveAtSlot(1);
         boolean load = saveInteractor.loadFromSlot(1);
         Assertions.assertTrue(load);
