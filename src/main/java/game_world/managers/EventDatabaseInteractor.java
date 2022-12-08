@@ -8,8 +8,6 @@ import database.objects.QuestGiverEventData;
 import game_world.factories.EventFactory;
 import game_world.objects.events.Event;
 
-import java.util.ArrayList;
-
 public class EventDatabaseInteractor {
 
     private final EventDataManager database;
@@ -24,9 +22,8 @@ public class EventDatabaseInteractor {
      * Generates new event object
      * @return the new event generated
      * @param name name of Event to be searched
-     * @param exec adds Event to eventQueue to be executed if set to true
      */
-    public Event createEvent(ArrayList<Event> eventQueue, String name, boolean exec) {
+    public Event createEvent(String name) {
         String type = this.database.fetchEventType(name);
         Event newEvent;
 
@@ -47,8 +44,6 @@ public class EventDatabaseInteractor {
             newEvent = eventFactory.createArbitraryEvent(data);
         }
 
-        if (exec)
-            eventQueue.add(newEvent);
         return newEvent;
     }
 

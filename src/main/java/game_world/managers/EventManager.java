@@ -31,7 +31,7 @@ public class EventManager {
     public ArrayList<Event> getEventsFromArea(ArrayList<String> names) {
         ArrayList<Event> events = new ArrayList<>();
         for (String name : names) {
-            events.add(databaseController.createEvent(eventQueue, name, false));
+            events.add(databaseController.createEvent(name));
         }
         return events;
     }
