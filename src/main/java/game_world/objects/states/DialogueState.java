@@ -23,13 +23,12 @@ public class DialogueState implements State {
     private final Area currentArea;
     private final ArrayList<String> allTexts;
     private StringBuilder nextText;
-    private final int textSpeed = Options.getOptions().getTextSpeed();
 
     private void updateNextText() {
         this.nextText = new StringBuilder(allTexts.get(this.currentArea.getCurrTextIndex()));
         this.currentArea.setCurrTextIndex(this.currentArea.getCurrTextIndex() + 1);
         int textIndex = 1;
-        while (this.currentArea.getCurrTextIndex() < allTexts.size() && textIndex < textSpeed) {
+        while (this.currentArea.getCurrTextIndex() < allTexts.size() && textIndex < Options.getOptions().getTextSpeed()) {
             this.nextText.append("\n");
             this.nextText.append(this.currentArea.getTexts().get(this.currentArea.getCurrTextIndex()));
             this.currentArea.setCurrTextIndex(this.currentArea.getCurrTextIndex() + 1);

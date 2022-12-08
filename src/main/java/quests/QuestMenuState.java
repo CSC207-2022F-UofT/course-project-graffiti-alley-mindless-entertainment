@@ -33,8 +33,12 @@ public class QuestMenuState implements State {
 
         // displays the quests.
         OutputHandler output = Output.getScreen();
-        output.generateText("Here are your quests:");
-        output.generateText(getQuestsStatuses());
+        if (this.questInteractor.getQuests().size() == 0) {
+            output.generateText("You did not accept any quests at the moment.");
+        } else {
+            output.generateText("Here are your quests:");
+            output.generateText(getQuestsStatuses());
+        }
 
         this.isAwaitingInput = true;
     }
