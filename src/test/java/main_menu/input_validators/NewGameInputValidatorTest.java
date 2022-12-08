@@ -19,5 +19,12 @@ class NewGameInputValidatorTest {
 
     @Test
     void getErrorMessage() {
+        NewGameInputValidator validator = new NewGameInputValidator();
+        assert(validator.getErrorMessage("start") == null);
+        assert(validator.getErrorMessage("return") == null);
+        assert(validator.getErrorMessage("").equals
+                ("Please choose to start the game or return to the main menu."));
+        assert(validator.getErrorMessage("a").equals
+                ("Please choose to start the game or return to the main menu."));
     }
 }

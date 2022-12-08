@@ -20,5 +20,14 @@ class LoadGameInputValidatorTest {
 
     @Test
     void getErrorMessage() {
+        SaveGatewayImpl gatewayImpl = new SaveGatewayImpl();
+        SaveInteractor saveInteractor = new SaveInteractor(2, gatewayImpl);
+        LoadGameInputValidator validator = new LoadGameInputValidator(saveInteractor);
+        assert(validator.getErrorMessage("1") == null);
+        assert(validator.getErrorMessage("return") == null);
+        assert(validator.getErrorMessage("no").equals
+                ("Please choose to open a valid save file or return to the main menu."));
+        assert(validator.getErrorMessage("4").equals
+                ("Please choose to open a valid save file or return to the main menu."));
     }
 }

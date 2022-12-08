@@ -61,7 +61,7 @@ public class LoadGameInputValidator implements InputValidator {
             }
         }
         if (!(input.equalsIgnoreCase(MainMenuOptions.RETURN.toString())) && !(validSlot)) {
-            return "Please choose to open a save file or return to the main menu.";
+            return "Please choose to open a valid save file or return to the main menu.";
         }
         else {
             return null;

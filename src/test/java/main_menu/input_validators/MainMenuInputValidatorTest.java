@@ -19,5 +19,10 @@ class MainMenuInputValidatorTest {
 
     @Test
     void getErrorMessage() {
+        MainMenuInputValidator validator = new MainMenuInputValidator();
+        assert(validator.getErrorMessage("new") == null);
+        assert(validator.getErrorMessage("load") == null);
+        assert(validator.getErrorMessage("a").equals("Please choose one of the main menu options."));
+        assert(validator.getErrorMessage("").equals("Please choose one of the main menu options."));
     }
 }
