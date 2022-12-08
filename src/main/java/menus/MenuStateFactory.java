@@ -12,6 +12,10 @@ import java.util.List;
  */
 public class MenuStateFactory {
 
+    /**
+     * changeOptionsStateFactory: injected dependency to create changeOptionsState
+     * inventoryStateFactory: injected dependency to create inventoryState
+     */
     private final ChangeOptionsStateFactory changeOptionsStateFactory;
     private final InventoryStateFactory inventoryStateFactory;
 

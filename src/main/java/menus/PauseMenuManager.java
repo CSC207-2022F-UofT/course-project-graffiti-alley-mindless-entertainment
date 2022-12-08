@@ -16,7 +16,8 @@ import java.util.Objects;
 public class PauseMenuManager extends StateManager {
     /**
      * currMenuType: an enum for the current state of the pauseMenu.
-     * all other fields are extracted constants
+     * menuStateFactory: factory used to create the menu states.
+     * all other fields are extracted constants for possible user input.
      */
 
     private final List<String> pauseMenuOptions;

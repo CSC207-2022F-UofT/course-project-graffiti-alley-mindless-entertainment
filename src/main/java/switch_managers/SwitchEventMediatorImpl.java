@@ -5,6 +5,9 @@ package switch_managers;
  */
 public class SwitchEventMediatorImpl implements SwitchEventMediator{
 
+    /**
+     * currType: the switch event type stored.
+     */
     private SwitchEventType currType;
 
     /**
