@@ -65,7 +65,7 @@
         "4": "follow the grassy trail",
         "3": "walk along the beach"
       },
-      "events": ["test quest","Gold Chest", "George...?"]
+      "events": ["test quest","Gold Chest", "Bronze Chest","George...?"]
     },
     "3": {
       "name": "Beach 2",

@@ -12,7 +12,7 @@ public class Sword extends Item {
     public Sword(int level) {
         super(level);
         this.setName("LEVEL " + (this.getLevel() + 1) + " SWORD");
-        this.setAbility("Grant " + (this.getLevel() + 1) + " Damage");
+        this.setAbility("Grant " + (this.getLevel() + 1) * 10 + " Damage");
         this.setPrice(this.getLevel() + 5);
     }
 }
