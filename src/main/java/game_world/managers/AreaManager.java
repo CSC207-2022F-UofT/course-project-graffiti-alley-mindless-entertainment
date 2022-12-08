@@ -1,7 +1,6 @@
 package game_world.managers;
 
 import core.StateManager;
-import game.Game;
 import game_world.factories.DialogueStateFactory;
 import game_world.factories.SelectionStateFactory;
 import game_world.objects.Area;
@@ -21,22 +20,20 @@ public class AreaManager extends StateManager {
     private final AreaDatabaseInteractor databaseController;
     private final EventManager eventManager;
     private Area currentArea;
-    private Location location;
+    private final Location location;
 
     public AreaManager(EventManager eventManager, Location location) {
         this.eventManager = eventManager;
         this.databaseController = new AreaDatabaseInteractor(this.eventManager);
-        this.currentArea = databaseController.loadArea("1");
+        this.currentArea = databaseController.loadArea("0");
         this.location = location;
         this.location.setDatabaseController(databaseController);
-        initialize();
     }
 
     @Override
     public void initialize() {
-        this.currState = dialogueStateFactory.createDialogueState(
-                "The game will now begin. To advance dialogue, press enter. Enjoy!"
-        );
+        this.currState = dialogueStateFactory.createDialogueState(this.currentArea);
+        getToNextArea("1");
         this.location.setCurrentArea(this.currentArea);
     }
 
@@ -58,10 +55,9 @@ public class AreaManager extends StateManager {
                 // Events are completed (or there are none)
                 if (this.currentArea.getNextInputs().contains(input.toLowerCase())) {
                     // Player entered a valid area to go next
-                    this.getToNextArea(this.currentArea.getAreaFromInput(input.toLowerCase()));
-                    this.currState = dialogueStateFactory.createDialogueState(
-                            "You approach " + this.currentArea.getName() + " in " + this.currentArea.getZone() + "."
-                    );
+                    getToNextArea(this.currentArea.getAreaFromInput(input.toLowerCase()));
+                    output.generateText("You approach " + this.currentArea.getName() + " in " + this.currentArea.getZone() + ".");
+                    return nextState(input);
                 }
                 else {
                     // Player selects an area to go next
@@ -79,10 +75,7 @@ public class AreaManager extends StateManager {
         }
         else {
             // Next text in sequence to be played
-            this.currState = dialogueStateFactory.createDialogueState(
-                    this.currentArea.getTexts().get(this.currentArea.getCurrTextIndex())
-            );
-            this.currentArea.setCurrTextIndex(this.currentArea.getCurrTextIndex() + 1);
+            this.currState = dialogueStateFactory.createDialogueState(this.currentArea);
         }
         return this.currState;
     }

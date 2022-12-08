@@ -74,8 +74,7 @@ public class ManagerControllerFactory {
     void createReturnToMapEventHandler() {
         Inventory inventory = gameEntities.getInventory();
         ItemPickUpEventFactory itemPickUpEventFactory = new ItemPickUpEventFactory(inventory);
-        EventFactory eventFactory = new EventFactory(itemPickUpEventFactory);
-        EventManager eventManager = new EventManager(eventFactory);
+        EventManager eventManager = new EventManager(itemPickUpEventFactory);
         AreaManager areaManager = new AreaManager(eventManager, gameEntities.getLocation());
         managerController.addManager(areaManager);
 
@@ -112,9 +111,9 @@ public class ManagerControllerFactory {
         saveInteractor.addSavableEntity(gameEntities.getPlayer().new SavePlayer());
         return saveInteractor;
     }
-    
+
     /**
-    * Creates the encounter event handler. 
+    * Creates the encounter event handler.
     */
     void createEncounterEventHandler() {
         BattleStateManager battleStateManager = new BattleStateManager(gameEntities.getPlayer(), gameEntities.getLocation());
