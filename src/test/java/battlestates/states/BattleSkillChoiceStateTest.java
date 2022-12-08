@@ -3,25 +3,27 @@ package battlestates.states;
 import battlestates.BattleChoiceType;
 import objects.battle.BattleEntityInteractor;
 import objects.battle.enemy.factory.EnemyFactory;
+import objects.battle.skills.Skill;
+import objects.battle.skills.SkillType;
 import objects.character.EnemyFighter;
 import objects.character.Player;
 import org.junit.Test;
 
-public class EnemyTurnStateTest {
+public class BattleSkillChoiceStateTest {
     @Test
-    public void enemyTurnStateTest() {
+    public void skillChoiceStateTest() {
         Player user = new Player("", null);
+        user.addSkill(new Skill("dummy", 0, 0, SkillType.EARTH));
         EnemyFighter foe = new EnemyFactory().createEnemy("goblin");
         BattleEntityInteractor bei = new BattleEntityInteractor(user, foe);
         BattleChoiceType action = BattleChoiceType.SKILLS;
-        EnemyTurnState test = new EnemyTurnState(bei.getUser(), bei.getFoe(), action);
-
+        BattleSkillChoiceState test = new BattleSkillChoiceState(bei, action);
         assert(!test.awaitInput());
         assert(!test.isDone());
         test.preInput();
-        assert(foe.getSpeed() == 80);
         assert(test.awaitInput());
-        test.postInput("");
+        test.postInput("a");
+        assert(user.getSpeed() == 90);
         assert(!test.awaitInput());
         assert(test.isDone());
     }

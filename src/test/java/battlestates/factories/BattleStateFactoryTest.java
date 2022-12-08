@@ -1,15 +1,38 @@
 package battlestates.factories;
 
-import battlestates.states.WinBattleState;
+import battlestates.BattleChoiceType;
+import battlestates.states.*;
 import interfaces.State;
-import org.junit.jupiter.api.DisplayName;
+import objects.battle.BattleEntityInteractor;
+import objects.battle.enemy.factory.EnemyFactory;
+import objects.battle.skills.Skill;
+import objects.battle.skills.SkillType;
+import objects.character.EnemyFighter;
+import objects.character.Player;
 import org.junit.jupiter.api.Test;
+
+import java.awt.*;
 
 public class BattleStateFactoryTest {
     @Test
-    @DisplayName("This test checks if the EnemyFactory class returns correct enemy")
-    public State createWinBattleStateTest() {
+    public void stateCreationTests() {
+        Player user = new Player("", null);
+        user.addSkill(new Skill("dummy", 0, 0, SkillType.EARTH));
+        EnemyFighter foe = new EnemyFactory().createEnemy("goblin");
+        BattleEntityInteractor bei = new BattleEntityInteractor(user, foe);
+        BattleChoiceType choice = BattleChoiceType.MENU;
+        BattleStateFactory factory = new BattleStateFactory(bei);
 
-        return new WinBattleState(battleEntityInteractor.getUser(), battleEntityInteractor.getFoe());
+        State test = factory.createBattleMenuState(choice);
+        assert(test instanceof BattleMenuState);
+        test = factory.createWinBattleState();
+        assert(test instanceof WinBattleState);
+        test = factory.createLoseBattleState();
+        assert(test instanceof LoseBattleState);
+        test = factory.createBattleItemChoiceState(choice);
+        assert(test instanceof BattleItemChoiceState);
+        test = factory.createBattleSkillChoiceState(choice);
+        assert(test instanceof BattleSkillChoiceState);
     }
+
 }
