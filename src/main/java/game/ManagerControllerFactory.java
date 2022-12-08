@@ -8,9 +8,11 @@ import main_menu.MainMenuManager;
 import menus.MenuStateFactory;
 import menus.PauseMenuManager;
 import menus.options.ChangeOptionsStateFactory;
+import menus.save.SaveMenuStateFactory;
 import objects.inventory.Inventory;
 import objects.inventory.InventoryStateFactory;
 import playercreation.PlayerCreatorManager;
+import save.SaveInteractor;
 import switch_managers.ManagerController;
 import switch_managers.ManagerControllerImpl;
 import switch_managers.SwitchEventManager;
@@ -84,11 +86,26 @@ public class ManagerControllerFactory {
         Inventory inventory = gameEntities.getInventory();
         ChangeOptionsStateFactory changeOptionsStateFactory = new ChangeOptionsStateFactory(gameEntities.getOptions());
         InventoryStateFactory inventoryStateFactory = new InventoryStateFactory(inventory);
-        MenuStateFactory menuStateFactory = new MenuStateFactory(changeOptionsStateFactory, inventoryStateFactory);
+        SaveInteractor saveInteractor = createSaveInteractor();
+        SaveMenuStateFactory saveMenuStateFactory = new SaveMenuStateFactory(saveInteractor);
+        MenuStateFactory menuStateFactory = new MenuStateFactory(changeOptionsStateFactory, inventoryStateFactory, saveMenuStateFactory);
         PauseMenuManager pauseMenuManager = new PauseMenuManager(menuStateFactory);
         managerController.addManager(pauseMenuManager);
 
         PauseResumeEventHandler pauseResumeEventHandler = new PauseResumeEventHandler(pauseMenuManager);
         switchEventManager.addSwitchEventHandler(pauseResumeEventHandler);
+    }
+
+    /**
+     * Use to create a save interactor.
+     * @return the SaveInteractor.
+     */
+    SaveInteractor createSaveInteractor() {
+        SaveInteractor saveInteractor = new SaveInteractor(3);
+        saveInteractor.addSavableEntity(gameEntities.getLocation());
+        saveInteractor.addSavableEntity(gameEntities.getInventory().new SaveInventory());
+        saveInteractor.addSavableEntity(gameEntities.getOptions().new SaveOptions());
+        saveInteractor.addSavableEntity(gameEntities.getPlayer().new SavePlayer());
+        return saveInteractor;
     }
 }
