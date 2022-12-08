@@ -1,6 +1,7 @@
 package game;
 
 import battlestates.BattleStateManager;
+import database.factories.QuestGiverEventFactory;
 import game_world.factories.EventFactory;
 import game_world.factories.ItemPickUpEventFactory;
 import game_world.managers.AreaDatabaseInteractor;
@@ -38,12 +39,14 @@ public class ManagerControllerFactory {
     private final SwitchEventManager switchEventManager;
 
     private AreaDatabaseInteractor areaDatabaseInteractor;
+    private QuestInteractor questInteractor;
     private final GameEntities gameEntities;
 
     public ManagerControllerFactory(GameEntities gameEntities) {
         switchEventManager = new SwitchEventManager();
         managerController = new ManagerControllerImpl(switchEventManager);
         this.gameEntities = gameEntities;
+        this.questInteractor = new QuestInteractor(gameEntities.getPlayer());
     }
 
     /**
@@ -83,7 +86,7 @@ public class ManagerControllerFactory {
         Player.inventory = inventory;
         ItemPickUpEventFactory itemPickUpEventFactory = new ItemPickUpEventFactory(inventory);
 
-        EventFactory eventFactory = new EventFactory(itemPickUpEventFactory);
+        EventFactory eventFactory = new EventFactory(itemPickUpEventFactory, new QuestGiverEventFactory(questInteractor));
         EventDatabaseInteractor eventDatabaseInteractor = new EventDatabaseInteractor(eventFactory);
         EventManager eventManager = new EventManager(eventDatabaseInteractor);
         areaDatabaseInteractor = new AreaDatabaseInteractor(eventManager);
@@ -103,7 +106,6 @@ public class ManagerControllerFactory {
         InventoryStateFactory inventoryStateFactory = new InventoryStateFactory(inventory);
         SaveInteractor saveInteractor = createSaveInteractor();
         SaveMenuStateFactory saveMenuStateFactory = new SaveMenuStateFactory(saveInteractor);
-        QuestInteractor questInteractor = new QuestInteractor(gameEntities.getPlayer());
         QuestMenuFactory questMenuFactory = new QuestMenuFactory(questInteractor);
         MenuStateFactory menuStateFactory = new MenuStateFactory(changeOptionsStateFactory, inventoryStateFactory, saveMenuStateFactory, questMenuFactory);
         PauseMenuManager pauseMenuManager = new PauseMenuManager(menuStateFactory);
