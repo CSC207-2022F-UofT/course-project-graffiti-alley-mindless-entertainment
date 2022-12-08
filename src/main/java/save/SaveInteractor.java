@@ -24,6 +24,9 @@ public class SaveInteractor {
 
     public SaveInteractor(int max_slots) {
         saves = new ArrayList<>(MAX_SLOTS + 1);
+        for (int i = 0; i < max_slots + 1; i++) {
+            saves.add(null);
+        }
         loader = new SaveLoader();
         creator = new SaveFactory();
         MAX_SLOTS = max_slots;
@@ -61,16 +64,18 @@ public class SaveInteractor {
      * displays all slots status
      */
     public void displaySlots() {
+        StringBuilder msg = new StringBuilder("Saves: \n");
         for (int i = 1; i <= MAX_SLOTS; ++ i) {
-            StringBuilder msg = new StringBuilder("Slot #");
+            msg.append("Slot #");
             msg.append(i);
             if (saves.get(i) == null) {
                 msg.append(": vacant");
             } else {
                 msg.append(": occupied");
             }
-            Output.getScreen().generateText(msg.toString());
+            msg.append("\n");
         }
+        Output.getScreen().generateText(msg.toString());
     }
 
     /**

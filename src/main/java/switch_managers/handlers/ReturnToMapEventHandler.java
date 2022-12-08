@@ -5,7 +5,7 @@ import game_world.managers.AreaManager;
 import switch_managers.SwitchEventHandler;
 import switch_managers.SwitchEventType;
 
-public class StartGameEventHandler implements SwitchEventHandler {
+public class ReturnToMapEventHandler implements SwitchEventHandler {
 
     private final AreaManager areaManager;
 
@@ -13,7 +13,7 @@ public class StartGameEventHandler implements SwitchEventHandler {
     /**
      * @param areaManager the area manager.
      */
-    public StartGameEventHandler(AreaManager areaManager) {
+    public ReturnToMapEventHandler(AreaManager areaManager) {
         this.areaManager = areaManager;
     }
 
@@ -24,7 +24,7 @@ public class StartGameEventHandler implements SwitchEventHandler {
      */
     @Override
     public StateManager handleSwitchEvent(SwitchEventType eventType, StateManager currManager) {
-        if (eventType == SwitchEventType.START_GAME) {
+        if (eventType == SwitchEventType.START_GAME || eventType == SwitchEventType.BATTLE_END) {
             return areaManager;
         }
         return null;

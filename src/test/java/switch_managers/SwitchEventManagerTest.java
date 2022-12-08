@@ -13,7 +13,7 @@ class SwitchEventManagerTest {
 
         assert(managerController.switchManagers(SwitchEventType.PAUSE, null) == null);
 
-        MenuStateFactory menuStateFactory = new MenuStateFactory(null, null);
+        MenuStateFactory menuStateFactory = new MenuStateFactory(null, null, null);
         PauseMenuManager pauseMenuManager = new PauseMenuManager(menuStateFactory);
 
         PauseResumeEventHandler pauseResumeEventHandler = new PauseResumeEventHandler(pauseMenuManager);

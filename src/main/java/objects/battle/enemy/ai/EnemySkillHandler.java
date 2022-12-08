@@ -6,11 +6,14 @@ import objects.battle.Skill;
 import objects.character.EnemyFighter;
 import objects.character.Player;
 
+/**
+ * This class is a use case for the EnemySkill which calculates the damage
+ * depending on the type advantage and actually updates the Player's stats.
+ *
+ */
 public class EnemySkillHandler extends SkillHandler implements EnemyActionHandler{
     /**
-     * This class is a use case for the EnemySkill which calculates the damage
-     * depending on the type advantage and actually updates the Player's stats.
-     *
+     * skill: the skill that the enemy used
      */
     private final Skill skill;
 

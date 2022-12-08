@@ -8,4 +8,6 @@ public enum SwitchEventType {
     LOAD_GAME,
     MAIN_MENU,
     END_GAME,
+    ENCOUNTER,
+    BATTLE_END
 }

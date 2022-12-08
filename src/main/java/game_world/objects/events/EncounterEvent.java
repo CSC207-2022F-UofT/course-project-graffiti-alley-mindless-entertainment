@@ -4,6 +4,9 @@ import game_world.WorldInputValidator;
 import io.InputValidator;
 import io.Output;
 import io.OutputHandler;
+import switch_managers.SwitchEventMediator;
+import switch_managers.SwitchEventMediatorProxy;
+import switch_managers.SwitchEventType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,7 +47,7 @@ public class EncounterEvent extends Event {
         this.awaitInput = true;
         OutputHandler output = Output.getScreen();
         // change text below
-        StringBuilder newMessage = new StringBuilder("[ENCOUNTER EVENT] What would you like to do?");
+        StringBuilder newMessage = new StringBuilder("[ENCOUNTER EVENT] You encountered an enemy! Would you like to fight it?");
         for (String input : inputs) {
             newMessage.append("\n\t◈ ").append(input);
         }
@@ -56,15 +59,12 @@ public class EncounterEvent extends Event {
         this.awaitInput = false;
         this.isDone = true;
         OutputHandler output = Output.getScreen();
+        output.generateText("You decided to " + input + ".");
         if (input.equals("yes")) {
-            // quest accepted, do what u need to here
-            output.generateText("You decided to fight!");
+            SwitchEventMediator s = SwitchEventMediatorProxy.getInstance();
+            s.store(SwitchEventType.ENCOUNTER);
+            output.generateText("BATTLE HAS BEGUN! Your enemy is: " + npc);
         }
-        else
-            output.generateText("You decided to avoid the encounter.");
-        // switch manager here
-        /// SwitchEventMediator s = SwitchEventMediatorProxy.getInstance();
-        /// s.store(SwitchEventType.--name of your switchevent--);
     }
 
     @Override

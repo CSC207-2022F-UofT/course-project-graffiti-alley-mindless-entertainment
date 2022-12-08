@@ -1,9 +1,12 @@
 package game_world.objects.events;
 
 import game_world.WorldInputValidator;
+import game_world.factories.QuestFactory;
 import io.InputValidator;
 import io.Output;
 import io.OutputHandler;
+import quests.Quest;
+import quests.QuestInteractor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,7 +46,7 @@ public class QuestGiverEvent extends Event {
     public void preInput() {
         this.awaitInput = true;
         OutputHandler output = Output.getScreen();
-        // change text below
+        // !!! change text below
         StringBuilder newMessage = new StringBuilder("[QUEST EVENT] What would you like to do?");
         for (String input : inputs) {
             newMessage.append("\n\t◈ ").append(input);
@@ -57,6 +60,9 @@ public class QuestGiverEvent extends Event {
         this.isDone = true;
         OutputHandler output = Output.getScreen();
         if (input.equals("yes")) {
+            // quest accepted
+            Quest quest = new QuestFactory().createQuest(this.quest);
+            // !!! needs to be added to the questInteractor
             // quest accepted, do what u need to here
             output.generateText("You decided to accept!");
         }

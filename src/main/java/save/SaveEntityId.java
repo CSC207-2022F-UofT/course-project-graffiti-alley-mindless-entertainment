@@ -5,5 +5,6 @@ public enum SaveEntityId {
     OPTIONS,
     INVENTORY,
     QUEST,
+    QUESTS,
     PLAYER
 }
