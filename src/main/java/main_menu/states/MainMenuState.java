@@ -71,7 +71,7 @@ public class MainMenuState implements State {
     }
 
     /**
-     * @return The InputValidator of this MainMenuState.
+     * @return The MainMenuInputValidator of this MainMenuState.
      */
     @Override
     public InputValidator getInputValidator() {

@@ -38,6 +38,7 @@ public class NewGameState implements State {
         this.awaitInput = true;
         OutputHandler output = Output.getScreen();
         output.generateText("Are you sure you would like to start a new game?" + "\n" +
+                "WARNING: Starting a new game will override the save in save slot 1." + "\n" +
                 "Type 'start' if you would like to start a new game." + "\n" +
                 "Type 'return' if you would like to return to the main menu.");
     }
