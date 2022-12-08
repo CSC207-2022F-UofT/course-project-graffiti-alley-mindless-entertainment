@@ -11,8 +11,6 @@ import game_world.objects.events.Event;
 import interfaces.State;
 import io.Output;
 import io.OutputHandler;
-import objects.battle.Skill;
-import objects.battle.SkillType;
 import objects.battle.enemy.factory.EnemyFactory;
 import objects.character.EnemyFighter;
 import objects.character.Player;
@@ -26,7 +24,6 @@ public class BattleStateManager extends StateManager {
      */
     private Player user;
     private EnemyFighter foe;
-    private final OutputHandler output = Output.getScreen();
     private Location location;
 
     public BattleStateManager(Player user, Location location) {
@@ -107,11 +104,6 @@ public class BattleStateManager extends StateManager {
         }
         this.foe = enemyFactory.createEnemy(chosenEnemy);
 
-        user.addSkill(new Skill("fireball", 20, 10, SkillType.FIRE));
-        user.addSkill(new Skill("waterball", 20, 10, SkillType.WATER));
-        user.addSkill(new Skill("earthball", 20, 10, SkillType.EARTH));
-        user.addSkill(new Skill("tsunami", 90, 40, SkillType.WATER));
-        // Initialize is called at the beginning of the game, make sure it is able to do it without proper area
         currState = nextState("");
     }
 }
