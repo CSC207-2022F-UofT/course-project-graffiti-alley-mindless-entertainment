@@ -2,11 +2,22 @@ package save;
 
 import java.util.Map;
 
+/**
+ * the class to manage savable entities
+ */
 public class Save {
+
+    /**
+     * savedData: the data saved
+     */
     Map<SaveEntityId, String> savedData;
 
     public Save(Map<SaveEntityId, String> dataToSave) {
         savedData = dataToSave;
+    }
+
+    public Map<SaveEntityId, String> getSavedData() {
+        return savedData;
     }
 
     /**

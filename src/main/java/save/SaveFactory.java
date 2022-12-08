@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * the class that used factory design pattern to create Saves
+ */
 public class SaveFactory {
 
     /**
