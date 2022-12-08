@@ -19,7 +19,7 @@ class InventoryTest {
         Item item = new Armor(15);
         item.setLevel(item.getPrice());
         inventory.addItem(item);
-        assertEquals("0. LEVEL 16 ARMOR: Gain 16 Armor\n", inventory.viewInventory());
+        assertEquals("0. LEVEL 16 ARMOR: Gain 160 Armor\n", inventory.viewInventory());
     }
 
     @Test
@@ -54,8 +54,8 @@ class InventoryTest {
         inventory.addItem(item1);
         inventory.addItem(item2);
         String result = inventory.viewInventory();
-        String expected = "0. LEVEL 13 ARMOR: Gain 13 Armor\n" +
-                "1. LEVEL 11 SWORD: Grant 11 Damage\n";
+        String expected = "0. LEVEL 13 ARMOR: Gain 130 Armor\n" +
+                "1. LEVEL 11 SWORD: Grant 110 Damage\n";
         assertEquals(expected, result);
     }
 
@@ -75,7 +75,7 @@ class InventoryTest {
         inventory.addItem(item1);
         inventory.addItem(item2);
         inventory.removeItem(0);
-        String expected = "0. LEVEL 11 SWORD: Grant 11 Damage\n";
+        String expected = "0. LEVEL 11 SWORD: Grant 110 Damage\n";
         String result = inventory.viewInventory();
         assertEquals(expected, result);
     }
@@ -111,7 +111,7 @@ class InventoryTest {
         inventory.addItem(item1);
         inventory.addItem(item2);
         String result = inventory.useItem(0);
-        String expected = "Gain 13 Armor";
+        String expected = "Gain 130 Armor";
         assertEquals(result, expected);
     }
 
