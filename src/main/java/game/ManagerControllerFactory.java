@@ -62,7 +62,7 @@ public class ManagerControllerFactory {
      * Creates the main menu event handler.
      */
     void createMainMenuEventHandler() {
-        MainMenuManager mainMenuManager = new MainMenuManager();
+        MainMenuManager mainMenuManager = new MainMenuManager(this.createSaveInteractor());
         managerController.addManager(mainMenuManager);
 
         PlayerCreatorManager playerCreatorManager = new PlayerCreatorManager(gameEntities.getPlayer());
