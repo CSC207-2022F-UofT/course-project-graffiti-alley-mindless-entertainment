@@ -59,12 +59,15 @@ public class QuestGiverEvent extends Event {
         this.awaitInput = false;
         this.isDone = true;
         OutputHandler output = Output.getScreen();
-        output.generateText("You decided to " + input + ".");
         if (input.equals("yes")) {
             // quest accepted
             Quest quest = new QuestFactory().createQuest(this.quest);
             // !!! needs to be added to the questInteractor
+            // quest accepted, do what u need to here
+            output.generateText("You decided to accept!");
         }
+        else
+            output.generateText("You decided not to accept.");
     }
 
     @Override

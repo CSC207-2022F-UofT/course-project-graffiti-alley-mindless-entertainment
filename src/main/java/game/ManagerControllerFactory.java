@@ -112,9 +112,9 @@ public class ManagerControllerFactory {
         saveInteractor.addSavableEntity(gameEntities.getPlayer().new SavePlayer());
         return saveInteractor;
     }
-    
+
     /**
-    * Creates the encounter event handler. 
+    * Creates the encounter event handler.
     */
     void createEncounterEventHandler() {
         BattleStateManager battleStateManager = new BattleStateManager(gameEntities.getPlayer(), gameEntities.getLocation());

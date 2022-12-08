@@ -23,6 +23,7 @@ public class SaveInteractor {
     private int MAX_SLOTS;
 
     public SaveInteractor(int max_slots) {
+        entities = new ArrayList<>();
         saves = new ArrayList<>(MAX_SLOTS + 1);
         for (int i = 0; i < max_slots + 1; i++) {
             saves.add(null);
