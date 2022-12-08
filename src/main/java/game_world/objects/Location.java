@@ -7,7 +7,7 @@ import save.SaveEntityId;
 
 import java.util.ArrayList;
 
-public class Location implements SavableEntity {
+public class Location {
 
     private Area currentArea;
     private AreaDatabaseInteractor databaseController;
@@ -24,33 +24,36 @@ public class Location implements SavableEntity {
         this.databaseController = databaseController;
     }
 
-    @Override
-    public String toSavableString() {
-        if (currentArea.getCurrEvent() == null)
-            return currentArea.getId() + "/NA";
-        return currentArea.getId() + "/" + currentArea.getCurrEvent().name;
-    }
-
-    @Override
-    public void fromSavableString(String str) {
-        String[] ids = str.split("/");
-        this.currentArea = databaseController.loadArea(ids[0]);
-        if (!ids[1].equals("NA")) {
-            ArrayList<Event> events = this.currentArea.getEvents();
-            for (int i = 0; i < events.size(); i++) {
-                if (events.get(i).name.equals(ids[1]))
-                    this.currentArea.setCurrEventIndex(i);
-            }
-        }
-    }
-
-    @Override
-    public SaveEntityId getId() {
-        return SaveEntityId.LOCATION;
-    }
-
     public Event getCurrEvent() {
         if (currentArea == null) {return null; }
         else {return currentArea.getCurrEvent();}
     }
+    public class SaveLocation implements SavableEntity {
+        @Override
+        public String toSavableString () {
+            if (currentArea.getCurrEvent() == null)
+                return currentArea.getId() + "/NA";
+            return currentArea.getId() + "/" + currentArea.getCurrEvent().name;
+        }
+
+        @Override
+        public void fromSavableString (String str){
+            String[] ids = str.split("/");
+            currentArea = databaseController.loadArea(ids[0]);
+            if (!ids[1].equals("NA")) {
+                ArrayList<Event> events = currentArea.getEvents();
+                for (int i = 0; i < events.size(); i++) {
+                    if (events.get(i).name.equals(ids[1]))
+                        currentArea.setCurrEventIndex(i);
+                }
+            }
+        }
+
+        @Override
+        public SaveEntityId getId () {
+            return SaveEntityId.LOCATION;
+        }
+    }
+
+
 }

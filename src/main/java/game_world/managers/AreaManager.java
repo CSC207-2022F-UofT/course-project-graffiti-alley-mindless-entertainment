@@ -3,11 +3,8 @@ package game_world.managers;
 import core.StateManager;
 import game_world.factories.DialogueStateFactory;
 import game_world.factories.SelectionStateFactory;
-import game_world.objects.Area;
 import game_world.objects.Location;
 import interfaces.State;
-import io.Output;
-import io.OutputHandler;
 
 public class AreaManager extends StateManager {
 
@@ -17,24 +14,19 @@ public class AreaManager extends StateManager {
 
     private final DialogueStateFactory dialogueStateFactory = new DialogueStateFactory();
     private final SelectionStateFactory selectionStateFactory = new SelectionStateFactory();
-    private final AreaDatabaseInteractor databaseController;
     private final EventManager eventManager;
-    private Area currentArea;
-    private final Location location;
+    private final AreaUseCase areaUseCase;
 
     public AreaManager(EventManager eventManager, Location location) {
         this.eventManager = eventManager;
-        this.databaseController = new AreaDatabaseInteractor(this.eventManager);
-        this.currentArea = databaseController.loadArea("0");
-        this.location = location;
-        this.location.setDatabaseController(databaseController);
+        this.areaUseCase = new AreaUseCase(new AreaDatabaseInteractor(eventManager), location);
+        areaUseCase.getToNextArea("0");
     }
 
     @Override
     public void initialize() {
-        this.currState = dialogueStateFactory.createDialogueState(this.currentArea);
-        getToNextArea("1");
-        this.location.setCurrentArea(this.currentArea);
+        this.currState = dialogueStateFactory.createDialogueState(areaUseCase.getCurrentArea());
+        areaUseCase.getToNextArea("1");
     }
 
     /**
@@ -43,59 +35,41 @@ public class AreaManager extends StateManager {
      */
     @Override
     protected State nextState(String input) {
-        OutputHandler output = Output.getScreen();
-        if (this.currentArea.getCurrTextIndex() == 0) {
-            // Texts have initialized
-            output.generateText("◈ " + this.currentArea.getSpeaker() + " ◈");
-            eventManager.areaEntered(this.currentArea);
+        if (areaUseCase.checkForAreaEntered()) {
+            eventManager.areaEntered(areaUseCase.getCurrentArea());
+            this.currState = dialogueStateFactory.createDialogueState(areaUseCase.getCurrentArea());
+
+            return this.currState;
         }
-        if (this.currentArea.getCurrTextIndex() == this.currentArea.getTexts().size()) {
-            // Texts are all completed
-            if (eventManager.queueCleared()) {
-                // Events are completed (or there are none)
-                if (this.currentArea.getNextInputs().contains(input.toLowerCase())) {
-                    // Player entered a valid area to go next
-                    getToNextArea(this.currentArea.getAreaFromInput(input.toLowerCase()));
-                    output.generateText("You approach " + this.currentArea.getName() + " in " + this.currentArea.getZone() + ".");
-                    return nextState(input);
-                }
-                else {
-                    // Player selects an area to go next
-                    this.currState = selectionStateFactory.createSelectionState(this.currentArea.getNextInputs());
-                }
-                return this.currState;
-            }
-            else {
-                this.currentArea.setCurrEventIndex(this.currentArea.getCurrTextIndex() + 1);
-                State nextState = eventManager.getNextStateInQueue();
-                if (nextState != null)
-                    return nextState;
+
+        if (eventManager.queueCleared()) {
+            if (areaUseCase.checkForValidInput(input)) {
+                areaUseCase.arriveAtNextArea(input);
                 return nextState(input);
             }
+            else {
+                this.currState = selectionStateFactory.createSelectionState(areaUseCase.getNextInputs());
+            }
+            return this.currState;
         }
         else {
-            // Next text in sequence to be played
-            this.currState = dialogueStateFactory.createDialogueState(this.currentArea);
+            areaUseCase.updateEventIndex();
+            State nextEvent = eventManager.getNextStateInQueue();
+
+            if (nextEvent != null)
+                return nextEvent;
+
+            assert eventManager.queueCleared();
+            return nextState(input);
         }
-        return this.currState;
     }
 
     /**
-     * @return currentArea of Player
+     * Testing purposes
+     * @return current areaUseCase
      */
-    public Area getCurrentArea() {
-        return this.currentArea;
-    }
-
-    /**
-     * Changes current area to next loaded area from id
-     * @param id of Area to be loaded and changed to
-     */
-    public void getToNextArea(String id) {
-        // save events and data here
-        assert this.currentArea.getNextAreas().contains(id);
-        this.currentArea = databaseController.loadArea(id);
-        this.location.setCurrentArea(this.currentArea);
+    public AreaUseCase getAreaUseCase() {
+        return areaUseCase;
     }
 
 }

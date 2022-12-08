@@ -44,6 +44,9 @@ public class DialogueState implements State {
         this.awaitInput = false;
         this.isDone = false;
         updateNextText();
+
+        OutputHandler output = Output.getScreen();
+        output.generateText("◈ " + this.currentArea.getSpeaker() + " ◈");
     }
 
     @Override

@@ -20,9 +20,9 @@ public class EventManager {
     /**
      * Constructs EventManager
      */
-    public EventManager(ItemPickUpEventFactory itemFactory) {
+    public EventManager(EventDatabaseInteractor eventDatabaseInteractor) {
         this.eventQueue = new ArrayList<>();
-        this.databaseController = new EventDatabaseInteractor(itemFactory);
+        this.databaseController = eventDatabaseInteractor;
         this.completedEvents = new ArrayList<>();
     }
 
