@@ -15,9 +15,6 @@ public class AreaManagerTest {
         ItemPickUpEventFactory itemPickUpEventFactory = new ItemPickUpEventFactory(inventory);
         EventManager eventManager = new EventManager(itemPickUpEventFactory);
         AreaManager areaManager = new AreaManager(eventManager, new Location());
-        assert areaManager.getCurrentArea().getName().equals("[GAME]");
-        areaManager.getToNextArea("1");
-        assert areaManager.getCurrentArea().getName().equals("[GAME]");
     }
 
 }
