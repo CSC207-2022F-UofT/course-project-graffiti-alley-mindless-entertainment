@@ -2,10 +2,7 @@ package worldgen;
 
 import game_world.factories.EventFactory;
 import game_world.factories.ItemPickUpEventFactory;
-import game_world.managers.AreaManager;
-import game_world.managers.AreaUseCase;
-import game_world.managers.EventDatabaseInteractor;
-import game_world.managers.EventManager;
+import game_world.managers.*;
 import game_world.objects.Area;
 import game_world.objects.Location;
 import objects.inventory.Inventory;
@@ -20,7 +17,8 @@ public class EventManagerTest {
         EventFactory eventFactory = new EventFactory(itemPickUpEventFactory);
         EventDatabaseInteractor eventDatabaseInteractor = new EventDatabaseInteractor(eventFactory);
         EventManager eventManager = new EventManager(eventDatabaseInteractor);
-        AreaManager areaManager = new AreaManager(eventManager, new Location());
+        AreaDatabaseInteractor areaDatabaseInteractor = new AreaDatabaseInteractor(eventManager);
+        AreaManager areaManager = new AreaManager(eventManager, areaDatabaseInteractor, new Location());
     }
 
 }

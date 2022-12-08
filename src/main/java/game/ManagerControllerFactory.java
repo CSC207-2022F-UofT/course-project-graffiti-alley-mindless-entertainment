@@ -3,6 +3,7 @@ package game;
 import battlestates.BattleStateManager;
 import game_world.factories.EventFactory;
 import game_world.factories.ItemPickUpEventFactory;
+import game_world.managers.AreaDatabaseInteractor;
 import game_world.managers.AreaManager;
 import game_world.managers.EventDatabaseInteractor;
 import game_world.managers.EventManager;
@@ -34,6 +35,7 @@ public class ManagerControllerFactory {
     private final ManagerController managerController;
     private final SwitchEventManager switchEventManager;
 
+    private AreaDatabaseInteractor areaDatabaseInteractor;
     private final GameEntities gameEntities;
 
     public ManagerControllerFactory(GameEntities gameEntities) {
@@ -82,7 +84,8 @@ public class ManagerControllerFactory {
         EventFactory eventFactory = new EventFactory(itemPickUpEventFactory);
         EventDatabaseInteractor eventDatabaseInteractor = new EventDatabaseInteractor(eventFactory);
         EventManager eventManager = new EventManager(eventDatabaseInteractor);
-        AreaManager areaManager = new AreaManager(eventManager, gameEntities.getLocation());
+        areaDatabaseInteractor = new AreaDatabaseInteractor(eventManager);
+        AreaManager areaManager = new AreaManager(eventManager, areaDatabaseInteractor, gameEntities.getLocation());
         managerController.addManager(areaManager);
 
         ReturnToMapEventHandler startGameEventHandler = new ReturnToMapEventHandler(areaManager);
