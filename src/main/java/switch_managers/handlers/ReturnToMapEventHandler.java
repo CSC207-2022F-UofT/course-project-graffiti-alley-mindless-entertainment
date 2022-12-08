@@ -24,7 +24,7 @@ public class ReturnToMapEventHandler implements SwitchEventHandler {
      */
     @Override
     public StateManager handleSwitchEvent(SwitchEventType eventType, StateManager currManager) {
-        if (eventType == SwitchEventType.START_GAME || eventType == SwitchEventType.BATTLE_END) {
+        if (eventType == SwitchEventType.START_GAME || eventType == SwitchEventType.LOAD_GAME || eventType == SwitchEventType.BATTLE_END) {
             return areaManager;
         }
         return null;
