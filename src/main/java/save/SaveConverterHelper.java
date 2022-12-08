@@ -8,11 +8,16 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.util.*;
 
+/**
+ * the helper class to help convert between saves and json files
+ */
 public class SaveConverterHelper {
 
     /**
      * @param saves the saves to be saved into file
      * @return the converted string to be saved into file
+     * warning suppressed because json library implements key set as generic,
+     * but in this implementation it is made sure to be a string.
      */
     @SuppressWarnings("unchecked")
     public String saveToJson(List<Save> saves) {
@@ -32,6 +37,8 @@ public class SaveConverterHelper {
     /**
      * @param str the string of saved saves
      * @return the converted saves
+     * warning suppressed because json library implements key set as generic,
+     * but in this implementation it is made sure to be a string.
      */
     @SuppressWarnings("unchecked")
     public List<Save> jsonToSave(String str) {

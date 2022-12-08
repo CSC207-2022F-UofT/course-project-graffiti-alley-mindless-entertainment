@@ -9,8 +9,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * implementation of SaveGateway
+ */
 public class SaveGatewayImpl implements SaveGateway{
 
+    /**
+     * helper: the helper to help convert between Saves and json files
+     */
     private final SaveConverterHelper helper;
 
     public SaveGatewayImpl() {
@@ -18,8 +24,8 @@ public class SaveGatewayImpl implements SaveGateway{
     }
 
     /**
-     * @param saves the saves to be saved
-     * save the saves into file
+     * @param saves the Saves to be saved
+     * save the Saves into file
      */
     @Override
     public void storeSaves(List<Save> saves) {
