@@ -7,6 +7,15 @@ import objects.battle.enemy.ai.EnemyPotion;
 import java.util.ArrayList;
 
 public class EnemyInfo {
+    /**
+     * maxHealth: max health that this enemy can have
+     * health: current health of this enemy
+     * skills: skills that the enemy has
+     * speed: speed of this enemy
+     * reputation: reputation that player gets when the player wins
+     * type: type of this enemy
+     * potion: the potion that this enemy has
+     */
     private final int maxHealth = 100;
     private int health = maxHealth; //does not have to be static since there are multiple enemies and
     // we create an enemy every time the user encounters an enemy.
@@ -16,6 +25,13 @@ public class EnemyInfo {
     private SkillType type;
     private final EnemyPotion potion;
 
+    /** This is a constructor of the EnemyInfo class
+     * @param type type of the enemy
+     * @param potion : potion that the enemy has
+     * @param reputation : reputation that the player gets if the player beats this enemy.
+     * @param skills : skills that the enemy has
+     * @param speed : speed of this enemy
+     */
     public EnemyInfo(ArrayList<Skill> skills, int speed, int reputation, SkillType type, EnemyPotion potion){
         this.skills = skills;
         this.reputation = reputation;
@@ -156,6 +172,11 @@ public class EnemyInfo {
         return this.maxHealth;
     }
 
+    /**
+     * This method returns the EnemyPotion object that this enemy has
+     *
+     * @return potion that this enemy has
+     */
     public EnemyPotion getPotion(){
         return this.potion;
     }

@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * A class for Inventory. Includes getter and setter for inventory, and functions like viewInventory,
  * addItem, removeItem, and useItem.
  */
-public class Inventory implements SavableEntity {
+public class Inventory {
     /**
      * Attribute:
      * inventory: list of items the user have
@@ -40,7 +40,7 @@ public class Inventory implements SavableEntity {
     }
 
     /**
-     * @Return all items' name and their ability in the inventory as a string.
+     * @return all items' name and their ability in the inventory as a string.
      */
     public String viewInventory(){
         StringBuilder itemInfo = new StringBuilder();
@@ -55,7 +55,7 @@ public class Inventory implements SavableEntity {
     }
 
     /**
-     * @Return list of item's name
+     * @return list of item's name
      */
     public String viewItemList(){
         StringBuilder items = new StringBuilder();
@@ -108,59 +108,65 @@ public class Inventory implements SavableEntity {
         return null;
     }
 
-    /**
-     * @return a string representation of inventory to be saved
-     */
-    @Override
-    public String toSavableString() {
-        if (inventory.size() == 0) {
-            return "";
-        }
-        else {
-            return this.viewItemList();
-        }
-    }
-    /**
-     * @param str a string representation of inventory
-     * map the string representation to the corresponding object
-     */
-    @Override
-    public void fromSavableString(String str) {
-        inventory.clear();
-        String[] items = str.split(System.lineSeparator());
-        for (String item : items) {
-            if (item.equals("")){
-                return;
+
+    public class SaveInventory implements SavableEntity {
+
+        /**
+         * @return a string representation of inventory to be saved
+         */
+        @Override
+        public String toSavableString() {
+            if (inventory.size() == 0) {
+                return "";
             }
-            String[] itemDetails = item.split(" ");
-            Item i = createItem(itemDetails[2], itemDetails[3]);
-            this.addItem(i);
+            else {
+                return viewItemList();
+            }
         }
-    }
-
-    /**
-     * @param itemType type of item
-     * @param level level of item
-     * @return Item object
-     */
-    public static Item createItem(String level, String itemType) {
-        switch (itemType){
-            case "SWORD":
-                return new Sword(Integer.parseInt(level) - 1);
-            case "POTION":
-                return new Potion(Integer.parseInt(level) - 1);
-            case "ARMOR":
-                return new Armor(Integer.parseInt(level) - 1);
+        /**
+         * @param str a string representation of inventory
+         * map the string representation to the corresponding object
+         */
+        @Override
+        public void fromSavableString(String str) {
+            inventory.clear();
+            String[] items = str.split("\n");
+            for (String item : items) {
+                if (item.equals("")){
+                    return;
+                }
+                String[] itemDetails = item.split(" ");
+                Item i = createItem(itemDetails[2], itemDetails[3]);
+                addItem(i);
+            }
         }
-        return null;
-    }
 
-    /**
-     * @return the id of inventory in the saved entities list
-     */
-    @Override
-    public SaveEntityId getId() {
-        return SaveEntityId.INVENTORY;
+        /**
+         * @param itemType type of item
+         * @param level level of item
+         * @return Item object
+         */
+        public Item createItem(String level, String itemType) {
+            switch (itemType){
+                case "SWORD":
+                    return new Sword(Integer.parseInt(level) - 1);
+                case "POTION":
+                    return new Potion(Integer.parseInt(level) - 1);
+                case "ARMOR":
+                    return new Armor(Integer.parseInt(level) - 1);
+            }
+            return null;
+        }
+
+        /**
+         * @return the id of inventory in the saved entities list
+         */
+        @Override
+        public SaveEntityId getId() {
+            return SaveEntityId.INVENTORY;
+        }
+
     }
 }
+
 

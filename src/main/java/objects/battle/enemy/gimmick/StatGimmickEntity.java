@@ -2,10 +2,17 @@ package objects.battle.enemy.gimmick;
 
 import objects.battle.SkillType;
 import objects.battle.enemy.EnemyInfo;
-
+/** This class is the entity of gimmick that holds information about the gimmick
+ */
 public class StatGimmickEntity {
-    /** This class is the entity of gimmick that holds information about the gimmick
-     *
+    /**
+     * name: name of the gimmick in enum
+     * enemyInfo: information about the enemy who is using this gimmick
+     * triggerHealth: enemy's health that the gimmick is triggered
+     * speedIncrease: The speed that increases when the speed gimmick is triggered
+     * attackIncrease: The amount in double that the damage to the enemy's skills are multiplied by
+     * type: the type that the boss changes to as a result of the type gimmick
+     * usedGimmick: keeps track of whether the gimmick is used or not
      */
     private final GimmickType name;
     private final EnemyInfo enemyInfo;
@@ -91,26 +98,52 @@ public class StatGimmickEntity {
         private double attackIncrease;
         private SkillType type;
 
+        /**
+         * This method is a constructor of the builder class
+         * @param enemyInfo : information about the enemy
+         * @param name : name of the gimmick
+         * @param triggerHealth : health that the gimmick is triggered at
+         */
         public StatGimmickBuilder(GimmickType name, EnemyInfo enemyInfo, int triggerHealth){
             this.name = name;
             this.enemyInfo = enemyInfo;
             this.triggerHealth = triggerHealth;
         }
 
+        /**
+         * This method sets the speedIncrease attribute
+         * @param speedIncrease : speed that increases as result of the speed gimmick
+         * @return the StatGimmickBuilder object
+         */
         public StatGimmickBuilder setSpeedIncrease(int speedIncrease){
             this.speedIncrease = speedIncrease;
             return this;
         }
 
+        /**
+         * This method sets the attackIncrease attribute
+         * @param attackIncrease : attack that increases as result of the attack gimmick
+         * @return the StatGimmickBuilder object
+         */
         public StatGimmickBuilder setAttackIncrease(double attackIncrease){
             this.attackIncrease = attackIncrease;
             return this;
         }
 
+        /**
+         * This method sets the type attribute
+         * @param type : type that the boss changes to as a result of the type gimmick
+         * @return the StatGimmickBuilder object
+         */
         public StatGimmickBuilder setNewType(SkillType type){
             this.type = type;
             return this;
         }
+
+        /**
+         * This method returns the StatGimmickEntity object with the given attributes
+         * @return the StatGimmickEntity with the attributes
+         */
         public StatGimmickEntity build(){
             return new StatGimmickEntity(this);
         }

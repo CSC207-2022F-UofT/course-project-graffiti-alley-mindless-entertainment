@@ -7,6 +7,8 @@ import io.OutputHandler;
 import objects.character.EnemyFacade;
 import objects.character.EnemyFighter;
 import objects.character.Player;
+import switch_managers.SwitchEventMediatorProxy;
+import switch_managers.SwitchEventType;
 
 public class WinBattleState implements State {
     /** State which handles the result of a battle from BattleStateManager, thus ending the battle.
@@ -19,6 +21,7 @@ public class WinBattleState implements State {
     private Player user;
     private EnemyFighter foe;
     private boolean done = false;
+    private boolean awaitingInput = false;
 
     public WinBattleState(Player user, EnemyFighter foe) {
         this.user = user;
@@ -39,12 +42,13 @@ public class WinBattleState implements State {
         // Something that adds loot into the user's inventory, so far no loot table.
         // user.changeReputation(repChange); // Currently no implementation
 
-        // Displaying victory text!
         String winText = foe.getName() + " has been defeated! You earned " + expGain
                 + " experience points, unless you cheated ;)";
         output.generateText(winText);
         user.changeSpeed(100 - user.getSpeed()); // Resets speed to 100
+
         this.done = true;
+        SwitchEventMediatorProxy.getInstance().store(SwitchEventType.BATTLE_END); // Moves to a new event
     }
 
     @Override
@@ -53,7 +57,7 @@ public class WinBattleState implements State {
     }
     @Override
     public boolean awaitInput() {
-        return false;
+        return this.awaitingInput;
     }
 
     @Override

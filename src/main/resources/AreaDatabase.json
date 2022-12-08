@@ -4,6 +4,18 @@
     "0": {
       "zone": "Introduction",
       "name": "[GAME]",
+      "speaker": "[NOTICE]",
+      "texts": [
+        "The game will now begin. To advance dialogue, press enter. Enjoy!"
+      ],
+      "options": {
+        "1": "next"
+      },
+      "events": []
+    },
+    "-1": {
+      "zone": "Introduction",
+      "name": "[GAME]",
       "speaker": "[G̶̢̥̥̋̅͠ͅĄ̶̡̰̉̋̔M̴̢̺̜̥͎̞̅̏̏̃̊͆̈́̂͘ͅḚ̵̣̻͖͓̒̑͜]",
       "texts": [
         "Well then...",
@@ -53,7 +65,7 @@
         "4": "follow the grassy trail",
         "3": "walk along the beach"
       },
-      "events": ["test quest","Gold Chest"]
+      "events": ["test quest","Gold Chest", "George...?"]
     },
     "3": {
       "name": "Beach 2",
@@ -108,7 +120,7 @@
         "5": "travel through to the village",
         "3": "walk to the beach"
       },
-      "events": []
+      "events": ["George...?"]
     }
   }
 }

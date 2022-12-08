@@ -10,10 +10,19 @@ import objects.battle.enemy.ai.SmartAI;
 
 import java.util.Objects;
 
+/**
+ * This class creates an enemyAI using the given information. It creates either default AI or smart AI
+ */
 public class EnemyAIFactory{
-
+    /**
+     * aiDataManager: this is for the class to get information about the AI
+     */
     private final AIDataManager aiDataManager;
 
+    /**
+     * This is a constructor of EnemyAIFactory
+     * @param aiDataManager : information about the AI from the database
+     */
     public EnemyAIFactory(AIDataManager aiDataManager){
         this.aiDataManager = aiDataManager;
     }

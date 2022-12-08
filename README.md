@@ -19,3 +19,13 @@ The plot of the game is based around the legendary hero (you, the player) destin
 Your choices greatly affect the outcome of the game, so make your choices carefully! Don't lose track of who the enemy really is.
 
 # Test Coverage 
+
+We covered most methods that did complex operations. 
+
+Methods such as getters, setters, or otherwise low logic methods were not explicitly tested, 
+but may have been implicitly tested while testing other functions. 
+
+Files in the game package were not tested at all due to being just initialization. 
+
+Files in io package were also not tested (due to being input/output)
+

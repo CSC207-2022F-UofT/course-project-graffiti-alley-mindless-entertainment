@@ -1,22 +1,29 @@
 package game;
 
+import battlestates.BattleStateManager;
 import game_world.factories.EventFactory;
 import game_world.factories.ItemPickUpEventFactory;
 import game_world.managers.AreaManager;
+import game_world.managers.EventDatabaseInteractor;
 import game_world.managers.EventManager;
 import main_menu.MainMenuManager;
 import menus.MenuStateFactory;
 import menus.PauseMenuManager;
 import menus.options.ChangeOptionsStateFactory;
+import menus.save.SaveMenuStateFactory;
 import objects.inventory.Inventory;
 import objects.inventory.InventoryStateFactory;
 import playercreation.PlayerCreatorManager;
+import save.SaveGatewayImpl;
+import save.SaveInteractor;
 import switch_managers.ManagerController;
 import switch_managers.ManagerControllerImpl;
 import switch_managers.SwitchEventManager;
+import switch_managers.handlers.EncounterEventHandler;
 import switch_managers.handlers.MainMenuEventHandler;
 import switch_managers.handlers.PauseResumeEventHandler;
-import switch_managers.handlers.StartGameEventHandler;
+import switch_managers.handlers.ReturnToMapEventHandler;
+
 /**
  * Used to create the manager controller for the game.
  */
@@ -42,8 +49,9 @@ public class ManagerControllerFactory {
     ManagerController createManagerController() {
 
         createPauseResumeEventHandler();
-        createStartGameEventHandler();
+        createReturnToMapEventHandler();
         createMainMenuEventHandler();
+        createEncounterEventHandler();
 
         return managerController;
     }
@@ -65,15 +73,17 @@ public class ManagerControllerFactory {
     /**
      * Creates the start game event handler.
      */
-    void createStartGameEventHandler() {
+    void createReturnToMapEventHandler() {
         Inventory inventory = gameEntities.getInventory();
         ItemPickUpEventFactory itemPickUpEventFactory = new ItemPickUpEventFactory(inventory);
+
         EventFactory eventFactory = new EventFactory(itemPickUpEventFactory);
-        EventManager eventManager = new EventManager(eventFactory);
+        EventDatabaseInteractor eventDatabaseInteractor = new EventDatabaseInteractor(eventFactory);
+        EventManager eventManager = new EventManager(eventDatabaseInteractor);
         AreaManager areaManager = new AreaManager(eventManager, gameEntities.getLocation());
         managerController.addManager(areaManager);
 
-        StartGameEventHandler startGameEventHandler = new StartGameEventHandler(areaManager);
+        ReturnToMapEventHandler startGameEventHandler = new ReturnToMapEventHandler(areaManager);
         switchEventManager.addSwitchEventHandler(startGameEventHandler);
     }
 
@@ -82,13 +92,41 @@ public class ManagerControllerFactory {
      */
     void createPauseResumeEventHandler() {
         Inventory inventory = gameEntities.getInventory();
-        ChangeOptionsStateFactory changeOptionsStateFactory = new ChangeOptionsStateFactory();
+        ChangeOptionsStateFactory changeOptionsStateFactory = new ChangeOptionsStateFactory(gameEntities.getOptions());
         InventoryStateFactory inventoryStateFactory = new InventoryStateFactory(inventory);
-        MenuStateFactory menuStateFactory = new MenuStateFactory(changeOptionsStateFactory, inventoryStateFactory);
+        SaveInteractor saveInteractor = createSaveInteractor();
+        SaveMenuStateFactory saveMenuStateFactory = new SaveMenuStateFactory(saveInteractor);
+        MenuStateFactory menuStateFactory = new MenuStateFactory(changeOptionsStateFactory, inventoryStateFactory, saveMenuStateFactory);
         PauseMenuManager pauseMenuManager = new PauseMenuManager(menuStateFactory);
         managerController.addManager(pauseMenuManager);
 
         PauseResumeEventHandler pauseResumeEventHandler = new PauseResumeEventHandler(pauseMenuManager);
         switchEventManager.addSwitchEventHandler(pauseResumeEventHandler);
+    }
+
+    /**
+     * Use to create a save interactor.
+     * @return the SaveInteractor.
+     */
+    SaveInteractor createSaveInteractor() {
+        SaveGatewayImpl saveGateway = new SaveGatewayImpl();
+        SaveInteractor saveInteractor = new SaveInteractor(3, saveGateway);
+        saveInteractor.addSavableEntity(gameEntities.getLocation().new SaveLocation());
+        saveInteractor.addSavableEntity(gameEntities.getInventory().new SaveInventory());
+        saveInteractor.addSavableEntity(gameEntities.getOptions().new SaveOptions());
+        saveInteractor.addSavableEntity(gameEntities.getPlayer().new SavePlayer());
+        return saveInteractor;
+    }
+
+    /**
+    * Creates the encounter event handler.
+    */
+    void createEncounterEventHandler() {
+        BattleStateManager battleStateManager = new BattleStateManager(gameEntities.getPlayer(), gameEntities.getLocation());
+        managerController.addManager(battleStateManager);
+
+        EncounterEventHandler encounterEventHandler = new EncounterEventHandler(battleStateManager);
+
+        switchEventManager.addSwitchEventHandler(encounterEventHandler);
     }
 }

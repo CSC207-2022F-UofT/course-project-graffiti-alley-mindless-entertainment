@@ -2,6 +2,8 @@ package battlestates.states;
 
 import interfaces.State;
 import io.InputValidator;
+import io.Output;
+import io.OutputHandler;
 import objects.battle.StatDisplayer;
 import objects.battle.enemy.ai.EnemyActionHandler;
 import objects.character.EnemyFacade;
@@ -12,6 +14,7 @@ public class EnemyTurnState implements State {
     private Player user;
     private EnemyFighter foe;
     private boolean done = false;
+    private boolean awaitingInput;
     private String userAction;
 
     public EnemyTurnState(Player user, EnemyFighter foe, String userAction) {
@@ -21,29 +24,37 @@ public class EnemyTurnState implements State {
     }
     @Override
     public void preInput() {
+        StatDisplayer statDisplayer = new StatDisplayer();
+        OutputHandler output = Output.getScreen();
+
+        foe.applyGimmick();
         EnemyActionHandler action = foe.enemyAction(userAction);
 
+        statDisplayer.displayPreBar();
+        output.generateText(foe.getName() + " outsped you!");
         action.useAction(foe, user);
-
-        StatDisplayer statDisplayer = new StatDisplayer();
-        statDisplayer.displayStats(foe);
-        statDisplayer.displayStats(user);
+        statDisplayer.displayPostBar();
 
         foe.changeSpeed(-20); // Speed tax per turn
-        this.done = true;
+        statDisplayer.displayStats(user, foe);
+
+        output.generateText("Press Enter to move to the next turn.");
+        this.awaitingInput = true;
     }
 
     /**
-     * EnemyTurnState does not need input from the user.
+     * EnemyTurnState does not need input from the user, user needs to press enter to continue.
      * @param input from the user
      * Executes when the state is awaiting input
      */
     @Override
     public void postInput(String input) {
+        this.awaitingInput = false;
+        this.done = true;
     }
     @Override
     public boolean awaitInput() {
-        return false;
+        return this.awaitingInput;
     }
 
     @Override

@@ -8,6 +8,9 @@ import objects.battle.enemy.ai.EnemyPotion;
 
 import java.util.ArrayList;
 
+/**
+ * This class is interface of the enemies that fight with the player
+ */
 public interface EnemyFighter {
 
     String getName();
