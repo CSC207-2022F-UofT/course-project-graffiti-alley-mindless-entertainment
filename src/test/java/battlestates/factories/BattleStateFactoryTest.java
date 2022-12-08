@@ -33,6 +33,8 @@ public class BattleStateFactoryTest {
         assert(test instanceof BattleItemChoiceState);
         test = factory.createBattleSkillChoiceState(choice);
         assert(test instanceof BattleSkillChoiceState);
+        test = factory.createEnemyTurnState(choice);
+        assert(test instanceof EnemyTurnState);
     }
 
 }

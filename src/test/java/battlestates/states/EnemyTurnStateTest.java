@@ -6,6 +6,7 @@ import objects.battle.enemy.factory.EnemyFactory;
 import objects.character.EnemyFighter;
 import objects.character.Player;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 public class EnemyTurnStateTest {
     @Test
@@ -16,8 +17,8 @@ public class EnemyTurnStateTest {
         BattleChoiceType action = BattleChoiceType.SKILLS;
         EnemyTurnState test = new EnemyTurnState(bei.getUser(), bei.getFoe(), action);
 
-        assert(!test.awaitInput());
-        assert(!test.isDone());
+        Assertions.assertFalse(test.awaitInput());
+        Assertions.assertFalse(test.isDone());
         test.preInput();
         assert(foe.getSpeed() == 80);
         assert(test.awaitInput());

@@ -18,6 +18,7 @@ public class BattleSkillChoiceStateTest {
         BattleEntityInteractor bei = new BattleEntityInteractor(user, foe);
         BattleChoiceType action = BattleChoiceType.SKILLS;
         BattleSkillChoiceState test = new BattleSkillChoiceState(bei, action);
+
         assert(!test.awaitInput());
         assert(!test.isDone());
         test.preInput();
