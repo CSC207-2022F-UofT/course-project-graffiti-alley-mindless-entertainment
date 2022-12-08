@@ -1,20 +1,13 @@
 package battlestates;
 
-import battlestates.states.EnemyTurnState;
-import battlestates.states.LoseBattleState;
-import battlestates.states.UserTurnState;
-import battlestates.states.WinBattleState;
+import battlestates.factories.BattleStateFactory;
 import core.StateManager;
 import game_world.objects.Location;
 import game_world.objects.events.EncounterEvent;
 import game_world.objects.events.Event;
 import interfaces.State;
-import io.Output;
-import io.OutputHandler;
-import objects.battle.Skill;
-import objects.battle.SkillType;
+import objects.battle.BattleEntityInteractor;
 import objects.battle.enemy.factory.EnemyFactory;
-import objects.character.EnemyFighter;
 import objects.character.Player;
 
 public class BattleStateManager extends StateManager {
@@ -24,12 +17,11 @@ public class BattleStateManager extends StateManager {
      *  user: Player object representing the user
      *  foe: EnemyFacade object representing who the user is battling
      */
-    private Player user;
-    private EnemyFighter foe;
+    private BattleEntityInteractor battleEntityInteractor;
     private Location location;
 
     public BattleStateManager(Player user, Location location) {
-        this.user = user;
+        this.battleEntityInteractor = new BattleEntityInteractor(user);
         this.location = location;
         initialize();
     }
@@ -42,22 +34,23 @@ public class BattleStateManager extends StateManager {
      */
     @Override
     protected State nextState(String input) {
-        boolean userNext = user.getSpeed() >= foe.getSpeed();
+        BattleStateFactory battleStateFactory = new BattleStateFactory(battleEntityInteractor);
+        boolean userNext = battleEntityInteractor.userOutspeeds();
         State chosenState;
 
-        if (!foe.checkAlive()) {
-            chosenState = new WinBattleState(user, foe);
+        if (battleEntityInteractor.isFoeDead()) {
+            chosenState = battleStateFactory.createWinBattleState();
             this.isDone = true;
         }
-        else if (user.getCurrHealth() <= 0) {
-            chosenState = new LoseBattleState(user, foe);
+        else if (battleEntityInteractor.isUserDead()) {
+            chosenState = battleStateFactory.createLoseBattleState();
             this.isDone = true;
         }
         else {
             if (userNext) {
-                chosenState = new UserTurnState(user, foe);
+                chosenState = battleStateFactory.createUserTurnState();
             } else {
-                chosenState = new EnemyTurnState(user, foe, input);
+                chosenState = battleStateFactory.createEnemyTurnState(input);
             }
         }
         return chosenState;
@@ -104,14 +97,14 @@ public class BattleStateManager extends StateManager {
             encounterEvent = (EncounterEvent) currEvent;
             chosenEnemy = encounterEvent.getNPC();
         }
-        this.foe = enemyFactory.createEnemy(chosenEnemy);
+        battleEntityInteractor.setFoe(enemyFactory.createEnemy(chosenEnemy));
 
         // TEMP: For demo purposes only! Will remove once Player gets starting skills
-        user.addSkill(new Skill("torch", 20, 10, SkillType.FIRE));
-        user.addSkill(new Skill("spit", 20, 10, SkillType.WATER));
-        user.addSkill(new Skill("pebble throw", 20, 10, SkillType.EARTH));
-        user.addSkill(new Skill("sneeze", 20, 10, SkillType.AIR));
-        user.addSkill(new Skill("tsunami", 90, 40, SkillType.WATER));
+//        user.addSkill(new Skill("torch", 20, 10, SkillType.FIRE));
+//        user.addSkill(new Skill("spit", 20, 10, SkillType.WATER));
+//        user.addSkill(new Skill("pebble throw", 20, 10, SkillType.EARTH));
+//        user.addSkill(new Skill("sneeze", 20, 10, SkillType.AIR));
+//        user.addSkill(new Skill("tsunami", 90, 40, SkillType.WATER));
 
         currState = nextState("");
     }
