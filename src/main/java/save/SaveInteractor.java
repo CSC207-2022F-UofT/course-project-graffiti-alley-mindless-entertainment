@@ -1,7 +1,5 @@
 package save;
 
-import io.Output;
-
 import java.util.ArrayList;
 
 /**
@@ -21,13 +19,14 @@ public class SaveInteractor {
     ArrayList<Save> saves;
     SaveLoader loader;
     SaveFactory creator;
-    SaveGatewayImpl gateway;
-    private int MAX_SLOTS;
+    SaveGateway gateway;
+    private final int MAX_SLOTS;
 
-    public SaveInteractor(int max_slots, SaveGatewayImpl gateway) {
+    public SaveInteractor(int max_slots, SaveGateway gateway) {
         entities = new ArrayList<>();
-        saves = new ArrayList<>(MAX_SLOTS + 1);
-        for (int i = 0; i < max_slots + 1; i++) {
+        saves = (ArrayList<Save>) gateway.retrieveSave();
+        int save_size = saves.size();
+        for (int i = 0; i < max_slots - save_size + 1; i++) {
             saves.add(null);
         }
         loader = new SaveLoader();
@@ -48,7 +47,7 @@ public class SaveInteractor {
         if (slot > MAX_SLOTS) {
             return false;
         }
-        saves = (ArrayList<Save>) gateway.retrieveSave();
+
         Save s = saves.get(slot);
         if (s == null) {
             return false;
@@ -67,9 +66,9 @@ public class SaveInteractor {
     }
 
     /**
-     * displays all slots status
+     * @return all slots status
      */
-    public void displaySlots() {
+    public String getSlotsStatus() {
         StringBuilder msg = new StringBuilder("Saves: \n");
         for (int i = 1; i <= MAX_SLOTS; ++ i) {
             msg.append("Slot #");
@@ -81,7 +80,7 @@ public class SaveInteractor {
             }
             msg.append("\n");
         }
-        Output.getScreen().generateText(msg.toString());
+        return msg.toString();
     }
 
     /**
