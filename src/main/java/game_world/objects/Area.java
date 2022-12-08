@@ -57,7 +57,7 @@ public class Area {
     }
 
     public Event getCurrEvent() {
-        if (this.events.size() == 0) return null;
+        if (this.events.size() <= this.currEventIndex) return null;
         return this.events.get(this.currEventIndex);
     }
 
@@ -76,10 +76,6 @@ public class Area {
 
     public ArrayList<String> getNextInputs() {
         return this.next_options;
-    }
-
-    public ArrayList<String> getNextAreas() {
-        return this.next_ids;
     }
 
     public String getAreaFromInput(String input) {

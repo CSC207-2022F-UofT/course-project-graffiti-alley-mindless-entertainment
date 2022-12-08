@@ -9,6 +9,11 @@ import java.util.ArrayList;
 
 public class AreaUseCase {
 
+    /**
+     * Directly manages currentArea of the game
+     * Used as use case interactor by AreaManager
+     */
+
     private final AreaDatabaseInteractor databaseController;
     private Area currentArea;
     private final Location location;
