@@ -7,18 +7,15 @@ import objects.character.Player;
  */
 public abstract class Task {
     /**
-     * Attributes.
+     * Attribute.
      */
-    // Stores the name of the task.
-    protected String name;
     // Stores whether the task has been completed.
     protected boolean isCompleted;
 
     /**
      * Constructor.
      */
-    public Task(String name) {
-        this.name = name;
+    public Task() {
         this.isCompleted = false;
     }
 
@@ -34,4 +31,15 @@ public abstract class Task {
      * @return true if the task has been completed properly. Returns false otherwise.
      */
     public abstract boolean isCompleted(Player assignee);
+
+    /**
+     * @return a string with the information for the reward.
+     */
+    public abstract String toString();
+
+    /**
+     * Changes the attributes of this object using the parameter.
+     * @param str: string containing all the information for this object's attributes.
+     */
+    public abstract void changesFromString(String str);
 }
