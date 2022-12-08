@@ -23,13 +23,13 @@ public abstract class BattleAskingState implements State {
      * choiceType: enum representing the choice the player made
      * output: OutputHandler for generating output
      */
-    private InputValidator inputValidator;
-    private List<String> options;
-    private Boolean awaitingInput = false;
-    private Boolean done = false;
-    private Player user;
-    private BattleChoiceType currChoice;
-    private final OutputHandler output = Output.getScreen();
+    protected InputValidator inputValidator;
+    protected List<String> options;
+    protected Boolean awaitingInput = false;
+    protected Boolean done = false;
+    protected Player user;
+    protected BattleChoiceType currChoice;
+    protected final OutputHandler output = Output.getScreen();
 
     public BattleAskingState(Player user, BattleChoiceType prevChoice) {
         this.user = user;
@@ -46,6 +46,7 @@ public abstract class BattleAskingState implements State {
     @Override
     public void preInput() {
         output.generateText("What would you like to do?");
+        this.awaitingInput = true;
     }
 
     /**
@@ -54,9 +55,9 @@ public abstract class BattleAskingState implements State {
      */
     @Override
     public void postInput(String input) {
+        this.done = true;
     }
-    protected boolean isValidInp(String input) {
-        String cleanInput = inputValidator.parseAndValidate(input);
+    protected boolean isValidInp(String cleanInput) {
         if (cleanInput == null) {
             currChoice = BattleChoiceType.INVALID;
             output.generateText("Please enter valid input.");
