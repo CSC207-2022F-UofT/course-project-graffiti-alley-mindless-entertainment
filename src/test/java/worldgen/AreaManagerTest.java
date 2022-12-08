@@ -16,8 +16,8 @@ public class AreaManagerTest {
         EventManager eventManager = new EventManager(itemPickUpEventFactory);
         AreaManager areaManager = new AreaManager(eventManager, new Location());
         assert areaManager.getCurrentArea().getName().equals("[GAME]");
-        areaManager.getToNextArea("2");
-        assert areaManager.getCurrentArea().getName().equals("Beach 1");
+        areaManager.getToNextArea("1");
+        assert areaManager.getCurrentArea().getName().equals("[GAME]");
     }
 
 }
