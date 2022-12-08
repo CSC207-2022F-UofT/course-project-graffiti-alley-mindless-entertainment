@@ -36,6 +36,7 @@ public class ManagerControllerFactory {
     private final ManagerController managerController;
     private final SwitchEventManager switchEventManager;
 
+    private AreaDatabaseInteractor areaDatabaseInteractor;
     private final GameEntities gameEntities;
 
     public ManagerControllerFactory(GameEntities gameEntities) {
@@ -83,7 +84,8 @@ public class ManagerControllerFactory {
         EventFactory eventFactory = new EventFactory(itemPickUpEventFactory);
         EventDatabaseInteractor eventDatabaseInteractor = new EventDatabaseInteractor(eventFactory);
         EventManager eventManager = new EventManager(eventDatabaseInteractor);
-        AreaManager areaManager = new AreaManager(eventManager, gameEntities.getLocation());
+        areaDatabaseInteractor = new AreaDatabaseInteractor(eventManager);
+        AreaManager areaManager = new AreaManager(eventManager, areaDatabaseInteractor, gameEntities.getLocation());
         managerController.addManager(areaManager);
 
         ReturnToMapEventHandler startGameEventHandler = new ReturnToMapEventHandler(areaManager);
@@ -117,6 +119,7 @@ public class ManagerControllerFactory {
         SaveGatewayImpl saveGateway = new SaveGatewayImpl();
         SaveInteractor saveInteractor = new SaveInteractor(3, saveGateway);
         Location.SaveLocation saveLocation = gameEntities.getLocation().new SaveLocation();
+        saveLocation.setDatabaseController(areaDatabaseInteractor);
         saveInteractor.addSavableEntity(saveLocation);
         saveInteractor.addSavableEntity(gameEntities.getInventory().new SaveInventory());
         saveInteractor.addSavableEntity(gameEntities.getOptions().new SaveOptions());

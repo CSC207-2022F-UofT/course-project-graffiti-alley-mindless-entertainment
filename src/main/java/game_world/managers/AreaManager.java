@@ -17,9 +17,9 @@ public class AreaManager extends StateManager {
     private final EventManager eventManager;
     private final AreaUseCase areaUseCase;
 
-    public AreaManager(EventManager eventManager, Location location) {
+    public AreaManager(EventManager eventManager, AreaDatabaseInteractor areaDatabaseInteractor, Location location) {
         this.eventManager = eventManager;
-        this.areaUseCase = new AreaUseCase(new AreaDatabaseInteractor(eventManager), location);
+        this.areaUseCase = new AreaUseCase(areaDatabaseInteractor, location);
         areaUseCase.getToNextArea("0");
     }
 
