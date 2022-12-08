@@ -9,6 +9,10 @@ import java.util.List;
  * Implementation of ManagerController.
  */
 public class ManagerControllerImpl implements ManagerController{
+    /**
+     * switchEventManager: the switchEventManager used to switch managers
+     * managers: the list of stateManagers to notify of global events like initalizeAll()
+     */
     SwitchEventManager switchEventManager;
     List<StateManager> managers;
 

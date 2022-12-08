@@ -1,5 +1,7 @@
 package save;
 
+import io.Output;
+
 import java.util.ArrayList;
 
 /**
@@ -49,15 +51,26 @@ public class SaveInteractor {
 
     /**
      * @param slot the slot to save file at
-     * @return whether saved successfully or not
      */
-    public boolean saveAtSlot(int slot) {
-        if (slot > MAX_SLOTS) {
-            return false;
-        }
+    public void saveAtSlot(int slot) {
         Save s = creator.createSave(entities);
         saves.set(slot, s);
-        return true;
+    }
+
+    /**
+     * displays all slots status
+     */
+    public void displaySlots() {
+        for (int i = 1; i <= MAX_SLOTS; ++ i) {
+            StringBuilder msg = new StringBuilder("Slot #");
+            msg.append(i);
+            if (saves.get(i) == null) {
+                msg.append(": vacant");
+            } else {
+                msg.append(": occupied");
+            }
+            Output.getScreen().generateText(msg.toString());
+        }
     }
 
     /**

@@ -3,9 +3,14 @@ package io;
 import java.util.Arrays;
 import java.util.List;
 
-
+/**
+ * Implementation of OutputHandler
+ */
 public class OutputHandlerImpl implements OutputHandler {
 
+    /**
+     * messageHistory: keeps track of message history, currently only storing the very last message
+     */
     private final MessageHistory messageHistory;
 
     /**
