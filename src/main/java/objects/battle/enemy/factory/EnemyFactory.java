@@ -6,7 +6,7 @@ import database.managers.GimmickDataManager;
 import database.managers.SkillDataManager;
 import database.objects.EnemyData;
 import database.objects.GimmickData;
-import objects.battle.SkillType;
+import objects.battle.skills.SkillType;
 import objects.battle.enemy.EnemyInfo;
 import objects.battle.enemy.ai.EnemyAI;
 import objects.battle.enemy.gimmick.*;

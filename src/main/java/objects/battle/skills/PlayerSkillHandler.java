@@ -1,7 +1,7 @@
-package objects.battle;
+package objects.battle.skills;
 
 import objects.battle.enemy.ai.SkillHandler;
-import objects.character.EnemyFacade;
+import objects.battle.skills.Skill;
 import objects.character.EnemyFighter;
 import objects.character.Player;
 

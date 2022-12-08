@@ -1,7 +1,7 @@
 package battle.enemy;
 
-import objects.battle.Skill;
-import objects.battle.SkillType;
+import objects.battle.skills.Skill;
+import objects.battle.skills.SkillType;
 import objects.battle.enemy.ai.EnemyPotion;
 import objects.battle.enemy.factory.EnemyFactory;
 import objects.battle.enemy.EnemyInfo;

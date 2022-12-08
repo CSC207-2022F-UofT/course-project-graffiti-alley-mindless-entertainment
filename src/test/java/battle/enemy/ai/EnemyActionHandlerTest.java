@@ -1,7 +1,7 @@
 package battle.enemy.ai;
 
 import battlestates.BattleChoiceType;
-import objects.battle.SkillType;
+import objects.battle.skills.SkillType;
 import objects.battle.enemy.ai.EnemyActionHandler;
 import objects.battle.enemy.ai.EnemyPotionHandler;
 import objects.battle.enemy.factory.EnemyFactory;

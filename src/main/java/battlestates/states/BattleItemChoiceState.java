@@ -2,16 +2,12 @@ package battlestates.states;
 
 import battlestates.BattleChoiceType;
 import core.ChoiceInputValidator;
-import game.GameEntities;
-import io.Output;
 import objects.battle.*;
-import objects.battle.enemy.SkillHelper;
+import objects.battle.skills.SkillHelper;
 import objects.character.Player;
 import objects.inventory.Inventory;
 import objects.item.Item;
-
-import java.awt.*;
-import java.util.List;
+import objects.item.UseItemHandler;
 
 public class BattleItemChoiceState extends BattleAskingState {
     private final SkillHelper skillHelper = new SkillHelper();

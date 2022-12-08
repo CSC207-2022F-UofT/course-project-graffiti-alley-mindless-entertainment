@@ -36,7 +36,6 @@ public class BattleStateFactory {
     public State createBattleSkillChoiceState(BattleChoiceType currChoice) {
         return new BattleSkillChoiceState(battleEntityInteractor, currChoice);
     }
-
     public State createBattleItemChoiceState(BattleChoiceType currChoice) {
         return new BattleItemChoiceState(battleEntityInteractor, currChoice);
     }

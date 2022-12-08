@@ -1,15 +1,14 @@
 package battlestates.states;
 
 import core.ChoiceInputValidator;
-import game.GameEntities;
 import interfaces.State;
 import io.InputValidator;
 import io.Output;
 import io.OutputHandler;
-import objects.battle.Skill;
-import objects.battle.PlayerSkillHandler;
+import objects.battle.skills.Skill;
+import objects.battle.skills.PlayerSkillHandler;
 import objects.battle.StatDisplayer;
-import objects.battle.enemy.SkillHelper;
+import objects.battle.skills.SkillHelper;
 import objects.character.EnemyFighter;
 import objects.character.Player;
 import objects.inventory.Inventory;

@@ -8,11 +8,8 @@ import game_world.objects.events.EncounterEvent;
 import game_world.objects.events.Event;
 import interfaces.State;
 import objects.battle.BattleEntityInteractor;
-import objects.battle.Skill;
-import objects.battle.SkillType;
 import objects.battle.enemy.factory.EnemyFactory;
 import objects.character.Player;
-import objects.inventory.Inventory;
 
 public class BattleStateManager extends StateManager {
     /** Class that manages the Turn states during a battle encounter. In particular, the order of
@@ -107,10 +104,16 @@ public class BattleStateManager extends StateManager {
         }
     }
 
+    /**
+     * Resets the manager to its constructed form, with the same player but new enemy depending on encounter
+     */
     @Override
     public void initialize() {
         EnemyFactory enemyFactory = new EnemyFactory();
-        Event currEvent = location.getCurrEvent();
+        Event currEvent = null;
+        if (location != null) {
+            currEvent = location.getCurrEvent();
+        }
         String chosenEnemy = "goblin warrior";
         EncounterEvent encounterEvent;
 
