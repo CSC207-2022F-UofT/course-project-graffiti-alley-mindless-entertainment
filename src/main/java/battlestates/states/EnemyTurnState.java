@@ -14,6 +14,7 @@ public class EnemyTurnState implements State {
     private Player user;
     private EnemyFighter foe;
     private boolean done = false;
+    private boolean awaitingInput;
     private String userAction;
 
     public EnemyTurnState(Player user, EnemyFighter foe, String userAction) {
@@ -36,21 +37,22 @@ public class EnemyTurnState implements State {
 
         foe.changeSpeed(-20); // Speed tax per turn
         statDisplayer.displayStats(user, foe);
-
-        this.done = true;
+        this.awaitingInput = true;
     }
 
     /**
-     * EnemyTurnState does not need input from the user.
+     * EnemyTurnState does not need input from the user, user needs to press enter to continue.
      * @param input from the user
      * Executes when the state is awaiting input
      */
     @Override
     public void postInput(String input) {
+        this.awaitingInput = false;
+        this.done = true;
     }
     @Override
     public boolean awaitInput() {
-        return false;
+        return this.awaitingInput;
     }
 
     @Override
