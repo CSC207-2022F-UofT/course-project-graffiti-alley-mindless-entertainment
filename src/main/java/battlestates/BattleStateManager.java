@@ -58,9 +58,20 @@ public class BattleStateManager extends StateManager {
                     case SKILLS:
                         chosenState = battleStateFactory.createBattleSkillChoiceState(currChoice);
                         break;
+                    case INVENTORY:
+                        // chosenState = new InventoryState // Something like this
+                        currChoice = BattleChoiceType.MENU;
+                        chosenState = battleStateFactory.createBattleMenuState(currChoice);
+                        break;
                 }
             } else {
-                chosenState = battleStateFactory.createEnemyTurnState(input);
+                String command = "use potion";
+                if (currChoice == BattleChoiceType.SKILLS) {
+                    command = "use skill";
+                }
+
+                chosenState = battleStateFactory.createEnemyTurnState(command);
+                currChoice = BattleChoiceType.MENU;
             }
         }
         return chosenState;
