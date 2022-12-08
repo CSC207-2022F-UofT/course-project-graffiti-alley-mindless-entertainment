@@ -32,6 +32,4 @@ public class Game {
         Shell s = new Shell(inputHandler, managerController, switchEventMediator);
         s.startGame();
     }
-
-
 }

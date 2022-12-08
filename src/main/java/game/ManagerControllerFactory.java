@@ -19,7 +19,6 @@ import objects.inventory.Inventory;
 import objects.inventory.InventoryStateFactory;
 import playercreation.PlayerCreatorManager;
 import quests.QuestInteractor;
-import save.SaveConverterHelper;
 import save.SaveGatewayImpl;
 import save.SaveInteractor;
 import switch_managers.ManagerController;
@@ -68,7 +67,7 @@ public class ManagerControllerFactory {
      * Creates the main menu event handler.
      */
     void createMainMenuEventHandler() {
-        MainMenuManager mainMenuManager = new MainMenuManager(this.createSaveInteractor());
+        MainMenuManager mainMenuManager = new MainMenuManager(saveInteractor);
         managerController.addManager(mainMenuManager);
 
         PlayerCreatorManager playerCreatorManager = new PlayerCreatorManager(gameEntities.getPlayer());
