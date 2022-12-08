@@ -79,8 +79,8 @@ public class PlayerQuests {
 
             List<Quest> quests = new ArrayList<>();
 
-            for (int i = 0; i < questsInformation.length; i++) {
-                quests.add(questFromString(questsInformation[i]));
+            for (String questInformation : questsInformation) {
+                quests.add(questFromString(questInformation));
             }
 
             return quests;

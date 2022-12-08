@@ -9,7 +9,7 @@ public class QuestMenuState implements State {
     /**
      * Attributes.
      */
-    private QuestInteractor questInteractor;
+    private final QuestInteractor questInteractor;
     private boolean isDone;
     private boolean isAwaitingInput;
 
@@ -31,6 +31,13 @@ public class QuestMenuState implements State {
         this.isAwaitingInput = true;
         // completes all the quests.
         questInteractor.completeQuests();
+
+        // creates the text to be displayed.
+        String textToDisplay = "Would you like to see your current quest? (yes/no)";
+
+        // displays the text.
+        OutputHandler output = Output.getScreen();
+        output.generateText(textToDisplay);
     }
 
     /**
@@ -39,12 +46,15 @@ public class QuestMenuState implements State {
      */
     @Override
     public void postInput(String input) {
+        // checks whether the player wants to see its current tasks.
+        if (input.equalsIgnoreCase("yes")) {
+            OutputHandler output = Output.getScreen();
+            output.generateText("Here are your quests:");
+            output.generateText(getQuestsStatuses());
+        }
+
         this.isAwaitingInput = false;
         this.isDone = true;
-
-        OutputHandler output = Output.getScreen();
-        output.generateText("Here are your quests.");
-        output.generateText(getQuestsStatuses());
     }
 
     /**
