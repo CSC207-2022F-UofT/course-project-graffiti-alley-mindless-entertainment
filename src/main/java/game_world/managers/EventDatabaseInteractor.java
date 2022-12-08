@@ -6,7 +6,6 @@ import database.objects.EncounterEventData;
 import database.objects.ItemPickUpEventData;
 import database.objects.QuestGiverEventData;
 import game_world.factories.EventFactory;
-import game_world.factories.ItemPickUpEventFactory;
 import game_world.objects.events.Event;
 import game_world.objects.events.EventType;
 
@@ -15,9 +14,9 @@ public class EventDatabaseInteractor {
     private final EventDataManager database;
     private final EventFactory eventFactory;
 
-    public EventDatabaseInteractor(ItemPickUpEventFactory itemFactory) {
+    public EventDatabaseInteractor(EventFactory eventFactory) {
         this.database = new EventDataManager();
-        this.eventFactory = new EventFactory(itemFactory);
+        this.eventFactory = eventFactory;
     }
 
     /**
