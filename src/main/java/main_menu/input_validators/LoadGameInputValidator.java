@@ -32,6 +32,11 @@ public class LoadGameInputValidator implements InputValidator {
         if (input.equalsIgnoreCase(MainMenuOptions.RETURN.toString())) {
             return input.toLowerCase();
         }
+        try {
+            Integer.parseInt(input);
+        } catch (NumberFormatException error) {
+            return null;
+        }
         int slots = this.saveInteractor.getMaxSlots();
         for (int i = 0; i <= slots; i++) {
             if (Integer.parseInt(input) == i) {
