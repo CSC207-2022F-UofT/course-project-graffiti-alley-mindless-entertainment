@@ -1,13 +1,15 @@
 package main_menu.input_validators;
 
 import org.junit.jupiter.api.Test;
+import save.SaveGatewayImpl;
 import save.SaveInteractor;
 
 class LoadGameInputValidatorTest {
 
     @Test
     void parseAndValidate() {
-        SaveInteractor saveInteractor = new SaveInteractor(2);
+        SaveGatewayImpl gatewayImpl = new SaveGatewayImpl();
+        SaveInteractor saveInteractor = new SaveInteractor(2, gatewayImpl);
         LoadGameInputValidator validator = new LoadGameInputValidator(saveInteractor);
         assert(validator.parseAndValidate("no") == null);
         assert(validator.parseAndValidate("") == null);
