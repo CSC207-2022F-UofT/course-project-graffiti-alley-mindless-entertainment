@@ -57,10 +57,10 @@ public class EnemyInfo {
      * @param n: the amount of health to change in int
      */
     public void changeHealth(int n){
-        if(this.health + n > this.maxHealth){
+        if (this.health + n > this.maxHealth){
             this.setHealth(100);
-        } else{
-            this.health = this.health + n;
+        } else {
+            this.health = Math.max(this.health + n, 0);
         }
     }
 
