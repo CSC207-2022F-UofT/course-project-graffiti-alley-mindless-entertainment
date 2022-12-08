@@ -9,7 +9,7 @@ class SaveInteractorTest {
 
     @Test
     void testSave() {
-        SaveGatewayImpl saveGateway = new SaveGatewayImpl();
+        TestSaveGateway saveGateway = new TestSaveGateway();
         GameEntities gameEntities = new GameEntities();
         SaveInteractor saveInteractor = new SaveInteractor(3, saveGateway);
         saveInteractor.addSavableEntity(gameEntities.getLocation().new SaveLocation());

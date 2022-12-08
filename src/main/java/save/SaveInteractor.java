@@ -19,10 +19,10 @@ public class SaveInteractor {
     ArrayList<Save> saves;
     SaveLoader loader;
     SaveFactory creator;
-    SaveGatewayImpl gateway;
+    SaveGateway gateway;
     private final int MAX_SLOTS;
 
-    public SaveInteractor(int max_slots, SaveGatewayImpl gateway) {
+    public SaveInteractor(int max_slots, SaveGateway gateway) {
         entities = new ArrayList<>();
         saves = (ArrayList<Save>) gateway.retrieveSave();
         int save_size = saves.size();
