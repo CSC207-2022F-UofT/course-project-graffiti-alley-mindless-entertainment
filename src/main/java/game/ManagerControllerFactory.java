@@ -119,6 +119,7 @@ public class ManagerControllerFactory {
         SaveGatewayImpl saveGateway = new SaveGatewayImpl();
         SaveInteractor saveInteractor = new SaveInteractor(3, saveGateway);
         Location.SaveLocation saveLocation = gameEntities.getLocation().new SaveLocation();
+        saveLocation.setDatabaseController(areaDatabaseInteractor);
         saveInteractor.addSavableEntity(saveLocation);
         saveInteractor.addSavableEntity(gameEntities.getInventory().new SaveInventory());
         saveInteractor.addSavableEntity(gameEntities.getOptions().new SaveOptions());
