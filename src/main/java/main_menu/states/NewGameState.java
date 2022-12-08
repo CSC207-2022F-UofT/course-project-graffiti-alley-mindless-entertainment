@@ -4,8 +4,7 @@ import interfaces.State;
 import io.InputValidator;
 import io.Output;
 import io.OutputHandler;
-import main_menu.MainMenuInputValidator;
-import main_menu.MainMenuOptions;
+import main_menu.input_validators.NewGameInputValidator;
 import switch_managers.SwitchEventMediatorProxy;
 import switch_managers.SwitchEventType;
 
@@ -16,11 +15,11 @@ public class NewGameState implements State {
     /**
      * awaitInput: A boolean describing if the state is awaiting input.
      * isDone: A boolean describing if the state is done running the postInput process.
-     * inputValidator: A MainMenuInputValidator that is used to validate the input from the user.
+     * inputValidator: A NewGameInputValidator that is used to validate the input from the user.
      */
     private boolean awaitInput;
     private boolean isDone;
-    private final MainMenuInputValidator inputValidator;
+    private final NewGameInputValidator inputValidator;
 
     /**
      * Initializes a new NewGameState.
@@ -28,7 +27,7 @@ public class NewGameState implements State {
     public NewGameState () {
         this.awaitInput = false;
         this.isDone = false;
-        this.inputValidator = new MainMenuInputValidator(MainMenuOptions.NEW);
+        this.inputValidator = new NewGameInputValidator();
     }
 
     /**
@@ -72,7 +71,7 @@ public class NewGameState implements State {
     }
 
     /**
-     * @return The MainMenuInputValidator of this NewGameState.
+     * @return The NewGameInputValidator of this NewGameState.
      */
     @Override
     public InputValidator getInputValidator() {

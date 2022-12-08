@@ -4,8 +4,8 @@ import interfaces.State;
 import io.InputValidator;
 import io.Output;
 import io.OutputHandler;
-import main_menu.MainMenuInputValidator;
-import main_menu.MainMenuOptions;
+import main_menu.input_validators.LoadGameInputValidator;
+import save.SaveInteractor;
 
 /**
  * The State for loading a previous game.
@@ -14,19 +14,23 @@ public class LoadGameState implements State {
     /**
      * awaitInput: A boolean describing if the state is awaiting input.
      * isDone: A boolean describing if the state is done running the postInput process.
-     * inputValidator: A MainMenuInputValidator that is used to validate the input from the user.
+     * inputValidator: A LoadGameInputValidator that is used to validate the input from the user.
+     * saveInteractor: A SaveInteractor used to load and display a maximum of 3 save slots.
      */
     private boolean awaitInput;
     private boolean isDone;
-    private final MainMenuInputValidator inputValidator;
+    private final SaveInteractor saveInteractor;
+    private final LoadGameInputValidator inputValidator;
 
     /**
      * Initializes a new LoadGameState that is not completed and is not awaiting input.
+     * @param saveInteractor The SaveInteractor for this LoadGameState.
      */
-    public LoadGameState() {
+    public LoadGameState(SaveInteractor saveInteractor) {
         this.awaitInput = false;
         this.isDone = false;
-        this.inputValidator = new MainMenuInputValidator(MainMenuOptions.LOAD);
+        this.saveInteractor = saveInteractor;
+        this.inputValidator = new LoadGameInputValidator(this.saveInteractor);
     }
 
     /**
@@ -37,9 +41,9 @@ public class LoadGameState implements State {
     public void preInput() {
         this.awaitInput = true;
         OutputHandler output = Output.getScreen();
-        // Can put a loop here once saving is implemented to show the user any saved game Player name and
-        // description.
-        // Awaiting saving implementation.
+        output.generateText("You are currently attempting to load a save file.");
+        this.saveInteractor.displaySlots();
+        output.generateText("Type the number of the save file to load it.");
         output.generateText("Type 'return' if you would like to return to the main menu.");
     }
 
@@ -50,7 +54,10 @@ public class LoadGameState implements State {
      */
     @Override
     public void postInput(String input) {
-        // Awaiting saving implementation.
+        if (!(input.equalsIgnoreCase("return"))) {
+            int slot = Integer.parseInt(input);
+
+        }
         this.awaitInput = false;
         this.isDone = true;
     }
@@ -72,7 +79,7 @@ public class LoadGameState implements State {
     }
 
     /**
-     * @return The MainMenuInputValidator of this LoadGameState.
+     * @return The LoadGameInputValidator of this LoadGameState.
      */
     @Override
     public InputValidator getInputValidator() {

@@ -4,8 +4,7 @@ import interfaces.State;
 import io.InputValidator;
 import io.Output;
 import io.OutputHandler;
-import main_menu.MainMenuInputValidator;
-import main_menu.MainMenuOptions;
+import main_menu.input_validators.MainMenuInputValidator;
 
 /**
  * The default State of the main menu. Gives the user options to start a new game, load saved games, enter the
@@ -15,7 +14,7 @@ public class MainMenuState implements State {
     /**
      * awaitInput: A boolean describing if the state is awaiting input.
      * isDone: A boolean describing if the state is done running the postInput process.
-     * inputValidator: A MainMenuInputValidator that is used to validate the input from the user.
+     * inputValidator: A s that is used to validate the input from the user.
      */
     private boolean awaitInput;
     private boolean isDone;
@@ -27,7 +26,7 @@ public class MainMenuState implements State {
     public MainMenuState() {
         this.awaitInput = false;
         this.isDone = false;
-        this.inputValidator = new MainMenuInputValidator(MainMenuOptions.MAINMENU);
+        this.inputValidator = new MainMenuInputValidator();
     }
 
     /**
@@ -72,7 +71,7 @@ public class MainMenuState implements State {
     }
 
     /**
-     * @return The MainMenuInputValidator of this MainMenuState.
+     * @return The InputValidator of this MainMenuState.
      */
     @Override
     public InputValidator getInputValidator() {

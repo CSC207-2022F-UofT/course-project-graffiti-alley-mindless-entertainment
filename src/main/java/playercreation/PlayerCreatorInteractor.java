@@ -2,6 +2,7 @@ package playercreation;
 
 import objects.character.Player;
 import objects.battle.SkillType;
+import save.SaveInteractor;
 
 /**
  * A use case for creating a new Player character at the start of the game. PlayerCreatorManager utilizes this
@@ -10,6 +11,7 @@ import objects.battle.SkillType;
 public class PlayerCreatorInteractor {
     /**
      * newPlayer: The Player being created.
+     *
      */
 
     private final Player newPlayer;
@@ -53,11 +55,13 @@ public class PlayerCreatorInteractor {
     }
 
     /**
-     * Saves the completed Player character to the database. Awaiting saving functionality
-     * @return True if newPlayer is saved successfully, false otherwise.
+     * Saves the completed Player character.
      */
-    public boolean savePlayer() {
-        return true;
+    public void savePlayer() {
+        SaveInteractor saveInteractor = new SaveInteractor(3);
+        Player.SavePlayer savePlayer = this.newPlayer.new SavePlayer();
+        saveInteractor.addSavableEntity(savePlayer);
     }
+
 
 }
