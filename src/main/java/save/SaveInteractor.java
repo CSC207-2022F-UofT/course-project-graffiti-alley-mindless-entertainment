@@ -55,12 +55,9 @@ public class SaveInteractor {
         if (slot > MAX_SLOTS) {
             return false;
         }
-        if (saves.get(slot) == null) {
-            Save s = creator.createSave(entities);
-            saves.set(slot, s);
-            return true;
-        }
-        return false;
+        Save s = creator.createSave(entities);
+        saves.set(slot, s);
+        return true;
     }
 
     /**
