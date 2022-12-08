@@ -72,11 +72,4 @@ public class AreaUseCase {
     public boolean checkForAreaEntered() {
         return this.currentArea.getCurrTextIndex() == 0;
     }
-
-    /**
-     * @return true if the texts have been completed
-     */
-    public boolean checkForCompletedTexts() {
-        return this.currentArea.getCurrTextIndex() == this.currentArea.getTexts().size();
-    }
 }

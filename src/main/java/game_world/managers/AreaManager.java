@@ -38,32 +38,30 @@ public class AreaManager extends StateManager {
     protected State nextState(String input) {
         if (areaUseCase.checkForAreaEntered()) {
             eventManager.areaEntered(areaUseCase.getCurrentArea());
+            this.currState = dialogueStateFactory.createDialogueState(areaUseCase.getCurrentArea());
+
+            return this.currState;
         }
-        if (areaUseCase.checkForCompletedTexts()) {
-            if (eventManager.queueCleared()) {
-                if (areaUseCase.checkForValidInput(input)) {
-                    areaUseCase.arriveAtNextArea(input);
-                    return nextState(input);
-                }
-                else {
-                    this.currState = selectionStateFactory.createSelectionState(areaUseCase.getNextInputs());
-                }
-                return this.currState;
-            }
-            else {
-                areaUseCase.updateEventIndex();
-                State nextEvent = eventManager.getNextStateInQueue();
 
-                if (nextEvent != null)
-                    return nextEvent;
-
+        if (eventManager.queueCleared()) {
+            if (areaUseCase.checkForValidInput(input)) {
+                areaUseCase.arriveAtNextArea(input);
                 return nextState(input);
             }
+            else {
+                this.currState = selectionStateFactory.createSelectionState(areaUseCase.getNextInputs());
+            }
+            return this.currState;
         }
         else {
-            this.currState = dialogueStateFactory.createDialogueState(areaUseCase.getCurrentArea());
+            areaUseCase.updateEventIndex();
+            State nextEvent = eventManager.getNextStateInQueue();
+
+            if (nextEvent != null)
+                return nextEvent;
+
+            return nextState(input);
         }
-        return this.currState;
     }
 
     /**
