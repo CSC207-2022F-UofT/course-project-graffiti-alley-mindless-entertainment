@@ -48,4 +48,9 @@ public class Location implements SavableEntity {
     public SaveEntityId getId() {
         return SaveEntityId.LOCATION;
     }
+
+    public Event getCurrEvent() {
+        if (currentArea == null) {return null; }
+        else {return currentArea.getCurrEvent();}
+    }
 }
