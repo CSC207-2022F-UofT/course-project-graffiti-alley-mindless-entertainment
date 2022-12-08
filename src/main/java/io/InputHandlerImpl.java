@@ -2,6 +2,9 @@ package io;
 
 import java.util.Scanner;
 
+/**
+ * implementation of InputHandler
+ */
 public class InputHandlerImpl implements InputHandler {
 
     /**
