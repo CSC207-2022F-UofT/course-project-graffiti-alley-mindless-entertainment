@@ -5,9 +5,11 @@ import io.OutputHandler;
 import objects.battle.Skill;
 import objects.battle.SkillType;
 
+/** This class is the Gimmick use case that uses gimmick.
+ */
 public class StatGimmickStrategy implements GimmickStrategy{
-    /** This class is the Gimmick use case that uses gimmick.
-     * Attribute: gimmick that has been used
+    /**
+     * gimmick: gimmick that has been used
      */
     private final StatGimmickEntity gimmick;
 
