@@ -3,6 +3,7 @@ package menus;
 import core.ChoiceState;
 import interfaces.State;
 import menus.options.ChangeOptionsStateFactory;
+import quests.QuestMenuFactory;
 import menus.save.SaveMenuStateFactory;
 import objects.inventory.InventoryStateFactory;
 
@@ -22,10 +23,13 @@ public class MenuStateFactory {
     private final InventoryStateFactory inventoryStateFactory;
     private final SaveMenuStateFactory saveMenuStateFactory;
 
-    public MenuStateFactory(ChangeOptionsStateFactory changeOptionsStateFactory, InventoryStateFactory inventoryStateFactory, SaveMenuStateFactory saveMenuStateFactory) {
+    private final QuestMenuFactory questMenuFactory;
+
+    public MenuStateFactory(ChangeOptionsStateFactory changeOptionsStateFactory, InventoryStateFactory inventoryStateFactory, SaveMenuStateFactory saveMenuStateFactory, QuestMenuFactory questMenuFactory) {
         this.changeOptionsStateFactory = changeOptionsStateFactory;
         this.inventoryStateFactory = inventoryStateFactory;
         this.saveMenuStateFactory = saveMenuStateFactory;
+        this.questMenuFactory = questMenuFactory;
     }
 
     public State createChangeOptionsState() {
@@ -53,4 +57,10 @@ public class MenuStateFactory {
      * @return the save menu state
      */
     public State createSaveMenuState() {return saveMenuStateFactory.createSaveMenuState();}
+
+    /**
+     * Creates the quest menu state.
+     * @return the quest menu state.
+     */
+    public State createQuestMenuState() {return questMenuFactory.createQuestMenuState();}
 }
