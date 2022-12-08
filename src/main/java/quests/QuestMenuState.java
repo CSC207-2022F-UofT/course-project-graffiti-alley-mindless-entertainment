@@ -28,16 +28,15 @@ public class QuestMenuState implements State {
      */
     @Override
     public void preInput() {
-        this.isAwaitingInput = true;
-        // completes all the quests.
+        // completes all the quests (update the quests that can be completed).
         questInteractor.completeQuests();
 
-        // creates the text to be displayed.
-        String textToDisplay = "Would you like to see your current quest? (yes/no)";
-
-        // displays the text.
+        // displays the quests.
         OutputHandler output = Output.getScreen();
-        output.generateText(textToDisplay);
+        output.generateText("Here are your quests:");
+        output.generateText(getQuestsStatuses());
+
+        this.isAwaitingInput = true;
     }
 
     /**
@@ -46,13 +45,6 @@ public class QuestMenuState implements State {
      */
     @Override
     public void postInput(String input) {
-        // checks whether the player wants to see its current tasks.
-        if (input.equalsIgnoreCase("yes")) {
-            OutputHandler output = Output.getScreen();
-            output.generateText("Here are your quests:");
-            output.generateText(getQuestsStatuses());
-        }
-
         this.isAwaitingInput = false;
         this.isDone = true;
     }
