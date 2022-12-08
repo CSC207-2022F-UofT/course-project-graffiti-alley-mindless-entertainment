@@ -65,12 +65,13 @@ public class LoseBattleState implements State {
             case "pretend you won": // TEMP, pretending to win
                 this.user.changeCurrHealth(1);
                 this.foe.setHealth(0);
+                this.user.changeSpeed(100-user.getSpeed());
                 this.done = true;
                 break;
             default:
                 output.generateText("Please enter a valid input.");
         }
-        user.changeSpeed(100-user.getSpeed());
+//        user.changeSpeed(100-user.getSpeed());
     }
     @Override
     public boolean awaitInput() {

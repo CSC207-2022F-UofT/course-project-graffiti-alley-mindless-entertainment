@@ -1,16 +1,16 @@
 package battlestates;
 
-import battlestates.states.EnemyTurnState;
-import battlestates.states.LoseBattleState;
-import battlestates.states.UserTurnState;
-import battlestates.states.WinBattleState;
+import battlestates.factories.BattleStateFactory;
+import battlestates.states.BattleAskingState;
 import core.StateManager;
 import game_world.objects.Location;
 import game_world.objects.events.EncounterEvent;
 import game_world.objects.events.Event;
 import interfaces.State;
+import objects.battle.BattleEntityInteractor;
+import objects.battle.Skill;
+import objects.battle.SkillType;
 import objects.battle.enemy.factory.EnemyFactory;
-import objects.character.EnemyFighter;
 import objects.character.Player;
 
 public class BattleStateManager extends StateManager {
@@ -20,13 +20,14 @@ public class BattleStateManager extends StateManager {
      *  user: Player object representing the user
      *  foe: EnemyFacade object representing who the user is battling
      */
-    private Player user;
-    private EnemyFighter foe;
+    private BattleEntityInteractor battleEntityInteractor;
     private Location location;
+    private BattleChoiceType currChoice;
 
     public BattleStateManager(Player user, Location location) {
-        this.user = user;
+        this.battleEntityInteractor = new BattleEntityInteractor(user);
         this.location = location;
+        this.currChoice = BattleChoiceType.MENU;
         initialize();
     }
 
@@ -38,22 +39,42 @@ public class BattleStateManager extends StateManager {
      */
     @Override
     protected State nextState(String input) {
-        boolean userNext = user.getSpeed() >= foe.getSpeed();
+        BattleStateFactory battleStateFactory = new BattleStateFactory(battleEntityInteractor);
+        boolean userNext = battleEntityInteractor.userOutspeeds();
         State chosenState;
 
-        if (!foe.checkAlive()) {
-            chosenState = new WinBattleState(user, foe);
+        if (battleEntityInteractor.isFoeDead()) {
+            chosenState = battleStateFactory.createWinBattleState();
             this.isDone = true;
         }
-        else if (user.getCurrHealth() <= 0) {
-            chosenState = new LoseBattleState(user, foe);
+        else if (battleEntityInteractor.isUserDead()) {
+            chosenState = battleStateFactory.createLoseBattleState();
             this.isDone = true;
         }
         else {
             if (userNext) {
-                chosenState = new UserTurnState(user, foe);
+                chosenState = battleStateFactory.createUserTurnState();
+                switch (currChoice) {
+                    case MENU:
+                        chosenState = battleStateFactory.createBattleMenuState(currChoice);
+                        break;
+                    case SKILLS:
+                        chosenState = battleStateFactory.createBattleSkillChoiceState(currChoice);
+                        break;
+                    case INVENTORY:
+                        // chosenState = new InventoryState // Something like this
+                        currChoice = BattleChoiceType.MENU;
+                        chosenState = battleStateFactory.createBattleMenuState(currChoice);
+                        break;
+                }
             } else {
-                chosenState = new EnemyTurnState(user, foe, input);
+                String command = "use potion";
+                if (currChoice == BattleChoiceType.SKILLS) {
+                    command = "use skill";
+                }
+
+                chosenState = battleStateFactory.createEnemyTurnState(command);
+                currChoice = BattleChoiceType.MENU;
             }
         }
         return chosenState;
@@ -80,6 +101,9 @@ public class BattleStateManager extends StateManager {
     @Override
     public void postInput(String input) {
         currState.postInput(input);
+        if (currState instanceof BattleAskingState) {
+            currChoice = ((BattleAskingState) currState).getCurrChoice();
+        }
         boolean currPostInput = currState.isDone();
         if (currPostInput) {
             this.currState = this.nextState(input);
@@ -100,7 +124,6 @@ public class BattleStateManager extends StateManager {
             encounterEvent = (EncounterEvent) currEvent;
             chosenEnemy = encounterEvent.getNPC();
         }
-        this.foe = enemyFactory.createEnemy(chosenEnemy);
-
+        battleEntityInteractor.setFoe(enemyFactory.createEnemy(chosenEnemy));
     }
 }

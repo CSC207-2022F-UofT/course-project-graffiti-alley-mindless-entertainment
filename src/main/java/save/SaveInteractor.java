@@ -14,15 +14,17 @@ public class SaveInteractor {
      * saves: the list of Saves
      * loader: the loader to help load Saves
      * creator: the creator to help create Saves
+     * gateway: the gateway to save file
      * MAX_SLOTS: the maximum space for Saves
      */
     ArrayList<SavableEntity> entities;
     ArrayList<Save> saves;
     SaveLoader loader;
     SaveFactory creator;
+    SaveGatewayImpl gateway;
     private int MAX_SLOTS;
 
-    public SaveInteractor(int max_slots) {
+    public SaveInteractor(int max_slots, SaveGatewayImpl gateway) {
         entities = new ArrayList<>();
         saves = new ArrayList<>(MAX_SLOTS + 1);
         for (int i = 0; i < max_slots + 1; i++) {
@@ -30,6 +32,7 @@ public class SaveInteractor {
         }
         loader = new SaveLoader();
         creator = new SaveFactory();
+        this.gateway = gateway;
         MAX_SLOTS = max_slots;
     }
 
@@ -45,6 +48,7 @@ public class SaveInteractor {
         if (slot > MAX_SLOTS) {
             return false;
         }
+        saves = (ArrayList<Save>) gateway.retrieveSave();
         Save s = saves.get(slot);
         if (s == null) {
             return false;
@@ -59,6 +63,7 @@ public class SaveInteractor {
     public void saveAtSlot(int slot) {
         Save s = creator.createSave(entities);
         saves.set(slot, s);
+        gateway.storeSaves(saves);
     }
 
     /**
