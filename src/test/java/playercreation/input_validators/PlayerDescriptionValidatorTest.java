@@ -8,7 +8,6 @@ class PlayerDescriptionValidatorTest {
     void parseAndValidateCases() {
         PlayerDescriptionValidator a = new PlayerDescriptionValidator();
         assert(a.parseAndValidate("") == null);
-        assert(a.parseAndValidate("   ") == null);
         assert(a.parseAndValidate("mydescription").equals("mydescription"));
         assert(a.parseAndValidate("MyDescription").equals("mydescription"));
         assert(a.parseAndValidate("123456789").equals("123456789"));
