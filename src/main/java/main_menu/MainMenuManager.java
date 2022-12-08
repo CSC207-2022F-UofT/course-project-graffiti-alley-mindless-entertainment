@@ -3,6 +3,7 @@ package main_menu;
 import core.StateManager;
 import interfaces.State;
 import main_menu.factories.MainMenuFactory;
+import save.SaveInteractor;
 import switch_managers.SwitchEventMediator;
 import switch_managers.SwitchEventMediatorProxy;
 import switch_managers.SwitchEventType;
@@ -15,15 +16,19 @@ public class MainMenuManager extends StateManager {
      * currState: The current state of the main menu.
      * currStateEnum: Keeps track of the current state of the main menu using the MainMenuOptions enum.
      * menuFactory: The MainMenuFactory. Used to create new States for the main menu while switching States.
+     * saveInteractor: The SaveInteractor. Used to load saves from the database.
      */
     private MainMenuOptions currStateEnum;
     private final MainMenuFactory menuFactory;
+    private final SaveInteractor saveInteractor;
 
     /**
      * Initializes a new MainMenuManager.
+     * @param saveInteractor The SaveInteractor of this main menu manager.
      */
-    public MainMenuManager() {
-        this.menuFactory = new MainMenuFactory();
+    public MainMenuManager(SaveInteractor saveInteractor) {
+        this.saveInteractor = saveInteractor;
+        this.menuFactory = new MainMenuFactory(this.saveInteractor);
         initialize();
     }
 
@@ -62,14 +67,13 @@ public class MainMenuManager extends StateManager {
             }
         }
         else if (currStateEnum == MainMenuOptions.LOAD) {
-            // Awaiting saving implementation. Will make a loop here to calculate how many saved games there are and
-            // load the proper saved game unless the user chooses to return to the main menu.
             if (input.equals("return")) {
                 // Returns to the main menu.
                 this.currState = this.menuFactory.createMainMenuState();
                 this.currStateEnum = MainMenuOptions.MAINMENU;
                 return this.currState;
             }
+            this.saveInteractor.loadFromSlot(Integer.parseInt(input));
         }
         else if (input.equalsIgnoreCase("exit")) {
             SwitchEventMediator mediator = SwitchEventMediatorProxy.getInstance();
