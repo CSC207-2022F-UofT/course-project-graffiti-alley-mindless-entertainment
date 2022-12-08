@@ -1,5 +1,6 @@
 package game_world.factories;
 
+import database.factories.QuestGiverEventFactory;
 import database.objects.ArbitraryEventData;
 import database.objects.EncounterEventData;
 import database.objects.ItemPickUpEventData;
@@ -15,13 +16,15 @@ import quests.Quest;
 
 public class EventFactory {
     public ItemPickUpEventFactory itemPickUpEventFactory;
+    private QuestGiverEventFactory questGiverEventFactory;
 
     /**
      * Constructs EventFactory
      * @param itemPickUpEventFactory itemPickUpEventFactory created to avoid introducing the Inventory dependency
      */
-    public EventFactory(ItemPickUpEventFactory itemPickUpEventFactory){
+    public EventFactory(ItemPickUpEventFactory itemPickUpEventFactory, QuestGiverEventFactory questGiverEventFactory){
         this.itemPickUpEventFactory = itemPickUpEventFactory;
+        this.questGiverEventFactory = questGiverEventFactory;
     }
 
     /**
@@ -51,11 +54,7 @@ public class EventFactory {
      * @param data data from current QuestGiverEventData
      */
     public QuestGiverEvent createQuestGiverEvent(QuestGiverEventData data) {
-        return new QuestGiverEvent(
-                data.name,
-                data.quest,
-                data.npc
-        );
+        return this.questGiverEventFactory.createQuestGiverEvent(data);
     }
 
     /**
