@@ -7,7 +7,5 @@ public enum BattleChoiceType {
     MENU,
     STATS,
     SKILLS,
-    INVENTORY,
-    BACK,
-    INVALID
+    INVENTORY
 }

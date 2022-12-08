@@ -6,6 +6,8 @@ import interfaces.State;
 import io.InputValidator;
 import io.Output;
 import io.OutputHandler;
+import objects.battle.BattleEntityInteractor;
+import objects.character.EnemyFighter;
 import objects.character.Player;
 
 import java.util.List;
@@ -28,16 +30,19 @@ public abstract class BattleAskingState implements State {
     protected Boolean awaitingInput = false;
     protected Boolean done = false;
     protected Player user;
+    protected EnemyFighter foe;
     protected BattleChoiceType currChoice;
     protected final OutputHandler output = Output.getScreen();
 
-    public BattleAskingState(Player user, BattleChoiceType prevChoice) {
-        this.user = user;
+    public BattleAskingState(BattleEntityInteractor fighters, BattleChoiceType prevChoice) {
+        this.user = fighters.getUser();
+        this.foe = fighters.getFoe();
         this.currChoice = prevChoice;
     }
 
-    public BattleAskingState(Player user, BattleChoiceType prevChoice, List<String> options) {
-        this.user = user;
+    public BattleAskingState(BattleEntityInteractor fighters, BattleChoiceType prevChoice, List<String> options) {
+        this.user = fighters.getUser();
+        this.foe = fighters.getFoe();
         this.currChoice = prevChoice;
         this.options = options;
         this.inputValidator = new ChoiceInputValidator(options);
@@ -57,13 +62,21 @@ public abstract class BattleAskingState implements State {
     public void postInput(String input) {
         this.done = true;
     }
+
+    /**
+     * Returns whether the input is valid (not null), if not null then sets to INVALID
+     * @param cleanInput parsed input from postInput()
+     * @return whether or not the input is null
+     */
     protected boolean isValidInp(String cleanInput) {
         if (cleanInput == null) {
-            currChoice = BattleChoiceType.INVALID;
             output.generateText("Please enter valid input.");
             return false;
         }
         return true;
+    }
+    public BattleChoiceType getCurrChoice() {
+        return this.currChoice;
     }
 
     /**

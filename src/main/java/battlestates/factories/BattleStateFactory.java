@@ -1,5 +1,6 @@
 package battlestates.factories;
 
+import battlestates.BattleChoiceType;
 import battlestates.states.*;
 import interfaces.State;
 import objects.battle.BattleEntityInteractor;
@@ -27,4 +28,11 @@ public class BattleStateFactory {
     public State createUserTurnState() {
         return new UserTurnState(battleEntityInteractor.getUser(), battleEntityInteractor.getFoe());
     }
+    public State createBattleMenuState(BattleChoiceType currChoice) {
+        return new BattleMenuState(battleEntityInteractor, currChoice);
+    }
+    public State createBattleSkillChoiceState(BattleChoiceType currChoice) {
+        return new BattleSkillChoiceState(battleEntityInteractor, currChoice);
+    }
+
 }

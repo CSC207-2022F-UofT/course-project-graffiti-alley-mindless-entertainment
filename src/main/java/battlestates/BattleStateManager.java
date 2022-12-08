@@ -19,10 +19,12 @@ public class BattleStateManager extends StateManager {
      */
     private BattleEntityInteractor battleEntityInteractor;
     private Location location;
+    private BattleChoiceType currChoice;
 
     public BattleStateManager(Player user, Location location) {
         this.battleEntityInteractor = new BattleEntityInteractor(user);
         this.location = location;
+        this.currChoice = BattleChoiceType.MENU;
         initialize();
     }
 
@@ -49,6 +51,14 @@ public class BattleStateManager extends StateManager {
         else {
             if (userNext) {
                 chosenState = battleStateFactory.createUserTurnState();
+                switch (currChoice) {
+                    case MENU:
+                        chosenState = battleStateFactory.createBattleMenuState(currChoice);
+                        break;
+                    case SKILLS:
+                        chosenState = battleStateFactory.createBattleSkillChoiceState(currChoice);
+                        break;
+                }
             } else {
                 chosenState = battleStateFactory.createEnemyTurnState(input);
             }

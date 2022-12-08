@@ -1,14 +1,19 @@
 package battlestates.states;
 
 import battlestates.BattleChoiceType;
-import objects.character.Player;
+import objects.battle.BattleEntityInteractor;
+import objects.battle.StatDisplayer;
 
-import java.util.List;
+import java.util.Arrays;
 
 public class BattleMenuState extends BattleAskingState{
+    /**
+     * Constructs BattleMenuState using super and a preset menu list options.
+     * @param prevChoice previous choice of BattleChoiceType
+     */
 
-    public BattleMenuState(Player user, BattleChoiceType prevChoice, List<String> options) {
-        super(user, prevChoice, options);
+    public BattleMenuState(BattleEntityInteractor fighters, BattleChoiceType prevChoice) {
+        super(fighters, prevChoice, Arrays.asList("Skills", "Inventory", "Stats"));
     }
 
     /**
@@ -28,7 +33,21 @@ public class BattleMenuState extends BattleAskingState{
     public void postInput(String input) {
         String cleanInput = inputValidator.parseAndValidate(input);
         if (isValidInp(cleanInput)) {
-
+            switch (cleanInput) {
+                case "skills":
+                    currChoice = BattleChoiceType.SKILLS;
+                    break;
+                case "inventory":
+                    currChoice = BattleChoiceType.INVENTORY;
+                    break;
+                case "stats":
+                    StatDisplayer statDisplayer = new StatDisplayer();
+                    statDisplayer.displayStats(user, foe);
+                    statDisplayer.displayStats(user.getSkillList());
+                    break;
+            }
+            this.awaitingInput = false;
+            this.done = true;
         }
     }
 
