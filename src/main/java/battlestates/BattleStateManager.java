@@ -11,6 +11,8 @@ import game_world.objects.events.Event;
 import interfaces.State;
 import io.Output;
 import io.OutputHandler;
+import objects.battle.Skill;
+import objects.battle.SkillType;
 import objects.battle.enemy.factory.EnemyFactory;
 import objects.character.EnemyFighter;
 import objects.character.Player;
@@ -103,6 +105,13 @@ public class BattleStateManager extends StateManager {
             chosenEnemy = encounterEvent.getNPC();
         }
         this.foe = enemyFactory.createEnemy(chosenEnemy);
+
+        // TEMP: For demo purposes only! Will remove once Player gets starting skills
+        user.addSkill(new Skill("torch", 20, 10, SkillType.FIRE));
+        user.addSkill(new Skill("spit", 20, 10, SkillType.WATER));
+        user.addSkill(new Skill("pebble throw", 20, 10, SkillType.EARTH));
+        user.addSkill(new Skill("sneeze", 20, 10, SkillType.AIR));
+        user.addSkill(new Skill("tsunami", 90, 40, SkillType.WATER));
 
         currState = nextState("");
     }

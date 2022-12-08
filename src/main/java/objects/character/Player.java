@@ -58,11 +58,6 @@ public class Player extends Character {
         this.speed = 100;
         this.money = 20;
         this.skillList = new ArrayList<>();
-        this.skillList.add(new Skill("torch", 20, 10, SkillType.FIRE));
-        this.skillList.add(new Skill("spit", 20, 10, SkillType.WATER));
-        this.skillList.add(new Skill("pebble throw", 20, 10, SkillType.EARTH));
-        this.skillList.add(new Skill("sneeze", 20, 10, SkillType.AIR));
-        this.skillList.add(new Skill("tsunami", 90, 40, SkillType.WATER));
     }
 
     /**
