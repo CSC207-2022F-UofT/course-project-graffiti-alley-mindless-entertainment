@@ -15,7 +15,7 @@ public class InputHandlerImpl implements InputHandler {
     public String getChoice(InputValidator validator) {
         Scanner input = new Scanner(System.in);
         while (true) {
-            String choice = input.nextLine().toLowerCase();
+            String choice = input.nextLine().trim().toLowerCase();
             if (choice.equals("exit") || choice.equals("pause")) {
                 return choice;
             }

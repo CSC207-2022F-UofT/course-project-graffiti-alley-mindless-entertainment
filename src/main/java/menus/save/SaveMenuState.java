@@ -31,7 +31,7 @@ public class SaveMenuState implements State {
         awaitingInput = true;
         Output.getScreen().generateText(interactor.getSlotsStatus());
         String textToDisplay = "Options: \n" + "To return to the previous menu: return\n" +
-                "To save to files: save + slot #\n";
+                "To save to files: save + slot #";
         Output.getScreen().generateText(textToDisplay);
     }
 
