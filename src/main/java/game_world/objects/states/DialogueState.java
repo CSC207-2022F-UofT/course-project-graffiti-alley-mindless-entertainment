@@ -68,8 +68,9 @@ public class DialogueState implements State {
         if (this.currentArea.getCurrTextIndex() == allTexts.size())
             this.isDone = true;
         else {
-            if (input.equals("skip"))
+            if (input.equals("skip")) {
                 skipAllTexts();
+            }
             else
                 updateNextText();
         }
