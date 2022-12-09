@@ -18,14 +18,23 @@ The plot of the game is based around the legendary hero (you, the player) destin
 
 Your choices greatly affect the outcome of the game, so make your choices carefully! Don't lose track of who the enemy really is.
 
-# Test Coverage 
+# Test Coverage
 
 We covered most methods that did complex operations. 
 
 Methods such as getters, setters, or otherwise low logic methods were not explicitly tested, 
 but may have been implicitly tested while testing other functions. 
 
-Files in the game package were not tested at all due to being just initialization. 
+Classes in the game package were not tested for correctness due to being just initialization. 
 
-Files in io package were also not tested (due to being input/output)
+Many classes in io package were also not tested (due to being input/output)
 
+We also created a simulation test to be able to insert any sequence of user inputs and see if it throws a runtime error. 
+
+More information about this is in the docstring of the GameTest.java file in the test/game package. 
+
+The test coverage report can be found at index.html of the test_coverage_report folder. 
+
+A screenshot is also provided here: 
+
+![test_coverage_report_ss](https://cdn.discordapp.com/attachments/1025202069856063528/1050630342001819769/image.png)
