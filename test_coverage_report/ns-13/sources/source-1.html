@@ -1,0 +1,152 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Game</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">game</a>
+</div>
+
+<h1>Coverage Summary for Class: Game (game)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Game</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (2/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (9/15)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package game;
+&nbsp;
+&nbsp;import core.Shell;
+&nbsp;import core.switch_managers.ManagerController;
+&nbsp;import io.InputHandler;
+&nbsp;import io.InputHandlerImpl;
+&nbsp;import core.switch_managers.switch_events.SwitchEventMediator;
+&nbsp;import core.switch_managers.switch_events.SwitchEventMediatorProxy;
+&nbsp;import core.switch_managers.switch_events.SwitchEventType;
+&nbsp;
+&nbsp;public class Game {
+&nbsp;    private final ManagerControllerFactory managerControllerFactory;
+&nbsp;
+&nbsp;    private final InputHandler inputHandler;
+&nbsp;    public static void main(String[] args) {
+&nbsp;
+<b class="nc">&nbsp;        Game g = new Game();</b>
+<b class="nc">&nbsp;        g.startGame();</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Private constructor to prevent outside access.
+&nbsp;     */
+<b class="nc">&nbsp;        private Game() {</b>
+<b class="nc">&nbsp;            GameEntities gameEntities = new GameEntities();</b>
+<b class="nc">&nbsp;            managerControllerFactory = new ManagerControllerFactory(gameEntities);</b>
+<b class="nc">&nbsp;            inputHandler = new InputHandlerImpl();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This constructor is for testing purposes only.
+&nbsp;     * @param mockInputHandler the inputHandler to mock input with
+&nbsp;     */
+<b class="fc">&nbsp;    public Game(InputHandler mockInputHandler) {</b>
+<b class="fc">&nbsp;        GameEntities gameEntities = new GameEntities();</b>
+<b class="fc">&nbsp;        managerControllerFactory = new ManagerControllerFactory(gameEntities);</b>
+<b class="fc">&nbsp;        inputHandler = mockInputHandler;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void startGame() {
+&nbsp;
+<b class="fc">&nbsp;        ManagerController managerController = managerControllerFactory.createManagerController();</b>
+<b class="fc">&nbsp;        SwitchEventMediator switchEventMediator = SwitchEventMediatorProxy.getInstance();</b>
+<b class="fc">&nbsp;        switchEventMediator.store(SwitchEventType.MAIN_MENU);</b>
+<b class="fc">&nbsp;        Shell s = new Shell(inputHandler, managerController, switchEventMediator);</b>
+<b class="fc">&nbsp;        s.startGame();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:21</div>
+</div>
+</body>
+</html>

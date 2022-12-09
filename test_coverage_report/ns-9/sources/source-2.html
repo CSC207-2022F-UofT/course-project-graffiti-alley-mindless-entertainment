@@ -1,0 +1,300 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > EnemyFacade</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">character</a>
+</div>
+
+<h1>Coverage Summary for Class: EnemyFacade (character)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EnemyFacade</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.2%
+  </span>
+  <span class="absValue">
+    (15/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    89.5%
+  </span>
+  <span class="absValue">
+    (17/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package character;
+&nbsp;import battle.entities.BattleChoiceType;
+&nbsp;import battle.use_cases.ai.EnemyAI;
+&nbsp;import battle.use_cases.EnemyActionHandler;
+&nbsp;import battle.entities.EnemyPotion;
+&nbsp;import battle.entities.Skill;
+&nbsp;import battle.entities.SkillType;
+&nbsp;import battle.entities.EnemyInfo;
+&nbsp;import character.entities.Character;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * This is a class for enemy that inherits character class. This enemy class includes
+&nbsp; * health, skills, speed, reputation and Enemy AI in addition to name which is inherited from
+&nbsp; * parent class.
+&nbsp; */
+&nbsp;public class EnemyFacade extends Character implements EnemyFighter{
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * enemyInfo: information about the enemy
+&nbsp;     * enemyAI: AI that the enemy has, and since it has a use case, this class works as a facade, so outer classes
+&nbsp;     * can use enemyAI without knowing the complexity of the system
+&nbsp;     */
+&nbsp;    private final EnemyInfo enemyInfo;
+&nbsp;    private final EnemyAI enemyAI;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This is a constructor of the enemy.
+&nbsp;     *
+&nbsp;     * @param name: name if the enemy
+&nbsp;     * @param enemyInfo: information about the enemy including health, skills, speed, and reputation
+&nbsp;     * @param enemyAI: enemyAI that the enemy has
+&nbsp;     */
+&nbsp;    public EnemyFacade(String name, EnemyInfo enemyInfo, EnemyAI enemyAI) {
+<b class="fc">&nbsp;        super(name);</b>
+<b class="fc">&nbsp;        this.enemyAI = enemyAI;</b>
+<b class="fc">&nbsp;        this.enemyInfo = enemyInfo;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method returns the enemy&#39;s health
+&nbsp;     *
+&nbsp;     * @return  enemy&#39;s health in int
+&nbsp;     */
+&nbsp;    public int getHealth() {
+<b class="fc">&nbsp;        return this.enemyInfo.getHealth();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method changes the Enemy&#39;s health
+&nbsp;     * if n is positive, it will increase the health and
+&nbsp;     * if its negative, it will decrease the health
+&nbsp;     *
+&nbsp;     * @param n: the amount of health to change in int
+&nbsp;     */
+&nbsp;    public void changeHealth(int n){
+<b class="fc">&nbsp;        this.enemyInfo.changeHealth(n);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method decreases the enemy&#39;s speed
+&nbsp;     *
+&nbsp;     * @param n: the amount of speed that the enemy looses by using a skill
+&nbsp;     *
+&nbsp;     */
+&nbsp;    public void changeSpeed(int n){
+<b class="fc">&nbsp;        this.enemyInfo.changeSpeed(n);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This returns the enemy&#39;s speed
+&nbsp;     *
+&nbsp;     * @return speed of this enemy in int
+&nbsp;     */
+&nbsp;    public int getSpeed(){
+<b class="fc">&nbsp;        return this.enemyInfo.getSpeed();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method checks if the enemy is alive or not
+&nbsp;     * and return false if the enemy is dead
+&nbsp;     *
+&nbsp;     * @return true if the enemy is alive and return false
+&nbsp;     * if the enemy is dead
+&nbsp;     */
+&nbsp;    public boolean checkAlive()
+&nbsp;    {
+<b class="fc">&nbsp;        return this.enemyInfo.checkAlive();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This function sets the enemy&#39;s health
+&nbsp;     *
+&nbsp;     * @param n: new health in int
+&nbsp;     */
+&nbsp;    public void setHealth(int n)
+&nbsp;    {
+<b class="fc">&nbsp;        this.enemyInfo.setHealth(n);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method sets the enemy&#39;s speed
+&nbsp;     *
+&nbsp;     * @param speed: new speed in int
+&nbsp;     */
+&nbsp;    public void setSpeed(int speed)
+&nbsp;    {
+<b class="fc">&nbsp;        this.enemyInfo.setSpeed(speed);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method returns the enemy&#39;s reputation
+&nbsp;     *
+&nbsp;     * @return the reputation that the player gets by killing this enemy
+&nbsp;     */
+&nbsp;    public int getReputation()
+&nbsp;    {
+<b class="fc">&nbsp;        return this.enemyInfo.getReputation();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method returns the skill at index n
+&nbsp;     *
+&nbsp;     * @param n: the index of the skill
+&nbsp;     * @return the skill at index n
+&nbsp;     */
+&nbsp;    public Skill getSkill(int n){
+<b class="fc">&nbsp;        return this.enemyInfo.getSkill(n);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method returns the skills that the enemy has
+&nbsp;     *
+&nbsp;     * @return the skills as a arraylist of skill
+&nbsp;     */
+&nbsp;    public ArrayList&lt;Skill&gt; getSkills(){
+<b class="fc">&nbsp;        return this.enemyInfo.getSkills();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method returns the type that the enemy has
+&nbsp;     *
+&nbsp;     * @return the enemy&#39;s type
+&nbsp;     */
+&nbsp;    public SkillType getType() {
+<b class="fc">&nbsp;        return this.enemyInfo.getType();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method sets the new type that the enemy  has
+&nbsp;     *
+&nbsp;     * @param type: new type of the enemy
+&nbsp;     */
+&nbsp;    public void setType(SkillType type){
+<b class="fc">&nbsp;        this.enemyInfo.setType(type);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method returns the enemy actions depending on the user&#39;s action
+&nbsp;     *
+&nbsp;     * @param input: input by the user
+&nbsp;     * @return enemy&#39;s action in string (use skill or use potion)
+&nbsp;     */
+&nbsp;    public EnemyActionHandler enemyAction(BattleChoiceType input){
+<b class="nc">&nbsp;        return this.enemyAI.respond(input);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method returns the AI that the enemy has
+&nbsp;     *
+&nbsp;     * @return enemy&#39;s type of enemyAI
+&nbsp;     */
+&nbsp;    public EnemyAI getEnemyAI() {
+<b class="fc">&nbsp;        return this.enemyAI;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method returns the potion that this enemy has
+&nbsp;     *
+&nbsp;     * @return the potion that the enemy has
+&nbsp;     */
+&nbsp;    public EnemyPotion getPotion(){
+<b class="fc">&nbsp;        return this.enemyInfo.getPotion();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method uses the gimmick and displays the string on the console
+&nbsp;     *
+&nbsp;     */
+&nbsp;    public void applyGimmick(){
+<b class="nc">&nbsp;    }</b>
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:21</div>
+</div>
+</body>
+</html>

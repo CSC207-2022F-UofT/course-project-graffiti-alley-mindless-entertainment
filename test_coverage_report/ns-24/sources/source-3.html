@@ -1,0 +1,199 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Options</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">pause_menu.options</a>
+</div>
+
+<h1>Coverage Summary for Class: Options (pause_menu.options)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Options</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Options$SaveOptions</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (16/16)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package pause_menu.options;
+&nbsp;
+&nbsp;
+&nbsp;import save.entities.SavableEntity;
+&nbsp;import save.entities.SaveEntityId;
+&nbsp;
+&nbsp;/*
+&nbsp;The options of the game. A data storage class.
+&nbsp;*/
+&nbsp;public class Options {
+<b class="fc">&nbsp;    private int textSpeed = 1;</b>
+<b class="fc">&nbsp;    private boolean enableAutoSave = false;</b>
+&nbsp;
+&nbsp;    private static Options instance;
+&nbsp;
+&nbsp;    public static Options getOptions() {
+<b class="fc">&nbsp;        if (instance == null) {</b>
+<b class="fc">&nbsp;            instance = new Options();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return instance;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    private Options() {}</b>
+&nbsp;
+&nbsp;    public int getTextSpeed() {
+<b class="fc">&nbsp;        return textSpeed;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isEnableAutoSave() {
+<b class="fc">&nbsp;        return enableAutoSave;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setTextSpeed(int textSpeed) {
+<b class="fc">&nbsp;        this.textSpeed = textSpeed;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setEnableAutoSave(boolean enableAutoSave) {
+<b class="fc">&nbsp;        this.enableAutoSave = enableAutoSave;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public class SaveOptions implements SavableEntity {</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @return a string representation of the object to be saved
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public String toSavableString() {
+<b class="fc">&nbsp;            return enableAutoSave + &quot; &quot; + textSpeed;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @param str a string representation
+&nbsp;         *            map the string representation to the corresponding object
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public void fromSavableString(String str) {
+<b class="fc">&nbsp;            String[] splitString = str.split(&quot; &quot;);</b>
+<b class="fc">&nbsp;            enableAutoSave = Boolean.parseBoolean(splitString[0]);</b>
+<b class="fc">&nbsp;            textSpeed = Integer.parseInt(splitString[1]);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @return the id of this entity in the saved entities list
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public SaveEntityId getId() {
+<b class="fc">&nbsp;            return SaveEntityId.OPTIONS;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:21</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > SwitchEventHandler</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">core.switch_managers.switch_events</a>
+</div>
+
+<h1>Coverage Summary for Class: SwitchEventHandler (core.switch_managers.switch_events)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">SwitchEventHandler</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package core.switch_managers.switch_events;
+&nbsp;
+&nbsp;import core.StateManager;
+&nbsp;
+&nbsp;/**
+&nbsp; * SwitchEventHandler. Takes inspiration from the chain of responsibility pattern:
+&nbsp; * If the handler can handle the switch event, then it returns a StateManager, otherwise, returns null.
+&nbsp; * Used in conjunction with the ManagerController to handle all manager switching.
+&nbsp; */
+&nbsp;public interface SwitchEventHandler {
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param eventType the switch event to handle
+&nbsp;     * @param currManager the current manager
+&nbsp;     * @return the manager to switch to, or null if this handler cannot handle the event
+&nbsp;     */
+&nbsp;    StateManager handleSwitchEvent(SwitchEventType eventType, StateManager currManager);
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:21</div>
+</div>
+</body>
+</html>

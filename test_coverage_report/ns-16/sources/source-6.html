@@ -1,0 +1,216 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > QuestFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">game_world.factories</a>
+</div>
+
+<h1>Coverage Summary for Class: QuestFactory (game_world.factories)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">QuestFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    11.1%
+  </span>
+  <span class="absValue">
+    (1/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    9.5%
+  </span>
+  <span class="absValue">
+    (2/21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package game_world.factories;
+&nbsp;
+&nbsp;import database.managers.QuestDataManager;
+&nbsp;import character.entities.Bystander;
+&nbsp;import database.entities.QuestData;
+&nbsp;import quests.entities.PlayersStatistics;
+&nbsp;import quests.entities.Quest;
+&nbsp;import quests.use_cases.Reward;
+&nbsp;import quests.use_cases.StatisticalReward;
+&nbsp;import quests.use_cases.StatisticalTask;
+&nbsp;import quests.use_cases.Task;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class contains all the methods to create a Quest using the information given by a QuestData object.
+&nbsp; */
+<b class="fc">&nbsp;public class QuestFactory {</b>
+&nbsp;    /**
+&nbsp;     * Attribute.
+&nbsp;     */
+<b class="fc">&nbsp;    private final QuestDataManager database = new QuestDataManager();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param name of the quest.
+&nbsp;     * @return quest in the database, corresponding ot hte name entered.
+&nbsp;     */
+&nbsp;    public Quest createQuest(String name) {
+<b class="nc">&nbsp;        QuestData data = this.database.fetchQuestData(name);</b>
+<b class="nc">&nbsp;        return createQuest(data);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param data: contains all the information needed to create the quest.
+&nbsp;     * @return the created quest using the information from data.
+&nbsp;     */
+&nbsp;    private Quest createQuest(QuestData data) {
+<b class="nc">&nbsp;        Bystander bystander = createBystander(data.bystander);      //!!! might be changed later on.</b>
+<b class="nc">&nbsp;        Reward reward = createReward(data.rewardType, data.rewardStatistic, (int) data.rewardValue);</b>
+<b class="nc">&nbsp;        List&lt;Task&gt; tasks = createTasks(data.tasksTypes, data.tasksStatistics, data.tasksValues);</b>
+&nbsp;
+<b class="nc">&nbsp;        return new Quest(data.name, data.description, bystander, reward, tasks);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param name: name of the Bystander involved in the quest.
+&nbsp;     * @return the Bystander object.
+&nbsp;     */
+&nbsp;    private Bystander createBystander(String name) {
+<b class="nc">&nbsp;        return new Bystander(name, false);          //!!! might need to be changed later</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param type of the reward.
+&nbsp;     * @param statistic: parameter for specific type of reward.
+&nbsp;     * @param value: parameter for specific type of reward.
+&nbsp;     * @return the created reward.
+&nbsp;     */
+&nbsp;    private Reward createReward(String type, String statistic, int value) {
+<b class="nc">&nbsp;        if (&quot;statistical&quot;.equals(type)) {</b>
+<b class="nc">&nbsp;            return createStatisticalReward(statistic, value);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param statistic: that is impacted by the reward.
+&nbsp;     * @param value: value by which the statistic is impacted.
+&nbsp;     * @return the created statistical reward.
+&nbsp;     */
+&nbsp;    private StatisticalReward createStatisticalReward(String statistic, int value) {
+<b class="nc">&nbsp;        return new StatisticalReward(PlayersStatistics.valueOf(statistic.toUpperCase()), value);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param tasksTypes: type of the tasks.
+&nbsp;     * @param tasksStatistics: parameter for a specific type of tasks.
+&nbsp;     * @param tasksValues: parameter for a specific type of tasks.
+&nbsp;     * @return a list of all the created tasks.
+&nbsp;     */
+&nbsp;    private List&lt;Task&gt; createTasks(ArrayList&lt;String&gt; tasksTypes, ArrayList&lt;String&gt; tasksStatistics,
+&nbsp;                                   ArrayList&lt;Long&gt; tasksValues) {
+<b class="nc">&nbsp;        List&lt;Task&gt; tasks = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; tasksTypes.size(); i++) {</b>
+<b class="nc">&nbsp;            tasks.add(createTask(tasksTypes.get(i), tasksStatistics.get(i), tasksValues.get(i)));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return tasks;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param type of task
+&nbsp;     * @param statistic: parameter for specific type of task.
+&nbsp;     * @param value: parameter for specific type of task.
+&nbsp;     * @return the created tasks using information given.
+&nbsp;     */
+&nbsp;    private Task createTask(String type, String statistic, long value) {
+<b class="nc">&nbsp;        if (&quot;statistical&quot;.equals(type)) {</b>
+<b class="nc">&nbsp;            return createStatisticalTask(statistic, (int) value);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param statistic from player that will be checked.
+&nbsp;     * @param value that needs to be obtained for given statistic.
+&nbsp;     * @return the created statistical Task.
+&nbsp;     */
+&nbsp;    private StatisticalTask createStatisticalTask(String statistic, long value) {
+<b class="nc">&nbsp;        return new StatisticalTask(PlayersStatistics.valueOf(statistic.toUpperCase()), (int) value);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:21</div>
+</div>
+</body>
+</html>

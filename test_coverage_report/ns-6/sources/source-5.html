@@ -1,0 +1,177 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > SkillHandler</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">battle.use_cases</a>
+</div>
+
+<h1>Coverage Summary for Class: SkillHandler (battle.use_cases)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SkillHandler</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (1/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    8.3%
+  </span>
+  <span class="absValue">
+    (1/12)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">SkillHandler$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (1/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    7.7%
+  </span>
+  <span class="absValue">
+    (1/13)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package battle.use_cases;
+&nbsp;
+&nbsp;import battle.entities.Skill;
+&nbsp;import battle.entities.SkillType;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class is for EnemySkillHandler and PlayerSkillHandler so that they can use the
+&nbsp; * method in this class (it is inherited by the classes)
+&nbsp; */
+<b class="fc">&nbsp;public class SkillHandler {</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method calculates the damage to the opponent.
+&nbsp;     * @param skill: skill that is used
+&nbsp;     * @param type : type of the character that is attacked
+&nbsp;     * @return the damage to a character with type in int
+&nbsp;     */
+&nbsp;    public int calculateDamage(Skill skill, SkillType type) {
+<b class="nc">&nbsp;        if (hasTypeAdv(skill.getType(), type)) {</b>
+<b class="nc">&nbsp;            return ((int)Math.ceil(1.2 * skill.getDamage()));</b>
+<b class="nc">&nbsp;        } else if (hasTypeAdv(type, skill.getType())) {</b>
+<b class="nc">&nbsp;            return ((int)Math.ceil(0.8 * skill.getDamage()));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return skill.getDamage();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method determines if the attacker and defender has type advantage or not
+&nbsp;     * @param base: SkillType of the type of the attacker.
+&nbsp;     * @param comparedTo: SkillType of the defender.
+&nbsp;     * @return boolean, and returns true if there is type advantage, and returns false otherwise
+&nbsp;     *
+&nbsp;     */
+&nbsp;    public boolean hasTypeAdv(SkillType base, SkillType comparedTo) {
+<b class="nc">&nbsp;        switch (base) {</b>
+&nbsp;            case AIR:
+<b class="nc">&nbsp;                return comparedTo == SkillType.WATER;</b>
+&nbsp;            case EARTH:
+<b class="nc">&nbsp;                return comparedTo == SkillType.AIR;</b>
+&nbsp;            case FIRE:
+<b class="nc">&nbsp;                return comparedTo == SkillType.EARTH;</b>
+&nbsp;            case WATER:
+<b class="nc">&nbsp;                return comparedTo == SkillType.FIRE;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:21</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,144 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > WorldInputValidator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">game_world.use_cases</a>
+</div>
+
+<h1>Coverage Summary for Class: WorldInputValidator (game_world.use_cases)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">WorldInputValidator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (4/10)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package game_world.use_cases;
+&nbsp;
+&nbsp;import io.InputValidator;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;
+&nbsp;
+&nbsp;public class WorldInputValidator implements InputValidator {
+&nbsp;
+&nbsp;    private final ArrayList&lt;String&gt; possibleInputs;
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;    public WorldInputValidator() {</b>
+<b class="fc">&nbsp;        this.possibleInputs = new ArrayList&lt;&gt;();</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public WorldInputValidator(ArrayList&lt;String&gt; possibleInputs) {</b>
+<b class="fc">&nbsp;        this.possibleInputs = possibleInputs;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param input current input from the user
+&nbsp;     * @return If the input exists in possible inputs or possible inputs is empty, validates string
+&nbsp;     *         Otherwise user must input again, the input is not valid
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public String parseAndValidate(String input) {
+&nbsp;        // Validates and parses user input if valid, returns null if invalid.
+<b class="nc">&nbsp;        if (this.possibleInputs.isEmpty()) {</b>
+&nbsp;            // Enter any key
+<b class="nc">&nbsp;            return input.toLowerCase();</b>
+&nbsp;        }
+&nbsp;        else {
+<b class="nc">&nbsp;            String lowerInput = input.toLowerCase();</b>
+<b class="nc">&nbsp;            if (this.possibleInputs.contains(lowerInput) || this.possibleInputs.size() == 1) {</b>
+<b class="nc">&nbsp;                return lowerInput;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:21</div>
+</div>
+</body>
+</html>

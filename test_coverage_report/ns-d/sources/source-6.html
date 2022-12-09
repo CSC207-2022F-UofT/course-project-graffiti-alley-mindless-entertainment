@@ -1,0 +1,93 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > SwitchEventMediator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">core.switch_managers.switch_events</a>
+</div>
+
+<h1>Coverage Summary for Class: SwitchEventMediator (core.switch_managers.switch_events)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">SwitchEventMediator</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package core.switch_managers.switch_events;
+&nbsp;
+&nbsp;/**
+&nbsp; * Interface for switchEventMediator.
+&nbsp; * The purpose of this class is to mediate communication between the stateManagers and the shell.
+&nbsp; * The shell needs to know which switchEvent has been scheduled once the manager is done.
+&nbsp; * Uses the mediator design pattern.
+&nbsp; */
+&nbsp;public interface SwitchEventMediator {
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param switchEventType Stores a switchEventType for later use
+&nbsp;     */
+&nbsp;    void store(SwitchEventType switchEventType);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return the stored switchEventType. Delete once accessed.
+&nbsp;     */
+&nbsp;    SwitchEventType retrieve();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return Whether there is a stored SwitchEventType
+&nbsp;     */
+&nbsp;    boolean ready();
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:21</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ManagerControllerImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">core.switch_managers</a>
+</div>
+
+<h1>Coverage Summary for Class: ManagerControllerImpl (core.switch_managers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ManagerControllerImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package core.switch_managers;
+&nbsp;
+&nbsp;import core.StateManager;
+&nbsp;import core.switch_managers.switch_events.SwitchEventManager;
+&nbsp;import core.switch_managers.switch_events.SwitchEventType;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * Implementation of ManagerController.
+&nbsp; */
+&nbsp;public class ManagerControllerImpl implements ManagerController{
+&nbsp;    /**
+&nbsp;     * switchEventManager: the switchEventManager used to switch managers
+&nbsp;     * managers: the list of stateManagers to notify of global events like initalizeAll()
+&nbsp;     */
+&nbsp;    private final SwitchEventManager switchEventManager;
+&nbsp;    private final List&lt;StateManager&gt; managers;
+&nbsp;
+<b class="fc">&nbsp;    public ManagerControllerImpl(SwitchEventManager switchEventManager) {</b>
+<b class="fc">&nbsp;        this.switchEventManager = switchEventManager;</b>
+<b class="fc">&nbsp;        this.managers = new ArrayList&lt;&gt;();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param manager The manager to add to the manager controller.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void addManager(StateManager manager) {
+<b class="fc">&nbsp;        managers.add(manager);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param type        the switch event that starts the switch
+&nbsp;     * @param currManager the current manager
+&nbsp;     * @return the manager to switch to
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public StateManager switchManagers(SwitchEventType type, StateManager currManager) {
+<b class="fc">&nbsp;        return switchEventManager.switchManagers(type, currManager);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Initializes all the managers.
+&nbsp;     * Used when starting a game.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void initializeAll() {
+<b class="fc">&nbsp;        for (StateManager manager: managers) {</b>
+<b class="fc">&nbsp;            manager.initialize();</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:21</div>
+</div>
+</body>
+</html>

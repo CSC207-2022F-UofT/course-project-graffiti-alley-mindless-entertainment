@@ -1,0 +1,180 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > EnemyInfoFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">battle.factories</a>
+</div>
+
+<h1>Coverage Summary for Class: EnemyInfoFactory (battle.factories)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EnemyInfoFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95.8%
+  </span>
+  <span class="absValue">
+    (23/24)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package battle.factories;
+&nbsp;
+&nbsp;import database.managers.SkillDataManager;
+&nbsp;import database.entities.EnemyData;
+&nbsp;import database.entities.SkillData;
+&nbsp;import battle.entities.Skill;
+&nbsp;import battle.entities.SkillType;
+&nbsp;import battle.entities.EnemyInfo;
+&nbsp;import battle.entities.EnemyPotion;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class creates the EnemyInfo of the enemy with the given name
+&nbsp; * using the information in the database
+&nbsp; */
+&nbsp;public class EnemyInfoFactory {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * skillDataManager: Manager used to get the information about the skill from the database
+&nbsp;     */
+&nbsp;    private final SkillDataManager skillDataManager;
+&nbsp;
+<b class="fc">&nbsp;    public EnemyInfoFactory(SkillDataManager skillDataManager){</b>
+<b class="fc">&nbsp;        this.skillDataManager = skillDataManager;</b>
+&nbsp;    }
+&nbsp;    /**
+&nbsp;     * This method returns the EnemyInfo that the enemy with the name in the database has.
+&nbsp;     * @param enemyData Enemy data from the database
+&nbsp;     * @return EnemyInfo of the enemy with the name given
+&nbsp;     */
+&nbsp;    public EnemyInfo createEnemyInfo(EnemyData enemyData){
+<b class="fc">&nbsp;        ArrayList&lt;Skill&gt; skills = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        for (String i:enemyData.skills) {</b>
+<b class="fc">&nbsp;            SkillData skillData = this.skillDataManager.fetchSkillData(i);</b>
+<b class="fc">&nbsp;            int damage = Integer.parseInt(skillData.damage);</b>
+<b class="fc">&nbsp;            String skillType = skillData.type;</b>
+<b class="fc">&nbsp;            SkillType type = translateSkill(skillType);</b>
+<b class="fc">&nbsp;            int lag = Integer.parseInt(skillData.lag);</b>
+<b class="fc">&nbsp;            Skill skill = new Skill(i, damage, lag, type);</b>
+<b class="fc">&nbsp;            skills.add(skill);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        int reputation = Integer.parseInt(enemyData.reputation);</b>
+<b class="fc">&nbsp;        int speed = Integer.parseInt(enemyData.speed);</b>
+<b class="fc">&nbsp;        int potion = Integer.parseInt(enemyData.potion);</b>
+&nbsp;
+<b class="fc">&nbsp;        String typeStr = enemyData.type;</b>
+<b class="fc">&nbsp;        SkillType type = translateSkill(typeStr);</b>
+&nbsp;
+<b class="fc">&nbsp;        return new EnemyInfo(skills, speed, reputation, type, new EnemyPotion(potion));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method returns the type gimmick depending on the string in the database
+&nbsp;     * @param name of the skill
+&nbsp;     * @return skill with the name and all the other attributes in the database
+&nbsp;     */
+&nbsp;    public SkillType translateSkill(String name){
+<b class="fc">&nbsp;        switch (name){</b>
+&nbsp;            case &quot;water&quot;:{
+<b class="fc">&nbsp;                return SkillType.WATER;</b>
+&nbsp;            }
+&nbsp;            case &quot;fire&quot;:{
+<b class="fc">&nbsp;                return SkillType.FIRE;</b>
+&nbsp;
+&nbsp;            }
+&nbsp;            case &quot;earth&quot;:{
+<b class="fc">&nbsp;                return SkillType.EARTH;</b>
+&nbsp;
+&nbsp;            }
+&nbsp;            case &quot;air&quot;:{
+<b class="fc">&nbsp;                return SkillType.AIR;</b>
+&nbsp;
+&nbsp;            }
+<b class="nc">&nbsp;        } return SkillType.WATER;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:21</div>
+</div>
+</body>
+</html>

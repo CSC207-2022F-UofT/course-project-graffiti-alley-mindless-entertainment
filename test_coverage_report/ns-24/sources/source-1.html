@@ -1,0 +1,287 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ChangeOptionsState</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">pause_menu.options</a>
+</div>
+
+<h1>Coverage Summary for Class: ChangeOptionsState (pause_menu.options)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ChangeOptionsState</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90%
+  </span>
+  <span class="absValue">
+    (9/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.3%
+  </span>
+  <span class="absValue">
+    (56/62)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package pause_menu.options;
+&nbsp;
+&nbsp;import io.InputValidator;
+&nbsp;import core.State;
+&nbsp;import io.Output;
+&nbsp;
+&nbsp;/**
+&nbsp; * Use case to change the options based on user input.
+&nbsp; */
+&nbsp;public class ChangeOptionsState implements State {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * options: Entity for game options
+&nbsp;     * isDone: whether the state is done
+&nbsp;     * awaitingInput: whether the state is waiting for user input
+&nbsp;     * xxxCommand: extracted constants for user commands.
+&nbsp;     */
+&nbsp;
+&nbsp;    private final Options options;
+<b class="fc">&nbsp;    private boolean isDone = false;</b>
+<b class="fc">&nbsp;    private boolean awaitingInput = false;</b>
+&nbsp;
+&nbsp;    private final String textSpeedCommand;
+&nbsp;
+&nbsp;    private final String autoSaveCommand;
+&nbsp;
+&nbsp;    private final String quitCommand;
+&nbsp;
+&nbsp;    private final String changeCommand;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param options stored options of the game. Injected dependency.
+&nbsp;     */
+<b class="fc">&nbsp;    public ChangeOptionsState(Options options) {</b>
+<b class="fc">&nbsp;        this.options = options;</b>
+<b class="fc">&nbsp;        this.textSpeedCommand = &quot;textSpeed&quot;;</b>
+<b class="fc">&nbsp;        this.autoSaveCommand = &quot;autoSave&quot;;</b>
+<b class="fc">&nbsp;        this.quitCommand = &quot;return&quot;;</b>
+<b class="fc">&nbsp;        this.changeCommand = &quot;change&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Executes when not awaiting input
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void preInput() {
+<b class="fc">&nbsp;        awaitingInput = true;</b>
+<b class="fc">&nbsp;        StringBuilder textToDisplay = new StringBuilder(&quot;Options: \n&quot;);</b>
+<b class="fc">&nbsp;        textToDisplay.append(this.autoSaveCommand).append(&quot;: &quot;);</b>
+<b class="fc">&nbsp;        String ANSI_BLUE = &quot;\u001B[34m&quot;;</b>
+<b class="fc">&nbsp;        String ANSI_RESET = &quot;\u001B[0m&quot;;</b>
+<b class="fc">&nbsp;        textToDisplay.append(options.isEnableAutoSave() ? ANSI_BLUE : &quot;&quot;).append(&quot;true &quot;).append(ANSI_RESET);</b>
+<b class="fc">&nbsp;        textToDisplay.append(!options.isEnableAutoSave() ? ANSI_BLUE : &quot;&quot;).append(&quot;false &quot;).append(ANSI_RESET);</b>
+&nbsp;
+<b class="fc">&nbsp;        textToDisplay.append(&quot;\n&quot;).append(this.textSpeedCommand).append(&quot;: &quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        int[] textSpeedOptions = {1, 2, 3, 4, 5};</b>
+<b class="fc">&nbsp;        for (int textSpeedOption : textSpeedOptions) {</b>
+<b class="fc">&nbsp;            textToDisplay.append(options.getTextSpeed() == textSpeedOption ? ANSI_BLUE : &quot;&quot;)</b>
+<b class="fc">&nbsp;                    .append(textSpeedOption).append(&quot; &quot;).append(ANSI_RESET);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        textToDisplay.append(&quot;\nTo change options, enter `&quot;).append(changeCommand).append(&quot; settingName&quot;).append(&quot; newValue`&quot;);</b>
+<b class="fc">&nbsp;        textToDisplay.append(&quot;\nTo go back, enter `&quot;).append(quitCommand).append(&quot;`&quot;);</b>
+<b class="fc">&nbsp;        Output.getScreen().generateText(textToDisplay.toString());</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Executes when awaiting input from the user
+&nbsp;     * @param input from the user
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void postInput(String input) {
+&nbsp;        //actually change the setting depending on the input.
+<b class="fc">&nbsp;        String[] inputarr = input.trim().split(&quot;\\s+&quot;);</b>
+<b class="fc">&nbsp;        String command = inputarr[0];</b>
+<b class="fc">&nbsp;        if (command.equalsIgnoreCase(quitCommand)) {</b>
+<b class="fc">&nbsp;            isDone = true;</b>
+<b class="fc">&nbsp;        } else if (command.equalsIgnoreCase(changeCommand)) {</b>
+<b class="fc">&nbsp;            if (inputarr.length != 3) {</b>
+<b class="nc">&nbsp;                Output.getScreen().generateText(&quot;Please enter 3 words! e.g. `change autoSave true`&quot;);</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="fc">&nbsp;            attemptChangeOption(inputarr[1], inputarr[2]);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            Output.getScreen().generateText(&quot;Please enter a valid command! e.g. `change autoSave true`&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Attempt to change Option option to parameter value
+&nbsp;     * @param option The option to change
+&nbsp;     * @param value The value to change option to
+&nbsp;     */
+&nbsp;    private void attemptChangeOption(String option, String value) {
+<b class="fc">&nbsp;        boolean success = false;</b>
+<b class="fc">&nbsp;        if (option.equalsIgnoreCase(textSpeedCommand)) {</b>
+<b class="fc">&nbsp;            success = attemptTextSpeedChange(value);</b>
+<b class="fc">&nbsp;        } else if (option.equalsIgnoreCase(autoSaveCommand)) {</b>
+<b class="fc">&nbsp;            success = attemptAutoSaveChange(value);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            Output.getScreen().generateText(&quot;Please select a valid option!&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (success) {</b>
+<b class="fc">&nbsp;            Output.getScreen().generateText(&quot;Successfully changed settings!&quot;);</b>
+<b class="fc">&nbsp;            awaitingInput = false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * If value is a valid input, change enableAutoSave to value.
+&nbsp;     * @param value new value of autoSave.
+&nbsp;     * @return whether the input was valid
+&nbsp;     */
+&nbsp;    private boolean attemptAutoSaveChange(String value) {
+<b class="fc">&nbsp;        if (value.equalsIgnoreCase(&quot;true&quot;)) {</b>
+<b class="nc">&nbsp;            options.setEnableAutoSave(true);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        else if (value.equalsIgnoreCase(&quot;false&quot;)) {</b>
+<b class="fc">&nbsp;            options.setEnableAutoSave(false);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            Output.getScreen().generateText(&quot;This is not a valid value for option &quot;+autoSaveCommand+&quot;!&quot;);</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * If value is a valid input, change textSpeed to value.
+&nbsp;     * @param value new value of textSpeed.
+&nbsp;     * @return whether the input was valid.
+&nbsp;     */
+&nbsp;    private boolean attemptTextSpeedChange(String value) {
+<b class="fc">&nbsp;        if (isInt(value)) {</b>
+<b class="fc">&nbsp;            int textSpeed = Integer.parseInt(value);</b>
+<b class="fc">&nbsp;            if (textSpeed &gt; 5 || textSpeed &lt; 1) {</b>
+<b class="nc">&nbsp;                Output.getScreen().generateText(&quot;This is not a valid value for option &quot;+textSpeedCommand+&quot;!&quot;);</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            options.setTextSpeed(textSpeed);</b>
+<b class="fc">&nbsp;        } else {</b>
+<b class="fc">&nbsp;            Output.getScreen().generateText(&quot;This is not a valid value for option &quot;+textSpeedCommand+&quot;!&quot;);</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param value any string
+&nbsp;     * @return whether value is a parseable integer
+&nbsp;     */
+&nbsp;    private boolean isInt(String value) {
+<b class="fc">&nbsp;        return value.matches(&quot;-?\\d+&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return whether the state is awaiting input
+&nbsp;     */
+&nbsp;    public boolean isDone() {
+<b class="fc">&nbsp;        return isDone;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return whether the state needs input
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean awaitInput() {
+<b class="fc">&nbsp;        return awaitingInput;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * do not validate input
+&nbsp;     * @return the input validator for accepted inputs
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public InputValidator getInputValidator() {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:21</div>
+</div>
+</body>
+</html>

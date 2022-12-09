@@ -1,0 +1,152 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > PlayerQuestionStateFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">player_creation.factories</a>
+</div>
+
+<h1>Coverage Summary for Class: PlayerQuestionStateFactory (player_creation.factories)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PlayerQuestionStateFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package player_creation.factories;
+&nbsp;
+&nbsp;import core.State;
+&nbsp;import player_creation.PlayerCreatorInteractor;
+&nbsp;import player_creation.states.PlayerDescriptionState;
+&nbsp;import player_creation.states.PlayerNameState;
+&nbsp;import player_creation.states.PlayerSkillTypeState;
+&nbsp;
+&nbsp;/**
+&nbsp; * A factory class for creating new questions for the user, including methods for creating new PlayerNameStates,
+&nbsp; * PlayerDescriptionStates, and PlayerSkillTypeStates. Used to avoid dependencies in PlayerCreatorManager.
+&nbsp; */
+&nbsp;public class PlayerQuestionStateFactory {
+&nbsp;    /**
+&nbsp;     * interactor: The PlayerCreatorInteractor that saves the Player information.
+&nbsp;     */
+&nbsp;    private final PlayerCreatorInteractor interactor;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a new PlayerQuestionStateFactory with creatorInteractor.
+&nbsp;     */
+<b class="fc">&nbsp;    public PlayerQuestionStateFactory(PlayerCreatorInteractor creatorInteractor) {</b>
+<b class="fc">&nbsp;        this.interactor = creatorInteractor;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new PlayerNameState.
+&nbsp;     * @return A new PlayerNameState with param this.interactor.
+&nbsp;     */
+&nbsp;    public State createPlayerNameState() {
+<b class="fc">&nbsp;        return new PlayerNameState(this.interactor);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new PlayerDescriptionState.
+&nbsp;     * @return A new PlayerDescriptionState with param this.interactor.
+&nbsp;     */
+&nbsp;    public State createPlayerDescriptionState() {
+<b class="fc">&nbsp;        return new PlayerDescriptionState(this.interactor);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new PlayerSkillTypeState.
+&nbsp;     * @return A new PlayerSkillTypeState with param this.interactor.
+&nbsp;     */
+&nbsp;    public State createPlayerSkillTypeState() {
+<b class="fc">&nbsp;        return new PlayerSkillTypeState(this.interactor);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:21</div>
+</div>
+</body>
+</html>
