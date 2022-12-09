@@ -71,6 +71,7 @@ public class SaveInteractor {
      */
     public String getSlotsStatus() {
         StringBuilder msg = new StringBuilder("Saves: \n");
+        msg.append("Slot #0: autosave\n");
         for (int i = 1; i <= MAX_SLOTS; ++ i) {
             msg.append("Slot #");
             msg.append(i);
