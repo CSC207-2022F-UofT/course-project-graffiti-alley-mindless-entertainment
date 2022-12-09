@@ -10,6 +10,11 @@ import java.util.Objects;
 
 public class Location {
 
+    /**
+     * The SaveableEntity of the Area for the save system
+     * Also able to be loaded so that the game resumes from loaded information
+     */
+
     private Area currentArea;
 
     public Area getCurrentArea() {

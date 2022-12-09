@@ -65,19 +65,15 @@ public class Area {
         this.currEventIndex = newValue;
     }
 
-    public String getType() {
-        if (this.next_ids.size() == 1) {
-            return "One-Way";
-        }
-        else {
-            return "Multi-Directional";
-        }
-    }
-
     public ArrayList<String> getNextInputs() {
         return this.next_options;
     }
 
+    /**
+     * Returns the next area from the valid input
+     * @param input given
+     * @return The area's id
+     */
     public String getAreaFromInput(String input) {
         if (this.next_options.size() == 1)
             return this.next_ids.get(0);
