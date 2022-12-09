@@ -36,6 +36,14 @@ public class DialogueState implements State {
         }
     }
 
+    private void skipAllTexts() {
+        while (this.currentArea.getCurrTextIndex() < allTexts.size()) {
+            this.nextText.append("\n");
+            this.nextText.append(this.currentArea.getTexts().get(this.currentArea.getCurrTextIndex()));
+            this.currentArea.setCurrTextIndex(this.currentArea.getCurrTextIndex() + 1);
+        }
+    }
+
     public DialogueState(Area currentArea) {
         this.currentArea = currentArea;
         this.allTexts = this.currentArea.getTexts();
@@ -59,8 +67,12 @@ public class DialogueState implements State {
         this.awaitInput = false;
         if (this.currentArea.getCurrTextIndex() == allTexts.size())
             this.isDone = true;
-        else
-            updateNextText();
+        else {
+            if (input.equals("skip"))
+                skipAllTexts();
+            else
+                updateNextText();
+        }
     }
 
     @Override
