@@ -28,6 +28,7 @@ public class EventManager {
      * @param area of the new area entered
      */
     public void areaEntered(Area area) {
+        this.eventQueue.clear();
         this.eventQueue.addAll(area.getEvents());
     }
 
@@ -46,6 +47,10 @@ public class EventManager {
         this.completedEvents.add(currEvent.name);
         this.eventQueue.remove(currEvent);
         return currEvent;
+    }
+
+    public void clearCompletedEvents() {
+        completedEvents.clear();
     }
 
     /**
