@@ -4,7 +4,7 @@ import interfaces.State;
 import io.InputValidator;
 import io.Output;
 import io.OutputHandler;
-import objects.battle.SkillType;
+import objects.battle.skills.SkillType;
 import playercreation.PlayerCreatorInteractor;
 import playercreation.input_validators.PlayerSkillTypeValidator;
 

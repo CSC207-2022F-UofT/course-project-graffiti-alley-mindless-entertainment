@@ -1,7 +1,7 @@
 package objects.battle.enemy.ai;
 
-import objects.battle.Skill;
-import objects.battle.SkillType;
+import objects.battle.skills.Skill;
+import objects.battle.skills.SkillType;
 
 /**
  * This class is for EnemySkillHandler and PlayerSkillHandler so that they can use the

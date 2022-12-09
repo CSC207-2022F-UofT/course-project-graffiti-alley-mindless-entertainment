@@ -1,12 +1,11 @@
 package battle.enemy.gimmick;
 
-import objects.battle.Skill;
-import objects.battle.SkillType;
+import objects.battle.skills.Skill;
+import objects.battle.skills.SkillType;
 import objects.battle.enemy.EnemyInfo;
 import objects.battle.enemy.ai.EnemyPotion;
 import objects.battle.enemy.factory.EnemyFactory;
 import objects.battle.enemy.gimmick.*;
-import objects.character.BossFacade;
 import objects.character.EnemyFighter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -7,7 +7,7 @@ public class QuestMenuFactory {
     /**
      * Attribute.
      */
-    private QuestInteractor questInteractor;
+    private final QuestInteractor questInteractor;
 
     /**
      * Constructor

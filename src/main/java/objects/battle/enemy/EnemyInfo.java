@@ -1,7 +1,7 @@
 package objects.battle.enemy;
 
-import objects.battle.Skill;
-import objects.battle.SkillType;
+import objects.battle.skills.Skill;
+import objects.battle.skills.SkillType;
 import objects.battle.enemy.ai.EnemyPotion;
 
 import java.util.ArrayList;
@@ -57,10 +57,10 @@ public class EnemyInfo {
      * @param n: the amount of health to change in int
      */
     public void changeHealth(int n){
-        if(this.health + n > this.maxHealth){
+        if (this.health + n > this.maxHealth){
             this.setHealth(100);
-        } else{
-            this.health = this.health + n;
+        } else {
+            this.health = Math.max(this.health + n, 0);
         }
     }
 

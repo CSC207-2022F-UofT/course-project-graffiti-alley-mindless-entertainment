@@ -1,4 +1,4 @@
-package objects.battle;
+package objects.battle.skills;
 
 public enum SkillType {
     /** Enum that holds constants FIRE, WATER, EARTH, AIR for type advantages

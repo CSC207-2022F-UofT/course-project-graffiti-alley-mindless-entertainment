@@ -1,6 +1,6 @@
 package playercreation;
 
-import objects.battle.SkillType;
+import objects.battle.skills.SkillType;
 import objects.character.Player;
 import org.junit.jupiter.api.Test;
 

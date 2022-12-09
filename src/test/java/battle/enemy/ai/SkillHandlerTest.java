@@ -1,7 +1,7 @@
 package battle.enemy.ai;
 
-import objects.battle.Skill;
-import objects.battle.SkillType;
+import objects.battle.skills.Skill;
+import objects.battle.skills.SkillType;
 import objects.battle.enemy.ai.SkillHandler;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;

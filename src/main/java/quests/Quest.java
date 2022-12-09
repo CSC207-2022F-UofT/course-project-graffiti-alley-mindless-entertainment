@@ -208,8 +208,7 @@ public class Quest {
 
             List<Task> tasks = new ArrayList<>();
 
-            for (int i = 0; i < tasksInformation.length; i++) {
-                String task = tasksInformation[i];
+            for (String task : tasksInformation) {
                 tasks.add(taskFromString(task));
             }
 
@@ -221,14 +220,12 @@ public class Quest {
          * @return a task object created through entered string.
          */
         public Task taskFromString(String str) {
-            switch (str.split(",")[0]) {
-                case "statistical":
-                    Task task = new StatisticalTask(null, 0);
-                    task.changesFromString(str);
-                    return task;
-                default:
-                    return null;
+            if ("statistical".equals(str.split(",")[0])) {
+                Task task = new StatisticalTask(null, 0);
+                task.changesFromString(str);
+                return task;
             }
+            return null;
         }
 
         /**
@@ -237,14 +234,12 @@ public class Quest {
          * @return a reward object created through the entered string.
          */
         public Reward rewardFromString(String str) {
-            switch (str.split(",")[0]) {
-                case "statistical":
-                    Reward newReward = new StatisticalReward(null, 0);
-                    newReward.changesFromString(str);
-                    return newReward;
-                default:
-                    return null;
+            if ("statistical".equals(str.split(",")[0])) {
+                Reward newReward = new StatisticalReward(null, 0);
+                newReward.changesFromString(str);
+                return newReward;
             }
+            return null;
         }
 
         /**

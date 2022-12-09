@@ -1,7 +1,7 @@
 package playercreation.input_validators;
 
 import io.InputValidator;
-import objects.battle.SkillType;
+import objects.battle.skills.SkillType;
 
 /**
  * A class for validating the Player's SkillType at the start of the game.
