@@ -2,6 +2,7 @@ package objects.battle;
 
 import io.Output;
 import io.OutputHandler;
+import objects.battle.skills.Skill;
 import objects.character.EnemyFighter;
 import objects.character.Player;
 import objects.inventory.Inventory;

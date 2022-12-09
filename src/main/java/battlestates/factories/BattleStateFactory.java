@@ -27,16 +27,12 @@ public class BattleStateFactory {
     public State createEnemyTurnState(BattleChoiceType currChoice) {
         return new EnemyTurnState(battleEntityInteractor.getUser(), battleEntityInteractor.getFoe(), currChoice);
     }
-    public State createUserTurnState() {
-        return new UserTurnState(battleEntityInteractor.getUser(), battleEntityInteractor.getFoe());
-    }
     public State createBattleMenuState(BattleChoiceType currChoice) {
         return new BattleMenuState(battleEntityInteractor, currChoice);
     }
     public State createBattleSkillChoiceState(BattleChoiceType currChoice) {
         return new BattleSkillChoiceState(battleEntityInteractor, currChoice);
     }
-
     public State createBattleItemChoiceState(BattleChoiceType currChoice) {
         return new BattleItemChoiceState(battleEntityInteractor, currChoice);
     }

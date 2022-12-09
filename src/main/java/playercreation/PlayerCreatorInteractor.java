@@ -1,7 +1,7 @@
 package playercreation;
 
 import objects.character.Player;
-import objects.battle.SkillType;
+import objects.battle.skills.SkillType;
 
 /**
  * A use case for creating a new Player character at the start of the game. PlayerCreatorManager utilizes this

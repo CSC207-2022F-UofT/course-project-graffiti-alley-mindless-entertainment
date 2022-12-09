@@ -2,7 +2,7 @@ package objects.battle.enemy.ai;
 
 import io.Output;
 import io.OutputHandler;
-import objects.battle.Skill;
+import objects.battle.skills.Skill;
 import objects.character.EnemyFighter;
 import objects.character.Player;
 

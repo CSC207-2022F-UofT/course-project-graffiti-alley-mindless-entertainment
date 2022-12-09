@@ -2,8 +2,8 @@ package battle.enemy.ai;
 
 
 import battlestates.BattleChoiceType;
-import objects.battle.Skill;
-import objects.battle.SkillType;
+import objects.battle.skills.Skill;
+import objects.battle.skills.SkillType;
 import objects.battle.enemy.EnemyInfo;
 import objects.battle.enemy.ai.*;
 import org.junit.jupiter.api.Assertions;

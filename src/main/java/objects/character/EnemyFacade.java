@@ -1,7 +1,7 @@
 package objects.character;
 import battlestates.BattleChoiceType;
-import objects.battle.Skill;
-import objects.battle.SkillType;
+import objects.battle.skills.Skill;
+import objects.battle.skills.SkillType;
 import objects.battle.enemy.EnemyInfo;
 import objects.battle.enemy.ai.*;
 

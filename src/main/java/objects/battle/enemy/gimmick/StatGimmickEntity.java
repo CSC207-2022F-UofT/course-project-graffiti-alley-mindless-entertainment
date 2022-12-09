@@ -1,6 +1,6 @@
 package objects.battle.enemy.gimmick;
 
-import objects.battle.SkillType;
+import objects.battle.skills.SkillType;
 import objects.battle.enemy.EnemyInfo;
 /** This class is the entity of gimmick that holds information about the gimmick
  */

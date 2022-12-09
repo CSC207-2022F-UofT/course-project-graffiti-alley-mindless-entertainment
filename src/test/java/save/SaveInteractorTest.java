@@ -1,7 +1,7 @@
 package save;
 
 import game.GameEntities;
-import objects.battle.SkillType;
+import objects.battle.skills.SkillType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

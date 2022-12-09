@@ -1,6 +1,4 @@
-package objects.battle.enemy;
-
-import objects.battle.Skill;
+package objects.battle.skills;
 
 import java.util.ArrayList;
 import java.util.List;

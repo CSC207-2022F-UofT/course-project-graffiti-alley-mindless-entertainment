@@ -1,5 +1,6 @@
-package objects.battle;
+package objects.item;
 
+import objects.battle.BattleEntityInteractor;
 import objects.item.Armor;
 import objects.item.Item;
 import objects.item.Potion;

@@ -1,4 +1,4 @@
-package objects.battle;
+package objects.battle.skills;
 
 public class Skill {
     /** A class for all skills to be used by any kinds of Characters in battles.

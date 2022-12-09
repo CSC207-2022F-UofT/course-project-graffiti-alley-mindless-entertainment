@@ -2,8 +2,8 @@ package objects.battle.enemy.gimmick;
 
 import io.Output;
 import io.OutputHandler;
-import objects.battle.Skill;
-import objects.battle.SkillType;
+import objects.battle.skills.Skill;
+import objects.battle.skills.SkillType;
 
 /** This class is the Gimmick use case that uses gimmick.
  */
