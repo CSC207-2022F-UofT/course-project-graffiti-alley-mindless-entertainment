@@ -1,6 +1,6 @@
 package main_menu.states;
 
-import interfaces.State;
+import core.State;
 import io.InputValidator;
 import io.Output;
 import io.OutputHandler;

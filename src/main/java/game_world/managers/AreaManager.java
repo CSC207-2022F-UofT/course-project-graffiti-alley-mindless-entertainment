@@ -3,10 +3,12 @@ package game_world.managers;
 import core.StateManager;
 import game_world.factories.DialogueStateFactory;
 import game_world.factories.SelectionStateFactory;
-import game_world.objects.Location;
-import interfaces.State;
-import options.Options;
-import save.SaveInteractor;
+import game_world.entities.Location;
+import core.State;
+import pause_menu.options.Options;
+import game_world.use_cases.AreaDatabaseInteractor;
+import game_world.use_cases.AreaUseCase;
+import save.use_cases.SaveInteractor;
 
 public class AreaManager extends StateManager {
 

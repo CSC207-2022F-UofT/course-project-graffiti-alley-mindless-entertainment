@@ -1,9 +1,12 @@
 package save;
 
+import save.entities.Save;
+import save.gateways.SaveGateway;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestSaveGateway implements SaveGateway{
+public class TestSaveGateway implements SaveGateway {
     /**
      * @param saves the saves to be saved
      *              store the save in file

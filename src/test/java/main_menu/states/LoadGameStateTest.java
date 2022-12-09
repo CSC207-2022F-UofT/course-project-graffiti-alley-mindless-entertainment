@@ -3,8 +3,8 @@ package main_menu.states;
 import io.InputValidator;
 import main_menu.input_validators.LoadGameInputValidator;
 import org.junit.jupiter.api.Test;
-import save.SaveGatewayImpl;
-import save.SaveInteractor;
+import save.gateways.SaveGatewayImpl;
+import save.use_cases.SaveInteractor;
 
 
 class LoadGameStateTest {

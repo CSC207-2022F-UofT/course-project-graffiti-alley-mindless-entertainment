@@ -1,7 +1,6 @@
 package core;
 
 import io.InputValidator;
-import interfaces.State;
 
 public abstract class StateManager{
 

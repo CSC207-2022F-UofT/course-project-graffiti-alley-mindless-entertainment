@@ -1,8 +1,8 @@
 package game_world.factories;
 
-import database.objects.ItemPickUpEventData;
-import game_world.objects.events.*;
-import objects.inventory.Inventory;
+import database.entities.ItemPickUpEventData;
+import game_world.events.ItemPickUpEvent;
+import inventory.entities.Inventory;
 
 /**
  * Factory design pattern, used to create an ItemPickUpEvent, and avoid introducing the Inventory dependency.

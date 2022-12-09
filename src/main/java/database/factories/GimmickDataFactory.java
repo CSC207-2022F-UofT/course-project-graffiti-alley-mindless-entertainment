@@ -1,6 +1,6 @@
 package database.factories;
 
-import database.objects.GimmickData;
+import database.entities.GimmickData;
 import org.json.simple.JSONObject;
 
 public class GimmickDataFactory {

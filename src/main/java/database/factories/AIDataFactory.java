@@ -1,7 +1,7 @@
 package database.factories;
 
 import org.json.simple.JSONObject;
-import database.objects.AIData;
+import database.entities.AIData;
 
 public class AIDataFactory {
 

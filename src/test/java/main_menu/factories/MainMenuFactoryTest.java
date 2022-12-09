@@ -1,12 +1,12 @@
 package main_menu.factories;
 
-import interfaces.State;
+import core.State;
 import main_menu.states.LoadGameState;
 import main_menu.states.MainMenuState;
 import main_menu.states.NewGameState;
 import org.junit.jupiter.api.Test;
-import save.SaveGatewayImpl;
-import save.SaveInteractor;
+import save.gateways.SaveGatewayImpl;
+import save.use_cases.SaveInteractor;
 
 class MainMenuFactoryTest {
 

@@ -1,5 +1,7 @@
 package options;
 
+import pause_menu.options.Options;
+
 import java.util.Objects;
 
 class OptionsTest {

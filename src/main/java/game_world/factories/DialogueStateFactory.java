@@ -1,7 +1,7 @@
 package game_world.factories;
 
-import game_world.objects.Area;
-import game_world.objects.states.DialogueState;
+import game_world.entities.Area;
+import game_world.states.DialogueState;
 
 public class DialogueStateFactory {
 

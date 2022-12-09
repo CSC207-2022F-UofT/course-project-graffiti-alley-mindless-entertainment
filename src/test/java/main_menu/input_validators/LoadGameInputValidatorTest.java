@@ -1,8 +1,8 @@
 package main_menu.input_validators;
 
 import org.junit.jupiter.api.Test;
-import save.SaveGatewayImpl;
-import save.SaveInteractor;
+import save.gateways.SaveGatewayImpl;
+import save.use_cases.SaveInteractor;
 
 class LoadGameInputValidatorTest {
 

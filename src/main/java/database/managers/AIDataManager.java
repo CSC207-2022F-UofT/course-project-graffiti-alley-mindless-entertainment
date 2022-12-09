@@ -2,7 +2,7 @@ package database.managers;
 
 import database.DatabaseHelper;
 import database.factories.AIDataFactory;
-import database.objects.AIData;
+import database.entities.AIData;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 

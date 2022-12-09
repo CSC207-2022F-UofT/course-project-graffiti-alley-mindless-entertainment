@@ -2,7 +2,7 @@ package main_menu.input_validators;
 
 import io.InputValidator;
 import main_menu.MainMenuOptions;
-import save.SaveInteractor;
+import save.use_cases.SaveInteractor;
 
 /**
  * A class for validating input while loading a new game.

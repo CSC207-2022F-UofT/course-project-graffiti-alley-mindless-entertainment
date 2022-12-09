@@ -1,7 +1,7 @@
 package database.factories;
 
-import database.objects.QuestGiverEventData;
-import game_world.objects.events.QuestGiverEvent;
+import database.entities.QuestGiverEventData;
+import game_world.events.QuestGiverEvent;
 import quests.QuestInteractor;
 
 /**

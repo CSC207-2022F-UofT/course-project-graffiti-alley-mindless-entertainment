@@ -1,14 +1,14 @@
 package main_menu.states;
 
-import interfaces.State;
+import core.State;
 import io.InputValidator;
 import io.Output;
 import io.OutputHandler;
 import main_menu.input_validators.LoadGameInputValidator;
-import save.SaveInteractor;
-import switch_managers.SwitchEventMediator;
-import switch_managers.SwitchEventMediatorProxy;
-import switch_managers.SwitchEventType;
+import save.use_cases.SaveInteractor;
+import core.switch_managers.switch_events.SwitchEventMediator;
+import core.switch_managers.switch_events.SwitchEventMediatorProxy;
+import core.switch_managers.switch_events.SwitchEventType;
 
 /**
  * The State for loading a previous game.

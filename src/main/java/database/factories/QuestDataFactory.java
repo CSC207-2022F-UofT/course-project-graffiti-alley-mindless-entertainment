@@ -1,6 +1,6 @@
 package database.factories;
 
-import database.objects.QuestData;
+import database.entities.QuestData;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 

@@ -1,7 +1,10 @@
 package quests;
 
 import game_world.factories.QuestFactory;
-import objects.character.Player;
+import character.entities.Player;
+import quests.entities.PlayerQuests;
+import quests.entities.Quest;
+import quests.use_cases.Task;
 
 import java.util.List;
 
