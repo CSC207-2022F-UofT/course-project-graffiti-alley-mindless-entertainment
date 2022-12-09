@@ -31,11 +31,13 @@ public class SelectionState implements State {
     public void preInput() {
         this.awaitInput = true;
         OutputHandler output = Output.getScreen();
-        StringBuilder newMessage = new StringBuilder("What would you like to do?");
-        for (String input : inputs) {
-            newMessage.append("\n\t◈ ").append(input);
+        if (this.inputs.size() != 1) {
+            StringBuilder newMessage = new StringBuilder("What would you like to do?");
+            for (String input : inputs) {
+                newMessage.append("\n\t◈ ").append(input);
+            }
+            output.generateText(String.valueOf(newMessage));
         }
-        output.generateText(String.valueOf(newMessage));
     }
 
     @Override
@@ -43,10 +45,15 @@ public class SelectionState implements State {
         this.awaitInput = false;
         this.isDone = true;
         OutputHandler output = Output.getScreen();
-        if (input.startsWith("i"))
-            output.generateText("You decide to " + input.substring(2) + ".");
-        else
-            output.generateText("You decide to " + input + ".");
+        if (this.inputs.size() != 1) {
+            if (input.startsWith("i"))
+                output.generateText("You decide to " + input.substring(2) + ".");
+            else
+                output.generateText("You decide to " + input + ".");
+        }
+        else {
+            output.generateText("You decide to " + this.inputs.get(0) + ".");
+        }
     }
 
     @Override

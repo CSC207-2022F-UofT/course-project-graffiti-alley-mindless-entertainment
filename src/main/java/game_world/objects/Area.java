@@ -79,6 +79,8 @@ public class Area {
     }
 
     public String getAreaFromInput(String input) {
+        if (this.next_options.size() == 1)
+            return this.next_ids.get(0);
         for (int i = 0; i < this.next_options.size(); i++) {
             if (this.next_options.get(i).equals(input)) {
                 return this.next_ids.get(i);

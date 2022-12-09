@@ -6,10 +6,10 @@
       "name": "[GAME]",
       "speaker": "[NOTICE]",
       "texts": [
-        "The game will now begin. To advance dialogue, press enter. Enjoy!"
+        "Press enter to advance dialogue and type pause to open main menu. Enjoy!"
       ],
       "options": {
-        "1": "next"
+        "1": "begin the game"
       },
       "events": []
     },
@@ -46,7 +46,7 @@
       ],
       "options": {
         "2": "i promise",
-        "0": "i do not promise"
+        "-1": "i do not promise"
       },
       "events": []
     },

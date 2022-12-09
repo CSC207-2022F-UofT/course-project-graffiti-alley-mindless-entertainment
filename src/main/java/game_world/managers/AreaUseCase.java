@@ -46,7 +46,8 @@ public class AreaUseCase {
     public void arriveAtNextArea(String input) {
         OutputHandler output = Output.getScreen();
         getToNextArea(location.getCurrentArea().getAreaFromInput(input.toLowerCase()));
-        output.generateText("You approach " + location.getCurrentArea().getName() + " in " + location.getCurrentArea().getZone() + ".");
+        if (location.getCurrentArea().getName().equals("GAME"))
+            output.generateText("You approach " + location.getCurrentArea().getName() + " in " + location.getCurrentArea().getZone() + ".\n");
     }
 
     /**
@@ -67,6 +68,8 @@ public class AreaUseCase {
      * @return true if the current input is valid
      */
     public boolean checkForValidInput(String input) {
+        if (location.getCurrentArea().getNextInputs().size() == 1)
+            return true;
         return location.getCurrentArea().getNextInputs().contains(input.toLowerCase());
     }
 
