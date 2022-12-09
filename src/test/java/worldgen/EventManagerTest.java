@@ -1,10 +1,10 @@
 package worldgen;
 
 import database.factories.QuestGiverEventFactory;
+import game_world.factories.AreaFactory;
 import game_world.factories.EventFactory;
 import game_world.factories.ItemPickUpEventFactory;
 import game_world.managers.*;
-import game_world.objects.Area;
 import game_world.objects.Location;
 import objects.character.Player;
 import objects.inventory.Inventory;
@@ -21,8 +21,9 @@ public class EventManagerTest {
         QuestGiverEventFactory questGiverEventFactory = new QuestGiverEventFactory(questInteractor);
         EventFactory eventFactory = new EventFactory(itemPickUpEventFactory, questGiverEventFactory);
         EventDatabaseInteractor eventDatabaseInteractor = new EventDatabaseInteractor(eventFactory);
-        EventManager eventManager = new EventManager(eventDatabaseInteractor);
-        AreaDatabaseInteractor areaDatabaseInteractor = new AreaDatabaseInteractor(eventManager);
+        EventManager eventManager = new EventManager();
+        AreaFactory areaFactory = new AreaFactory(eventDatabaseInteractor);
+        AreaDatabaseInteractor areaDatabaseInteractor = new AreaDatabaseInteractor(areaFactory);
         AreaManager areaManager = new AreaManager(eventManager, areaDatabaseInteractor, new Location());
         areaManager.initialize();
         areaManager.getAreaUseCase().getToNextArea("2");

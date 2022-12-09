@@ -14,9 +14,9 @@ public class AreaDatabaseInteractor {
     private final AreaDataManager database;
     private final AreaFactory areaFactory;
 
-    public AreaDatabaseInteractor(EventManager eventManager) {
+    public AreaDatabaseInteractor(AreaFactory areaFactory) {
         this.database = new AreaDataManager();
-        this.areaFactory = new AreaFactory(eventManager);
+        this.areaFactory = areaFactory;
     }
 
     /**

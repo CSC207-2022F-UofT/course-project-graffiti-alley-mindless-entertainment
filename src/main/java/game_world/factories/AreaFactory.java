@@ -1,7 +1,7 @@
 package game_world.factories;
 
 import database.objects.AreaData;
-import game_world.managers.EventManager;
+import game_world.managers.EventDatabaseInteractor;
 import game_world.objects.Area;
 
 public class AreaFactory {
@@ -10,10 +10,10 @@ public class AreaFactory {
      * A factory class for creating new Areas. Used to avoid dependencies in AreaManager.
      */
 
-    private final EventManager eventManager;
+    private final EventDatabaseInteractor eventDatabaseInteractor;
 
-    public AreaFactory(EventManager eventManager) {
-        this.eventManager = eventManager;
+    public AreaFactory(EventDatabaseInteractor eventDatabaseInteractor) {
+        this.eventDatabaseInteractor = eventDatabaseInteractor;
     }
 
     /**
@@ -30,7 +30,7 @@ public class AreaFactory {
                 data.texts,
                 data.next_ids,
                 data.next_options,
-                this.eventManager.getEventsFromArea(data.events)
+                this.eventDatabaseInteractor.getEventsFromArea(data.events)
         );
     }
 }
