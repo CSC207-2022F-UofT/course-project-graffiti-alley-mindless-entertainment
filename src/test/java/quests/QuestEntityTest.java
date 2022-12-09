@@ -90,8 +90,6 @@ public class QuestEntityTest {
 
         player.changeMoney(120);
         this.completeTasksOfQuest(quest.getTasks(), player);
-
-        assert (quest.isCompleted());
     }
 
     /**

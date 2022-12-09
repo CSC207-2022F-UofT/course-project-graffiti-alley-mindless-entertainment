@@ -71,14 +71,6 @@ public class Quest {
     }
 
     /**
-     * Adds a new task to the list of tasks.
-     * @param task to be added to the list of tasks in the quest.
-     */
-    public void addTask(Task task) {
-        this.tasks.add(task);
-    }
-
-    /**
      * @return the reward for completing the quest completed.
      */
     public Reward getReward() {
@@ -99,37 +91,14 @@ public class Quest {
      *         false otherwise.
      */
     public boolean isCompleted() {
-        // Checks whether the status is set to completed.
-        if (this.isCompleted) {
-            return true;
-        } else if (areTasksCompleted()) {
-            this.isCompleted = true;
-            return true;
-        }
-        // Otherwise, quest is not completed.
-        return false;
+        return this.isCompleted;
     }
 
     /**
-     * Checks whether all the tasks in the quest have been completed.
-     * @return true if all the tasks in the quest have been completed.
-     *         false otherwise.
+     * Completes the quest.
      */
-    private boolean areTasksCompleted() {
-        boolean areTasksCompleted = true;
-
-        for (Task task : this.tasks) {
-            areTasksCompleted = areTasksCompleted && task.isCompleted();
-        }
-
-        return areTasksCompleted;
-    }
-
-    /**
-     * Changes the status of the reward's distribution to true.
-     */
-    public void distributeReward() {
-        this.isRewardDistributed = true;
+    public void complete() {
+        this.isCompleted = true;
     }
 
     /**
@@ -137,13 +106,14 @@ public class Quest {
      */
     @Override
     public String toString() {
-        String str = this.name + ", status: ";
+        StringBuilder str = new StringBuilder(this.name + ", status: ");
+
         if (this.isCompleted) {
-            str += "completed.";
+            str.append("completed.");
         } else {
-            str += "on going.";
+            str.append("on going.");
         }
-        return str;
+        return str.toString();
     }
 
 
@@ -166,16 +136,16 @@ public class Quest {
          * @return string with all the tasks.
          */
         public String tasksToString() {
-            String str = "";
+            StringBuilder str = new StringBuilder();
 
             for (Task task: getTasks()) {
-                if (!str.equals("")) {
-                    str += "#";
+                if (!str.toString().equals("")) {
+                    str.append("#");
                 }
-                str += task.toString();
+                str.append(task.toString());
             }
 
-            return str;
+            return str.toString();
         }
 
         /**

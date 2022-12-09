@@ -49,16 +49,16 @@ public class PlayerQuests {
          */
         @Override
         public String toSavableString() {
-            String questsInformation = "";
+            StringBuilder questsInformation = new StringBuilder();
 
             for (Quest quest : quests) {
-                if (!questsInformation.equals("")) {
-                    questsInformation += "§";
+                if (!questsInformation.toString().equals("")) {
+                    questsInformation.append("§");
                 }
-                questsInformation += quest.new SaveQuest().toSavableString();
+                questsInformation.append(quest.new SaveQuest().toSavableString());
             }
 
-            return questsInformation;
+            return questsInformation.toString();
         }
 
         /**
