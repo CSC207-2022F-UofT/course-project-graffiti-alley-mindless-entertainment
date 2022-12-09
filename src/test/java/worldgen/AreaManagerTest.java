@@ -1,10 +1,14 @@
 package worldgen;
 
 import database.factories.QuestGiverEventFactory;
+import game_world.factories.DialogueStateFactory;
 import game_world.factories.EventFactory;
 import game_world.factories.ItemPickUpEventFactory;
+import game_world.factories.SelectionStateFactory;
 import game_world.managers.*;
 import game_world.objects.Location;
+import game_world.objects.states.DialogueState;
+import game_world.objects.states.SelectionState;
 import objects.character.Player;
 import objects.inventory.Inventory;
 import org.junit.jupiter.api.Test;
@@ -29,6 +33,16 @@ public class AreaManagerTest {
         assert areaManager.getAreaUseCase().getCurrentArea().getName().equals("Beach 1");
         assert areaManager.getAreaUseCase().checkForAreaEntered();
         assert areaManager.getAreaUseCase().checkForValidInput("walk along the beach");
+        DialogueStateFactory dialogueStateFactory = new DialogueStateFactory();
+        DialogueState dialogueState = dialogueStateFactory.createDialogueState(
+                areaManager.getAreaUseCase().getCurrentArea()
+        );
+        assert (!dialogueState.isDone());
+        SelectionStateFactory selectionStateFactory = new SelectionStateFactory();
+        SelectionState selectionState = selectionStateFactory.createSelectionState(
+                areaManager.getAreaUseCase().getCurrentArea().getNextInputs()
+        );
+        assert (!selectionState.isDone());
     }
 
 }
