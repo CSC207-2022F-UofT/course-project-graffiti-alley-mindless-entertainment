@@ -59,13 +59,13 @@ public class QuestMenuState implements State {
      * @return a string containing all the quests in the game, accepted by the player.
      */
     private String getQuestsStatuses() {
-        String str = "";
+        StringBuilder str = new StringBuilder();
 
         for (Quest quest: this.questInteractor.getQuests()) {
-            str += quest.toString();
+            str.append(quest.toString());
         }
 
-        return str;
+        return str.toString();
     }
 
     /**

@@ -12,19 +12,12 @@ public class ChoiceState implements State {
      * choices: The list of choices the program is allowed to make.
      */
 
-    List<String> choices;
-    String textToDisplay;
+    private final List<String> choices;
+    private final String textToDisplay;
     boolean awaitingInput = false;
-    InputValidator inputValidator;
+    private final InputValidator inputValidator;
 
     boolean isDone = false;
-
-    public ChoiceState(List<String> choices, List<String> choiceDisplayText) {
-        this.choices = choices;
-        textToDisplay = String.join("\n", choiceDisplayText);
-        inputValidator = new ChoiceInputValidator(choices);
-
-    }
 
     public ChoiceState(List<String> choices, String textToDisplay) {
         this.choices = choices;
