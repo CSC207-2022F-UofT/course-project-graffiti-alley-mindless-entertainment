@@ -1,0 +1,159 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > PlayerCreatorInteractor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">player_creation</a>
+</div>
+
+<h1>Coverage Summary for Class: PlayerCreatorInteractor (player_creation)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PlayerCreatorInteractor</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package player_creation;
+&nbsp;
+&nbsp;import character.entities.Player;
+&nbsp;import battle.entities.SkillType;
+&nbsp;
+&nbsp;/**
+&nbsp; * A use case for creating a new Player character at the start of the game. PlayerCreatorManager utilizes this
+&nbsp; * class to store user input until a new Player can be created and stored in the database.
+&nbsp; */
+&nbsp;public class PlayerCreatorInteractor {
+&nbsp;    /**
+&nbsp;     * newPlayer: The Player being created.
+&nbsp;     *
+&nbsp;     */
+&nbsp;
+&nbsp;    private final Player newPlayer;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Initializes a new PlayerCreatorInteractor with player.
+&nbsp;     */
+<b class="fc">&nbsp;    public PlayerCreatorInteractor(Player player) {</b>
+<b class="fc">&nbsp;        this.newPlayer = player;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return The new Player being created.
+&nbsp;     */
+&nbsp;    public Player getNewPlayer() {
+<b class="fc">&nbsp;        return this.newPlayer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Change newPlayer&#39;s name to name.
+&nbsp;     * @param name The new name to give to newPlayer.
+&nbsp;     */
+&nbsp;    public void addName(String name) {
+<b class="fc">&nbsp;        this.newPlayer.changeName(name);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Change newPlayer&#39;s description to description.
+&nbsp;     * @param description The new description to give to newPlayer.
+&nbsp;     */
+&nbsp;    public void addDescription(String description) {
+<b class="fc">&nbsp;        this.newPlayer.changeDescription(description);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Change newPlayer&#39;s SkillType to skillType.
+&nbsp;     * @param skillType The new SkillType to give to newPlayer.
+&nbsp;     */
+&nbsp;    public void addSkillType(SkillType skillType) {
+<b class="fc">&nbsp;        this.newPlayer.changeSkillType(skillType);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:21</div>
+</div>
+</body>
+</html>

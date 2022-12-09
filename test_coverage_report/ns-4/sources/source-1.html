@@ -1,0 +1,140 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > BattleStateFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">battle.factories</a>
+</div>
+
+<h1>Coverage Summary for Class: BattleStateFactory (battle.factories)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BattleStateFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package battle.factories;
+&nbsp;
+&nbsp;import battle.entities.BattleChoiceType;
+&nbsp;import battle.states.*;
+&nbsp;import core.State;
+&nbsp;import battle.use_cases.BattleEntityInteractor;
+&nbsp;
+&nbsp;public class BattleStateFactory {
+&nbsp;    /**
+&nbsp;     * Factory that creates Battle States needed to run an Encounter Event
+&nbsp;     * Attributes:
+&nbsp;     * battleEntityInteractor: Interactor that deals with checking stats of user and foe in battle
+&nbsp;     */
+&nbsp;    private final BattleEntityInteractor battleEntityInteractor;
+&nbsp;
+<b class="fc">&nbsp;    public BattleStateFactory(BattleEntityInteractor battleEntityInteractor) {</b>
+<b class="fc">&nbsp;        this.battleEntityInteractor = battleEntityInteractor;</b>
+&nbsp;    }
+&nbsp;    public State createWinBattleState() {
+<b class="fc">&nbsp;        return new WinBattleState(battleEntityInteractor.getUser(), battleEntityInteractor.getFoe());</b>
+&nbsp;    }
+&nbsp;    public State createLoseBattleState() {
+<b class="fc">&nbsp;        return new LoseBattleState(battleEntityInteractor.getUser(), battleEntityInteractor.getFoe());</b>
+&nbsp;    }
+&nbsp;    public State createEnemyTurnState(BattleChoiceType currChoice) {
+<b class="fc">&nbsp;        return new EnemyTurnState(battleEntityInteractor.getUser(), battleEntityInteractor.getFoe(), currChoice);</b>
+&nbsp;    }
+&nbsp;    public State createBattleMenuState(BattleChoiceType currChoice) {
+<b class="fc">&nbsp;        return new BattleMenuState(battleEntityInteractor, currChoice);</b>
+&nbsp;    }
+&nbsp;    public State createBattleSkillChoiceState(BattleChoiceType currChoice) {
+<b class="fc">&nbsp;        return new BattleSkillChoiceState(battleEntityInteractor, currChoice);</b>
+&nbsp;    }
+&nbsp;    public State createBattleItemChoiceState(BattleChoiceType currChoice) {
+<b class="fc">&nbsp;        return new BattleItemChoiceState(battleEntityInteractor, currChoice);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:21</div>
+</div>
+</body>
+</html>

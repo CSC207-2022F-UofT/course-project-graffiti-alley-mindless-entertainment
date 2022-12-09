@@ -1,0 +1,139 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > AreaFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">game_world.factories</a>
+</div>
+
+<h1>Coverage Summary for Class: AreaFactory (game_world.factories)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AreaFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package game_world.factories;
+&nbsp;
+&nbsp;import database.entities.AreaData;
+&nbsp;import game_world.use_cases.EventDatabaseInteractor;
+&nbsp;import game_world.entities.Area;
+&nbsp;
+&nbsp;public class AreaFactory {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A factory class for creating new Areas. Used to avoid dependencies in AreaManager.
+&nbsp;     */
+&nbsp;
+&nbsp;    private final EventDatabaseInteractor eventDatabaseInteractor;
+&nbsp;
+<b class="fc">&nbsp;    public AreaFactory(EventDatabaseInteractor eventDatabaseInteractor) {</b>
+<b class="fc">&nbsp;        this.eventDatabaseInteractor = eventDatabaseInteractor;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates new Area object and adds to the areas list
+&nbsp;     * @return the new area generated
+&nbsp;     * @param data data from existing AreaData
+&nbsp;     */
+&nbsp;    public Area createArea(AreaData data) {
+<b class="fc">&nbsp;        return new Area(</b>
+&nbsp;                data.id,
+&nbsp;                data.name,
+&nbsp;                data.speaker,
+&nbsp;                data.zone,
+&nbsp;                data.texts,
+&nbsp;                data.next_ids,
+&nbsp;                data.next_options,
+<b class="fc">&nbsp;                this.eventDatabaseInteractor.getEventsFromArea(data.events)</b>
+&nbsp;        );
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:21</div>
+</div>
+</body>
+</html>

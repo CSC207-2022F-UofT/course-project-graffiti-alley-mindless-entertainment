@@ -1,0 +1,169 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > EventDatabaseInteractor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">game_world.use_cases</a>
+</div>
+
+<h1>Coverage Summary for Class: EventDatabaseInteractor (game_world.use_cases)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EventDatabaseInteractor</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.7%
+  </span>
+  <span class="absValue">
+    (22/24)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package game_world.use_cases;
+&nbsp;
+&nbsp;import database.managers.EventDataManager;
+&nbsp;import database.entities.ArbitraryEventData;
+&nbsp;import database.entities.EncounterEventData;
+&nbsp;import database.entities.ItemPickUpEventData;
+&nbsp;import database.entities.QuestGiverEventData;
+&nbsp;import game_world.factories.EventFactory;
+&nbsp;import game_world.events.Event;
+&nbsp;import game_world.entities.EventType;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public class EventDatabaseInteractor {
+&nbsp;
+&nbsp;    private final EventDataManager database;
+&nbsp;    private final EventFactory eventFactory;
+&nbsp;
+<b class="fc">&nbsp;    public EventDatabaseInteractor(EventFactory eventFactory) {</b>
+<b class="fc">&nbsp;        this.database = new EventDataManager();</b>
+<b class="fc">&nbsp;        this.eventFactory = eventFactory;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param names of events to be generated
+&nbsp;     * @return array of events to be added to Area
+&nbsp;     */
+&nbsp;    public ArrayList&lt;Event&gt; getEventsFromArea(List&lt;String&gt; names) {
+<b class="fc">&nbsp;        ArrayList&lt;Event&gt; events = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        for (String name : names) {</b>
+<b class="fc">&nbsp;            events.add(createEvent(name));</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return events;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Generates new event object
+&nbsp;     * @return the new event generated
+&nbsp;     * @param name name of Event to be searched
+&nbsp;     */
+&nbsp;    private Event createEvent(String name) {
+<b class="fc">&nbsp;        EventType type = this.database.fetchEventType(name);</b>
+&nbsp;        Event newEvent;
+&nbsp;
+<b class="fc">&nbsp;        if (type == EventType.ENCOUNTER) {</b>
+<b class="fc">&nbsp;            EncounterEventData data = this.database.fetchEncounterEvent(&quot;name&quot;, name);</b>
+<b class="fc">&nbsp;            newEvent = eventFactory.createEncounterEvent(data);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        else if (type == EventType.ITEM_PICKUP) {</b>
+<b class="fc">&nbsp;            ItemPickUpEventData data = this.database.fetchItemPickUpEvent(&quot;name&quot;, name);</b>
+<b class="fc">&nbsp;            newEvent = eventFactory.createItemPickUpEvent(data);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        else if (type == EventType.QUEST_GIVER) {</b>
+<b class="fc">&nbsp;            QuestGiverEventData data = this.database.fetchQuestGiverEvent(&quot;name&quot;, name);</b>
+<b class="fc">&nbsp;            newEvent = eventFactory.createQuestGiverEvent(data);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;        else {
+<b class="nc">&nbsp;            ArbitraryEventData data = this.database.fetchArbitraryEvent(&quot;name&quot;, name);</b>
+<b class="nc">&nbsp;            newEvent = eventFactory.createArbitraryEvent(data);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return newEvent;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:21</div>
+</div>
+</body>
+</html>

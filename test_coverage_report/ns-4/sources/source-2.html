@@ -1,0 +1,154 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > EnemyAIFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">battle.factories</a>
+</div>
+
+<h1>Coverage Summary for Class: EnemyAIFactory (battle.factories)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EnemyAIFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package battle.factories;
+&nbsp;
+&nbsp;import database.managers.AIDataManager;
+&nbsp;import database.entities.AIData;
+&nbsp;import database.entities.EnemyData;
+&nbsp;import battle.entities.EnemyInfo;
+&nbsp;import battle.use_cases.ai.DefaultAI;
+&nbsp;import battle.use_cases.ai.EnemyAI;
+&nbsp;import battle.use_cases.ai.SmartAI;
+&nbsp;
+&nbsp;import java.util.Objects;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class creates an enemyAI using the given information. It creates either default AI or smart AI
+&nbsp; */
+&nbsp;public class EnemyAIFactory{
+&nbsp;    /**
+&nbsp;     * aiDataManager: this is for the class to get information about the AI
+&nbsp;     */
+&nbsp;    private final AIDataManager aiDataManager;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This is a constructor of EnemyAIFactory
+&nbsp;     * @param aiDataManager : information about the AI from the database
+&nbsp;     */
+<b class="fc">&nbsp;    public EnemyAIFactory(AIDataManager aiDataManager){</b>
+<b class="fc">&nbsp;        this.aiDataManager = aiDataManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method returns the Enemy AI that the enemy with the name in the database has.
+&nbsp;     * @param enemyInfo of the enemy to create
+&nbsp;     * @param enemyData of the enemy from the database
+&nbsp;     * @return instance enemy AI tha the enemy with the name has
+&nbsp;     */
+&nbsp;    public EnemyAI createEnemyAI(EnemyData enemyData, EnemyInfo enemyInfo){
+&nbsp;        EnemyAI AItype;
+<b class="fc">&nbsp;        String ai = enemyData.ai;</b>
+<b class="fc">&nbsp;        AIData aiData = this.aiDataManager.fetchAIData(ai);</b>
+<b class="fc">&nbsp;        if (Objects.equals(ai, &quot;smart&quot;)) {</b>
+<b class="fc">&nbsp;            AItype = new SmartAI(enemyInfo, Integer.parseInt(aiData.chance));</b>
+&nbsp;        } else{
+<b class="fc">&nbsp;            AItype = new DefaultAI(enemyInfo, Integer.parseInt(aiData.chance));</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return AItype;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+&nbsp;
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:21</div>
+</div>
+</body>
+</html>

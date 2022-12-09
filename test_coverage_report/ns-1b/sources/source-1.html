@@ -1,0 +1,331 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Inventory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">inventory.entities</a>
+</div>
+
+<h1>Coverage Summary for Class: Inventory (inventory.entities)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Inventory</td>
+<td class="coverageStat">
+  <span class="percent">
+    90%
+  </span>
+  <span class="absValue">
+    (9/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    76.7%
+  </span>
+  <span class="absValue">
+    (33/43)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Inventory$SaveInventory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.1%
+  </span>
+  <span class="absValue">
+    (16/17)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    93.3%
+  </span>
+  <span class="absValue">
+    (14/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.7%
+  </span>
+  <span class="absValue">
+    (49/60)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package inventory.entities;
+&nbsp;
+&nbsp;import inventory.entities.item.Armor;
+&nbsp;import inventory.entities.item.Item;
+&nbsp;import inventory.entities.item.Potion;
+&nbsp;import inventory.entities.item.Sword;
+&nbsp;import save.entities.SavableEntity;
+&nbsp;import save.entities.SaveEntityId;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * A class for Inventory. Includes getter and setter for inventory, and functions like viewInventory,
+&nbsp; * addItem, removeItem, and useItem.
+&nbsp; */
+&nbsp;public class Inventory {
+&nbsp;    /**
+&nbsp;     * Attribute:
+&nbsp;     * inventory: list of items the user have
+&nbsp;     */
+&nbsp;
+&nbsp;    private ArrayList&lt;Item&gt; inventory;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Initialize new inventory.
+&nbsp;     */
+<b class="fc">&nbsp;    public Inventory() {</b>
+<b class="fc">&nbsp;        this.inventory = new ArrayList&lt;&gt;();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Getter for inventory.
+&nbsp;     */
+&nbsp;    public ArrayList&lt;Item&gt; getInventory() {
+<b class="fc">&nbsp;        return inventory;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Setter for inventory.
+&nbsp;     */
+&nbsp;    public void setInventory(ArrayList&lt;Item&gt; inventory) {
+<b class="fc">&nbsp;        this.inventory = inventory;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return all items&#39; name and their ability in the inventory as a string.
+&nbsp;     */
+&nbsp;    public String viewInventory(){
+<b class="fc">&nbsp;        StringBuilder itemInfo = new StringBuilder();</b>
+&nbsp;
+<b class="fc">&nbsp;        for(int i = 0; i &lt; inventory.size(); i++){</b>
+<b class="fc">&nbsp;            Item item = inventory.get(i);</b>
+<b class="fc">&nbsp;            String[] stats = item.getStats();</b>
+<b class="fc">&nbsp;            itemInfo.append(i).append(&quot;. &quot;).append(stats[0]).append(&quot;: &quot;).append(stats[1]).append(&quot;\n&quot;);</b>
+&nbsp;
+&nbsp;        }
+<b class="fc">&nbsp;        return itemInfo.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return list of item&#39;s name
+&nbsp;     */
+&nbsp;    public String viewItemList(){
+<b class="fc">&nbsp;        StringBuilder items = new StringBuilder();</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; inventory.size(); i++) {</b>
+<b class="fc">&nbsp;            Item item = inventory.get(i);</b>
+<b class="fc">&nbsp;            items.append(i).append(&quot;. &quot;).append(item.getName()).append(&quot;\n&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return items.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return pure list of item names
+&nbsp;     */
+&nbsp;    public List&lt;String&gt; toStringList(){
+<b class="fc">&nbsp;        List&lt;String&gt; itemList = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        for (Item item : inventory) {</b>
+<b class="nc">&nbsp;            itemList.add(item.getName());</b>
+<b class="nc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return itemList;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param item to be added to inventory
+&nbsp;     * @return whether item is added.
+&nbsp;     */
+&nbsp;    public boolean addItem(Item item){
+<b class="fc">&nbsp;        int maxSize = 5;</b>
+<b class="fc">&nbsp;        if (inventory.size() &gt;= maxSize){</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;        else {
+<b class="fc">&nbsp;            inventory.add(item);</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Remove i-th item in inventory
+&nbsp;     * @param i: i-th item in the inventory that is to be removed.
+&nbsp;     * @return whether item is removed.
+&nbsp;     */
+&nbsp;    public boolean removeItem(int i){
+<b class="fc">&nbsp;        if (inventory.size() &gt; i){</b>
+<b class="fc">&nbsp;            inventory.remove(i);</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param i-th item in the inventory to be used.
+&nbsp;     * @return i-th item&#39;s ability in inventory, return null otherwise.
+&nbsp;     */
+&nbsp;    public String useItem(int i) {
+<b class="fc">&nbsp;        if (inventory.size() &gt; i){</b>
+<b class="fc">&nbsp;            Item item = inventory.get(i);</b>
+<b class="fc">&nbsp;            String ability = item.getAbility();</b>
+<b class="fc">&nbsp;            removeItem(i);</b>
+<b class="fc">&nbsp;            return ability;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param name of the item that wants to be used, uss the first one of the name.
+&nbsp;     * @return the item that has been used, or null if nothing is used.
+&nbsp;     */
+&nbsp;    public Item useItem(String name) {
+<b class="nc">&nbsp;        int index = 0;</b>
+<b class="nc">&nbsp;        for (Item item : inventory) {</b>
+<b class="nc">&nbsp;            if (name.toUpperCase().equals(item.getName())) {</b>
+<b class="nc">&nbsp;                useItem(index);</b>
+<b class="nc">&nbsp;                return item;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            index++;</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public class SaveInventory implements SavableEntity {</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @return a string representation of inventory to be saved
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public String toSavableString() {
+<b class="fc">&nbsp;            if (inventory.size() == 0) {</b>
+<b class="fc">&nbsp;                return &quot;&quot;;</b>
+&nbsp;            }
+&nbsp;            else {
+<b class="fc">&nbsp;                return viewItemList();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        /**
+&nbsp;         * @param str a string representation of inventory
+&nbsp;         * map the string representation to the corresponding object
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public void fromSavableString(String str) {
+<b class="fc">&nbsp;            inventory.clear();</b>
+<b class="fc">&nbsp;            String[] items = str.split(&quot;\n&quot;);</b>
+<b class="fc">&nbsp;            for (String item : items) {</b>
+<b class="fc">&nbsp;                if (item.equals(&quot;&quot;)){</b>
+&nbsp;                    return;
+&nbsp;                }
+<b class="fc">&nbsp;                String[] itemDetails = item.split(&quot; &quot;);</b>
+<b class="fc">&nbsp;                Item i = createItem(itemDetails[2], itemDetails[3]);</b>
+<b class="fc">&nbsp;                addItem(i);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @param itemType type of item
+&nbsp;         * @param level level of item
+&nbsp;         * @return Item object
+&nbsp;         */
+&nbsp;        public Item createItem(String level, String itemType) {
+<b class="fc">&nbsp;            switch (itemType){</b>
+&nbsp;                case &quot;SWORD&quot;:
+<b class="fc">&nbsp;                    return new Sword(Integer.parseInt(level) - 1);</b>
+&nbsp;                case &quot;POTION&quot;:
+<b class="fc">&nbsp;                    return new Potion(Integer.parseInt(level) - 1);</b>
+&nbsp;                case &quot;ARMOR&quot;:
+<b class="fc">&nbsp;                    return new Armor(Integer.parseInt(level) - 1);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @return the id of inventory in the saved entities list
+&nbsp;         */
+&nbsp;        @Override
+&nbsp;        public SaveEntityId getId() {
+<b class="fc">&nbsp;            return SaveEntityId.INVENTORY;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;}
+&nbsp;
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:21</div>
+</div>
+</body>
+</html>

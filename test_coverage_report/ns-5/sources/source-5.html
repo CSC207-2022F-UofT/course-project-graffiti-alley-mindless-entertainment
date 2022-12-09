@@ -1,0 +1,182 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > EnemyTurnState</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">battle.states</a>
+</div>
+
+<h1>Coverage Summary for Class: EnemyTurnState (battle.states)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EnemyTurnState</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    16.7%
+  </span>
+  <span class="absValue">
+    (1/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    22.7%
+  </span>
+  <span class="absValue">
+    (5/22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package battle.states;
+&nbsp;
+&nbsp;import battle.entities.BattleChoiceType;
+&nbsp;import core.State;
+&nbsp;import io.InputValidator;
+&nbsp;import io.Output;
+&nbsp;import io.OutputHandler;
+&nbsp;import battle.use_cases.StatDisplayer;
+&nbsp;import battle.use_cases.EnemyActionHandler;
+&nbsp;import character.EnemyFighter;
+&nbsp;import character.entities.Player;
+&nbsp;
+&nbsp;public class EnemyTurnState implements State {
+&nbsp;    /**
+&nbsp;     * Battle state that deals with the state where it is the enemy&#39;s turn. The enemy&#39;s
+&nbsp;     * action is decided through the enemy&#39;s AI.
+&nbsp;     * Attributes:
+&nbsp;     * user: Player object representing the user participating in the battle
+&nbsp;     * foe: EnemyFighter object representing the encountered foe of the battle
+&nbsp;     * done: Whether this state is done and ready to move on
+&nbsp;     * awaitingInput: Whether this state needs input from the user
+&nbsp;     * userAction: Enum that allows foe to know what the user did beforehand.
+&nbsp;     */
+&nbsp;    private final Player user;
+&nbsp;    private final EnemyFighter foe;
+<b class="fc">&nbsp;    private boolean done = false;</b>
+&nbsp;    private boolean awaitingInput;
+&nbsp;    private final BattleChoiceType userAction;
+&nbsp;
+<b class="fc">&nbsp;    public EnemyTurnState(Player user, EnemyFighter foe, BattleChoiceType userAction) {</b>
+<b class="fc">&nbsp;        this.user = user;</b>
+<b class="fc">&nbsp;        this.foe = foe;</b>
+<b class="fc">&nbsp;        this.userAction = userAction;</b>
+&nbsp;    }
+&nbsp;    @Override
+&nbsp;    public void preInput() {
+<b class="nc">&nbsp;        StatDisplayer statDisplayer = new StatDisplayer();</b>
+<b class="nc">&nbsp;        OutputHandler output = Output.getScreen();</b>
+&nbsp;
+<b class="nc">&nbsp;        foe.applyGimmick();</b>
+<b class="nc">&nbsp;        EnemyActionHandler action = foe.enemyAction(userAction);</b>
+&nbsp;
+<b class="nc">&nbsp;        statDisplayer.displayPreBar();</b>
+<b class="nc">&nbsp;        output.generateText(foe.getName() + &quot; outsped you!&quot;);</b>
+<b class="nc">&nbsp;        action.useAction(foe, user);</b>
+<b class="nc">&nbsp;        statDisplayer.displayPostBar();</b>
+&nbsp;
+<b class="nc">&nbsp;        foe.changeSpeed(-20); // Speed tax per turn</b>
+<b class="nc">&nbsp;        statDisplayer.displayStats(user, foe);</b>
+&nbsp;
+<b class="nc">&nbsp;        output.generateText(&quot;Press Enter to move to the next turn.&quot;);</b>
+<b class="nc">&nbsp;        this.awaitingInput = true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * EnemyTurnState does not need input from the user, user needs to press enter to continue.
+&nbsp;     * @param input from the user
+&nbsp;     * Executes when the state is awaiting input
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void postInput(String input) {
+<b class="nc">&nbsp;        this.awaitingInput = false;</b>
+<b class="nc">&nbsp;        this.done = true;</b>
+&nbsp;    }
+&nbsp;    @Override
+&nbsp;    public boolean awaitInput() {
+<b class="nc">&nbsp;        return this.awaitingInput;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isDone() {
+<b class="nc">&nbsp;        return this.done;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public InputValidator getInputValidator() {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:21</div>
+</div>
+</body>
+</html>

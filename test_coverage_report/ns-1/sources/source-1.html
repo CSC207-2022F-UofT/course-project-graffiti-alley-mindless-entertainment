@@ -1,0 +1,256 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > BattleStateManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">battle</a>
+</div>
+
+<h1>Coverage Summary for Class: BattleStateManager (battle)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BattleStateManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (3/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    44.9%
+  </span>
+  <span class="absValue">
+    (22/49)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">BattleStateManager$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (3/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    44%
+  </span>
+  <span class="absValue">
+    (22/50)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package battle;
+&nbsp;
+&nbsp;import battle.entities.BattleChoiceType;
+&nbsp;import battle.factories.BattleStateFactory;
+&nbsp;import battle.states.BattleAskingState;
+&nbsp;import core.StateManager;
+&nbsp;import game_world.entities.Location;
+&nbsp;import game_world.events.EncounterEvent;
+&nbsp;import game_world.events.Event;
+&nbsp;import core.State;
+&nbsp;import battle.use_cases.BattleEntityInteractor;
+&nbsp;import battle.factories.EnemyFactory;
+&nbsp;import character.entities.Player;
+&nbsp;
+&nbsp;public class BattleStateManager extends StateManager {
+&nbsp;    /** Class that manages the Turn states during a battle encounter. In particular, the order of
+&nbsp;     *  EnemyFacade and User turns. Uses PreBattle and PostBattle to determine set-up and results of battle.
+&nbsp;     *  Attributes:
+&nbsp;     *  user: Player object representing the user
+&nbsp;     *  foe: EnemyFacade object representing who the user is battling
+&nbsp;     */
+&nbsp;    private final BattleEntityInteractor battleEntityInteractor;
+&nbsp;    private final Location location;
+&nbsp;    private BattleChoiceType currChoice;
+&nbsp;
+<b class="fc">&nbsp;    public BattleStateManager(Player user, Location location) {</b>
+<b class="fc">&nbsp;        this.battleEntityInteractor = new BattleEntityInteractor(user);</b>
+<b class="fc">&nbsp;        this.location = location;</b>
+<b class="fc">&nbsp;        this.currChoice = BattleChoiceType.MENU;</b>
+<b class="fc">&nbsp;        initialize();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the next state based on the current state. If either EnemyFacade or user are dead, ends battle and
+&nbsp;     * provides win or lose state accordingly.
+&nbsp;     * @param input string input to dictate the next state, currently unused
+&nbsp;     * @return the state that comes next in the battle. sometimes when the user enters the wrong number this class would be used to fix the difference between the se
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    protected State nextState(String input) {
+<b class="fc">&nbsp;        BattleStateFactory battleStateFactory = new BattleStateFactory(battleEntityInteractor);</b>
+<b class="fc">&nbsp;        boolean userNext = battleEntityInteractor.userOutspeeds();</b>
+<b class="fc">&nbsp;        State chosenState = null;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (battleEntityInteractor.isFoeDead()) {</b>
+<b class="nc">&nbsp;            chosenState = battleStateFactory.createWinBattleState();</b>
+<b class="nc">&nbsp;            this.isDone = true;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        else if (battleEntityInteractor.isUserDead()) {</b>
+<b class="nc">&nbsp;            chosenState = battleStateFactory.createLoseBattleState();</b>
+<b class="nc">&nbsp;            this.isDone = true;</b>
+&nbsp;        }
+&nbsp;        else {
+<b class="fc">&nbsp;            if (userNext) {</b>
+<b class="nc">&nbsp;                switch (currChoice) {</b>
+&nbsp;                    case MENU:
+<b class="nc">&nbsp;                        chosenState = battleStateFactory.createBattleMenuState(currChoice);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case SKILLS:
+<b class="nc">&nbsp;                        chosenState = battleStateFactory.createBattleSkillChoiceState(currChoice);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case INVENTORY:
+<b class="nc">&nbsp;                        chosenState = battleStateFactory.createBattleItemChoiceState(currChoice);</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="fc">&nbsp;                chosenState = battleStateFactory.createEnemyTurnState(currChoice);</b>
+<b class="fc">&nbsp;                currChoice = BattleChoiceType.MENU;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return chosenState;</b>
+&nbsp;    }
+&nbsp;    /**
+&nbsp;     * Whether the state is done and ready to move to the next state
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void preInput() {
+<b class="nc">&nbsp;        currState.preInput();</b>
+<b class="nc">&nbsp;        boolean currPreInput = currState.isDone();</b>
+<b class="nc">&nbsp;        if (currPreInput) {</b>
+<b class="nc">&nbsp;            this.currState = this.nextState(&quot;&quot;);</b>
+<b class="nc">&nbsp;            if (this.currState == null) {</b>
+<b class="nc">&nbsp;                this.isDone = true;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Whether the state is done and ready to move to the next state
+&nbsp;     * @param input from the user
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void postInput(String input) {
+<b class="nc">&nbsp;        currState.postInput(input);</b>
+<b class="nc">&nbsp;        if (currState instanceof BattleAskingState) {</b>
+<b class="nc">&nbsp;            currChoice = ((BattleAskingState) currState).getCurrChoice();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        boolean currPostInput = currState.isDone();</b>
+<b class="nc">&nbsp;        if (currPostInput) {</b>
+<b class="nc">&nbsp;            this.currState = this.nextState(input);</b>
+<b class="nc">&nbsp;            if (this.currState == null) {</b>
+<b class="nc">&nbsp;                this.isDone = true;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Resets the manager to its constructed form, with the same player but new enemy depending on encounter
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void initialize() {
+<b class="fc">&nbsp;        EnemyFactory enemyFactory = new EnemyFactory();</b>
+<b class="fc">&nbsp;        Event currEvent = null;</b>
+<b class="fc">&nbsp;        if (location != null) {</b>
+<b class="fc">&nbsp;            currEvent = location.getCurrEvent();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        String chosenEnemy = &quot;goblin warrior&quot;;</b>
+&nbsp;        EncounterEvent encounterEvent;
+&nbsp;
+<b class="fc">&nbsp;        if (currEvent != null &amp;&amp; currEvent.type.equals((&quot;Encounter&quot;))) {</b>
+<b class="nc">&nbsp;            encounterEvent = (EncounterEvent) currEvent;</b>
+<b class="nc">&nbsp;            chosenEnemy = encounterEvent.getNPC();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        battleEntityInteractor.setFoe(enemyFactory.createEnemy(chosenEnemy));</b>
+<b class="fc">&nbsp;        currState = nextState(&quot;&quot;);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:21</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,197 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > QuestMenuState</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">pause_menu.quests</a>
+</div>
+
+<h1>Coverage Summary for Class: QuestMenuState (pause_menu.quests)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">QuestMenuState</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    71.4%
+  </span>
+  <span class="absValue">
+    (5/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    61.9%
+  </span>
+  <span class="absValue">
+    (13/21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package pause_menu.quests;
+&nbsp;
+&nbsp;import core.State;
+&nbsp;import io.InputValidator;
+&nbsp;import io.Output;
+&nbsp;import io.OutputHandler;
+&nbsp;import quests.QuestInteractor;
+&nbsp;import quests.entities.Quest;
+&nbsp;
+&nbsp;public class QuestMenuState implements State {
+&nbsp;    /**
+&nbsp;     * Attributes.
+&nbsp;     */
+&nbsp;    private final QuestInteractor questInteractor;
+&nbsp;    private boolean isDone;
+&nbsp;    private boolean isAwaitingInput;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor.
+&nbsp;     */
+<b class="fc">&nbsp;    public QuestMenuState(QuestInteractor questInteractor) {</b>
+<b class="fc">&nbsp;        this.questInteractor = questInteractor;</b>
+<b class="fc">&nbsp;        this.isDone = false;</b>
+<b class="fc">&nbsp;        this.isAwaitingInput = false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Executes when the state is not awaiting input
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void preInput() {
+&nbsp;        // completes all the quests (update the quests that can be completed).
+<b class="fc">&nbsp;        questInteractor.completeQuests();</b>
+&nbsp;
+&nbsp;        // displays the quests.
+<b class="fc">&nbsp;        OutputHandler output = Output.getScreen();</b>
+<b class="fc">&nbsp;        if (this.questInteractor.getQuests().size() == 0) {</b>
+<b class="fc">&nbsp;            output.generateText(&quot;You did not accept any quests at the moment.&quot;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            output.generateText(&quot;Here are your quests:&quot;);</b>
+<b class="nc">&nbsp;            output.generateText(getQuestsStatuses());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        this.isAwaitingInput = true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param input from the user
+&nbsp;     *              Executes when the state is awaiting input
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void postInput(String input) {
+<b class="fc">&nbsp;        this.isAwaitingInput = false;</b>
+<b class="fc">&nbsp;        this.isDone = true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return a string containing all the quests in the game, accepted by the player.
+&nbsp;     */
+&nbsp;    private String getQuestsStatuses() {
+<b class="nc">&nbsp;        StringBuilder str = new StringBuilder();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (Quest quest: this.questInteractor.getQuests()) {</b>
+<b class="nc">&nbsp;            str.append(quest.toString());</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return str.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return whether the state is awaiting input
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean awaitInput() {
+<b class="fc">&nbsp;        return this.isAwaitingInput;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return whether the state is done and ready to go to next State.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean isDone() {
+<b class="fc">&nbsp;        return this.isDone;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return null, as not needed in this case.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public InputValidator getInputValidator() {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:21</div>
+</div>
+</body>
+</html>

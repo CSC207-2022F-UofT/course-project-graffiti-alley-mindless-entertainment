@@ -1,0 +1,139 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > DatabaseManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">database.managers</a>
+</div>
+
+<h1>Coverage Summary for Class: DatabaseManager (database.managers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DatabaseManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (7/8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package database.managers;
+&nbsp;
+&nbsp;import core.IDatabase;
+&nbsp;import org.json.simple.JSONObject;
+&nbsp;import org.json.simple.parser.JSONParser;
+&nbsp;import org.json.simple.parser.ParseException;
+&nbsp;
+&nbsp;import java.io.FileReader;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;public abstract class DatabaseManager implements IDatabase {</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Manages all matters regarding JSON database, JSON library is used nowhere else
+&nbsp;     */
+&nbsp;    public JSONObject fullDatabase;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Initializes json file to a readable JSONObject
+&nbsp;     * @param fileName The JSON file name used
+&nbsp;     */
+&nbsp;    public void initializeDatabase(String fileName) {
+<b class="fc">&nbsp;        JSONParser jsonParser = new JSONParser();</b>
+<b class="fc">&nbsp;        try (FileReader reader = new FileReader(fileName))</b>
+&nbsp;        {
+&nbsp;            //Read JSON file
+<b class="fc">&nbsp;            Object obj = jsonParser.parse(reader);</b>
+<b class="fc">&nbsp;            this.fullDatabase = (JSONObject) obj;</b>
+<b class="fc">&nbsp;        } catch (ParseException | IOException e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:21</div>
+</div>
+</body>
+</html>
