@@ -1,6 +1,6 @@
 package database.factories;
 
-import database.objects.AreaData;
+import database.entities.AreaData;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 

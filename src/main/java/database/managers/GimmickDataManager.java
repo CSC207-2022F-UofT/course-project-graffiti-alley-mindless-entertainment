@@ -2,7 +2,7 @@ package database.managers;
 
 import database.DatabaseHelper;
 import database.factories.GimmickDataFactory;
-import database.objects.GimmickData;
+import database.entities.GimmickData;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 

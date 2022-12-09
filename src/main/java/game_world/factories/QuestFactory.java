@@ -1,9 +1,14 @@
 package game_world.factories;
 
 import database.managers.QuestDataManager;
-import objects.character.Bystander;
-import quests.*;
-import database.objects.QuestData;
+import character.entities.Bystander;
+import database.entities.QuestData;
+import quests.entities.PlayersStatistics;
+import quests.entities.Quest;
+import quests.use_cases.Reward;
+import quests.use_cases.StatisticalReward;
+import quests.use_cases.StatisticalTask;
+import quests.use_cases.Task;
 
 import java.util.ArrayList;
 import java.util.List;

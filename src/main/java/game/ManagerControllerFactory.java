@@ -1,35 +1,35 @@
 package game;
 
-import battlestates.BattleStateManager;
+import battle.BattleStateManager;
 import database.factories.QuestGiverEventFactory;
 import game_world.factories.AreaFactory;
 import game_world.factories.EventFactory;
 import game_world.factories.ItemPickUpEventFactory;
-import game_world.managers.AreaDatabaseInteractor;
+import game_world.use_cases.AreaDatabaseInteractor;
 import game_world.managers.AreaManager;
-import game_world.managers.EventDatabaseInteractor;
+import game_world.use_cases.EventDatabaseInteractor;
 import game_world.managers.EventManager;
-import game_world.objects.Location;
+import game_world.entities.Location;
 import main_menu.MainMenuManager;
-import menus.MenuStateFactory;
-import menus.PauseMenuManager;
-import menus.options.ChangeOptionsStateFactory;
-import quests.QuestMenuFactory;
-import menus.save.SaveMenuStateFactory;
-import objects.character.Player;
-import objects.inventory.Inventory;
-import objects.inventory.InventoryStateFactory;
-import playercreation.PlayerCreatorManager;
+import pause_menu.MenuStateFactory;
+import pause_menu.PauseMenuManager;
+import pause_menu.options.ChangeOptionsStateFactory;
+import pause_menu.quests.QuestMenuFactory;
+import pause_menu.save.SaveMenuStateFactory;
+import character.entities.Player;
+import inventory.entities.Inventory;
+import pause_menu.inventory.InventoryStateFactory;
+import player_creation.PlayerCreatorManager;
 import quests.QuestInteractor;
-import save.SaveGatewayImpl;
-import save.SaveInteractor;
-import switch_managers.ManagerController;
-import switch_managers.ManagerControllerImpl;
-import switch_managers.SwitchEventManager;
-import switch_managers.handlers.EncounterEventHandler;
-import switch_managers.handlers.MainMenuEventHandler;
-import switch_managers.handlers.PauseResumeEventHandler;
-import switch_managers.handlers.ReturnToMapEventHandler;
+import save.gateways.SaveGatewayImpl;
+import save.use_cases.SaveInteractor;
+import core.switch_managers.ManagerController;
+import core.switch_managers.ManagerControllerImpl;
+import core.switch_managers.switch_events.SwitchEventManager;
+import core.switch_managers.switch_events.handlers.EncounterEventHandler;
+import core.switch_managers.switch_events.handlers.MainMenuEventHandler;
+import core.switch_managers.switch_events.handlers.PauseResumeEventHandler;
+import core.switch_managers.switch_events.handlers.ReturnToMapEventHandler;
 
 /**
  * Used to create the manager controller for the game.

@@ -1,10 +1,12 @@
 package game;
 
-import switch_managers.*;
+import core.Shell;
+import core.switch_managers.ManagerController;
 import io.InputHandler;
 import io.InputHandlerImpl;
-import switch_managers.SwitchEventMediator;
-import switch_managers.SwitchEventMediatorProxy;
+import core.switch_managers.switch_events.SwitchEventMediator;
+import core.switch_managers.switch_events.SwitchEventMediatorProxy;
+import core.switch_managers.switch_events.SwitchEventType;
 
 public class Game {
     private final ManagerControllerFactory managerControllerFactory;

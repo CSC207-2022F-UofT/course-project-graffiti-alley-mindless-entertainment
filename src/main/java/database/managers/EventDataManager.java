@@ -2,11 +2,11 @@ package database.managers;
 
 import database.DatabaseHelper;
 import database.factories.EventDataFactory;
-import database.objects.ArbitraryEventData;
-import database.objects.EncounterEventData;
-import database.objects.ItemPickUpEventData;
-import database.objects.QuestGiverEventData;
-import game_world.objects.events.EventType;
+import database.entities.ArbitraryEventData;
+import database.entities.EncounterEventData;
+import database.entities.ItemPickUpEventData;
+import database.entities.QuestGiverEventData;
+import game_world.entities.EventType;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 

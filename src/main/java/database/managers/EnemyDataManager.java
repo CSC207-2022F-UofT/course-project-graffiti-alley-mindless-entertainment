@@ -2,7 +2,7 @@ package database.managers;
 
 import database.DatabaseHelper;
 import database.factories.EnemyDataFactory;
-import database.objects.EnemyData;
+import database.entities.EnemyData;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 

@@ -4,7 +4,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
-import database.objects.EnemyData;
+import database.entities.EnemyData;
 
 public class EnemyDataFactory {
 

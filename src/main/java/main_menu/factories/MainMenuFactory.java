@@ -1,11 +1,11 @@
 package main_menu.factories;
 
 
-import interfaces.State;
+import core.State;
 import main_menu.states.LoadGameState;
 import main_menu.states.MainMenuState;
 import main_menu.states.NewGameState;
-import save.SaveInteractor;
+import save.use_cases.SaveInteractor;
 
 /** A factory class for creating new States from main_menu.states. Used to avoid dependencies in MainMenuManager.
  */

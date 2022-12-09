@@ -1,8 +1,8 @@
 package game_world.managers;
 
-import game_world.objects.Area;
-import game_world.objects.events.Event;
-import interfaces.State;
+import game_world.entities.Area;
+import game_world.events.Event;
+import core.State;
 
 import java.util.ArrayList;
 
