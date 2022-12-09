@@ -19,7 +19,7 @@ public abstract class StateManager{
     }
 
     /**
-     * @return whether the state is done and ready to move to the next state
+     * Executes whenever currState is not awaiting input.
      */
     public void preInput() {
         currState.preInput();
@@ -28,14 +28,13 @@ public abstract class StateManager{
             this.currState = this.nextState("");
             if (this.currState == null) {
                 this.isDone = true;
-                return;
             }
         }
     }
 
     /**
+     * Executes whenever currState is awaiting input.
      * @param input from the user
-     * @return whether the state is done and ready to move to the next state
      */
     public void postInput(String input) {
         currState.postInput(input);
@@ -44,7 +43,6 @@ public abstract class StateManager{
             this.currState = this.nextState(input);
             if (this.currState == null) {
                 this.isDone = true;
-                return;
             }
         }
     }

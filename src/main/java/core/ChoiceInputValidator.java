@@ -10,7 +10,7 @@ public class ChoiceInputValidator implements InputValidator {
     /**
      * allowedInputs: The inputs the program will allow from the user.
      */
-    List<String> allowedInputs;
+    private final List<String> allowedInputs;
 
     public ChoiceInputValidator(List<String> allowedInputs) {
         this.allowedInputs = allowedInputs;
