@@ -33,6 +33,7 @@ public class AreaManager extends StateManager {
     public void initialize() {
         areaUseCase.getToNextArea("0");
         this.currState = dialogueStateFactory.createDialogueState(areaUseCase.getCurrentArea());
+        eventManager.clearCompletedEvents();
     }
 
     /**
