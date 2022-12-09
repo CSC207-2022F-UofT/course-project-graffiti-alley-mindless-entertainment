@@ -49,7 +49,8 @@ public class StatisticalTask extends Task {
             case EXPERIENCE:
                 return assignee.getExperience();
             case LEVEL:
-                return assignee.getLevel();
+                // static from Player's statistic.
+                return Player.getLevel();
             case MONEY:
                 return assignee.getMoney();
             default:

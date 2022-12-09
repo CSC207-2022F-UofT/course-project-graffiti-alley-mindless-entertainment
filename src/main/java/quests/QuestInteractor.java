@@ -63,21 +63,28 @@ public class QuestInteractor {
     }
 
     /**
+     * Attempts to complete the tasks.
      * @param quest to be completed.
      */
     private void completeQuest(Quest quest) {
-        if (!quest.isCompleted()) {
-            //attempts to complete the tasks.
-            completeTasks(quest);
+        if (areTasksCompleted(quest)) {
+            quest.complete();
         }
     }
 
     /**
-     * @param quest for which the tasks need to be completed.
+     * Checks whether all the tasks in the quest have been completed.
+     * @param quest we want to check the tasks from.
+     * @return true if all the tasks in the quest have been completed.
+     *         false otherwise.
      */
-    public void completeTasks(Quest quest) {
-        for (Task task: quest.getTasks()) {
-            task.isCompleted(player);
+    private boolean areTasksCompleted(Quest quest) {
+        boolean areTasksCompleted = true;
+
+        for (Task task : quest.getTasks()) {
+            areTasksCompleted = areTasksCompleted && task.isCompleted();
         }
+
+        return areTasksCompleted;
     }
 }
