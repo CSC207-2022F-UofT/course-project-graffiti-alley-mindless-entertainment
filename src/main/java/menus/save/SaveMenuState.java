@@ -59,6 +59,9 @@ public class SaveMenuState implements State {
                 return;
             }
             int s = Integer.parseInt(slot);
+            if (s == 0) {
+                Output.getScreen().generateText("Slot #0 is reserved for autosave.");
+            }
             if (s < 1 || s > interactor.getMaxSlots()) {
                 Output.getScreen().generateText("Please enter a valid slot.");
                 return;

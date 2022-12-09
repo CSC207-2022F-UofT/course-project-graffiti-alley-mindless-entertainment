@@ -20,7 +20,7 @@ class SaveInteractorTest {
         boolean load = saveInteractor.loadFromSlot(1);
         Assertions.assertTrue(load);
         String slotsStatus = saveInteractor.getSlotsStatus();
-        String expected = "Saves: \n" + "Slot #1: occupied\n" +
+        String expected = "Saves: \n" + "Slot #0: autosave\n" + "Slot #1: occupied\n" +
                 "Slot #2: vacant\n" + "Slot #3: vacant\n";
         Assertions.assertEquals(slotsStatus, expected);
     }
