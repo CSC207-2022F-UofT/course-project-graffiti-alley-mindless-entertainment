@@ -28,7 +28,7 @@ public class WorldInputValidator implements InputValidator {
         // Validates and parses user input if valid, returns null if invalid.
         if (this.possibleInputs.isEmpty()) {
             // Enter any key
-            return "";
+            return input.toLowerCase();
         }
         else {
             String lowerInput = input.toLowerCase();
