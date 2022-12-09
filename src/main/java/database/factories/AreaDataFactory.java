@@ -23,8 +23,8 @@ public class AreaDataFactory {
             events.add((String) obj);
 
         JSONObject jsonOptions = (JSONObject) jsonObject.get("options");
-        ArrayList<String> next_ids = new ArrayList<>(jsonOptions.keySet());
-        ArrayList<String> next_options = new ArrayList<>(jsonOptions.values());
+        ArrayList next_ids = new ArrayList<>(jsonOptions.keySet());
+        ArrayList next_options = new ArrayList<>(jsonOptions.values());
 
         return new AreaData(
                 id,

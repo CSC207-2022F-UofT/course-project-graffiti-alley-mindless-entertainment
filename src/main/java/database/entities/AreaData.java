@@ -8,14 +8,14 @@ public class AreaData {
      * All information needed for an area
      */
 
-    public String id;
-    public String name;
-    public String speaker;
-    public String zone;
-    public ArrayList<String> texts;
-    public ArrayList<String> events;
-    public ArrayList<String> next_ids;
-    public ArrayList<String> next_options;
+    public final String id;
+    public final String name;
+    public final String speaker;
+    public final String zone;
+    public final ArrayList<String> texts;
+    public final ArrayList<String> events;
+    public final ArrayList<String> next_ids;
+    public final ArrayList<String> next_options;
 
     public AreaData(String id, String name, String speaker, String zone, ArrayList<String> texts,
                     ArrayList<String> next_ids, ArrayList<String> next_options, ArrayList<String> events) {
