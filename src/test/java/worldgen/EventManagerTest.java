@@ -24,6 +24,10 @@ public class EventManagerTest {
         EventManager eventManager = new EventManager(eventDatabaseInteractor);
         AreaDatabaseInteractor areaDatabaseInteractor = new AreaDatabaseInteractor(eventManager);
         AreaManager areaManager = new AreaManager(eventManager, areaDatabaseInteractor, new Location());
+        areaManager.initialize();
+        areaManager.getAreaUseCase().getToNextArea("2");
+        eventManager.areaEntered(areaManager.getAreaUseCase().getCurrentArea());
+        assert !eventManager.queueCleared();
     }
 
 }
