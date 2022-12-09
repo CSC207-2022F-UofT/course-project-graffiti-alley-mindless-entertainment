@@ -1,7 +1,6 @@
 package game_world.factories;
 
 import database.entities.ItemPickUpEventData;
-import game_world.entities.events.*;
 import game_world.events.ItemPickUpEvent;
 import inventory.entities.Inventory;
 

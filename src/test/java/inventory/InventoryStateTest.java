@@ -6,7 +6,6 @@ import inventory.entities.item.Armor;
 import inventory.entities.item.Item;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import entities.item.*;
 
 /**
  * Test methods in InventoryState.java

@@ -1,6 +1,5 @@
 package inventory;
 
-import entities.item.*;
 import inventory.entities.Inventory;
 import inventory.entities.item.Armor;
 import inventory.entities.item.Item;

@@ -36,7 +36,7 @@ public class PauseMenuManager extends StateManager {
      */
     public PauseMenuManager(MenuStateFactory menuStateFactory) {
         this.menuStateFactory = menuStateFactory;
-        this.optionsCommand = "entities/options";
+        this.optionsCommand = "options";
         this.inventoryCommand = "inventory";
         this.questCommand = "quest";
         this.saveCommand = "save";

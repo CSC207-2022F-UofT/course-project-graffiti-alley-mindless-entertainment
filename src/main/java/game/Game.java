@@ -2,7 +2,6 @@ package game;
 
 import core.Shell;
 import core.switch_managers.ManagerController;
-import switch_managers.*;
 import io.InputHandler;
 import io.InputHandlerImpl;
 import core.switch_managers.switch_events.SwitchEventMediator;

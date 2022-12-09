@@ -1,6 +1,5 @@
 package inventory.entities;
 
-import entities.item.*;
 import inventory.entities.item.Armor;
 import inventory.entities.item.Item;
 import inventory.entities.item.Potion;
@@ -132,9 +131,8 @@ public class Inventory {
         int index = 0;
         for (Item item : inventory) {
             if (name.toUpperCase().equals(item.getName())) {
-                Item returnItem = item;
                 useItem(index);
-                return returnItem;
+                return item;
             }
             index++;
         }

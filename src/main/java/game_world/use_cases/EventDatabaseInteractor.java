@@ -10,6 +10,7 @@ import game_world.events.Event;
 import game_world.entities.EventType;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class EventDatabaseInteractor {
 
@@ -25,7 +26,7 @@ public class EventDatabaseInteractor {
      * @param names of events to be generated
      * @return array of events to be added to Area
      */
-    public ArrayList<Event> getEventsFromArea(ArrayList<String> names) {
+    public ArrayList<Event> getEventsFromArea(List<String> names) {
         ArrayList<Event> events = new ArrayList<>();
         for (String name : names) {
             events.add(createEvent(name));

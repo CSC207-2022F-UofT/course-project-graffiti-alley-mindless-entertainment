@@ -22,7 +22,7 @@ public class AreaDataFactory {
         for (Object obj : (JSONArray) jsonObject.get("events"))
             events.add((String) obj);
 
-        JSONObject jsonOptions = (JSONObject) jsonObject.get("entities/options");
+        JSONObject jsonOptions = (JSONObject) jsonObject.get("options");
         ArrayList<String> next_ids = new ArrayList<>(jsonOptions.keySet());
         ArrayList<String> next_options = new ArrayList<>(jsonOptions.values());
 
