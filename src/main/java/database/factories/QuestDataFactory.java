@@ -6,6 +6,9 @@ import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * This class contains the methods needed to create a QuestData object, suing the factory design pattern.
+ */
 public class QuestDataFactory {
 
     /**
@@ -35,5 +38,4 @@ public class QuestDataFactory {
                 taskTypes, taskStatistics, taskValues
         );
     }
-
 }

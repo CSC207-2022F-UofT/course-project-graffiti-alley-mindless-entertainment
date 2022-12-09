@@ -4,35 +4,32 @@ import game_world.WorldInputValidator;
 import io.InputValidator;
 import io.Output;
 import io.OutputHandler;
-import quests.Quest;
 import quests.QuestInteractor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * This class contains QuestGiverEvent, which is executed when there is a quest to be given
+ */
 public class QuestGiverEvent extends Event {
 
     /**
-     * Event executes when there is a quest to be given
+     * Attributes.
      */
-
     private final String quest;
     private final String npc;
     private final WorldInputValidator inputValidator;
     private boolean isDone;
     private boolean awaitInput;
-
-    private QuestInteractor questInteractor;
-
-    // change below for inputs u want
-    private final ArrayList<String> inputs = new ArrayList<String>(Arrays.asList(
+    private final QuestInteractor questInteractor;
+    private final ArrayList<String> inputs = new ArrayList<>(Arrays.asList(
             "yes", "no"
     ));
 
-    public String getNPC() {
-        return this.npc;
-    }
-
+    /**
+     * Constructor.
+     */
     public QuestGiverEvent(String name, String quest, String npc, QuestInteractor questInteractor) {
         this.name = name;
         this.type = "Quest Giver";
@@ -42,6 +39,13 @@ public class QuestGiverEvent extends Event {
         this.awaitInput = false;
         this.isDone = false;
         this.questInteractor = questInteractor;
+    }
+
+    /**
+     * @return name of the npc.
+     */
+    public String getNPC() {
+        return this.npc;
     }
 
     @Override
@@ -55,6 +59,10 @@ public class QuestGiverEvent extends Event {
         output.generateText(String.valueOf(newMessage));
     }
 
+    /**
+     * Executes when the state is awaiting input.
+     * @param input from the user
+     */
     @Override
     public void postInput(String input) {
         this.awaitInput = false;
@@ -68,16 +76,25 @@ public class QuestGiverEvent extends Event {
         }
     }
 
+    /**
+     * @return whether the QuestGiverEvent object is awaiting input or not.
+     */
     @Override
     public boolean awaitInput() {
         return this.awaitInput;
     }
 
+    /**
+     * @return whether the QuestGiverEvent is done or not.
+     */
     @Override
     public boolean isDone() {
         return this.isDone;
     }
 
+    /**
+     * @return the input validator.
+     */
     @Override
     public InputValidator getInputValidator() {
         return this.inputValidator;

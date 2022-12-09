@@ -8,8 +8,8 @@ public class QuestGiverEventData {
 
     public String name;
     public String type;
-    public String npc;
     public String quest;
+    public String npc;
 
     public QuestGiverEventData(String name, String type, String quest, String npc) {
         this.name = name;

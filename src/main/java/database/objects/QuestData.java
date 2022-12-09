@@ -2,11 +2,11 @@ package database.objects;
 
 import java.util.ArrayList;
 
+/**
+ * This class contains all information needed for the creation of a quest.
+ */
 public class QuestData {
 
-    /**
-     * All information needed for the creation of a quest
-     */
     public String name;
     public String description;
     public String bystander;
@@ -19,6 +19,9 @@ public class QuestData {
     public ArrayList<String> tasksStatistics;
     public ArrayList<Long> tasksValues;
 
+    /**
+     * Constructor.
+     */
     public QuestData(String name, String description, String bystander, String rewardType, String rewardStatistic,
                      long rewardValue, ArrayList<String> tasksTypes, ArrayList<String> tasksStatistics,
                      ArrayList<Long> tasksValues) {
