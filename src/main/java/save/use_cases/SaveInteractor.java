@@ -21,11 +21,11 @@ public class SaveInteractor {
      * gateway: the gateway to save file
      * MAX_SLOTS: the maximum space for Saves
      */
-    List<SavableEntity> entities;
-    List<Save> saves;
-    SaveLoader loader;
-    SaveFactory creator;
-    SaveGateway gateway;
+    final List<SavableEntity> entities;
+    final List<Save> saves;
+    final SaveLoader loader;
+    final SaveFactory creator;
+    final SaveGateway gateway;
     private final int MAX_SLOTS;
 
     public SaveInteractor(int max_slots, SaveGateway gateway) {

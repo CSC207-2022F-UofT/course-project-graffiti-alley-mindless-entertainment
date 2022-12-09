@@ -18,7 +18,7 @@ public class SaveFactory {
      * @return a Save created
      */
     public Save createSave(List<SavableEntity> entities) {
-        Map<SaveEntityId, String> dataToSave = new HashMap<SaveEntityId, String>();
+        Map<SaveEntityId, String> dataToSave = new HashMap<>();
         for (SavableEntity e : entities) {
             dataToSave.put(e.getId(), e.toSavableString());
         }

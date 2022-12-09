@@ -6,6 +6,6 @@ public interface InputHandler {
      * @param validator from wherever is calling input
      * @return a valid user input
      */
-    public String getChoice(InputValidator validator);
+    String getChoice(InputValidator validator);
 }
 

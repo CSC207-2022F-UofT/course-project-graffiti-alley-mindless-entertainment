@@ -14,7 +14,7 @@ public class OutputHandlerImpl implements OutputHandler {
     private final MessageHistory messageHistory;
 
     /**
-     * using Singleton pattern so that globally there is only one OutputHandler instance, which is screen
+     * using Singleton pattern so that globally there is only one OutputHandler instance, which is the screen
      */
     public OutputHandlerImpl() {
         messageHistory = new MessageHistory();
