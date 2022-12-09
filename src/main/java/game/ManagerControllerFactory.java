@@ -87,7 +87,7 @@ public class ManagerControllerFactory {
      */
     void createReturnToMapEventHandler() {
         EventManager eventManager = new EventManager();
-        AreaManager areaManager = new AreaManager(eventManager, areaDatabaseInteractor, gameEntities.getLocation());
+        AreaManager areaManager = new AreaManager(eventManager, areaDatabaseInteractor, gameEntities.getLocation(), saveInteractor);
         managerController.addManager(areaManager);
 
         ReturnToMapEventHandler startGameEventHandler = new ReturnToMapEventHandler(areaManager);

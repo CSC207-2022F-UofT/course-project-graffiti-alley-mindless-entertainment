@@ -24,7 +24,7 @@ public class AreaManagerTest {
         EventManager eventManager = new EventManager();
         AreaFactory areaFactory = new AreaFactory(eventDatabaseInteractor);
         AreaDatabaseInteractor areaDatabaseInteractor = new AreaDatabaseInteractor(areaFactory);
-        AreaManager areaManager = new AreaManager(eventManager, areaDatabaseInteractor, new Location());
+        AreaManager areaManager = new AreaManager(eventManager, areaDatabaseInteractor, new Location(), null);
         areaManager.initialize();
         assert areaManager.getAreaUseCase().getCurrentArea().getName().equals("[GAME]");
         areaManager.getAreaUseCase().getToNextArea("2");
