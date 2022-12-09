@@ -26,11 +26,11 @@ public class Location {
     }
     public class SaveLocation implements SavableEntity {
 
-        public void setDatabaseController(AreaDatabaseInteractor databaseController) {
+        public SaveLocation(AreaDatabaseInteractor databaseController) {
             this.databaseController = databaseController;
         }
 
-        private AreaDatabaseInteractor databaseController;
+        private final AreaDatabaseInteractor databaseController;
         @Override
         public String toSavableString () {
             if (currentArea == null) {return "";}

@@ -1,6 +1,5 @@
 package game_world.managers;
 
-import game_world.factories.ItemPickUpEventFactory;
 import game_world.objects.Area;
 import game_world.objects.events.Event;
 import interfaces.State;
@@ -15,27 +14,13 @@ public class EventManager {
 
     private final ArrayList<Event> eventQueue;
     private final ArrayList<String> completedEvents;
-    private final EventDatabaseInteractor databaseController;
 
     /**
      * Constructs EventManager
      */
-    public EventManager(EventDatabaseInteractor eventDatabaseInteractor) {
+    public EventManager() {
         this.eventQueue = new ArrayList<>();
-        this.databaseController = eventDatabaseInteractor;
         this.completedEvents = new ArrayList<>();
-    }
-
-    /**
-     * @param names of events to be generated
-     * @return array of events to be added to Area
-     */
-    public ArrayList<Event> getEventsFromArea(ArrayList<String> names) {
-        ArrayList<Event> events = new ArrayList<>();
-        for (String name : names) {
-            events.add(databaseController.createEvent(name));
-        }
-        return events;
     }
 
     /**

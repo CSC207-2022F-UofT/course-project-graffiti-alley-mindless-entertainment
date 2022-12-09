@@ -12,7 +12,6 @@ class SaveInteractorTest {
         TestSaveGateway saveGateway = new TestSaveGateway();
         GameEntities gameEntities = new GameEntities();
         SaveInteractor saveInteractor = new SaveInteractor(3, saveGateway);
-        saveInteractor.addSavableEntity(gameEntities.getLocation().new SaveLocation());
         saveInteractor.addSavableEntity(gameEntities.getInventory().new SaveInventory());
         saveInteractor.addSavableEntity(gameEntities.getOptions().new SaveOptions());
         saveInteractor.addSavableEntity(gameEntities.getPlayer().new SavePlayer());

@@ -2,6 +2,7 @@ package game;
 
 import battlestates.BattleStateManager;
 import database.factories.QuestGiverEventFactory;
+import game_world.factories.AreaFactory;
 import game_world.factories.EventFactory;
 import game_world.factories.ItemPickUpEventFactory;
 import game_world.managers.AreaDatabaseInteractor;
@@ -38,8 +39,8 @@ public class ManagerControllerFactory {
     private final ManagerController managerController;
     private final SwitchEventManager switchEventManager;
 
-    private AreaDatabaseInteractor areaDatabaseInteractor;
-    private QuestInteractor questInteractor;
+    private final AreaDatabaseInteractor areaDatabaseInteractor;
+    private final QuestInteractor questInteractor;
     private final GameEntities gameEntities;
     private final SaveInteractor saveInteractor;
 
@@ -48,6 +49,7 @@ public class ManagerControllerFactory {
         managerController = new ManagerControllerImpl(switchEventManager);
         this.gameEntities = gameEntities;
         questInteractor = new QuestInteractor(gameEntities.getPlayer());
+        areaDatabaseInteractor = createAreaDatabaseInteractor();
         saveInteractor = createSaveInteractor();
     }
 
@@ -84,14 +86,7 @@ public class ManagerControllerFactory {
      * Creates the start game event handler.
      */
     void createReturnToMapEventHandler() {
-        Inventory inventory = gameEntities.getInventory();
-        Player.inventory = inventory;
-        ItemPickUpEventFactory itemPickUpEventFactory = new ItemPickUpEventFactory(inventory);
-
-        EventFactory eventFactory = new EventFactory(itemPickUpEventFactory, new QuestGiverEventFactory(questInteractor));
-        EventDatabaseInteractor eventDatabaseInteractor = new EventDatabaseInteractor(eventFactory);
-        EventManager eventManager = new EventManager(eventDatabaseInteractor);
-        areaDatabaseInteractor = new AreaDatabaseInteractor(eventManager);
+        EventManager eventManager = new EventManager();
         AreaManager areaManager = new AreaManager(eventManager, areaDatabaseInteractor, gameEntities.getLocation());
         managerController.addManager(areaManager);
 
@@ -122,8 +117,7 @@ public class ManagerControllerFactory {
      */
     SaveInteractor createSaveInteractor() {
         SaveGatewayImpl saveGateway = new SaveGatewayImpl();
-        Location.SaveLocation saveLocation = gameEntities.getLocation().new SaveLocation();
-        saveLocation.setDatabaseController(areaDatabaseInteractor);
+        Location.SaveLocation saveLocation = gameEntities.getLocation().new SaveLocation(areaDatabaseInteractor);
         SaveInteractor saveInteractor = new SaveInteractor(3, saveGateway);
         saveInteractor.addSavableEntity(saveLocation);
         saveInteractor.addSavableEntity(gameEntities.getInventory().new SaveInventory());
@@ -142,5 +136,20 @@ public class ManagerControllerFactory {
         EncounterEventHandler encounterEventHandler = new EncounterEventHandler(battleStateManager);
 
         switchEventManager.addSwitchEventHandler(encounterEventHandler);
+    }
+
+    /**
+     * Creates the area database interactor.
+     * @return the area database interactor
+     */
+    AreaDatabaseInteractor createAreaDatabaseInteractor() {
+        Inventory inventory = gameEntities.getInventory();
+        Player.inventory = inventory;
+        ItemPickUpEventFactory itemPickUpEventFactory = new ItemPickUpEventFactory(inventory);
+
+        EventFactory eventFactory = new EventFactory(itemPickUpEventFactory, new QuestGiverEventFactory(questInteractor));
+        EventDatabaseInteractor eventDatabaseInteractor = new EventDatabaseInteractor(eventFactory);
+        AreaFactory areaFactory = new AreaFactory(eventDatabaseInteractor);
+        return new AreaDatabaseInteractor(areaFactory);
     }
 }
