@@ -10,7 +10,7 @@ public class Save {
     /**
      * savedData: the data saved
      */
-    Map<SaveEntityId, String> savedData;
+    final Map<SaveEntityId, String> savedData;
 
     public Save(Map<SaveEntityId, String> dataToSave) {
         savedData = dataToSave;
