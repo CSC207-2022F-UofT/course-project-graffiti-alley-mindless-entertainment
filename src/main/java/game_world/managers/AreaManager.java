@@ -5,6 +5,8 @@ import game_world.factories.DialogueStateFactory;
 import game_world.factories.SelectionStateFactory;
 import game_world.objects.Location;
 import interfaces.State;
+import options.Options;
+import save.SaveInteractor;
 
 public class AreaManager extends StateManager {
 
@@ -17,9 +19,12 @@ public class AreaManager extends StateManager {
     private final EventManager eventManager;
     private final AreaUseCase areaUseCase;
 
-    public AreaManager(EventManager eventManager, AreaDatabaseInteractor areaDatabaseInteractor, Location location) {
+    private final SaveInteractor saveInteractor;
+
+    public AreaManager(EventManager eventManager, AreaDatabaseInteractor areaDatabaseInteractor, Location location, SaveInteractor saveInteractor) {
         this.eventManager = eventManager;
         this.areaUseCase = new AreaUseCase(areaDatabaseInteractor, location);
+        this.saveInteractor = saveInteractor;
     }
 
     @Override
@@ -34,6 +39,9 @@ public class AreaManager extends StateManager {
      */
     @Override
     protected State nextState(String input) {
+        if (Options.getOptions().isEnableAutoSave()) {
+            saveInteractor.saveAtSlot(0);
+        }
         if (areaUseCase.checkForAreaEntered()) {
             eventManager.areaEntered(areaUseCase.getCurrentArea());
             this.currState = dialogueStateFactory.createDialogueState(areaUseCase.getCurrentArea());

@@ -9,7 +9,7 @@ The options of the game. A data storage class.
 */
 public class Options {
     private int textSpeed = 1;
-    private boolean enableAutoSave = true;
+    private boolean enableAutoSave = false;
 
     private static Options instance;
 
