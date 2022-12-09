@@ -12,7 +12,7 @@ public class UseItemHandler {
      * Attributes:
      * fighters: Battle entities participating in the exchange of stats.
      */
-    private BattleEntityInteractor fighters;
+    private final BattleEntityInteractor fighters;
     public UseItemHandler(BattleEntityInteractor fighters) {
         this.fighters = fighters;
     }
