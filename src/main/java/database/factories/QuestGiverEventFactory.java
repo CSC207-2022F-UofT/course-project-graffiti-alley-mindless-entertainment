@@ -1,7 +1,6 @@
 package database.factories;
 
 import database.objects.QuestGiverEventData;
-import game_world.factories.EventFactory;
 import game_world.objects.events.QuestGiverEvent;
 import quests.QuestInteractor;
 
@@ -13,7 +12,7 @@ public class QuestGiverEventFactory {
     /**
      * Attributes.
      */
-    private QuestInteractor interactor;
+    private final QuestInteractor interactor;
 
     /**
      * Constructor.

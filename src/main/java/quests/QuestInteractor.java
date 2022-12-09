@@ -1,12 +1,7 @@
 package quests;
 
-import database.factories.QuestGiverEventFactory;
 import game_world.factories.QuestFactory;
-import game_world.objects.events.QuestGiverEvent;
 import objects.character.Player;
-import quests.PlayerQuests;
-import quests.Quest;
-import quests.Task;
 
 import java.util.List;
 
@@ -17,9 +12,9 @@ public class QuestInteractor {
     /**
      * Attributes.
      */
-    private PlayerQuests questsInGame;
-    private Player player;
-    private QuestFactory questFactory;
+    private final PlayerQuests questsInGame;
+    private final Player player;
+    private final QuestFactory questFactory;
 
 
     /**
