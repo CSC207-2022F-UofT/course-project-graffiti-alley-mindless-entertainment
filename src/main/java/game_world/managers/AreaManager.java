@@ -20,13 +20,14 @@ public class AreaManager extends StateManager {
     public AreaManager(EventManager eventManager, AreaDatabaseInteractor areaDatabaseInteractor, Location location) {
         this.eventManager = eventManager;
         this.areaUseCase = new AreaUseCase(areaDatabaseInteractor, location);
-        areaUseCase.getToNextArea("0");
+        initialize();
     }
 
     @Override
     public void initialize() {
+        areaUseCase.getToNextArea("0");
         this.currState = dialogueStateFactory.createDialogueState(areaUseCase.getCurrentArea());
-        areaUseCase.getToNextArea("1");
+
     }
 
     /**

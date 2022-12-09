@@ -33,7 +33,6 @@ public class PlayerCreatorManager extends StateManager {
      * @param player The Player entity passed into the manager.
      */
     public PlayerCreatorManager(Player player) {
-        this.completedQuestions = 0;
         PlayerCreatorInteractor creatorInteractor = new PlayerCreatorInteractor(player);
         this.questionStateFactory = new PlayerQuestionStateFactory(creatorInteractor);
         this.confirmStateFactory = new PlayerConfirmStateFactory();
@@ -45,6 +44,7 @@ public class PlayerCreatorManager extends StateManager {
      */
     @Override
     public void initialize() {
+        this.completedQuestions = 0;
         this.currPlayerQuestion = PlayerQuestion.NAME;
         currState = questionStateFactory.createPlayerNameState();
     }

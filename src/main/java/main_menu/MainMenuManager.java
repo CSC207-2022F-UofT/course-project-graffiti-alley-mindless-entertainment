@@ -20,15 +20,13 @@ public class MainMenuManager extends StateManager {
      */
     private MainMenuOptions currStateEnum;
     private final MainMenuFactory menuFactory;
-    private final SaveInteractor saveInteractor;
 
     /**
      * Initializes a new MainMenuManager.
      * @param saveInteractor The SaveInteractor of this main menu manager.
      */
     public MainMenuManager(SaveInteractor saveInteractor) {
-        this.saveInteractor = saveInteractor;
-        this.menuFactory = new MainMenuFactory(this.saveInteractor);
+        this.menuFactory = new MainMenuFactory(saveInteractor);
         initialize();
     }
 
@@ -73,7 +71,6 @@ public class MainMenuManager extends StateManager {
                 this.currStateEnum = MainMenuOptions.MAINMENU;
                 return this.currState;
             }
-            this.saveInteractor.loadFromSlot(Integer.parseInt(input));
         }
         else if (input.equalsIgnoreCase("exit")) {
             SwitchEventMediator mediator = SwitchEventMediatorProxy.getInstance();

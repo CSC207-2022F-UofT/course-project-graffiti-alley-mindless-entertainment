@@ -1,27 +1,37 @@
 package objects.character;
 
+/**
+ * A class for the Bystander character.
+ */
 public class Bystander extends Character {
-    /** A class for the Bystander character.
-     * Attributes:
+    /**
      * name: The name of the Bystander.
      * hasQuest: True if the Bystander is involved in a Quest.
      */
     private String name;
     private boolean hasQuest;
 
+    /**
+     * Initializes a Bystander with name and hasQuest.
+     * @param name The name of the Bystander.
+     * @param hasQuest True if the Bystander is associated with a quest, false otherwise.
+     */
     public Bystander(String name, boolean hasQuest) {
-        // Creates a Bystander with name and hasQuest.
         super(name);
         this.hasQuest = hasQuest;
     }
 
+    /**
+     * @return True if this Bystander is involved in a Quest, false otherwise.
+     */
     public boolean hasQuest() {
-        // Returns true if this Bystander is involved in a Quest, and false otherwise.
         return this.hasQuest;
     }
 
+    /**
+     * Switches hasQuest between true and false, or false and true.
+     */
     public void switchHasQuest() {
-        // Switches hasQuest between true and false, or false and true.
         this.hasQuest = !this.hasQuest;
     }
 }

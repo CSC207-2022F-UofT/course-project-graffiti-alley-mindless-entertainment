@@ -38,9 +38,6 @@ public class MainMenuEventHandler implements SwitchEventHandler {
         switch (eventType) {
             case NEW_GAME:
                 return this.playerCreatorManager;
-            case LOAD_GAME:
-                // Awaiting saving implementation to return an AreaManager based on information from a database.
-                return null;
             case MAIN_MENU:
             case END_GAME:
                 return mainMenuManager;

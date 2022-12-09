@@ -1,5 +1,7 @@
 package quests;
 
+import database.factories.QuestGiverEventFactory;
+import game_world.factories.QuestFactory;
 import game_world.objects.events.QuestGiverEvent;
 import objects.character.Player;
 import quests.PlayerQuests;
@@ -17,6 +19,7 @@ public class QuestInteractor {
      */
     private PlayerQuests questsInGame;
     private Player player;
+    private QuestFactory questFactory;
 
 
     /**
@@ -25,15 +28,16 @@ public class QuestInteractor {
     public QuestInteractor(Player player) {
         this.questsInGame = new PlayerQuests();
         this.player = player;
+        this.questFactory = new QuestFactory();
     }
 
 
     /**
      * Adds a new quest to the player's quests.
      */
-    public void addQuest(QuestGiverEvent event) {
-        //!!!
-        questsInGame.addNewQuest(null);
+    public void addQuest(String name) {
+        Quest quest = this.questFactory.createQuest(name);
+        questsInGame.addNewQuest(quest);
     }
 
     /**
