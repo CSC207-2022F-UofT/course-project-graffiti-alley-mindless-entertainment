@@ -28,6 +28,7 @@ public class GameEntities {
         player.addSkill(new Skill("tsunami", 90, 40, SkillType.WATER));
         inventory = new Inventory();
         options = Options.getOptions();
+        options.setEnableAutoSave(true);
         location = new Location();
     }
 
