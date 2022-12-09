@@ -24,8 +24,10 @@ public class AreaManagerTest {
         AreaDatabaseInteractor areaDatabaseInteractor = new AreaDatabaseInteractor(eventManager);
         AreaManager areaManager = new AreaManager(eventManager, areaDatabaseInteractor, new Location());
         assert areaManager.getAreaUseCase().getCurrentArea().getName().equals("[GAME]");
-        areaManager.getAreaUseCase().getToNextArea("1");
-        assert areaManager.getAreaUseCase().getCurrentArea().getName().equals("[GAME]");
+        areaManager.getAreaUseCase().getToNextArea("2");
+        assert areaManager.getAreaUseCase().getCurrentArea().getName().equals("Beach 1");
+        assert areaManager.getAreaUseCase().checkForAreaEntered();
+        assert areaManager.getAreaUseCase().checkForValidInput("walk along the beach");
     }
 
 }

@@ -4,6 +4,18 @@
     "0": {
       "zone": "Introduction",
       "name": "[GAME]",
+      "speaker": "[NOTICE]",
+      "texts": [
+        "Press enter to advance dialogue and type pause to open main menu. Enjoy!"
+      ],
+      "options": {
+        "1": "begin the game"
+      },
+      "events": []
+    },
+    "-1": {
+      "zone": "Introduction",
+      "name": "[GAME]",
       "speaker": "[G̶̢̥̥̋̅͠ͅĄ̶̡̰̉̋̔M̴̢̺̜̥͎̞̅̏̏̃̊͆̈́̂͘ͅḚ̵̣̻͖͓̒̑͜]",
       "texts": [
         "Well then...",
@@ -34,7 +46,7 @@
       ],
       "options": {
         "2": "i promise",
-        "0": "i do not promise"
+        "-1": "i do not promise"
       },
       "events": []
     },

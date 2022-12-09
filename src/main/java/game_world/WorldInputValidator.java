@@ -32,7 +32,7 @@ public class WorldInputValidator implements InputValidator {
         }
         else {
             String lowerInput = input.toLowerCase();
-            if (this.possibleInputs.contains(lowerInput)) {
+            if (this.possibleInputs.contains(lowerInput) || this.possibleInputs.size() == 1) {
                 return lowerInput;
             }
         }
