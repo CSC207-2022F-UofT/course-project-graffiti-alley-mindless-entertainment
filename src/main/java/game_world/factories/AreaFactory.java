@@ -1,8 +1,8 @@
 package game_world.factories;
 
-import database.objects.AreaData;
-import game_world.managers.EventDatabaseInteractor;
-import game_world.objects.Area;
+import database.entities.AreaData;
+import game_world.use_cases.EventDatabaseInteractor;
+import game_world.entities.Area;
 
 public class AreaFactory {
 

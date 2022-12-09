@@ -1,9 +1,9 @@
 package database.factories;
 
-import database.objects.ArbitraryEventData;
-import database.objects.EncounterEventData;
-import database.objects.ItemPickUpEventData;
-import database.objects.QuestGiverEventData;
+import database.entities.ArbitraryEventData;
+import database.entities.EncounterEventData;
+import database.entities.ItemPickUpEventData;
+import database.entities.QuestGiverEventData;
 import org.json.simple.JSONObject;
 
 public class EventDataFactory {

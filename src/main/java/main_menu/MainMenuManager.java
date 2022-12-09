@@ -1,12 +1,12 @@
 package main_menu;
 
 import core.StateManager;
-import interfaces.State;
+import core.State;
 import main_menu.factories.MainMenuFactory;
-import save.SaveInteractor;
-import switch_managers.SwitchEventMediator;
-import switch_managers.SwitchEventMediatorProxy;
-import switch_managers.SwitchEventType;
+import save.use_cases.SaveInteractor;
+import core.switch_managers.switch_events.SwitchEventMediator;
+import core.switch_managers.switch_events.SwitchEventMediatorProxy;
+import core.switch_managers.switch_events.SwitchEventType;
 
 /**
  * A manager for the main menu.

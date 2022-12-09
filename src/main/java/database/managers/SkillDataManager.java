@@ -2,7 +2,7 @@ package database.managers;
 
 import database.DatabaseHelper;
 import database.factories.SkillDataFactory;
-import database.objects.SkillData;
+import database.entities.SkillData;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 

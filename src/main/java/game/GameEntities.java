@@ -1,11 +1,11 @@
 package game;
 
-import game_world.objects.Location;
-import objects.battle.skills.Skill;
-import objects.battle.skills.SkillType;
-import objects.character.Player;
-import objects.inventory.Inventory;
-import options.Options;
+import game_world.entities.Location;
+import battle.entities.Skill;
+import battle.entities.SkillType;
+import character.entities.Player;
+import inventory.entities.Inventory;
+import pause_menu.options.Options;
 
 /**
  * This class is used to initialize all the entities, and provide getters for each of them.

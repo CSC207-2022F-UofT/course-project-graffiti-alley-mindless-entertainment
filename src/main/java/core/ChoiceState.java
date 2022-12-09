@@ -1,7 +1,6 @@
 package core;
 
 import io.InputValidator;
-import interfaces.State;
 import io.Output;
 
 import java.util.List;

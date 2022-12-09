@@ -3,8 +3,7 @@ package database.managers;
 import database.factories.AreaDataFactory;
 import org.json.simple.JSONObject;
 
-import java.util.ArrayList;
-import database.objects.AreaData;
+import database.entities.AreaData;
 
 public class AreaDataManager extends DatabaseManager {
 

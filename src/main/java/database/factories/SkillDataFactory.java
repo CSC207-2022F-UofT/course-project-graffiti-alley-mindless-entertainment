@@ -1,6 +1,6 @@
 package database.factories;
 
-import database.objects.SkillData;
+import database.entities.SkillData;
 import org.json.simple.JSONObject;
 
 public class SkillDataFactory {
