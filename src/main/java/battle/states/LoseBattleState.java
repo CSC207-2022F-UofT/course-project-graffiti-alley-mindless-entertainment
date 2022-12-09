@@ -18,9 +18,12 @@ public class LoseBattleState implements State {
      *  user: The Player that is participating in the battle
      *  foe: The EnemyFacade that the user is fighting
      *  done: represents whether the state is done
+     *  awaitingInput: whether state needs input from user
+     *  validator: InputValidator to parse input
+     *  output: OutputHandler to produce output for the user to see
      */
-    private Player user;
-    private EnemyFighter foe;
+    private final Player user;
+    private final EnemyFighter foe;
     private boolean done = false;
     private boolean awaitingInput = false;
     private InputValidator validator;

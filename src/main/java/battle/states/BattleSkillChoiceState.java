@@ -9,6 +9,12 @@ import battle.use_cases.StatDisplayer;
 import battle.use_cases.SkillHelper;
 
 public class BattleSkillChoiceState extends BattleAskingState {
+    /**
+     * BattleAskingState child class that asks for the skill the user wants to use from
+     * their list of skills.
+     * Attributes:
+     * skillHelper: Use case that applies effects from the chosen skill onto the foe
+     */
     private final SkillHelper skillHelper = new SkillHelper();
 
     public BattleSkillChoiceState(BattleEntityInteractor fighters, BattleChoiceType prevChoice) {

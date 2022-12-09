@@ -9,7 +9,7 @@ public class BattleEntityInteractor {
      * user: Player object being interacted with
      * foe: EnemyFighter object being interacted with
      */
-    private Player user;
+    private final Player user;
     private EnemyFighter foe;
     public BattleEntityInteractor(Player user, EnemyFighter foe) {
         this.user = user;
@@ -37,12 +37,17 @@ public class BattleEntityInteractor {
     }
 
     /**
-     * Returns true if dead, false if not.
-     * @return
+     * Returns for User, true if dead, false if not.
+     * @return whether User is dead
      */
     public boolean isUserDead() {
         return user.getCurrHealth() <= 0;
     }
+
+    /**
+     * Returns for Foe, true if dead, false it not
+     * @return whether Foe is dead
+     */
     public boolean isFoeDead() {
         return !foe.checkAlive();
     }

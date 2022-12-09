@@ -4,16 +4,21 @@ import battle.entities.BattleChoiceType;
 import battle.use_cases.BattleEntityInteractor;
 import battle.use_cases.StatDisplayer;
 import core.ChoiceInputValidator;
-import battle.use_cases.SkillHelper;
 import character.entities.Player;
 import inventory.entities.Inventory;
 import inventory.entities.item.Item;
 import inventory.UseItemHandler;
 
 public class BattleItemChoiceState extends BattleAskingState {
-    private final SkillHelper skillHelper = new SkillHelper();
-    private Inventory inventory;
-    private UseItemHandler itemHandler;
+    /**
+     * BattleAskingState child class representing the State where the user chooses
+     * an item to use from their inventory.
+     * Attributes:
+     * inventory: Inventory object of the objects the player has
+     * itemHandler: Use case to use the effect of the item chosen.
+     */
+    private final Inventory inventory;
+    private final UseItemHandler itemHandler;
 
     public BattleItemChoiceState(BattleEntityInteractor fighters, BattleChoiceType prevChoice) {
         super(fighters, prevChoice);
