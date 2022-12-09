@@ -11,8 +11,8 @@ import game_world.events.ItemPickUpEvent;
 import game_world.events.QuestGiverEvent;
 
 public class EventFactory {
-    public ItemPickUpEventFactory itemPickUpEventFactory;
-    private QuestGiverEventFactory questGiverEventFactory;
+    public final ItemPickUpEventFactory itemPickUpEventFactory;
+    private final QuestGiverEventFactory questGiverEventFactory;
 
     /**
      * Constructs EventFactory

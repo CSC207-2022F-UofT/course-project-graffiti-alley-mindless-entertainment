@@ -18,7 +18,7 @@ public class SelectionState implements State {
     private final WorldInputValidator inputValidator;
     private boolean isDone;
     private boolean awaitInput;
-    private ArrayList<String> inputs;
+    private final ArrayList<String> inputs;
 
     public SelectionState(ArrayList<String> inputs) {
         this.inputs = inputs;
