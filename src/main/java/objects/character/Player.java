@@ -213,24 +213,33 @@ public class Player extends Character {
         this.speed += changeBy;
     }
 
+    /**
+     * @return The amount of money this Player has.
+     */
     public int getMoney() {
-        // Return the amount of money this Player has.
         return this.money;
     }
 
+    /**
+     * @param changeBy The amount of money to increase the Player's money by.
+     */
     public void changeMoney(int changeBy) {
-        // Change the amount of money the Player has by changeBy.
         this.money += changeBy;
     }
 
+    /**
+     * @return The skillList of the Player.
+     */
     public ArrayList<Skill> getSkillList() {
-        // Returns the skillList of the Player.
         return this.skillList;
     }
 
+    /**
+     * Append a new Skill to the end of skillList iff newSkill is not already in skillList.
+     * @param newSkill The new Skill to append
+     * @return True if successful.
+     */
     public boolean addSkill(Skill newSkill) {
-        // Append a new Skill to the end of skillList iff newSkill is not already in skillList. Returns true if
-        // successful.
         for (Skill skill : this.skillList) {
             if (skill.getName().equals(newSkill.getName())) {
                 return false;
@@ -240,11 +249,16 @@ public class Player extends Character {
         return true;
     }
 
+    /**
+     * @param toRemove The Skill to remove from the skillList.
+     */
     public void removeSkill(Skill toRemove) {
-        // Remove toRemove from skillList.
         this.skillList.remove(toRemove);
     }
 
+    /**
+     * @return The Player's inventory.
+     */
     public static Inventory getInventory(){
         return inventory;
     }
