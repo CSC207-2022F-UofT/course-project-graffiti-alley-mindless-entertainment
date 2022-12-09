@@ -8,8 +8,8 @@ import java.util.Arrays;
 
 public class BattleMenuState extends BattleAskingState{
     /**
-     * Constructs BattleMenuState using super and a preset menu list options.
-     * @param prevChoice previous choice of BattleChoiceType
+     * BattleAskingState that covers the scenario where the user is to choose between
+     * different menus, i.e. Skill or Inventory menu, or wants to look at Stats.
      */
 
     public BattleMenuState(BattleEntityInteractor fighters, BattleChoiceType prevChoice) {

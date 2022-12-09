@@ -14,8 +14,7 @@ import java.util.List;
 
 public abstract class BattleAskingState implements State {
     /**
-     * Abstract class that probes for user input during a battle.
-     *
+     * Abstract class that probes for user input during a battle.*
      * Attributes:
      * inputValidator: InputValidator for parsing input
      * options: List of strings for what options the user can pick from

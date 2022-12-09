@@ -19,8 +19,8 @@ public class BattleStateManager extends StateManager {
      *  user: Player object representing the user
      *  foe: EnemyFacade object representing who the user is battling
      */
-    private BattleEntityInteractor battleEntityInteractor;
-    private Location location;
+    private final BattleEntityInteractor battleEntityInteractor;
+    private final Location location;
     private BattleChoiceType currChoice;
 
     public BattleStateManager(Player user, Location location) {
@@ -71,7 +71,7 @@ public class BattleStateManager extends StateManager {
         return chosenState;
     }
     /**
-     * @return whether the state is done and ready to move to the next state
+     * Whether the state is done and ready to move to the next state
      */
     @Override
     public void preInput() {
@@ -86,8 +86,8 @@ public class BattleStateManager extends StateManager {
     }
 
     /**
+     * Whether the state is done and ready to move to the next state
      * @param input from the user
-     * @return whether the state is done and ready to move to the next state
      */
     @Override
     public void postInput(String input) {

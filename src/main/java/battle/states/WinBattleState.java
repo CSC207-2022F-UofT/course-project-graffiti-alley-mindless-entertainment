@@ -17,10 +17,9 @@ public class WinBattleState implements State {
      *  foe: The EnemyFacade that the user is fighting
      *  done: represents whether the state is done
      */
-    private Player user;
-    private EnemyFighter foe;
+    private final Player user;
+    private final EnemyFighter foe;
     private boolean done = false;
-    private boolean awaitingInput = false;
 
     public WinBattleState(Player user, EnemyFighter foe) {
         this.user = user;
@@ -56,7 +55,7 @@ public class WinBattleState implements State {
     }
     @Override
     public boolean awaitInput() {
-        return this.awaitingInput;
+        return false;
     }
 
     @Override

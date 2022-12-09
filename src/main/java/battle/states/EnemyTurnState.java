@@ -11,11 +11,21 @@ import character.EnemyFighter;
 import character.entities.Player;
 
 public class EnemyTurnState implements State {
-    private Player user;
-    private EnemyFighter foe;
+    /**
+     * Battle state that deals with the state where it is the enemy's turn. The enemy's
+     * action is decided through the enemy's AI.
+     * Attributes:
+     * user: Player object representing the user participating in the battle
+     * foe: EnemyFighter object representing the encountered foe of the battle
+     * done: Whether this state is done and ready to move on
+     * awaitingInput: Whether this state needs input from the user
+     * userAction: Enum that allows foe to know what the user did beforehand.
+     */
+    private final Player user;
+    private final EnemyFighter foe;
     private boolean done = false;
     private boolean awaitingInput;
-    private BattleChoiceType userAction;
+    private final BattleChoiceType userAction;
 
     public EnemyTurnState(Player user, EnemyFighter foe, BattleChoiceType userAction) {
         this.user = user;

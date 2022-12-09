@@ -7,12 +7,11 @@ import battle.use_cases.BattleEntityInteractor;
 
 public class BattleStateFactory {
     /**
-     * Factory to create Battle States to avoid dependencies
+     * Factory that creates Battle States needed to run an Encounter Event
      * Attributes:
      * battleEntityInteractor: Interactor that deals with checking stats of user and foe in battle
-     * inventory: Inventory entity that is being used
      */
-    private BattleEntityInteractor battleEntityInteractor;
+    private final BattleEntityInteractor battleEntityInteractor;
 
     public BattleStateFactory(BattleEntityInteractor battleEntityInteractor) {
         this.battleEntityInteractor = battleEntityInteractor;
