@@ -49,8 +49,8 @@ public class ManagerControllerFactory {
         managerController = new ManagerControllerImpl(switchEventManager);
         this.gameEntities = gameEntities;
         questInteractor = new QuestInteractor(gameEntities.getPlayer());
-        saveInteractor = createSaveInteractor();
         areaDatabaseInteractor = createAreaDatabaseInteractor();
+        saveInteractor = createSaveInteractor();
     }
 
     /**
