@@ -7,17 +7,17 @@ import java.util.ArrayList;
  */
 public class QuestData {
 
-    public String name;
-    public String description;
-    public String bystander;
+    public final String name;
+    public final String description;
+    public final String bystander;
 
-    public String rewardType;
-    public String rewardStatistic;
-    public long rewardValue;
+    public final String rewardType;
+    public final String rewardStatistic;
+    public final long rewardValue;
 
-    public ArrayList<String> tasksTypes;
-    public ArrayList<String> tasksStatistics;
-    public ArrayList<Long> tasksValues;
+    public final ArrayList<String> tasksTypes;
+    public final ArrayList<String> tasksStatistics;
+    public final ArrayList<Long> tasksValues;
 
     /**
      * Constructor.

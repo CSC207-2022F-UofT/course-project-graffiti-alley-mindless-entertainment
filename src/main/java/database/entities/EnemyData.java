@@ -8,14 +8,14 @@ public class EnemyData {
      * All information needed for an enemy
      */
 
-    public String name;
-    public String type;
-    public ArrayList<String> skills;
-    public String reputation;
-    public String speed;
-    public String ai;
+    public final String name;
+    public final String type;
+    public final ArrayList<String> skills;
+    public final String reputation;
+    public final String speed;
+    public final String ai;
     public String gimmick;
-    public String potion;
+    public final String potion;
 
     public EnemyData(String name, String type, ArrayList<String> skills, String reputation, String speed, String ai,
                      String potion) {

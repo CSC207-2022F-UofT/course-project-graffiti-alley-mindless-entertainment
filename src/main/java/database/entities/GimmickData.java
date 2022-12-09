@@ -6,8 +6,8 @@ public class GimmickData {
      * All information needed for a gimmick
      */
 
-    public String name;
-    public String trigger;
+    public final String name;
+    public final String trigger;
     public String attack;
     public String speed;
 
