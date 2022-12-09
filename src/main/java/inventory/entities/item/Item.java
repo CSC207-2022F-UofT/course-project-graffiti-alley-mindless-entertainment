@@ -19,7 +19,7 @@ public abstract class Item {
 
     /**
      * Initializes new Item with level, type, an empty name, an ability, and 0 price.
-     * @param level
+     * @param level level of the player
      */
     public Item(int level) {
         this.level = level;
